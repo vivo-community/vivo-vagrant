@@ -11,8 +11,8 @@ DATADIR=/usr/local/vdata
 
 #VIVO will be installed in APPDIR.  You might want to put this
 #in a shared folder so that the files can be edited from the
-#host machine.  On Windows, however during testing, building
-#VIVO via the shared file system is slow.  See
+#host machine.  Buidling VIVO on Windows via the shared file
+#system was very slow.  See
 #http://docs.vagrantup.com/v2/synced-folders/nfs.html
 
 #Remove existing app directory if present.
