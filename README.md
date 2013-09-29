@@ -20,7 +20,7 @@ $ vagrant up
  * This is intended for development only.  Change passwords if you intend to use this config for deployment.
  * The source at `/usr/local/vivo` is based off a [template](https://github.com/lawlesst/vivo-project-template) and under git
  version control.
- * Various other development tools, mainly Python, are installed too.  Comment those out if they are not needed.
  * Your VIVO environment will be dropped and reconfigured anytime that `vagrant reload` or `vagrant provision` is run.
  Be sure to backup any data or code before running these commands.
+ * Various other development tools, mainly Python, are installed too.  Comment those out if they are not needed.
 
