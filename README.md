@@ -11,7 +11,8 @@ The box will boot and install VIVO 1.5.1 and dependencies.  This will take sever
 ## Install
 
 ~~~
-$ git clone vivo-vagrant
+$ git clone https://github.com/lawlesst/vivo-vagrant.git vivo-vagrant
+$ cd vivo-vagrant
 $ vagrant up
 ~~~
 
