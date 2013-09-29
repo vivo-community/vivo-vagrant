@@ -50,10 +50,10 @@ sudo /etc/init.d/tomcat7 stop
 
 #In development, you might want to remove these ontology and data files
 #since they slow down Tomcat restarts considerably.
-rm VIVO/productMods/WEB-INF/filegraph/tbox/geopolitical.tbox.ver1.1-11-18-11.owl
-rm VIVO/productMods/WEB-INF/filegraph/abox/continents.n3
-rm VIVO/productMods/WEB-INF/filegraph/abox/us-states.rdf
-rm VIVO/productMods/WEB-INF/filegraph/abox/geopolitical.abox.ver1.1-11-18-11.owl
+#rm VIVO/productMods/WEB-INF/filegraph/tbox/geopolitical.tbox.ver1.1-11-18-11.owl
+#rm VIVO/productMods/WEB-INF/filegraph/abox/continents.n3
+#rm VIVO/productMods/WEB-INF/filegraph/abox/us-states.rdf
+#rm VIVO/productMods/WEB-INF/filegraph/abox/geopolitical.abox.ver1.1-11-18-11.owl
 
 #Build VIVO
 sudo ant all
