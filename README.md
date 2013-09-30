@@ -1,7 +1,5 @@
 # VIVO Vagrant
 
->*September 29, 2013* - this is an initial pass at installing VIVO via a Vagrant bootstrap script.  Testing needed.
-
 [Vagrant](http://www.vagrantup.com/) configuration and install scripts for running [VIVO](http://vivoweb.org) on an Ubuntu 64 Precise image.
 
 The VIVO web application will be available at `http://localhost:8080/vivo`.  The source will be at `/usr/local/vivo/`.
