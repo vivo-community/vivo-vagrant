@@ -14,6 +14,11 @@ $ cd vivo-vagrant
 $ vagrant up
 ~~~
 
+For subsequent vagrant startups, you can use the --no-provision flag to prevent the VIVO install script from running.  
+~~~
+$ vagrant up --no-provision
+~~~
+
 ## Notes
  * This is intended for development only.  Change passwords if you intend to use this config for deployment.
  * The source at `/usr/local/vivo` is based off a [template](https://github.com/lawlesst/vivo-project-template) and under git
