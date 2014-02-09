@@ -1,5 +1,4 @@
-.vagrant
+.gitattributes
+.vagrant*
 *~
-work/vivo/*
 work/*
-!work/.gitignore

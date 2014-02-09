@@ -4,7 +4,7 @@ export DEBIAN_FRONTEND=noninteractive
 set -e # Exit script immediately on first error.
 set -x # Print commands and their arguments as they are executed.
 
-# Comment out during development
+#Update Ubuntu packages. Comment out during development
 sudo apt-get update -y
 
 #Set time zone
