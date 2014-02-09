@@ -4,24 +4,24 @@
 #Install VIVO.
 #
 #
-#VIVO install location - this needs to match your deploy.properties file.
+#VIVO install location
 APPDIR=/usr/local/vivo
-#Data directory - Solr index will be stored here.
+#Data directory - Solr index and VIVO application files will be stored here.
 DATADIR=/usr/local/vdata
 
 #VIVO will be installed in APPDIR.  You might want to put this
 #in a shared folder so that the files can be edited from the
-#host machine.  Buidling VIVO on Windows via the shared file
-#system was very slow.  See
+#host machine.  Building VIVO via the shared file
+#system can be very slow, at least with Windows.  See
 #http://docs.vagrantup.com/v2/synced-folders/nfs.html
 
 #Remove existing app directory if present.
-sudo rm -rf $APPDIR
+#sudo rm -rf $APPDIR
 
 #remove existing VIVO database
 #mysql -uroot -pvivo -e "DROP DATABASE IF EXISTS vivodev;"
 #create vivo database
-mysql -uroot -pvivo -e "CREATE DATABASE IF NOT EXISTS vivodev DEFAULT CHARACTER SET utf8;"
+mysql -uroot -pvivo -e "CREATE DATABASE IF NOT EXISTS vivo16dev DEFAULT CHARACTER SET utf8;"
 
 #Make app directory
 sudo mkdir -p $APPDIR
@@ -33,27 +33,29 @@ sudo chown -R vagrant:vagrant $APPDIR
 cd $APPDIR
 
 #Checkout three tiered build template from Github
-git clone https://github.com/lawlesst/vivo-project-template.git .
+#git clone https://github.com/lawlesst/vivo-project-template.git .
 git submodule init
 git submodule update
 cd VIVO/
-git checkout maint-rel-1.5
+git checkout maint-rel-1.6
 cd ../Vitro
-git checkout maint-rel-1.5
+git checkout maint-rel-1.6
 cd ..
 
-#Copy deploy properties into app directory
-cp /home/vagrant/provision/vivo/deploy.properties $APPDIR/.
+#Copy build properties into app directory
+cp /home/vagrant/provision/vivo/build.properties $APPDIR/.
+#Copy runtime properties into data directory
+cp /home/vagrant/provision/vivo/runtime.properties $DATADIR/.
 
 #Stop tomcat
 sudo /etc/init.d/tomcat7 stop
 
 #In development, you might want to remove these ontology and data files
 #since they slow down Tomcat restarts considerably.
-#rm VIVO/productMods/WEB-INF/filegraph/tbox/geopolitical.tbox.ver1.1-11-18-11.owl
-#rm VIVO/productMods/WEB-INF/filegraph/abox/continents.n3
-#rm VIVO/productMods/WEB-INF/filegraph/abox/us-states.rdf
-#rm VIVO/productMods/WEB-INF/filegraph/abox/geopolitical.abox.ver1.1-11-18-11.owl
+rm VIVO/rdf/tbox/filegraph/geo-political.owl
+rm VIVO/rdf/abox/filegraph/continents.n3
+rm VIVO/rdf/abox/filegraph/us-states.rdf
+rm VIVO/rdf/abox/filegraph/rdf/abox/filegraph/geopolitical.abox.ver1.1-11-18-11.owl
 
 #Build VIVO
 sudo ant all
@@ -72,3 +74,6 @@ sudo chown -R tomcat7:tomcat7 $DATADIR
 sudo chown -R tomcat7:tomcat7 /var/lib/tomcat7/webapps/vivo/
 
 sudo /etc/init.d/tomcat7 start
+
+#Fuseki
+#https://dl.dropboxusercontent.com/u/29827026/jena-fuseki-1.0.0-vivo.tar.gz
