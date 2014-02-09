@@ -16,7 +16,7 @@ DATADIR=/usr/local/vdata
 #http://docs.vagrantup.com/v2/synced-folders/nfs.html
 
 #Remove existing app directory if present.
-#sudo rm -rf $APPDIR
+sudo rm -rf $APPDIR
 
 #remove existing VIVO database
 #mysql -uroot -pvivo -e "DROP DATABASE IF EXISTS vivodev;"
@@ -33,7 +33,7 @@ sudo chown -R vagrant:vagrant $APPDIR
 cd $APPDIR
 
 #Checkout three tiered build template from Github
-#git clone https://github.com/lawlesst/vivo-project-template.git .
+git clone https://github.com/lawlesst/vivo-project-template.git .
 git submodule init
 git submodule update
 cd VIVO/
