@@ -12,9 +12,18 @@ The box will boot and install VIVO 1.6 and dependencies.  This will take several
 
 ## Install the VIVO Vagrant box
 
+### VIVO 1.6
 ~~~
 $ git clone https://github.com/lawlesst/vivo-vagrant.git vivo-vagrant
 $ cd vivo-vagrant
+$ vagrant up
+~~~
+
+### VIVO 1.5
+~~~
+$ git clone https://github.com/lawlesst/vivo-vagrant.git vivo-vagrant
+$ cd vivo-vagrant
+$ git checkout v1.5
 $ vagrant up
 ~~~
 
