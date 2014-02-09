@@ -18,9 +18,7 @@ DATADIR=/usr/local/vdata
 #Remove existing app directory if present.
 sudo rm -rf $APPDIR
 
-#remove existing VIVO database
-#mysql -uroot -pvivo -e "DROP DATABASE IF EXISTS vivodev;"
-#create vivo database
+#create VIVO mysql database
 mysql -uroot -pvivo -e "CREATE DATABASE IF NOT EXISTS vivo16dev DEFAULT CHARACTER SET utf8;"
 
 #Make app directory
