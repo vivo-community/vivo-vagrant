@@ -34,6 +34,7 @@ cd $APPDIR
 
 #Checkout three tiered build template from Github
 git clone https://github.com/lawlesst/vivo-project-template.git .
+git checkout 1.6
 git submodule init
 git submodule update
 cd VIVO/
@@ -52,10 +53,10 @@ sudo /etc/init.d/tomcat7 stop
 
 #In development, you might want to remove these ontology and data files
 #since they slow down Tomcat restarts considerably.
-rm VIVO/rdf/tbox/filegraph/geo-political.owl
-rm VIVO/rdf/abox/filegraph/continents.n3
-rm VIVO/rdf/abox/filegraph/us-states.rdf
-rm VIVO/rdf/abox/filegraph/rdf/abox/filegraph/geopolitical.abox.ver1.1-11-18-11.owl
+# rm VIVO/rdf/tbox/filegraph/geo-political.owl
+# rm VIVO/rdf/abox/filegraph/continents.n3
+# rm VIVO/rdf/abox/filegraph/us-states.rdf
+# rm VIVO/rdf/abox/filegraph/geopolitical.abox.ver1.1-11-18-11.owl
 
 #Build VIVO
 sudo ant all
@@ -64,16 +65,10 @@ sudo ant all
 sudo mkdir -p /usr/share/tomcat7/logs/
 sudo touch /usr/share/tomcat7/logs/vivo.all.log
 
-#Add directories not created by VIVO build process.
-sudo mkdir -p /var/lib/tomcat7/webapps/vivo/WEB-INF/ontologies/update/changedData/
-sudo mkdir -p /var/lib/tomcat7/webapps/vivo/WEB-INF/ontologies/update/logs
-
-#Change some permissions
+#Change permissions
 sudo chown -R tomcat7:tomcat7 /usr/share/tomcat7/logs/
 sudo chown -R tomcat7:tomcat7 $DATADIR
 sudo chown -R tomcat7:tomcat7 /var/lib/tomcat7/webapps/vivo/
 
+#Start Tomcat
 sudo /etc/init.d/tomcat7 start
-
-#Fuseki
-#https://dl.dropboxusercontent.com/u/29827026/jena-fuseki-1.0.0-vivo.tar.gz
