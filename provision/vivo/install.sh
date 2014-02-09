@@ -19,7 +19,7 @@ DATADIR=/usr/local/vdata
 sudo rm -rf $APPDIR
 
 #remove existing VIVO database
-mysql -uroot -pvivo -e "DROP DATABASE IF EXISTS vivodev;"
+#mysql -uroot -pvivo -e "DROP DATABASE IF EXISTS vivodev;"
 #create vivo database
 mysql -uroot -pvivo -e "CREATE DATABASE IF NOT EXISTS vivodev DEFAULT CHARACTER SET utf8;"
 
