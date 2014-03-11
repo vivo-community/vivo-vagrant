@@ -51,6 +51,7 @@ $ vagrant up
  $ sudo /etc/init.d/tomcat7 start
  ~~~
  * You can also, at anytime, re-provision your Vagrant box.  By running the following from your host machine.  Be sure to backup any data or code changes you have made beforehand.  
+ 
  ~~~
  $ vagrant up --provision
  ~~~
