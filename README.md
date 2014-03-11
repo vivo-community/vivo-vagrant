@@ -36,12 +36,16 @@ $ vagrant up
  * Various other development tools, mainly Python, are installed too.  Comment those out if they are not needed.
  * Vagrant supports virtualization utilities other than [VirtualBox](https://www.virtualbox.org/) but this package hasn't been tested with those.  Please report back if you are using another tool with this package.  
 
-### Updates
+## Updates to VIVO and Vitro code
  * From time to time, updates will be made to the current VIVO or Vitro release.  To make sure your VIVO Vagrant box is running the latest code.  Login to your box, shutdown Tomcat, and re-run the VIVO provisioning script.  E.g.
  
  ~~~
  $ sudo /etc/init.d/tomcat7 stop
  $ sudo /home/vagrant/provision/vivo/install.sh
+ ~~~
+ * You can also, at anytime, re-provision your Vagrant box.  By running the following from your host machine.  Be sure to backup any data or code changes you have made beforehand.  
+ ~~~
+ $ vagrant up --provision
  ~~~
 
 
