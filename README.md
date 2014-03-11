@@ -9,6 +9,7 @@ The box will boot and install VIVO 1.6 and dependencies.  This will take several
 ## Prerequisites
  * [VirtualBox](https://www.virtualbox.org/).
  * [Vagrant](https://docs.vagrantup.com/v2/installation/index.html).
+ * Git - if you are new to git, you might want to use the Github desktop client. [Windows](http://windows.github.com/) and [Mac](http://mac.github.com/) are available.
 
 ## Install the VIVO Vagrant box
 
