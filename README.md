@@ -1,10 +1,8 @@
 # VIVO Vagrant
 
-[Vagrant](http://www.vagrantup.com/) configuration and install scripts for running [VIVO](http://vivoweb.org) on an Ubuntu 64 Precise image.
+[Vagrant](http://www.vagrantup.com/) configuration and install scripts for running [VIVO](http://vivoweb.org) on a virtual machine, aka [Vagrant box](http://docs.vagrantup.com/v2/boxes.html), running an Ubuntu 64 Precise image.
 
-The VIVO web application will be available at `http://localhost:8080/vivo`.  The source will be at `/usr/local/vivo/`.
-
-The box will boot and install VIVO 1.6 and dependencies.  This will take several minutes for the initial install.
+The virtual machine will boot and install VIVO 1.6 and dependencies.  This will take several minutes for the initial install.
 
 ## Prerequisites
  * [VirtualBox](https://www.virtualbox.org/).
@@ -20,6 +18,20 @@ $ cd vivo-vagrant
 $ vagrant up
 ~~~
 
+When the Vagrant provisioning is complete, the VIVO web application will be available in a browser on the host machine at `http://localhost:8080/vivo`.  
+
+The source will be installed on the virtual machine at `/usr/local/vivo/`. You can log into your Vagrant box securely using this command:
+
+~~~
+$ vagrant ssh
+~~~
+
+Once you are logged in, you can view the default VIVO log output with this command:
+
+~~~
+$ vlog
+~~~
+
 ### VIVO 1.5
 ~~~
 $ git clone https://github.com/lawlesst/vivo-vagrant.git vivo-vagrant
@@ -29,15 +41,14 @@ $ vagrant up
 ~~~
 
 ## Notes
- * This is intended for development only.  Change passwords if you intend to use this config for deployment.
- * The source at `/usr/local/vivo` is based off a [template](https://github.com/lawlesst/vivo-project-template) and under git
- version control.
+ * This is intended for development only.  Change passwords if you intend to use this config for a production deployment.
+ * The source at `/usr/local/vivo` is based off a [template](https://github.com/lawlesst/vivo-project-template) and under git version control.
  * On older versions of Vagrant it might be necessary to start Vagrant with the `$ vagrant up --no-provision` flag to prevent the VIVO installation script from running each time.
  * Various other development tools, mainly Python, are installed too.  Comment those out if they are not needed.
  * Vagrant supports virtualization utilities other than [VirtualBox](https://www.virtualbox.org/) but this package hasn't been tested with those.  Please report back if you are using another tool with this package.  
 
 ## Updates to VIVO and Vitro code
- * From time to time, updates will be made to the current VIVO or Vitro release.  To make sure your VIVO Vagrant box is running the latest code.  Login to your box, shutdown Tomcat, and checkout the latest VIVO and Vitro code from Github.  For example:
+ * From time to time, updates will be made to the current VIVO or Vitro release.  To make sure your VIVO Vagrant box is running the latest code.  Login to your box, shutdown Tomcat, and checkout the latest [VIVO](https://github.com/vivo-project/VIVO) and [Vitro](https://github.com/vivo-project/Vitro) code from Github.  For example:
  
  ~~~
  $ sudo /etc/init.d/tomcat7 stop
