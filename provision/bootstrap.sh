@@ -20,10 +20,6 @@ sudo apt-get install -y git-core mercurial vim screen wget curl raptor-utils unz
 # Web server
 sudo apt-get install -y apache2
 
-# Python - optional
-sudo apt-get install -y python python-dev python-mysqldb python-lxml python-virtualenv
-sudo pip install virtualenvwrapper
-
 # Java - install openjdk7 first
 sudo apt-get install -y openjdk-7-jdk
 sudo apt-get install -y tomcat7 ant
