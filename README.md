@@ -18,7 +18,7 @@ $ cd vivo-vagrant
 $ vagrant up
 ~~~
 
-When the Vagrant provisioning is complete, the VIVO web application will be available in a browser on the host machine at `http://localhost:8080/vivo`.  
+When the Vagrant provisioning is complete, the VIVO web application will be available in a browser on the host machine at `http://localhost:8080/vivo`.  You can log into your new VIVO with the default admin user (**vivo_root@school.edu**) and password (**rootPassword**), which are specified in the `/provision/vivo/deploy.properties` source file in this repository.
 
 The source will be installed on the virtual machine at `/usr/local/vivo/`. You can log into your Vagrant box securely using this command:
 
@@ -41,7 +41,7 @@ $ vagrant up
 ~~~
 
 ## Notes
- * This is intended for development only.  Change passwords if you intend to use this config for a production deployment.
+ * This Vagrant box is intended for development only.  Change default user names and passwords if you intend to use this config for a production deployment.
  * The source at `/usr/local/vivo` is based off a [template](https://github.com/lawlesst/vivo-project-template) and under git version control.
  * On older versions of Vagrant it might be necessary to start Vagrant with the `$ vagrant up --no-provision` flag to prevent the VIVO installation script from running each time.
  * Various other development tools, mainly Python, are installed too.  Comment those out if they are not needed.
