@@ -44,7 +44,6 @@ $ vagrant up
  * This Vagrant box is intended for development only.  Change default user names and passwords if you intend to use this config for a production deployment.
  * The source at `/usr/local/vivo` is based off a [template](https://github.com/lawlesst/vivo-project-template) and under git version control.
  * On older versions of Vagrant it might be necessary to start Vagrant with the `$ vagrant up --no-provision` flag to prevent the VIVO installation script from running each time.
- * Various other development tools, mainly Python, are installed too.  Comment those out if they are not needed.
  * Vagrant supports virtualization utilities other than [VirtualBox](https://www.virtualbox.org/) but this package hasn't been tested with those.  Please report back if you are using another tool with this package.  
 
 ## Updates to VIVO and Vitro code
