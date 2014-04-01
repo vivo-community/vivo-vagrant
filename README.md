@@ -2,7 +2,7 @@
 
 [Vagrant](http://www.vagrantup.com/) configuration and install scripts for running [VIVO](http://vivoweb.org) on a virtual machine, aka [Vagrant box](http://docs.vagrantup.com/v2/boxes.html), running an Ubuntu 64 Precise image.
 
-The virtual machine will boot and install VIVO 1.6 and dependencies.  This will take several minutes for the initial install.
+The virtual machine will boot and install VIVO 1.6 and its dependencies.  This will take several minutes for the initial install.
 
 ## Prerequisites
  * [VirtualBox](https://www.virtualbox.org/).
