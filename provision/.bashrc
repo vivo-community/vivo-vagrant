@@ -106,9 +106,12 @@ if [ -f /etc/bash_completion ] && ! shopt -oq posix; then
     . /etc/bash_completion
 fi
 
-source /usr/local/bin/virtualenvwrapper.sh
-export WORKON_HOME=~/Envs
-mkdir -p $WORKON_HOME
+# Call virtualenv and create environment
+if [ -f /usr/local/bin/virtualenvwrapper.sh ]; then 
+    export WORKON_HOME=~/Envs
+    mkdir -p $WORKON_HOME
+    source /usr/local/bin/virtualenvwrapper.sh
+fi
 
 #Alias for viewing VIVO log
 alias vlog='less +F /usr/share/tomcat7/logs/vivo.all.log'
