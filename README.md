@@ -18,7 +18,7 @@ $ cd vivo-vagrant
 $ vagrant up
 ~~~
 
-When the Vagrant provisioning is complete, the VIVO web application will be available in a browser on the host machine at `http://localhost:8080/vivo`.  You can log into your new VIVO with the default admin user (**vivo_root@school.edu**) and password (**rootPassword**), which are specified in the `/provision/vivo/deploy.properties` source file in this repository.
+When the Vagrant provisioning is complete, the VIVO web application will be available in a browser on the host machine at `http://localhost:8080/vivo`.  You can log into your new VIVO with the default admin user (`vivo_root@school.edu`) and password (`rootPassword`), which are specified in the `/provision/vivo/deploy.properties` source file in this repository.
 
 The source will be installed on the virtual machine at `/usr/local/vivo/`. You can log into your Vagrant box securely using this command:
 
