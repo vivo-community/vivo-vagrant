@@ -59,11 +59,11 @@ $ vlog
  ~~~
 
  * If you are interested in running VIVO 1.5, you can run checkout the v1.5 branch of this repository.  
-~~~
-$ git clone https://github.com/lawlesst/vivo-vagrant.git vivo-vagrant
-$ cd vivo-vagrant
-$ git checkout v1.5
-$ vagrant up
-~~~
+ ~~~
+ $ git clone https://github.com/lawlesst/vivo-vagrant.git vivo-vagrant
+ $ cd vivo-vagrant
+ $ git checkout v1.5
+ $ vagrant up
+ ~~~
 
 
