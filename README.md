@@ -32,14 +32,6 @@ Once you are logged in, you can view the default VIVO log output with this comma
 $ vlog
 ~~~
 
-### VIVO 1.5
-~~~
-$ git clone https://github.com/lawlesst/vivo-vagrant.git vivo-vagrant
-$ cd vivo-vagrant
-$ git checkout v1.5
-$ vagrant up
-~~~
-
 ## Notes
  * This Vagrant box is intended for development only.  Change default user names and passwords if you intend to use this config for a production deployment.
  * The source at `/usr/local/vivo` is based off a [template](https://github.com/lawlesst/vivo-project-template) and under git version control.
@@ -65,5 +57,13 @@ $ vagrant up
  ~~~
  $ vagrant up --provision
  ~~~
+
+ * If you are interested in running VIVO 1.5, you can run checkout the v1.5 branch of this repository.  
+~~~
+$ git clone https://github.com/lawlesst/vivo-vagrant.git vivo-vagrant
+$ cd vivo-vagrant
+$ git checkout v1.5
+$ vagrant up
+~~~
 
 
