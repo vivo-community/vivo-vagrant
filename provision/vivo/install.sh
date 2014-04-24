@@ -8,6 +8,8 @@
 APPDIR=/usr/local/vivo
 #Data directory - Solr index and VIVO application files will be stored here.
 DATADIR=/usr/local/vdata
+#Tomcat webapp dir
+WEBAPPDIR=/var/lib/tomcat7/webapps
 
 #VIVO will be installed in APPDIR.  You might want to put this
 #in a shared folder so that the files can be edited from the
@@ -66,7 +68,11 @@ sudo touch /usr/share/tomcat7/logs/vivo.all.log
 #Change permissions
 sudo chown -R tomcat7:tomcat7 /usr/share/tomcat7/logs/
 sudo chown -R tomcat7:tomcat7 $DATADIR
-sudo chown -R tomcat7:tomcat7 /var/lib/tomcat7/webapps/vivo/
+sudo chown -R tomcat7:tomcat7 $WEBAPPDIR/vivo/
+
+#Add redicrect to /vivo in tomcat root
+sudo rm -f $WEBAPPDIR/ROOT/index.html
+sudo cp /home/vagrant/provision/vivo/index.jsp $WEBAPPDIR/ROOT/index.jsp
 
 #Start Tomcat
 sudo /etc/init.d/tomcat7 start
