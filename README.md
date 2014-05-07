@@ -32,6 +32,16 @@ Once you are logged in, you can view the default VIVO log output with this comma
 $ vlog
 ~~~
 
+
+### Other operating system notes
+
+ * VIVO application: `/usr/local/vivo`
+ * VIVO data directory: `/usr/local/vdata`
+ * Tomcat: `/var/lib/tomcat7/`
+  ** To start/stop Tomcat run `sudo /etc/init.d/tomcat start|stop|restart`.
+ * [Shared directory](http://docs.vagrantup.com/v2/synced-folders/) with host system: `/work`. 
+ 
+
 ## Notes
  * This Vagrant box is intended for development only.  Change default user names and passwords if you intend to use this config for a production deployment.
  * The source at `/usr/local/vivo` is based off a [template](https://github.com/lawlesst/vivo-project-template) and under git version control.
