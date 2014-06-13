@@ -38,9 +38,9 @@ git checkout 1.6
 git submodule init
 git submodule update
 cd VIVO/
-git checkout maint-rel-1.6
+git checkout maint-rel-1.6.2
 cd ../Vitro
-git checkout maint-rel-1.6
+git checkout maint-rel-1.6.2
 cd ..
 
 #Copy build properties into app directory
