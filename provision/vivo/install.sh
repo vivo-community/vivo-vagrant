@@ -10,6 +10,8 @@ APPDIR=/usr/local/vivo
 DATADIR=/usr/local/vdata
 #Tomcat webapp dir
 WEBAPPDIR=/var/lib/tomcat7/webapps
+#Database
+VIVO_DATABASE=vivo17dev
 
 #VIVO will be installed in APPDIR.  You might want to put this
 #in a shared folder so that the files can be edited from the
@@ -21,7 +23,7 @@ WEBAPPDIR=/var/lib/tomcat7/webapps
 sudo rm -rf $APPDIR
 
 #create VIVO mysql database
-mysql -uroot -pvivo -e "CREATE DATABASE IF NOT EXISTS vivo16dev DEFAULT CHARACTER SET utf8;"
+mysql -uroot -pvivo -e "CREATE DATABASE IF NOT EXISTS $VIVO_DATABASE DEFAULT CHARACTER SET utf8;"
 
 #Make app directory
 sudo mkdir -p $APPDIR
@@ -34,13 +36,12 @@ cd $APPDIR
 
 #Checkout three tiered build template from Github
 git clone https://github.com/lawlesst/vivo-project-template.git .
-git checkout 1.6
 git submodule init
 git submodule update
 cd VIVO/
-git checkout maint-rel-1.6.2
+git checkout maint-rel-1.7
 cd ../Vitro
-git checkout maint-rel-1.6.2
+git checkout maint-rel-1.7
 cd ..
 
 #Copy build properties into app directory
@@ -59,6 +60,7 @@ sudo /etc/init.d/tomcat7 stop
 # rm VIVO/rdf/abox/filegraph/geopolitical.abox.ver1.1-11-18-11.owl
 
 #Build VIVO
+#Disable tests with -Dskiptests=true
 sudo ant all
 
 # VIVO log directory

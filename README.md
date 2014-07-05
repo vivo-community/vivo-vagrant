@@ -2,7 +2,7 @@
 
 [Vagrant](http://www.vagrantup.com/) configuration and install scripts for running [VIVO](http://vivoweb.org) on a virtual machine, aka [Vagrant box](http://docs.vagrantup.com/v2/boxes.html), running an Ubuntu 64 Precise image.
 
-The virtual machine will boot and install VIVO 1.6 and its dependencies.  This will take several minutes for the initial install.
+The virtual machine will boot and install VIVO 1.7 and its dependencies.  This will take several minutes for the initial install.
 
 ## Prerequisites
  * [VirtualBox](https://www.virtualbox.org/).
@@ -39,16 +39,16 @@ $ vlog
  * To start/stop Tomcat run `sudo /etc/init.d/tomcat start|stop|restart`.
  * A Vagrant [shared directory](http://docs.vagrantup.com/v2/synced-folders/) is available at `/work` from the box.
  * Use the `vagrant suspend` and `vagrant resume` commands to manage your Vagrant box when not in use or if you plan to restart or shutdown the host system, as opposed to using the VirtualBox admin user interface.
- 
+
 ### Background
  * This Vagrant box is intended for development only.  Change default user names and passwords if you intend to use this config for a production deployment.
  * The source at `/usr/local/vivo` is based off a [3-tier VIVO build template](https://github.com/lawlesst/vivo-project-template) and under git version control.
  * On older versions of Vagrant it might be necessary to start Vagrant with the `$ vagrant up --no-provision` flag to prevent the VIVO installation script from running each time.
- * Vagrant supports virtualization utilities other than [VirtualBox](https://www.virtualbox.org/) but this package hasn't been tested with those.  Please report back if you have adapted this to work with another virtualization tool.  
+ * Vagrant supports virtualization utilities other than [VirtualBox](https://www.virtualbox.org/) but this package hasn't been tested with those.  Please report back if you have adapted this to work with another virtualization tool.
 
 ## Updates to VIVO and Vitro code
  * From time to time, updates will be made to the current VIVO or Vitro release.  To make sure your VIVO Vagrant box is running the latest code, login to your box, shutdown Tomcat, and checkout the latest [VIVO](https://github.com/vivo-project/VIVO) and [Vitro](https://github.com/vivo-project/Vitro) code from Github.  For example:
- 
+
  ~~~
  $ sudo /etc/init.d/tomcat7 stop
  $ cd /usr/local/vivo
@@ -60,13 +60,13 @@ $ vlog
  $ sudo ant all
  $ sudo /etc/init.d/tomcat7 start
  ~~~
- * You can also, at anytime, re-provision your Vagrant box.  By running the following from your host machine.  Be sure to backup any data or code changes you have made beforehand.  
- 
+ * You can also, at anytime, re-provision your Vagrant box.  By running the following from your host machine.  Be sure to backup any data or code changes you have made beforehand.
+
  ~~~
  $ vagrant up --provision
  ~~~
 
- * If you are interested in running VIVO 1.5, you can run checkout the v1.5 branch of this repository.  
+ * If you are interested in running VIVO 1.5, you can run checkout the v1.5 branch of this repository.
  ~~~
  $ git clone https://github.com/lawlesst/vivo-vagrant.git vivo-vagrant
  $ cd vivo-vagrant
