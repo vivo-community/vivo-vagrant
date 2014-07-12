@@ -75,6 +75,6 @@ $ vlog
  ~~~
 
 ## Karma
-[Karma](http://www.isi.edu/integration/karma/) is a tool for mapping raw data in various formats (CSV, XML, etc) to RDF.  A script is included to install Karma and its dependencies.  To install: run `sudo /home/vagrant/provision/karma.sh install`.  The initial install will take about 10 minutes.  Once it's installed Karma can be started with `/home/vagrant/provision/karma.sh start`.  Karma runs in a web browser and will be available on your machine at `http://localhost:8000/`.
+[Karma](http://www.isi.edu/integration/karma/) is a tool for mapping raw data in various formats (CSV, XML, etc) to RDF.  To assist with using Karma to model data for VIVO, a script is included to install Karma and its dependencies.  To install Karma: run `sudo /home/vagrant/provision/karma.sh install`.  The initial install will take about 10 minutes.  Once it's installed Karma can be started with `/home/vagrant/provision/karma.sh start`.  Karma runs in a web browser and will be available on your machine at `http://localhost:8000/`.
 
 See this [presentation](https://www.youtube.com/watch?v=aBLHGzui0_s) (starting at about 12:30) from [Violeta Ilik](http://library.tamu.edu/directory/people/vilik) from Texas & AM University on how to model data for VIVO with Karma.
