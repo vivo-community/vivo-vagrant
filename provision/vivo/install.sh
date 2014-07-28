@@ -8,6 +8,10 @@
 APPDIR=/usr/local/vivo
 #Data directory - Solr index and VIVO application files will be stored here.
 DATADIR=/usr/local/vdata
+#Tomcat webapp dir
+WEBAPPDIR=/var/lib/tomcat7/webapps
+#Database
+VIVO_DATABASE=vivo17dev
 
 #VIVO will be installed in APPDIR.  You might want to put this
 #in a shared folder so that the files can be edited from the
@@ -19,7 +23,7 @@ DATADIR=/usr/local/vdata
 sudo rm -rf $APPDIR
 
 #create VIVO mysql database
-mysql -uroot -pvivo -e "CREATE DATABASE IF NOT EXISTS vivo16dev DEFAULT CHARACTER SET utf8;"
+mysql -uroot -pvivo -e "CREATE DATABASE IF NOT EXISTS $VIVO_DATABASE DEFAULT CHARACTER SET utf8;"
 
 #Make app directory
 sudo mkdir -p $APPDIR
@@ -32,13 +36,12 @@ cd $APPDIR
 
 #Checkout three tiered build template from Github
 git clone https://github.com/lawlesst/vivo-project-template.git .
-git checkout 1.6
 git submodule init
 git submodule update
 cd VIVO/
-git checkout maint-rel-1.6
+git checkout maint-rel-1.7
 cd ../Vitro
-git checkout maint-rel-1.6
+git checkout maint-rel-1.7
 cd ..
 
 #Copy build properties into app directory
@@ -57,6 +60,7 @@ sudo /etc/init.d/tomcat7 stop
 # rm VIVO/rdf/abox/filegraph/geopolitical.abox.ver1.1-11-18-11.owl
 
 #Build VIVO
+#Disable tests with -Dskiptests=true
 sudo ant all
 
 # VIVO log directory
@@ -66,7 +70,11 @@ sudo touch /usr/share/tomcat7/logs/vivo.all.log
 #Change permissions
 sudo chown -R tomcat7:tomcat7 /usr/share/tomcat7/logs/
 sudo chown -R tomcat7:tomcat7 $DATADIR
-sudo chown -R tomcat7:tomcat7 /var/lib/tomcat7/webapps/vivo/
+sudo chown -R tomcat7:tomcat7 $WEBAPPDIR/vivo/
+
+#Add redicrect to /vivo in tomcat root
+sudo rm -f $WEBAPPDIR/ROOT/index.html
+sudo cp /home/vagrant/provision/vivo/index.jsp $WEBAPPDIR/ROOT/index.jsp
 
 #Start Tomcat
 sudo /etc/init.d/tomcat7 start

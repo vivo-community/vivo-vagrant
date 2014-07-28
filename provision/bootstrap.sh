@@ -20,10 +20,6 @@ sudo apt-get install -y git-core mercurial vim screen wget curl raptor-utils unz
 # Web server
 sudo apt-get install -y apache2
 
-# Python - optional
-sudo apt-get install -y python python-dev python-mysqldb python-lxml python-virtualenv
-sudo pip install virtualenvwrapper
-
 # Java - install openjdk7 first
 sudo apt-get install -y openjdk-7-jdk
 sudo apt-get install -y tomcat7 ant
@@ -34,11 +30,21 @@ echo mysql-server mysql-server/root_password_again password vivo | sudo debconf-
 sudo apt-get install -y mysql-server
 sudo apt-get install -y mysql-client
 
-#Default .bashrc to home directory
-cp /home/vagrant/provision/.bashrc /home/vagrant/.
-
 #Call VIVO install
 source /home/vagrant/provision/vivo/install.sh
+
+#Append defaults to .bashrc
+#Alias for viewing VIVO log
+VLOG="alias vlog='less +F /usr/share/tomcat7/logs/vivo.all.log'"
+BASHRC=/home/vagrant/.bashrc
+
+if grep "$VLOG" $BASHRC > /dev/null
+then
+   echo "log alias exists"
+else
+   (echo;  echo $VLOG)>> $BASHRC
+   echo "log alias created"
+fi
 
 echo Box provisioned.
 
