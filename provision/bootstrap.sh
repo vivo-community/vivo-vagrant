@@ -43,12 +43,12 @@ sudo apt-get install -y mysql-server
 sudo apt-get install -y mysql-client
 
 #Call VIVO install
-source /home/vagrant/provision/vivo/install.sh
+source /home/$USER/provision/vivo/install.sh
 
 #Append defaults to .bashrc
 #Alias for viewing VIVO log
 VLOG="alias vlog='less +F /usr/share/tomcat7/logs/vivo.all.log'"
-BASHRC=/home/vagrant/.bashrc
+BASHRC=/home/$USER/.bashrc
 
 if grep "$VLOG" $BASHRC > /dev/null
 then

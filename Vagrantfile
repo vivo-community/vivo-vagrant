@@ -1,48 +1,54 @@
 # -*- mode: ruby -*-
 # vi: set ft=ruby :
 
-Vagrant::Config.run do |config|
-  # All Vagrant configuration is done here. The most common configuration
-  # options are documented and commented below. For a complete reference,
-  # please see the online documentation at vagrantup.com.
-
-  # Every Vagrant virtual environment requires a box to build off of.
-  config.vm.box = "precise64"
-
-  # The url from where the 'config.vm.box' box will be fetched if it
-  # doesn't already exist on the user's system.
-  config.vm.box_url = "http://files.vagrantup.com/precise64.box"
-
-  # Boot with a GUI so you can see the screen. (Default is headless)
-  # config.vm.boot_mode = :gui
-
-  #Memory 2GBs
-  config.vm.customize ["modifyvm", :id, "--memory", 2048]
-
-  # Assign this VM to a host-only network IP, allowing you to access it
-  # via the IP. Host-only networks can talk to the host machine as well as
-  # any other machines on the same network, but cannot be accessed (through this
-  # network interface) by any external networks.
-  # config.vm.network :hostonly, "192.168.33.10"
-
-  # Assign this VM to a bridged network, allowing you to connect directly to a
-  # network using the host's network device. This makes the VM appear as another
-  # physical device on your network.
-  # config.vm.network :bridged
-
-  # Forward a port from the guest to the host, which allows for outside
-  # computers to access the VM, whereas host only networking does not.
-  config.vm.forward_port 80, 8081
-  config.vm.forward_port 8080, 8080
-  config.vm.forward_port 8000, 8000
-  config.vm.forward_port 5000, 5000
-  config.vm.forward_port 3030, 3030
-
+Vagrant.configure("2") do |config|
   # Share an additional folder to the guest VM. The first argument is
-  # an identifier, the second is the path on the guest to mount the
-  # folder, and the third is the path on the host to the actual folder.
-  config.vm.share_folder "v-data", "/work", "work"
-  config.vm.share_folder "provision", "/home/vagrant/provision", "provision"
+  # a path to a directory on the host machine, and the second is the path on
+  # the guest to mount the folder.
+  config.vm.synced_folder "work", "/work"
 
-  config.vm.provision :shell, :path => "provision/bootstrap.sh"
+  # This configuration is for a local box, using VirtualBox as the provider
+  config.vm.provider "virtualbox" do |vb, override|
+    override.vm.box = "precise64"
+    override.vm.box_url = "http://files.vagrantup.com/precise64.box" 
+
+    #vb.customize ["modifyvm", :id, "--memory", 2048]
+    vb.memory = 2048
+
+    config.vm.synced_folder "provision", "/home/vagrant/provision"
+
+    config.vm.network "forwarded_port", guest: 80, host: 8081
+    config.vm.network "forwarded_port", guest: 8080, host: 8080
+    config.vm.network "forwarded_port", guest: 8000, host: 8000
+    config.vm.network "forwarded_port", guest: 5000, host: 5000
+    config.vm.network "forwarded_port", guest: 3030, host: 3030
+  end
+
+  # This configuration is for an AWS EC2 instance, requiring the vagrant-aws plugin
+  config.vm.provider "aws" do |aws, override|
+    aws.access_key_id = ENV['AWS_ACCESS_KEY_ID']
+    aws.secret_access_key = ENV['AWS_SECRET_ACCESS_KEY']
+    aws.region = "us-west-1"
+    # Ubuntu Server 14.04 LTS, SSD Volume Type (64-bit, HVM hardware-assisted, EC2-VPC, t2.micro free tier eligible)
+    #aws.ami = "ami-a7fdfee2"  
+    #aws.instance_type = "t2.micro"  #also see t2.small, t2.medium, and larger
+    # Ubuntu Server 14.04 LTS, SSD Volume Type (64-bit, PV paravirtual, EC2-Classic, t1.micro free tier eligible)
+    aws.ami = "ami-f1fdfeb4"  
+    aws.instance_type = "t1.micro"  #also see m1.small, m3.medium, m1.medium, and larger
+    aws.keypair_name = ENV['AWS_KEYPAIR_NAME']
+    aws.security_groups = [ENV['AWS_SECURITY_GROUP']]
+    aws.tags = {
+      'Name' => 'VIVO Vagrant Test',
+    }
+
+    override.vm.box = "dummy"
+    override.vm.box_url = "https://github.com/mitchellh/vagrant-aws/raw/master/dummy.box"
+    override.ssh.username = "ubuntu"  #Overrides default 'vagrant' user name
+    override.ssh.private_key_path = ENV['MY_PRIVATE_AWS_SSH_KEY_PATH']
+
+    config.vm.synced_folder "provision", "/home/ubuntu/provision"
+  end
+
+  #config.vm.provision "shell", path: "provision/bootstrap.sh"
+  config.vm.provision "shell", path: "provision/bootstrap.sh", privileged: false
 end

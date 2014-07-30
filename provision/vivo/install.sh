@@ -31,7 +31,8 @@ sudo mkdir -p $APPDIR
 sudo mkdir -p $DATADIR
 
 #Setup permissions and switch to app dir.
-sudo chown -R vagrant:vagrant $APPDIR
+sudo chown -R $USER:$USER $APPDIR
+sudo chown -R $USER:$USER $DATADIR
 cd $APPDIR
 
 #Checkout three tiered build template from Github
@@ -45,9 +46,9 @@ git checkout maint-rel-1.7
 cd ..
 
 #Copy build properties into app directory
-cp /home/vagrant/provision/vivo/build.properties $APPDIR/.
+cp /home/$USER/provision/vivo/build.properties $APPDIR/.
 #Copy runtime properties into data directory
-cp /home/vagrant/provision/vivo/runtime.properties $DATADIR/.
+cp /home/$USER/provision/vivo/runtime.properties $DATADIR/.
 
 #Stop tomcat
 sudo /etc/init.d/tomcat7 stop
@@ -74,7 +75,7 @@ sudo chown -R tomcat7:tomcat7 $WEBAPPDIR/vivo/
 
 #Add redicrect to /vivo in tomcat root
 sudo rm -f $WEBAPPDIR/ROOT/index.html
-sudo cp /home/vagrant/provision/vivo/index.jsp $WEBAPPDIR/ROOT/index.jsp
+sudo cp /home/$USER/provision/vivo/index.jsp $WEBAPPDIR/ROOT/index.jsp
 
 #Start Tomcat
 sudo /etc/init.d/tomcat7 start
