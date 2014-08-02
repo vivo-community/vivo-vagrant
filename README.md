@@ -6,7 +6,7 @@ The virtual machine will boot and install VIVO 1.7 and its dependencies.  This w
 
 ## Prerequisites
  * [VirtualBox](https://www.virtualbox.org/).
- * [Vagrant](https://docs.vagrantup.com/v2/installation/index.html).
+ * [Vagrant](https://docs.vagrantup.com/v2/installation/index.html).  The most recent version is recommended.  Vagrant 1.0.x will not work.
  * Git - if you are new to git, you might want to use the Github desktop client. [Windows](http://windows.github.com/) and [Mac](http://mac.github.com/) versions are available.
 
 ## Install the VIVO Vagrant box
@@ -44,7 +44,7 @@ $ vlog
  * This Vagrant box is intended for development only.  Change default user names and passwords if you intend to use this config for a production deployment.
  * The source at `/usr/local/vivo` is based off a [3-tier VIVO build template](https://github.com/lawlesst/vivo-project-template) and under git version control.
  * On older versions of Vagrant it might be necessary to start Vagrant with the `$ vagrant up --no-provision` flag to prevent the VIVO installation script from running each time.
- * Vagrant supports virtualization utilities other than [VirtualBox](https://www.virtualbox.org/) but this package hasn't been tested with those.  Please report back if you have adapted this to work with another virtualization tool.
+ * Vagrant supports virtualization utilities other than [VirtualBox](https://www.virtualbox.org/).  Amazon Web Service support is available in this branch - `aws`.  If you require another provisioning tool, like VMware, please create an issue.
 
 ## Updates to VIVO and Vitro code
  * From time to time, updates will be made to the current VIVO or Vitro release.  To make sure your VIVO Vagrant box is running the latest code, login to your box, shutdown Tomcat, and checkout the latest [VIVO](https://github.com/vivo-project/VIVO) and [Vitro](https://github.com/vivo-project/Vitro) code from Github.  For example:
