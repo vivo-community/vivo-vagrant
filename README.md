@@ -46,6 +46,16 @@ $ vlog
  * On older versions of Vagrant it might be necessary to start Vagrant with the `$ vagrant up --no-provision` flag to prevent the VIVO installation script from running each time.
  * Vagrant supports virtualization utilities other than [VirtualBox](https://www.virtualbox.org/).  Amazon Web Service support is available in this branch - `aws`.  If you require another provisioning tool, like VMware, please create an issue.
 
+
+## Deploying the VIVO Vagrant box on Amazon Web Services
+Experimental support has been added for deploying the vivo-vagrant to Amazon Web Services (AWS).  You will need an AWS account and credentials.  See the [aws-sample.sh](aws-sample.sh) file for the required environment variables.
+
+The box will take about 10 minutes to provision.  You will need a AWS security policy that allows for SSHing into the box and exposes port 8080 to use VIVO in the web browser.
+
+**Warning**: deploying to AWS is intended for development and development purposes only.  Passwords and access control will need to be adjusted for a production deployment.
+
+If you do attempt to deploy this on AWS, please report back via the issue tracker.
+
 ## Updates to VIVO and Vitro code
  * From time to time, updates will be made to the current VIVO or Vitro release.  To make sure your VIVO Vagrant box is running the latest code, login to your box, shutdown Tomcat, and checkout the latest [VIVO](https://github.com/vivo-project/VIVO) and [Vitro](https://github.com/vivo-project/Vitro) code from Github.  For example:
 
@@ -75,8 +85,8 @@ $ vlog
  ~~~
 
 ## Karma
-[Karma](http://www.isi.edu/integration/karma/) is a tool for mapping raw data in various formats (CSV, XML, etc) to RDF.  To assist with using Karma to model data for VIVO, a script is included to install Karma and its dependencies.  
+[Karma](http://www.isi.edu/integration/karma/) is a tool for mapping raw data in various formats (CSV, XML, etc) to RDF.  To assist with using Karma to model data for VIVO, a script is included to install Karma and its dependencies.
 
 To install Karma: run `sudo /home/vagrant/provision/karma.sh install`.  The initial install will take about 10 minutes.  Once it's installed Karma can be started with `/home/vagrant/provision/karma.sh start`.  Karma runs in a web browser and will be available on your machine at `http://localhost:8000/`.
 
-[Violeta Ilik](http://library.tamu.edu/directory/people/vilik) from Texas & AM University has [presented](https://www.youtube.com/watch?v=aBLHGzui0_s) (starting at about 12:30) on how to model data for VIVO with Karma.  More information about Karma can be found in this [tutorial](https://github.com/InformationIntegrationGroup/karma-step-by-step) and on the project's [wiki](https://github.com/InformationIntegrationGroup/Web-Karma/wiki).  
+[Violeta Ilik](http://library.tamu.edu/directory/people/vilik) from Texas & AM University has [presented](https://www.youtube.com/watch?v=aBLHGzui0_s) (starting at about 12:30) on how to model data for VIVO with Karma.  More information about Karma can be found in this [tutorial](https://github.com/InformationIntegrationGroup/karma-step-by-step) and on the project's [wiki](https://github.com/InformationIntegrationGroup/Web-Karma/wiki).
