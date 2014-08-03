@@ -22,12 +22,12 @@ sudo apt-get install -y git-core vim wget curl subversion htop
 # Install Oracle Java 7 which best supports Java Advanced Imaging (JAI),
 # or uncomment line below and comment out other 6 lines to install OpenJDK7 instead
 #sudo apt-get install -y openjdk-7-jdk
-sudo apt-get install python-software-properties -y
-sudo add-apt-repository ppa:webupd8team/java -y
-sudo apt-get update -y
+sudo apt-get install python-software-properties -y > /dev/null
+sudo add-apt-repository ppa:webupd8team/java -y > /dev/null
+sudo apt-get update -y > /dev/null
 echo debconf shared/accepted-oracle-license-v1-1 select true | sudo debconf-set-selections
 echo debconf shared/accepted-oracle-license-v1-1 seen true | sudo debconf-set-selections
-sudo apt-get install oracle-java7-installer -y --quiet
+sudo apt-get install oracle-java7-installer -y > /dev/null
 
 # Install Tomcat 7 with JAVA_HOME export so Tomcat starts when install completes,
 # and then patch /etc/default/tomcat7 to specify Oracle Java 7
