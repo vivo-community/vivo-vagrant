@@ -2,7 +2,8 @@
 # vi: set ft=ruby :
 
 Vagrant.configure("2") do |config|
-  config.vm.box = "precise64"
+  #Set the box name from env or use precise64
+  config.vm.box = ENV['BOX_NAME'] || "precise64"
   config.vm.box_url = "http://files.vagrantup.com/precise64.box"
   #
   # This configuration is for a local box, using VirtualBox as the provider
@@ -46,7 +47,7 @@ Vagrant.configure("2") do |config|
     override.vm.provision "shell", path: "provision/bootstrap.sh", privileged: false
     #Get the provision dir and put it in the home directory.  We aren't using shared folders on AWS.
     #Provision AWS on Windows did not copy the provision directory to AWS, causing the VIVO install to fail.
-    override.vm.provision "shell", inline: "rm -rf /home/#{aws_unix_user}/provision/; svn export https://github.com/lawlesst/vivo-vagrant/branches/aws/provision /home/#{aws_unix_user}/provision", privileged: false
+    override.vm.provision "shell", inline: "rm -rf /home/#{aws_unix_user}/provision/; svn export https://github.com/lawlesst/vivo-vagrant/trunk/provision /home/#{aws_unix_user}/provision", privileged: false
     #Install VIVO
     override.vm.provision "shell", path: "provision/vivo/install.sh", privileged: false
   end
