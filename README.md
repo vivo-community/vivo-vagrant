@@ -47,10 +47,10 @@ $ vlog
  * Vagrant supports virtualization utilities other than [VirtualBox](https://www.virtualbox.org/).  Amazon Web Service support is available in this branch - `aws`.  If you require another provisioning tool, like VMware, please create an issue.
 
 
-## Deploying the VIVO Vagrant box on Amazon Web Services
-Experimental support has been added for deploying the vivo-vagrant to Amazon Web Services (AWS).  You will need an AWS account and credentials.  See the [aws-sample.sh](aws-sample.sh) file for the required environment variables.
+##Amazon Web Services
+Experimental support has been added for deploying the vivo-vagrant to Amazon Web Services (AWS).  You will need the [vagrant-aws provider](https://github.com/mitchellh/vagrant-aws) plugin and AWS account and credentials set as environment variables.  See the [aws-sample.sh](aws-sample.sh) file for the required variables.
 
-The box will take about 10 minutes to provision.  You will need a AWS security policy that allows for SSHing into the box and exposes port 8080 to use VIVO in the web browser.
+The box will take about 15 minutes to provision the first time.  You will need a AWS security policy that allows for SSHing into the box and exposes port 8080 to use VIVO in the web browser.
 
 **Warning**: deploying to AWS is intended for development and development purposes only.  Passwords and access control will need to be adjusted for a production deployment.
 
@@ -73,7 +73,7 @@ If you do attempt to deploy this on AWS, please report back via the issue tracke
  * You can also, at anytime, re-provision your Vagrant box.  By running the following from your host machine.  Be sure to backup any data or code changes you have made beforehand.
 
  ~~~
- $ vagrant up --provision
+ $ vagrant --provision
  ~~~
 
  * If you are interested in running VIVO 1.5, you can run checkout the v1.5 branch of this repository.
