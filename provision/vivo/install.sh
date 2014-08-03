@@ -30,7 +30,7 @@ if [ ! -f "$APPDIR/build.xml" ]; then
     echo "Checking VIVO and Vitro out from Github."
     #Recreate app dir and set permissions.
     sudo rm -rf $APPDIR
-    mkdir -p $APPDIR
+    sudo mkdir -p $APPDIR
     sudo chown -R $USER:$USER $APPDIR
     cd $APPDIR
     #Checkout from Github.
