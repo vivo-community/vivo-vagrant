@@ -1,23 +1,25 @@
 # -*- mode: ruby -*-
 # vi: set ft=ruby :
-
-Vagrant::Config.run do |config|
-  # All Vagrant configuration is done here. The most common configuration
-  # options are documented and commented below. For a complete reference,
-  # please see the online documentation at vagrantup.com.
-
-  # Every Vagrant virtual environment requires a box to build off of.
+ 
+Vagrant.configure("2") do |config|	
   config.vm.box = "precise64"
-
-  # The url from where the 'config.vm.box' box will be fetched if it
-  # doesn't already exist on the user's system.
   config.vm.box_url = "http://files.vagrantup.com/precise64.box"
 
-  # Boot with a GUI so you can see the screen. (Default is headless)
-  # config.vm.boot_mode = :gui
+  config.vm.provider "virtualbox" do |v,override|
+	v.name = "vagrant_vivo_precise64"    
+	v.gui = false	
+	v.cpus = 1
+	v.memory = 1024
+  end
 
-  #Memory 2GBs
-  config.vm.customize ["modifyvm", :id, "--memory", 2048]
+  config.vm.provider "vmware_fusion" do |v,override|
+	v.name = "vagrant_vivo_precise64"
+	v.gui = false
+	v.vmx["numvcpus"] = "1"	
+	v.vmx["memsize"] = "1024"
+	override.vm.box     = "precise64_vmware_fusion"
+	override.vm.box_url = "http://files.vagrantup.com/precise64_vmware_fusion.box"
+  end
 
   # Assign this VM to a host-only network IP, allowing you to access it
   # via the IP. Host-only networks can talk to the host machine as well as
@@ -32,17 +34,20 @@ Vagrant::Config.run do |config|
 
   # Forward a port from the guest to the host, which allows for outside
   # computers to access the VM, whereas host only networking does not.
-  config.vm.forward_port 80, 8081
-  config.vm.forward_port 8080, 8080
-  config.vm.forward_port 8000, 8000
-  config.vm.forward_port 5000, 5000
-  config.vm.forward_port 3030, 3030
+  config.vm.network "forwarded_port", guest: 80, host: 8081
+  config.vm.network "forwarded_port", guest: 8080, host: 8080
+  config.vm.network "forwarded_port", guest: 8000, host: 8000
+  config.vm.network "forwarded_port", guest: 5000, host: 5000
+  config.vm.network "forwarded_port", guest: 3030, host: 3030
 
   # Share an additional folder to the guest VM. The first argument is
   # an identifier, the second is the path on the guest to mount the
   # folder, and the third is the path on the host to the actual folder.
-  config.vm.share_folder "v-data", "/work", "work"
-  config.vm.share_folder "provision", "/home/vagrant/provision", "provision"
+  config.vm.synced_folder "work", "/work"
+  config.vm.synced_folder "provision", "/home/vagrant/provision"  
 
-  config.vm.provision :shell, :path => "provision/bootstrap.sh"
+  #config.vm.share_folder "v-data", "/work", "work"
+  #config.vm.share_folder "provision", "/home/vagrant/provision", "provision"
+
+  config.vm.provision "shell", path: "provision/bootstrap.sh", privileged: true	
 end
