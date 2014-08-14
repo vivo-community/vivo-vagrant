@@ -5,9 +5,11 @@
 The virtual machine will boot and install VIVO 1.7 and its dependencies.  This will take several minutes for the initial install.
 
 ## Prerequisites
- * [VirtualBox](https://www.virtualbox.org/).
+ * [VirtualBox](https://www.virtualbox.org/) or [VMWare Fusion](http://www.vmware.com/products/fusion).
  * [Vagrant](https://docs.vagrantup.com/v2/installation/index.html).
  * Git - if you are new to git, you might want to use the Github desktop client. [Windows](http://windows.github.com/) and [Mac](http://mac.github.com/) versions are available.
+
+This Vagrant box is intended for development and experimentation only.  Change default user names and passwords.
 
 ## Install the VIVO Vagrant box
 
@@ -31,20 +33,13 @@ Once you are logged in, you can view the default VIVO log output with this comma
 $ vlog
 ~~~
 
-
 ### Commands / system layout
- * VIVO application: `/usr/local/vivo`
+ * VIVO application: `/usr/local/vivo`.  The source at `/usr/local/vivo` is based off a [3-tier VIVO build template](https://github.com/lawlesst/vivo-project-template) and under git version control.
  * VIVO data directory: `/usr/local/vdata`
  * Tomcat: `/var/lib/tomcat7/`
  * To start/stop Tomcat run `sudo /etc/init.d/tomcat start|stop|restart`.
  * A Vagrant [shared directory](http://docs.vagrantup.com/v2/synced-folders/) is available at `/work` from the box.
- * Use the `vagrant suspend` and `vagrant resume` commands to manage your Vagrant box when not in use or if you plan to restart or shutdown the host system, as opposed to using the VirtualBox admin user interface.
-
-### Background
- * This Vagrant box is intended for development only.  Change default user names and passwords if you intend to use this config for a production deployment.
- * The source at `/usr/local/vivo` is based off a [3-tier VIVO build template](https://github.com/lawlesst/vivo-project-template) and under git version control.
- * On older versions of Vagrant it might be necessary to start Vagrant with the `$ vagrant up --no-provision` flag to prevent the VIVO installation script from running each time.
- * Vagrant supports virtualization utilities other than [VirtualBox](https://www.virtualbox.org/) but this package hasn't been tested with those.  Please report back if you have adapted this to work with another virtualization tool.
+ * Use the `vagrant suspend` and `vagrant resume` commands to manage your Vagrant box when not in use or if you plan to restart or shutdown the host system, as opposed to using the VirtualBox or VMWare Fusion admin user interface.
 
 ## Updates to VIVO and Vitro code
  * From time to time, updates will be made to the current VIVO or Vitro release.  To make sure your VIVO Vagrant box is running the latest code, login to your box, shutdown Tomcat, and checkout the latest [VIVO](https://github.com/vivo-project/VIVO) and [Vitro](https://github.com/vivo-project/Vitro) code from Github.  For example:
