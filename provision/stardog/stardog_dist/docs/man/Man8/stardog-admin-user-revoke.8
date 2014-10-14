@@ -1,0 +1,49 @@
+.\" generated with Ronn/v0.7.3
+.\" http://github.com/rtomayko/ronn/tree/0.7.3
+.
+.TH "STARDOG\-ADMIN_USER_REVOKE" "8" "August 2014" "Clark & Parsia" "stardog-admin"
+.
+.SH "NAME"
+\fBstardog\-admin_user_revoke\fR \- Revokes user permission\.
+.
+.SH "SYNOPSIS"
+\fBstardog\-admin\fR [ \-\-server \fIserver url\fR ] \fBuser\fR \fBrevoke\fR {\-a | \-\-action} \fIaction\fR {\-o | \-\-object} \fIobj\fR [ {\-p | \-\-passwd} \fIpassword\fR ] [ {\-P | \-\-ask\-password} ] [ {\-u | \-\-username} \fIusername\fR ] [ {\-v | \-\-verbose} ] [\-\-] \fIusername\fR
+.
+.SH "OPTIONS"
+.
+.TP
+\fB\-a\fR \fIaction\fR, \fB\-\-action\fR \fIaction\fR
+Action to be permitted: [read,write,create,delete,grant,revoke,execute,all]\.
+.
+.TP
+\fB\-o\fR \fIobj\fR, \fB\-\-object\fR \fIobj\fR
+Target resource (user:username, db:databasename)\.
+.
+.TP
+\fB\-p\fR \fIpassword\fR, \fB\-\-passwd\fR \fIpassword\fR
+Password\.
+.
+.TP
+\fB\-P\fR, \fB\-\-ask\-password\fR
+Prompt for password\.
+.
+.TP
+\fB\-\-server\fR \fIserver url\fR
+URL of Stardog Server\. If this option isn\'t specified, it will be read from JVM argument \'stardog\.default\.cli\.server\'\. If the JVM arg isn\'t set, the default value \'snarl://localhost:5820\' is used\. If server URL has no explicit port value, the default port value \'5820\' is used\. Example: \'stardog \-\-server snarl://12\.34\.56\.78:5820 server stop\'
+.
+.TP
+\fB\-u\fR \fIusername\fR, \fB\-\-username\fR \fIusername\fR
+User name\.
+.
+.TP
+\fB\-v\fR, \fB\-\-verbose\fR
+Verbose flag that causes more detailed information to be printed
+.
+.TP
+\-\-
+This option can be used to separate command\-line options from the list of arguments (useful when arguments might be mistaken for command\-line options)\.
+.
+.TP
+\fIusername\fR
+User whose permission is to be revoked\.
+

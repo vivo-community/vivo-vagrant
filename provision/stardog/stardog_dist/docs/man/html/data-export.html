@@ -1,0 +1,148 @@
+<html>
+<head>
+<link href="css/bootstrap.min.css" rel="stylesheet" media="screen">
+</head>
+<style>
+    body { margin: 50px; }
+</style>
+<body>
+<hr/>
+<h1 class="text-info">stardog data export Manual Page
+<hr/>
+<h1 class="text-info">NAME</h1>
+<br/>
+<div class="row"><div class="span8 offset1">stardog data export &mdash;Exports the contents of a database in RDF.</div>
+</div>
+<br/>
+<h1 class="text-info">SYNOPSIS</h1>
+<br/>
+<div class="row">
+<div class="span8 offset1">
+stardog data export [ --compression &lt;Compression&gt; ] [ {-f | --format} &lt;RDF Format&gt; ] [ {-g | --named-graph} &lt;export named graph(s)&gt;... ] [ {-p | --passwd} &lt;password&gt; ] [ {-P | --ask-password} ] [ {-s | --server-side} ] [ {-u | --username} &lt;username&gt; ] [ {-v | --verbose} ] [--] &lt;dbname&gt; &lt;export file&gt;...</div>
+</div>
+<br/>
+<h1 class="text-info">OPTIONS</h1>
+<br/>
+<div class="row">
+<div class="span8 offset1">
+--compression &lt;Compression&gt;</div>
+</div>
+<div class="row">
+<div class="span8 offset2">
+Compression formot [GZIP, BZ2] for the exported data.</div>
+</div>
+<div class="row">
+<div class="span8 offset1">
+-f &lt;RDF Format&gt;, --format &lt;RDF Format&gt;</div>
+</div>
+<div class="row">
+<div class="span8 offset2">
+RDF Format [NTRIPLES, RDF/XML, TURTLE, TRIG, TRIX, N3, NQUADS] for the exported data.</div>
+</div>
+<div class="row">
+<div class="span8 offset1">
+-g &lt;export named graph(s)&gt;, --named-graph &lt;export named graph(s)&gt;</div>
+</div>
+<div class="row">
+<div class="span8 offset2">
+Named graph(s) to export.  Multiple options are separated by whitespaces, e.g., '-g "urn:context1 urn:context2"'. The keyword ALL can be used if all named graphs in the db are desired, and the keyword DEFAULT can be used to export the default graph. When used as the last option, values should be followed by '--' to denote the end of the named graphs."</div>
+</div>
+<div class="row">
+<div class="span8 offset1">
+-p &lt;password&gt;, --passwd &lt;password&gt;</div>
+</div>
+<div class="row">
+<div class="span8 offset2">
+Password.</div>
+</div>
+<div class="row">
+<div class="span8 offset1">
+-P, --ask-password</div>
+</div>
+<div class="row">
+<div class="span8 offset2">
+Prompt for password.</div>
+</div>
+<div class="row">
+<div class="span8 offset1">
+-s, --server-side</div>
+</div>
+<div class="row">
+<div class="span8 offset2">
+Export the data to the server</div>
+</div>
+<div class="row">
+<div class="span8 offset1">
+-u &lt;username&gt;, --username &lt;username&gt;</div>
+</div>
+<div class="row">
+<div class="span8 offset2">
+User name.</div>
+</div>
+<div class="row">
+<div class="span8 offset1">
+-v, --verbose</div>
+</div>
+<div class="row">
+<div class="span8 offset2">
+Verbose flag that causes more detailed information to be printed</div>
+</div>
+<div class="row">
+<div class="span8 offset1">
+--
+</div>
+</div>
+<div class="row">
+<div class="span8 offset2">
+This option can be used to separate command-line options from the list of argument, (useful when arguments might be mistaken for command-line options
+</div>
+</div>
+<div class="row">
+<div class="span8 offset1">
+&lt;dbname&gt; &lt;export file&gt;</div>
+</div>
+<div class="row">
+<div class="span8 offset2">
+The name of the database or the full connection string of the database to connect to. If only the name is provided, the default server URL will be pre-pended to the name of the database in order to construct the connection string. Connection parameters such as ';reasoning=QL' can be included in the provided database name. Connection parameters specified like this can be overridden by specific options on the command. The default server URL will be read from the JVM argument 'stardog.default.cli.server'. If the JVM argument is not set, the default value 'snarl://localhost:5820' is used. If the server URL has no explicit port value, the default port value '5820' is used.  To use a secure connection, you should specify the full connection string and postfix 's' to the protocol, e.g. snarls or https. The second argument is the file to write the output to; if not specified, the output is written to STDOUT.</div>
+</div>
+<br/>
+<h1 class="text-info">DISCUSSION</h1>
+<br/>
+<div class="row">
+<div class="span8 offset1">
+Exports the database in the specified format to the specified output file, else to STDOUT. By default, only the default graph will be exported.  To export the entire database, or a specific set of named graphs, use the -g/--named-graph parameter to specify the graphs to export. If no format is specified, the format is determined from the output file name; otherwise, TURTLE is the default. Exports of large databases should be performed on the server using the --server-side flag.  This will save the RDF using the specified format in the export directory for the server.</div>
+</div>
+<br/>
+<h1 class="text-info">EXAMPLES</h1>
+<br/>
+<div class="row">
+<div class="span12 offset1">
+<p>
+Export the database 'myDb' as NTRIPLES:</p>
+<pre>
+    $ stardog data export --format NTRIPLES myDb</pre>
+<p>
+Export the entire database 'myDb' to a file in TURTLE:</p>
+<pre>
+    $ stardog data export --named-graph ALL -- myDb export.ttl</pre>
+<p>
+Export two named graphs of the database 'myDb' as TRIG:</p>
+<pre>
+    $ stardog data export --named-graph http://examples.org/graph1 http://examples.org/graph2 --format TRIG myDb</pre>
+<p>
+Export the database 'myDb' to a file in TURTLE:</p>
+<pre>
+    $ stardog data export myDb export.ttl</pre>
+<p>
+Export the database 'myDb' to a gzipped file in TURTLE:</p>
+<pre>
+    $ stardog data export myDb export.ttl.gz</pre>
+<p>
+Export the database 'myDb' as TRIG to a file on the server</p>
+<pre>
+    $ stardog data export --format TRIG --server-side myDb</pre>
+</div>
+</div>
+</body>
+</html>
+

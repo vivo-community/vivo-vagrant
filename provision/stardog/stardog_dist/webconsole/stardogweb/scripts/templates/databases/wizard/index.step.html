@@ -1,0 +1,67 @@
+<!-- <p>The following are the configuration options for the Database indexes:</p>
+ -->
+<br/>
+
+<div class="row">
+  <div class="col-md-6">
+    <form role="form">
+      <div class="form-group" data-option="index.differential.enable.limit">
+        <label for="index.differential.enable.limit" class="control-label" title="{{= it.metadataInfo['index.differential.enable.limit'].help}}">{{= it.metadataInfo['index.differential.enable.limit'].label}}</label>
+        <input id="index.differential.enable.limit" type="text" class="form-control" placeholder="# of triples" {{? it.metadataModel['index.differential.enable.limit']}}value="{{= it.metadataModel['index.differential.enable.limit']}}"{{?}}>
+      </div>
+
+      <div class="form-group" data-option="index.differential.merge.limit">
+        <label for="index.differential.merge.limit" class="control-label" title="{{= it.metadataInfo['index.differential.merge.limit'].help}}">{{= it.metadataInfo['index.differential.merge.limit'].label}}</label>
+        <input id="index.differential.merge.limit" type="text" class="form-control" placeholder="# of triples" {{? it.metadataModel['index.differential.merge.limit']}}value="{{= it.metadataModel['index.differential.merge.limit']}}"{{?}}>
+      </div>
+
+      <div class="form-group" data-option="index.type">
+        <label for="index.type" class="control-label" title="{{= it.metadataInfo['index.type'].help}}">{{= it.metadataInfo['index.type'].label}}</label>
+        <select id="index.type" name="index.type" class="form-control">
+          {{~ it.metadataInfo['index.type'].input.options :opt }}
+          <option value="{{= opt}}" {{ if (it.metadataModel['index.type'] === opt) { }}selected{{ } }}>{{= opt}}</option>
+          {{~}}
+        </select>
+      </div>
+    </form>
+  </div>
+  <div class="col-md-6">
+    <form class="form-horizontal" role="form">
+      <div class="form-group" data-option="index.literals.canonical">
+        <label for="index.literals.canonical" class="col-sm-6 control-label" title="{{= it.metadataInfo['index.literals.canonical'].help}}">{{= it.metadataInfo['index.literals.canonical'].label}}</label>
+        <div class="col-sm-6">
+          <input id="index.literals.canonical" type="checkbox" {{? it.metadataModel['index.literals.canonical']}}checked{{?}}>
+        </div>
+      </div>
+
+      <div class="form-group" data-option="index.named.graphs">
+        <label for="index.named.graphs" class="col-sm-6 control-label" title="{{= it.metadataInfo['index.named.graphs'].help}}">{{= it.metadataInfo['index.named.graphs'].label}}</label>
+        <div class="col-sm-6">
+          <input id="index.named.graphs" type="checkbox" {{? it.metadataModel['index.named.graphs']}}checked{{?}}>
+        </div>
+      </div>
+
+      <div class="form-group" data-option="index.statistics.update.automatic">
+        <label for="index.statistics.update.automatic" class="col-sm-6 control-label" title="{{= it.metadataInfo['index.statistics.update.automatic'].help}}">{{= it.metadataInfo['index.statistics.update.automatic'].label}}</label>
+        <div class="col-sm-6">
+          <input id="index.statistics.update.automatic" type="checkbox" {{? it.metadataModel['index.statistics.update.automatic']}}checked{{?}}>
+        </div>
+      </div>
+
+      <div class="form-group" data-option="index.persist">
+        <label for="index.persist" class="col-sm-6 control-label" title="{{= it.metadataInfo['index.persist'].help}}">{{= it.metadataInfo['index.persist'].label}}</label>
+        <div class="col-sm-6">
+          <input id="index.persist" type="checkbox" {{? it.metadataModel['index.persist']}}checked{{?}}>
+        </div>
+      </div>
+
+      <div class="form-group" data-option="index.persist.sync">
+        <label for="index.persist.sync" class="col-sm-6 control-label" title="{{= it.metadataInfo['index.persist.sync'].help}}">{{= it.metadataInfo['index.persist.sync'].label}}</label>
+        <div class="col-sm-6">
+          <input id="index.persist.sync" type="checkbox" {{? it.metadataModel['index.persist.sync']}}checked{{?}}>
+        </div>
+      </div>
+
+    </form>
+  </div>
+</div>

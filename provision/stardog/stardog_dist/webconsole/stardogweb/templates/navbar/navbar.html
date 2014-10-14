@@ -1,0 +1,76 @@
+<nav class="navbar navbar-default" role="navigation">
+  <div class="container-fluid">
+    <!-- Brand and toggle get grouped for better mobile display -->
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a id="lblBrand" class="navbar-brand {{#if sLogo}}withLogo{{else}}{{/if}}" href="#">
+      {{#if isLogo}}
+        <img id="lblLogo" src="{{label}}" ></img>
+      {{else}}
+        {{{label}}}
+      {{/if}}
+      </a>
+    </div>
+
+    <!-- Collect the nav links, forms, and other content for toggling -->
+    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+      <ul id="navli" class="nav navbar-nav">
+        {{#each modules.navbar.items}}
+        <li class="" id="{{htmlId}}">
+          <a class="menuLink" href="{{link}}">{{#if icon}}<i class="{{icon}}"></i>{{/if}} {{{label}}}</a>
+        </li>
+        {{/each}}
+        {{#each modules.navbar.dropdowns}}
+        <li class="dropdown">
+          <a href="#" id="itemdrop-{{name}}" class="dropdown-toggle" data-bypass="true" data-toggle="dropdown">
+            <i class="{{icon}}"></i> {{name}} <b class="caret"></b>
+          </a>
+          <ul class="dropdown-menu" role="menu" aria-labelledby="itemdrop-{{name}}">
+            {{#each items}}
+            <li class="" id="{{htmlId}}">
+              <a class="menuLink" href="{{link}}">{{#if icon}}<i class="{{icon}}"></i>{{/if}} {{{label}}}</a>
+            </li>
+            {{/each}}
+          </ul>
+        </li>
+        {{/each}}
+      </ul>
+
+      <button id="help-link" class="btn btn-primary navbar-btn navbar-right">
+        <i class="icon-question"></i>
+      </button>
+
+      {{#if modules.search}}
+      <form class="navbar-form navbar-right" role="search">
+        <input id="direct_search" type="text" class="form-control search-query" placeholder="Search"></input>
+      </form>
+      {{/if}}
+
+      <ul class="nav navbar-nav navbar-right">
+        <li id="optionsMenu" class="dropdown">
+          <a href="#" id="maindrop" class="dropdown-toggle" data-bypass="true" data-toggle="dropdown">
+            <i class="icon-reorder"></i>
+          </a>
+          <ul class="dropdown-menu" role="menu" aria-labelledby="maindrop">
+            {{#each modules}}
+              {{#if label}}
+                {{#if mainUrl}}
+                <li>
+                  <a href="{{mainUrl}}" {{#if htmlId}}id="{{htmlId}}"{{/if}} >
+                    {{#if label}}{{{label}}}{{else}}{{mainUrl}}{{/if}}
+                  </a>
+                </li>
+                {{/if}}
+              {{/if}}
+            {{/each}}
+          </ul>
+        </li>
+      </ul>
+    </div><!-- /.navbar-collapse -->
+  </div><!-- /.container-fluid -->
+</nav>

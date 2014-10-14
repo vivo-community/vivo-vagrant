@@ -1,0 +1,40 @@
+<div id="newPermission" class="modal fade bs-example-modal-sm" role="dialog" aria-labelledby="newPermissionLabel" aria-hidden="true">
+  <div class="modal-dialog modal-sm">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        <h4 id="newPermissionLabel" class="modal-title">Add permission to resource</h4>
+      </div>
+      <div class="modal-body">
+        <div id="modalAlerts"></div>
+        <p>Enter the resource information to add permissions:</p>
+        <form class="form-horizontal" role="form">
+          <div class="form-group">
+            <label class="col-sm-2 control-label" for="selResourceType">Resource Type</label>
+            <div class="col-sm-10">
+              <select id="selResourceType" class="form-control" name="resourceType">
+                <option value="*">*</option>
+                <option value="db">db</option>
+                <option value="user">user</option>
+                <option value="role">role</option>
+                <option value="admin">admin</option>
+                <option value="metadata">metadata</option>
+                <option value="named-graph">named-graph</option>
+                <option value="icv-constraints">icv-constraints</option>
+              </select>
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="inResource" class="col-sm-2 control-label">Resource</label>
+            <div class="col-sm-10">
+              <input type="text" class="form-control" id="inResource" placeholder="Resource name">
+            </div>
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button id="btnAdd" type="button" class="btn btn-primary">Add</button>
+      </div>
+    </div>
+  </div>
+</div>

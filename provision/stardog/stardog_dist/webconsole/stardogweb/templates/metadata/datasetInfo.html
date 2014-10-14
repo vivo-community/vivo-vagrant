@@ -1,0 +1,45 @@
+<div>
+  <table id="dataInfoTable" class="table">
+    <tbody>
+      {{#unless embeddedInStardog}}
+      
+      <tr>
+        <td><strong>Application Name:<strong></td>
+        <td>{{name}}</td>
+      </tr>
+      <tr>
+        <td><strong>SPARQL Endpoint:<strong></td>
+        <td>{{sparqlEndpoint}}</td>
+      </tr>
+      <tr>
+        <td><strong>API Endpoint:<strong></td>
+        <td>{{apiEndpoint}}</td>
+      </tr>
+      {{/unless}}
+      <tr>
+        <td><strong>Database Name:<strong></td>
+        <td id="db-name">{{[database.name]}}</td>
+      </tr>
+      <tr>
+        <td><strong>Size (triples):<strong></td>
+        <td id="db-size">{{[index.size]}}</td>
+      </tr>
+      <tr>
+        <td><strong>Index Type:<strong></td>
+        <td id="index-type">{{[index.type]}}</td>
+      </tr>
+      <tr>
+        <td><strong>Creation Date:<strong></td>
+        <td id="db-creation">{{[database.time.creation]}}</td>
+      </tr>
+      <tr>
+        <td><strong>Last Modified:<strong></td>
+        <td id="db-modification">{{[database.time.modification]}}</td>
+      </tr>
+      <tr>
+        <td><strong>Search Enabled:<strong></td>
+        <td id="search-enabled">{{#if [search.enabled]}}Yes{{else}}No{{/if}}</td>
+      </tr>
+    </tbody>
+  </table>
+</div>

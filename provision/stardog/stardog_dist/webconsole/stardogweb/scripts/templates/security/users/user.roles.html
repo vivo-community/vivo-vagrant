@@ -1,0 +1,24 @@
+<div class="panel-heading">
+  <strong>Roles</strong>
+
+  <div class="input-group pull-right" style="width: 50%; margin-top: -5px;">
+    <input id="inAddRole" data-provide="typeahead" type="text" class="form-control input-sm" placeholder="Add role">
+    <span class="input-group-btn">
+      <button id="btnAddRole" class="btn btn-default btn-sm" type="button">Add</button>
+    </span>
+  </div>
+  
+</div>
+<div class="panel-body">
+  <div class="input-group" style="height: 34px;">
+    <span class="input-group-addon"><i class="icon icon-search"></i></span>
+    <input id="inRoleFilter" type="search" class="form-control" style="height: inherit" placeholder="Type to search roles">
+  </div>
+  <br/>
+  <div class="scroll" style="height: 430px">
+    <table class="table table-bordered table-responsive table-hover">
+      <tbody id="roles">
+      </tbody>
+    </table>
+  </div>
+</div>

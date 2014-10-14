@@ -1,0 +1,62 @@
+.\" generated with Ronn/v0.7.3
+.\" http://github.com/rtomayko/ronn/tree/0.7.3
+.
+.TH "STARDOG\-ADMIN_DB_RESTORE" "8" "August 2014" "Clark & Parsia" "stardog-admin"
+.
+.SH "NAME"
+\fBstardog\-admin_db_restore\fR \- Restore a database from a backup\.
+.
+.SH "SYNOPSIS"
+\fBstardog\-admin\fR [ \-\-server \fIserver url\fR ] \fBdb\fR \fBrestore\fR [ {\-n | \-\-name} \fInew name\fR ] [ {\-o | \-\-overwrite} ] [ {\-p | \-\-passwd} \fIpassword\fR ] [ {\-P | \-\-ask\-password} ] [ {\-u | \-\-username} \fIusername\fR ] [ {\-v | \-\-verbose} ] [\-\-] \fIbackup location\fR
+.
+.SH "OPTIONS"
+.
+.TP
+\fB\-n\fR \fInew name\fR, \fB\-\-name\fR \fInew name\fR
+Specify a new name for the restored database
+.
+.TP
+\fB\-o\fR, \fB\-\-overwrite\fR
+If the database being restored already exists, overwrite the existing copy with the restored version
+.
+.TP
+\fB\-p\fR \fIpassword\fR, \fB\-\-passwd\fR \fIpassword\fR
+Password\.
+.
+.TP
+\fB\-P\fR, \fB\-\-ask\-password\fR
+Prompt for password\.
+.
+.TP
+\fB\-\-server\fR \fIserver url\fR
+URL of Stardog Server\. If this option isn\'t specified, it will be read from JVM argument \'stardog\.default\.cli\.server\'\. If the JVM arg isn\'t set, the default value \'snarl://localhost:5820\' is used\. If server URL has no explicit port value, the default port value \'5820\' is used\. Example: \'stardog \-\-server snarl://12\.34\.56\.78:5820 server stop\'
+.
+.TP
+\fB\-u\fR \fIusername\fR, \fB\-\-username\fR \fIusername\fR
+User name\.
+.
+.TP
+\fB\-v\fR, \fB\-\-verbose\fR
+Verbose flag that causes more detailed information to be printed
+.
+.TP
+\-\-
+This option can be used to separate command\-line options from the list of arguments (useful when arguments might be mistaken for command\-line options)\.
+.
+.TP
+\fIbackup location\fR
+The full path on disk of the backup to restore
+.
+.SH "DISCUSSION"
+Restores a database from its backup\. The location of the backup should be the full path to the backup, not the location of the backup directory as specified in your Stardog configuration\. By default, the name of a database is saved in its backup, so there is no need to specify a name for the restored database\. However, if you wish to restore the backup to a different database, a new name can be provided, which must be unique\. A backup will not be restored over an existing database of the same name, to force an overwrite using the restored database, use the \-o/\-\-overwrite flag\. You cannot overwrite and specify a new name\.If overwrite is not specified, and a new name is not provided, and a database with the name of the database to be restored already exists, the restore operation will not succeed\.
+.
+.SH "EXAMPLES"
+.
+.TP
+Restore a database from its backup:
+$ stardog\-admin db restore $STARDOG_HOME/\.backup/myDb/2012\-06\-21
+.
+.TP
+Restore a database to a new copy:
+$ stardog\-admin db restore \-\-name restoredMyDb $STARDOG_HOME/\.backup/myDb/2012\-06\-21
+

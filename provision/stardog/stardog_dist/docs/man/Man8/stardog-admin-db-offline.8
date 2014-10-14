@@ -1,0 +1,62 @@
+.\" generated with Ronn/v0.7.3
+.\" http://github.com/rtomayko/ronn/tree/0.7.3
+.
+.TH "STARDOG\-ADMIN_DB_OFFLINE" "8" "August 2014" "Clark & Parsia" "stardog-admin"
+.
+.SH "NAME"
+\fBstardog\-admin_db_offline\fR \- Takes a database offline\.
+.
+.SH "SYNOPSIS"
+\fBstardog\-admin\fR [ \-\-server \fIserver url\fR ] \fBdb\fR \fBoffline\fR [ {\-p | \-\-passwd} \fIpassword\fR ] [ {\-P | \-\-ask\-password} ] [ \-\-timeout \fItimeout\fR ] [ {\-u | \-\-username} \fIusername\fR ] [ {\-v | \-\-verbose} ] [\-\-] \fIdatabase\fR
+.
+.SH "OPTIONS"
+.
+.TP
+\fB\-p\fR \fIpassword\fR, \fB\-\-passwd\fR \fIpassword\fR
+Password\.
+.
+.TP
+\fB\-P\fR, \fB\-\-ask\-password\fR
+Prompt for password\.
+.
+.TP
+\fB\-\-server\fR \fIserver url\fR
+URL of Stardog Server\. If this option isn\'t specified, it will be read from JVM argument \'stardog\.default\.cli\.server\'\. If the JVM arg isn\'t set, the default value \'snarl://localhost:5820\' is used\. If server URL has no explicit port value, the default port value \'5820\' is used\. Example: \'stardog \-\-server snarl://12\.34\.56\.78:5820 server stop\'
+.
+.TP
+\fB\-\-timeout\fR \fItimeout\fR
+Minutes to wait before database is put offline\. If no timeout is specified, the default timeout of 3 minutes is used\.
+.
+.TP
+\fB\-u\fR \fIusername\fR, \fB\-\-username\fR \fIusername\fR
+User name\.
+.
+.TP
+\fB\-v\fR, \fB\-\-verbose\fR
+Verbose flag that causes more detailed information to be printed
+.
+.TP
+\-\-
+This option can be used to separate command\-line options from the list of arguments (useful when arguments might be mistaken for command\-line options)\.
+.
+.TP
+\fIdatabase\fR
+The name of the database for the operation
+.
+.SH "DISCUSSION"
+Initiates the offlining of a database\. The offline operation optionally takes a timeout which, when specified, provides a window where the database is not yet offline\. While in this window, no new connections will be accepted but all open connections will be allowed to complete their actions\. Once the timeout has been reached, any remaining connections are closed, open transactions are rolled back, and the database is put offline\.
+.
+.SH "EXAMPLES"
+.
+.TP
+Take a database \'foo\' offline:
+$ stardog\-admin db offline foo
+.
+.TP
+Take the database \'foo\' offline, but wait 15 minutes for open connections to complete their actions:
+$ stardog\-admin db offline \-\-timeout 15 foo
+.
+.TP
+Take the database \'foo\' offline immediately:
+$ stardog\-admin db offline \-\-timeout 0 foo
+

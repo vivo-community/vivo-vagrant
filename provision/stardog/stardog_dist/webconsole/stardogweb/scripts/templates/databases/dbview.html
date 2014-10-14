@@ -1,0 +1,94 @@
+<div id="menu"></div>
+
+<div id="alert"></div>
+
+<nav class="navbar navbar-default" role="navigation">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-2">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+    </div>
+
+    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-2">
+      <div class="btn-group">
+        <button id="btnQuery" type="button" class="btn btn-default navbar-btn req-online" {{ if (!it.metadata["database.online"]) { }}disabled{{ } }}><i class="fa fa-terminal"></i> Query</button>
+        <button id="btnBrowse" type="button" class="btn btn-default navbar-btn req-online" {{ if (!it.metadata["database.online"]) { }}disabled{{ } }}><i class="glyphicon glyphicon-link"></i> Browse</button>
+        <!-- <button id="btnAddData" type="button" class="btn btn-default navbar-btn req-online" {{ if (!it.metadata["database.online"]) { }}disabled{{ } }}><i class="fa fa-hdd-o"></i> Data</button> -->
+      </div>
+
+      <div class="btn-group">
+        <button id="btnEdit" type="button" class="btn btn-default navbar-btn req-offline" {{ if (it.metadata["database.online"]) { }}disabled{{ } }}><i class="glyphicon glyphicon-pencil"></i> Edit</button>
+        
+        <button id="btnMigrate" type="button" class="btn btn-default navbar-btn req-offline" {{ if (it.metadata["database.online"]) { }}disabled{{ } }}><i class="glyphicon glyphicon-compressed"></i> Migrate</button>
+        <button id="btnOptimize" type="button" class="btn btn-default navbar-btn req-offline" {{ if (it.metadata["database.online"]) { }}disabled{{ } }}><i class="glyphicon glyphicon-flash"></i> Optimize</button>
+      </div>
+      <button id="btnDrop" type="button" class="btn btn-danger navbar-btn"><i class="glyphicon glyphicon-remove"></i> Drop</button>
+
+      <form class="navbar-form navbar-right" role="search">
+        <input id="dbStatus" type="checkbox"/>
+      </form>
+    </div>
+  </div>
+</nav>
+
+<div class="row">
+  <div class="col-md-12">
+
+    <div class="panel panel-default">
+
+      <div class="panel-heading">
+        <div class="row">
+          <div class="col-md-10">
+            <h1 class="sw-icon icon-data">{{=it.metadata["database.name"]}}</h1>
+          </div>
+          <div class="col-md-2 addtooltip" title="Database status" style="margin-top: 25px;">
+            
+          </div>
+        </div>
+      </div>
+
+      <div class="panel-body">
+        {{~ it["metadata.groups"] :value}}
+        {{ if (value.elements && value.elements.length >0) { }}
+        <h4>{{= value.groupName}}</h4>
+        <table class="table table-striped">
+          <tbody>
+            {{~ value["elements"] :opt}}
+            {{ if (it.metadata.hasOwnProperty(opt.id)) { }}
+            <tr style="width: 100%;" data-setting="{{= opt.id }}">
+              <td style="width: 60%;">
+                <span class="addtooltip" {{? opt.help}}title="{{= opt.help }}"{{?}}>{{= opt.label}}</span>
+              </td>
+              <td style="width: 40%;">
+                {{ if (typeof it.metadata[opt.id] === "boolean" || it.metadata[opt.id]) { }}
+                  {{ if (opt.input && opt.input.type === "checkbox") { }}
+                <input type="checkbox" class="switch" {{? it.metadata[opt.id]}}checked{{?}} disabled>
+                  {{ } else if (opt.input && opt.input.type === "multiinput") { }}
+                  <div class="multiinput" data-option="{{= opt.id }}">
+                    {{ var nsArray = it.metadata[opt.id]; }}
+                    {{~ nsArray :ns :index}}
+                    <span>{{= ns}}</span> <br/>
+                    {{~}}
+                  </div>
+                  {{ } else { }}
+                {{= it.metadata[opt.id]}}
+                  {{ } }}
+                {{ } else { }}
+                <span class="label label-warning">Empty</span>
+                {{ } }}
+              </td>
+            </tr>
+            {{ } }}
+            {{~}}
+          </tbody>
+        </table>
+        {{ } }}
+        {{~}}
+      </div>
+    </div>
+  </div>
+</div>

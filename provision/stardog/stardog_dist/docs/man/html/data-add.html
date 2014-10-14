@@ -1,0 +1,124 @@
+<html>
+<head>
+<link href="css/bootstrap.min.css" rel="stylesheet" media="screen">
+</head>
+<style>
+    body { margin: 50px; }
+</style>
+<body>
+<hr/>
+<h1 class="text-info">stardog data add Manual Page
+<hr/>
+<h1 class="text-info">NAME</h1>
+<br/>
+<div class="row"><div class="span8 offset1">stardog data add &mdash;Adds RDF data to a database; prints status on STDOUT.</div>
+</div>
+<br/>
+<h1 class="text-info">SYNOPSIS</h1>
+<br/>
+<div class="row">
+<div class="span8 offset1">
+stardog data add [ {-f | --format} &lt;rdf format&gt; ] [ {-g | --named-graph} &lt;named graph&gt; ] [ {-p | --passwd} &lt;password&gt; ] [ {-P | --ask-password} ] [ --server-side ] [ {-u | --username} &lt;username&gt; ] [ {-v | --verbose} ] [--] &lt;database&gt; &lt;name&gt; &lt;files&gt;...</div>
+</div>
+<br/>
+<h1 class="text-info">OPTIONS</h1>
+<br/>
+<div class="row">
+<div class="span8 offset1">
+-f &lt;rdf format&gt;, --format &lt;rdf format&gt;</div>
+</div>
+<div class="row">
+<div class="span8 offset2">
+Data format. The supported formats are NTRIPLES, RDF/XML, TURTLE, TRIG, TRIX, N3, NQUADS. If no format is specified, the file name will be used to guess the required format.</div>
+</div>
+<div class="row">
+<div class="span8 offset1">
+-g &lt;named graph&gt;, --named-graph &lt;named graph&gt;</div>
+</div>
+<div class="row">
+<div class="span8 offset2">
+Target named graph. If no named graph is specified, the default graph will be used. This is the named graph where data will be modified. If a graph format that specifies context is used, such as TRIG, this will override the context specified in the by the format.</div>
+</div>
+<div class="row">
+<div class="span8 offset1">
+-p &lt;password&gt;, --passwd &lt;password&gt;</div>
+</div>
+<div class="row">
+<div class="span8 offset2">
+Password.</div>
+</div>
+<div class="row">
+<div class="span8 offset1">
+-P, --ask-password</div>
+</div>
+<div class="row">
+<div class="span8 offset2">
+Prompt for password.</div>
+</div>
+<div class="row">
+<div class="span8 offset1">
+--server-side</div>
+</div>
+<div class="row">
+<div class="span8 offset2">
+Server-side file IO. If this flag is set, it will be assumed that the input files passed reside on the server and the client wil just send the file path to the server.</div>
+</div>
+<div class="row">
+<div class="span8 offset1">
+-u &lt;username&gt;, --username &lt;username&gt;</div>
+</div>
+<div class="row">
+<div class="span8 offset2">
+User name.</div>
+</div>
+<div class="row">
+<div class="span8 offset1">
+-v, --verbose</div>
+</div>
+<div class="row">
+<div class="span8 offset2">
+Verbose flag that causes more detailed information to be printed</div>
+</div>
+<div class="row">
+<div class="span8 offset1">
+--
+</div>
+</div>
+<div class="row">
+<div class="span8 offset2">
+This option can be used to separate command-line options from the list of argument, (useful when arguments might be mistaken for command-line options
+</div>
+</div>
+<div class="row">
+<div class="span8 offset1">
+&lt;database&gt; &lt;name&gt; &lt;files&gt;</div>
+</div>
+<div class="row">
+<div class="span8 offset2">
+The name of the database or the full connection string of the database to connect to. If only the name is provided, the default server URL will be pre-pended to the name of the database in order to construct the connection string. Connection parameters such as ';reasoning=QL' can be included in the provided database name. Connection parameters specified like this can be overridden by specific options on the command. The default server URL will be read from the JVM argument 'stardog.default.cli.server'. If the JVM argument is not set, the default value 'snarl://localhost:5820' is used. If the server URL has no explicit port value, the default port value '5820' is used.  To use a secure connection, you should specify the full connection string and postfix 's' to the protocol, e.g. snarls or https. Subsequent arguments are the list of files whose contents should be added to or removed from the database.</div>
+</div>
+<br/>
+<h1 class="text-info">DISCUSSION</h1>
+<br/>
+<div class="row">
+<div class="span8 offset1">
+Adds data to the database in a single commit; the add operation is atomic: if multiple files are being added to the database and there is an error adding one or more of the files, the entire operation will be rolled back.</div>
+</div>
+<br/>
+<h1 class="text-info">EXAMPLES</h1>
+<br/>
+<div class="row">
+<div class="span12 offset1">
+<p>
+Add data to the default graph:</p>
+<pre>
+    $ stardog data add myDb file.rdf</pre>
+<p>
+Add data to a specific named graph:</p>
+<pre>
+    $ stardog data --named-graph http://example.org/context add myDb file.rdf</pre>
+</div>
+</div>
+</body>
+</html>
+

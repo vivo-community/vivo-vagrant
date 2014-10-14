@@ -1,0 +1,21 @@
+{{? it['user.enabled']}}
+<td class="user-status"><span class="label label-success">enabled</span></td>
+{{??}}
+<td class="user-status"><span class="label label-danger">disabled</span></td>
+{{?}}
+
+<td class="user-name">{{= it['user.username']}}</td>
+{{? it['user.superuser']}}
+<td class="user-super"><span class="badge alert-success"><i class="glyphicon glyphicon-ok"></i></span></td>
+{{??}}
+<td class="user-super"></td>
+{{?}}
+{{? it['user.roles']}}
+<td class="user-roles">
+{{~ it['user.roles'] :value}}
+  <span class="label label-primary">{{= value}}</span>
+{{~}}
+</td>
+{{??}}
+<td class="user-roles"><i>No roles assigned</i></td>
+{{?}}

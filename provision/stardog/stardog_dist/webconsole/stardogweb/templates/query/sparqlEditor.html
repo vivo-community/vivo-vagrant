@@ -1,0 +1,58 @@
+<div id="sparqlEditorForm" style="height: 525px; width: 99%;"> <!-- 99% aprevents horizontal bar in IE & Firefox -->
+  <div class="btn-toolbar">
+    <div class="btn-group">
+      <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
+        <i class="icon-eye-open"></i> Explore <span class="caret"></span>
+      </button>
+      <ul class="dropdown-menu" role="menu">
+        <li><a id="exploreTypes" tabindex="-1" data-bypass="true" href="#">Types</a></li>
+        <li><a id="exploreObjProps" tabindex="-1" data-bypass="true" href="#">Object Properties</a></li>
+        <li><a id="exploreDataProps" tabindex="-1" data-bypass="true" href="#">Data Properties</a></li>
+        <li><a id="exploreAssertedProps" tabindex="-1" data-bypass="true" href="#">Asserted Properties</a></li>
+        <li><a id="exploreEntities" tabindex="-1" data-bypass="true" href="#">Entities</a></li>
+        <li><a id="exploreHierarchy" tabindex="-1" data-bypass="true" href="#">Class Hierarchy</a></li>
+        <li><a id="exploreNamedGraphs" tabindex="-1" data-bypass="true" href="#">Named Graphs</a></li>
+      </ul>
+    </div>
+
+    {{#unless embeddedInStardog}}
+    <button id="btnDatasetInfo" class="btn btn-info"><i class="icon-info-sign"></i> Dataset Info</button>
+    {{/unless}}
+
+    <div class="btn-group">
+      <button id="newQuery" class="btn btn-default"><i class="icon-file"></i></button>
+      {{#if fileSupport}}
+      <button id="loadQuery" class="btn btn-default"><i class="icon-folder-open"></i></button>
+      <button id="saveQuery" class="btn btn-default"><i class="icon-save"></i></button>
+      {{/if}}
+    </div>
+    {{#if fileSupport}}
+    <input type="file" id="queryFile" style="display:none;" />
+    {{/if}}
+
+    <div class="pull-right">
+      <button id="btn_execute" class="btn btn-primary"><i class="icon-rocket"></i> Execute</button>
+      <button id="btn_clear" class="btn btn-danger"><i class="icon-remove"></i> Clear</button>
+    </div>
+
+    {{#if reasoning}}
+    <select id="reasoning" name="reasoningOpt" class="form-control panel-field pull-right" style="width: 150px; margin-right: 10px;">
+      <option value="" selected="selected">Reasoning Level</option>
+      <option value="NONE">NONE</option>
+      <option value="RDFS">RDFS</option>
+      <option value="QL">QL</option>
+      <option value="RL">RL</option>
+      <option value="EL">EL</option>
+      <option value="SL">SL</option>
+    </select>
+    {{/if}}
+
+  </div>
+  <br/>
+  <form class="form-inline">
+    <div class="panel-field"><label for="prefixSelect">Prefixes:</label> <input id="prefixSelect" type="text" value="{{prefixes}}" style="width: 100%;"></div>
+  </form>
+  <br/>
+  <textarea id="sparql_query" style="width:99%; height:350px;"></textarea>
+  <span id="lblLoadedFile" class="label label-primary" style="display: none;">File: <span id="fileName"></span></span>
+</div>

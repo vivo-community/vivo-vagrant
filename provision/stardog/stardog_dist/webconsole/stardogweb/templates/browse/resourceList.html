@@ -1,0 +1,39 @@
+<div class="results" xmlns:foaf="http://xmlns.com/foaf/0.1/" xmlns:egad="http://www.clarkparsia.com/egad#" xmlns:org="http://www.w3.org/ns/org#" xmlns:="http://www.clarkparsia.com/egad#">
+  {{#if propertyLabel}}
+  <h1 id="page_title">Using property <a href="#!/browse/resource/{{#encodeURIComp property}}{{this}}{{/encodeURIComp}}">{{propertyLabel}}</a></h1>
+  {{else}}
+  <h1 id="page_title">{{#localname typeLabel}}{{this}}{{/localname}}</h1>
+  {{/if}}
+  <button id="btnAdd" class="btn btn-success pull-right"><i class="icon-plus-sign"></i> Add</button>
+  <br/>
+  {{#if hasResults}}
+  <div class="resourceListContainer">
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th>Instances</th>
+        </tr>
+      </thead>
+      <tbody id="tableBody">
+      </tbody>
+    </table>
+  </div>
+
+  <ul class="pager">
+    <li class="previous">
+      <a {{#if prevPage}}href="{{prevPage}}"{{else}}href="#" style="visibility: hidden"{{/if}}>&larr; Previous</a>
+    </li>
+    <li class="next">
+      <a {{#if nextPage}}href="{{nextPage}}"{{else}}href="#" style="visibility: hidden"{{/if}}>Next &rarr;</a>
+    </li>
+  </ul>
+  {{else}}
+  <h3>No more elements found!</h3>
+  <ul class="pager">
+    <li class="previous">
+      <a {{#if prevPage}}href="{{prevPage}}"{{else}}href="#" style="visibility: hidden"{{/if}}>&larr; Previous</a>
+    </li>
+  </ul>
+  {{/if}}
+</div>
+

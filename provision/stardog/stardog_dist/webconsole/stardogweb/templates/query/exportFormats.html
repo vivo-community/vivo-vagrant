@@ -1,0 +1,19 @@
+<button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
+<i class="icon-download-alt"></i> Export as...
+</button>
+<ul class="dropdown-menu" role="menu">
+    {{#if tupleResults}}
+    <li><a class="export-option" format="sparql-xml" tabindex="-1" data-bypass="true" href="#">SPARQL Results RDF/XML</a></li>
+    <li><a class="export-option" format="sparql-json" tabindex="-1" data-bypass="true" href="#">SPARQL Results JSON</a></li>
+    <li><a class="export-option" format="sparql-tsv" tabindex="-1" data-bypass="true" href="#">TSV</a></li>
+    <li><a class="export-option" format="sparql-csv" tabindex="-1" data-bypass="true" href="#">CSV</a></li>
+    {{/if}}
+    {{#if graphResults}}
+    <li><a class="export-option" format="rdf-xml" tabindex="-1" data-bypass="true" href="#">RDF/XML</a></li>
+    <li><a class="export-option" format="ttl" tabindex="-1" data-bypass="true" href="#">Turtle</a></li>
+    <li><a class="export-option" format="nt" tabindex="-1" data-bypass="true" href="#">N-Triples</a></li>
+    <li><a class="export-option" format="trig" tabindex="-1" data-bypass="true" href="#">TriG</a></li>
+    <li><a class="export-option" format="trix" tabindex="-1" data-bypass="true" href="#">TriX</a></li>
+    <li><a class="export-option" format="nq" tabindex="-1" data-bypass="true" href="#">N-Quads</a></li>
+    {{/if}}
+</ul>

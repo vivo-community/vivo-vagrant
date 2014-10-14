@@ -1,0 +1,735 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+  <title>ConnectionAPIExample.java</title>
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+  <meta name="viewport" content="width=device-width, target-densitydpi=160dpi, initial-scale=1.0; maximum-scale=1.0; user-scalable=0;">
+  <link rel="stylesheet" media="all" href="docco.css" />
+</head>
+<body>
+  <div id="container">
+    <div id="background"></div>
+    
+    <ul class="sections">
+        
+          <li id="title">
+              <div class="annotation">
+                  <h1>ConnectionAPIExample.java</h1>
+              </div>
+          </li>
+        
+        
+        
+        <li id="section-1">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-1">&#182;</a>
+              </div>
+              
+            </div>
+            
+            <div class="content"><div class='highlight'><pre><span class="comment">/*
+ * Copyright (c) 2010 - 2013 -- Clark &amp; Parsia, LLC. &lt;http://www.clarkparsia.com&gt;
+ * For more information about licensing and copyright of this software, please contact
+ * inquiries@clarkparsia.com or visit http://stardog.com
+ */</span>
+
+<span class="keyword">package</span> com.clarkparsia.stardog.examples.api;
+
+<span class="keyword">import</span> com.clarkparsia.common.protocols.server.Server;
+<span class="keyword">import</span> com.clarkparsia.openrdf.Graphs;
+<span class="keyword">import</span> com.clarkparsia.stardog.Stardog;
+<span class="keyword">import</span> com.clarkparsia.stardog.api.Connection;
+<span class="keyword">import</span> com.clarkparsia.stardog.api.Query;
+<span class="keyword">import</span> com.clarkparsia.stardog.api.Getter;
+<span class="keyword">import</span> com.clarkparsia.stardog.api.ConnectionConfiguration;
+
+<span class="keyword">import</span> com.clarkparsia.stardog.StardogException;
+<span class="keyword">import</span> com.clarkparsia.stardog.api.admin.AdminConnection;
+<span class="keyword">import</span> com.clarkparsia.stardog.api.admin.StardogDBMS;
+<span class="keyword">import</span> com.clarkparsia.common.iterations.Iteration;
+
+<span class="keyword">import</span> java.io.FileInputStream;
+<span class="keyword">import</span> java.io.File;
+
+<span class="keyword">import</span> com.clarkparsia.stardog.protocols.snarl.SNARLProtocol;
+<span class="keyword">import</span> com.clarkparsia.stardog.server.ServerBuilder;
+<span class="keyword">import</span> org.openrdf.rio.RDFFormat;
+
+<span class="keyword">import</span> org.openrdf.model.impl.ValueFactoryImpl;
+<span class="keyword">import</span> org.openrdf.model.Graph;
+<span class="keyword">import</span> org.openrdf.model.Resource;
+<span class="keyword">import</span> org.openrdf.model.URI;
+<span class="keyword">import</span> org.openrdf.model.Statement;
+<span class="keyword">import</span> org.openrdf.model.vocabulary.RDF;
+<span class="keyword">import</span> org.openrdf.query.TupleQueryResult;
+
+<span class="javadoc">/**
+ * &lt;p&gt;Example code illustrating use of the Stardog Connection API&lt;/p&gt;
+ *
+ * <span class="javadoctag">@author</span>  Michael Grove
+ * <span class="javadoctag">@since</span>   0.4
+ * <span class="javadoctag">@version</span> 2.0
+ */</span>
+<span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ConnectionAPIExample</span> {</span></pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-2">
+            <div class="annotation">
+              
+              <div class="pilwrap for-h2">
+                <a class="pilcrow" href="#section-2">&#182;</a>
+              </div>
+              <h2>Using the SNARL API</h2>
+
+            </div>
+            
+        </li>
+        
+        
+        <li id="section-3">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-3">&#182;</a>
+              </div>
+              <p>In this example we&#39;ll walk through the basic usage of the Stardog Native API for the RDF Language (SNARL)
+API, which is the preferred way to interact with Stardog.  This will show how to use both the administrative
+and client APIs to perform some basic operations.</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> main(String[] args) <span class="keyword">throws</span> Exception {</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-4">
+            <div class="annotation">
+              
+              <div class="pilwrap for-h2">
+                <a class="pilcrow" href="#section-4">&#182;</a>
+              </div>
+              <h2>Creating a Server</h2>
+
+            </div>
+            
+        </li>
+        
+        
+        <li id="section-5">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-5">&#182;</a>
+              </div>
+              <p>You&#39;ll need a server to connect to, obviously.  The <code>Stardog</code>
+class provides a simple <a href="http://stardog.com/docs/java/snarl/com/clarkparsia/stardog/Stardog.html">builder interface</a> to specify which protocol
+the server should use (options are HTTP &amp; SNARL) and takes a <code>SocketAddress</code>
+the server should bind to.  This will return you a <code>Server</code> object which
+can be used to start &amp; stop the Stardog server.</p>
+<p>This example shows up to create and start the embedded SNARL server.  Note that
+you can only embed the <em>SNARL</em> server, not HTTP.</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>        Server aServer = Stardog
+            .buildServer()
+            .codec(ServerBuilder.Codec.SNARL)
+            .bind(SNARLProtocol.EMBEDDED_ADDRESS)
+            .start();</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-6">
+            <div class="annotation">
+              
+              <div class="pilwrap for-h2">
+                <a class="pilcrow" href="#section-6">&#182;</a>
+              </div>
+              <h2>Using AdminConnection</h2>
+
+            </div>
+            
+        </li>
+        
+        
+        <li id="section-7">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-7">&#182;</a>
+              </div>
+              <p>Now that the server is running, we want to create a connection to the DBMS itself so we can do
+some administrative stuff, namely, creating a new database to use for the purpose of this example.
+We need to create a connection to perform administrative actions, so we can use the <code>StardogDBMS</code>
+utility class for opening the connection.</p>
+<p>Most operations supported by the DBMS require specific permissions, so either an admin account
+is required, or a user who has been granted the ability to perform the actions.  You can learn
+more about this in the <a href="http://stardog.com/docs/security">Security chapter</a>.</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>        AdminConnection aAdminConnection = StardogDBMS.toEmbeddedServer()
+                                                      .credentials(<span class="string">"admin"</span>, <span class="string">"admin"</span>)
+                                                      .login();</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-8">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-8">&#182;</a>
+              </div>
+              <p>With our admin connection, we&#39;re able to see if the database for this example already exists, and
+if it does, we want to drop it and re-create so that we can run the example from clean database.</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>        <span class="keyword">if</span> (aAdminConnection.list().contains(<span class="string">"testConnectionAPI"</span>)) {
+            aAdminConnection.drop(<span class="string">"testConnectionAPI"</span>);
+        }</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-9">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-9">&#182;</a>
+              </div>
+              <p>Convenience function for creating a non-persistent in-memory database with all the default settings.</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>        aAdminConnection.createMemory(<span class="string">"testConnectionAPI"</span>);</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-10">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-10">&#182;</a>
+              </div>
+              <p><em>ALWAYS</em> close your connections!</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>        aAdminConnection.close();</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-11">
+            <div class="annotation">
+              
+              <div class="pilwrap for-h2">
+                <a class="pilcrow" href="#section-11">&#182;</a>
+              </div>
+              <h2>Using the SNARL API</h2>
+
+            </div>
+            
+        </li>
+        
+        
+        <li id="section-12">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-12">&#182;</a>
+              </div>
+              <p>Now that we&#39;ve created our database for the example, lets open a connection to it.  For that we use the
+<a href="http://stardog.com/docs/java/snarl/com/clarkparsia/stardog/api/ConnectionConfiguration.html">ConnectionConfiguration</a>
+to configure and open a new connection to a database.</p>
+<p>We&#39;ll use the configuration to specify which database we want to connect to as well as our login information,
+then we can obtain a new connection.</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>        Connection aConn = ConnectionConfiguration
+            .to(<span class="string">"testConnectionAPI"</span>)
+            .credentials(<span class="string">"admin"</span>, <span class="string">"admin"</span>)
+            .connect();</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-13">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-13">&#182;</a>
+              </div>
+              <p>All changes to a database <em>must</em> be performed within a transaction.  We want to add some data to the database
+so we can begin firing off some queries, so first, we&#39;ll start a new transaction.</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>        aConn.begin();</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-14">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-14">&#182;</a>
+              </div>
+              <p>The SNARL API provides fluent objects for adding &amp; removing data from a database.  Here we&#39;ll use the
+<a href="http://stardog.com/docs/java/snarl/com/clarkparsia/stardog/api/Adder.html">Adder</a> to read in an N3 file
+from disk containing the 10k triples SP2B dataset.  Actually, for RDF data coming from a stream or from
+disk, we&#39;ll use the helper class <a href="http://stardog.com/docs/java/snarl/com/clarkparsia/stardog/api/IO.html">IO</a>
+for this task.  <code>IO</code> will automatically close the stream once the data has been read.</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>        aConn.add().io()
+             .format(RDFFormat.N3)
+             .stream(<span class="keyword">new</span> FileInputStream(<span class="string">"data/sp2b_10k.n3"</span>));</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-15">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-15">&#182;</a>
+              </div>
+              <p>You&#39;re not restricted to adding, or removing, data from a file.  You can create <code>Graph</code> objects
+containing information you want to add or remove from the database and make the modification wit
+that graph.  Here we&#39;ll create a new Graph and add a statement that we want added to our database.</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>        Graph aGraph = Graphs.newGraph(ValueFactoryImpl.getInstance()
+                                                       .createStatement(ValueFactoryImpl.getInstance().createURI(<span class="string">"urn:subj"</span>),
+                                                                        ValueFactoryImpl.getInstance().createURI(<span class="string">"urn:pred"</span>),
+                                                                        ValueFactoryImpl.getInstance().createURI(<span class="string">"urn:obj"</span>)));
+
+        Resource aContext = ValueFactoryImpl.getInstance().createURI(<span class="string">"urn:test:context"</span>);</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-16">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-16">&#182;</a>
+              </div>
+              <p>With our newly created <code>Graph</code>, we can easily add that to the database as well.  You can also
+easily specify the context the data should be added to.  This will insert all of the statements
+in the <code>Graph</code> into the given context.</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>        aConn.add().graph(aGraph, aContext);</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-17">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-17">&#182;</a>
+              </div>
+              <p>Now that we&#39;re done adding data to the database, we can go ahead and commit the transaction.</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>        aConn.commit();</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-18">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-18">&#182;</a>
+              </div>
+              <p>Removing data from a database is just as easy.  Again, we need to start a transaction before making any changes.</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>        aConn.begin();</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-19">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-19">&#182;</a>
+              </div>
+              <p>Now we&#39;ll use the <a href="http://stardog.com/docs/java/snarl/com/clarkparsia/stardog/api/Remover.html">Remover</a> to
+remove some data from the database.  <code>Remover</code> has a very similar API to <code>Adder</code>, so this code should look
+somewhat familiar.  It has many of the same methods as <code>Adder</code>, the only difference is that they&#39;ll cause
+the triples to be removed instead of added.</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>        aConn.remove().io()
+             .format(RDFFormat.N3)
+             .file(<span class="keyword">new</span> File(<span class="string">"data/remove_data.nt"</span>));</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-20">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-20">&#182;</a>
+              </div>
+              <p>Lastly, we&#39;ll commit the changes.</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>        aConn.commit();
+
+        URI aURI = ValueFactoryImpl.getInstance().createURI(<span class="string">"http://localhost/publications/articles/Journal1/1940/Article1"</span>);</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-21">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-21">&#182;</a>
+              </div>
+              <p>A SNARL connection provides <a href="http://stardog.com/docs/java/snarl/com/clarkparsia/stardog/api/Query.html">parameterized queries</a>
+which you can use to easily build and execute SPARQL queries against the database.  First, let&#39;s create a simple
+query that will get all of the statements in the database.</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>        Query aQuery = aConn.query(<span class="string">"select * where { ?s ?p ?o }"</span>);</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-22">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-22">&#182;</a>
+              </div>
+              <p>But getting <em>all</em> the statements is kind of silly, so let&#39;s actually specify a limit, we only want 10 results.</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>        aQuery.limit(<span class="number">10</span>);</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-23">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-23">&#182;</a>
+              </div>
+              <p>We can go ahead and execute this query which will give us a result set.  Once we have our result set, we can do
+something interesting with the results.</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>        TupleQueryResult aResult = aQuery.executeSelect();
+
+        System.out.println(<span class="string">"The first ten results..."</span>);
+
+        <span class="keyword">while</span> (aResult.hasNext()) {
+            System.out.println(aResult.next());
+        }</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-24">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-24">&#182;</a>
+              </div>
+              <p><em>Always</em> close your result sets, they hold resources which need to be released.</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>        aResult.close();</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-25">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-25">&#182;</a>
+              </div>
+              <p><code>Query</code> objects are easily parameterized; so we can bind the &quot;s&quot; variable in the previous query with a specific value.
+Queries should be managed via the parameterized methods, rather than created by concatenating strings together,
+because that is not only more readable, it helps avoid SPARQL injection attacks.</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>        aQuery.parameter(<span class="string">"s"</span>, aURI);</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-26">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-26">&#182;</a>
+              </div>
+              <p>Now that we&#39;ve bound &#39;s&#39; to a specific value, we&#39;re not going to pull down the entire database with our query
+so we can go head and remove the limit and get all the results.</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>        aQuery.limit(Query.NO_LIMIT);</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-27">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-27">&#182;</a>
+              </div>
+              <p>We&#39;ve made our modifications, so we can re-run the query to get a new result set and see the difference in the results.</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>        aResult = aQuery.executeSelect();
+
+        System.out.println(<span class="string">"\nNow a particular slice..."</span>);
+
+        <span class="keyword">while</span> (aResult.hasNext()) {
+            System.out.println(aResult.next());
+        }</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-28">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-28">&#182;</a>
+              </div>
+              <p>Again, <em>close</em> your result sets.</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>        aResult.close();</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-29">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-29">&#182;</a>
+              </div>
+              <p>The previous query was just getting the statements in which the value of <code>aURI</code> is the subject.  We can get the
+same results just as easily via the <a href="http://stardog.com/docs/java/snarl/com/clarkparsia/stardog/api/Getter.html">Getter</a>
+interface.  <code>Getter</code> is designed to make it easy to list statements matching specific criteria; it&#39;s analogous to
+<code>listStatements</code> or <code>match</code> in the Jena &amp; Sesame APIs respectively.</p>
+<p>So here we&#39;ll create a <code>Getter</code> to obtain the list of statements with <code>aURI</code> as the subject.  If we print those
+out we&#39;ll see that we&#39;ve retrieved the same results as the query we just ran.</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>        Iteration&lt;Statement, StardogException&gt; aIter = aConn.get()
+                                                            .subject(aURI)
+                                                            .iterator();
+
+        System.out.println(<span class="string">"\nOr you can use a getter to do the same thing..."</span>);
+
+        <span class="keyword">while</span> (aIter.hasNext()) {
+            System.out.println(aIter.next());
+        }</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-30">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-30">&#182;</a>
+              </div>
+              <p><code>Iteration</code> objects are the same as Java <code>Iterator</code>&#39;s with the only difference that 1) they can throw exceptions and 2)
+they are closeable.  So you should make sure you close all your Iterations as well</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>        aIter.close();</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-31">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-31">&#182;</a>
+              </div>
+              <p><code>Getter</code> objects are parameterizable just like <code>Query</code>, so you can easily modify and re-use them to change
+what slice of the database you&#39;ll retrieve.</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>        Getter aGetter = aConn.get();</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-32">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-32">&#182;</a>
+              </div>
+              <p>We created a new <code>Getter</code>, if we iterated over its results now, we&#39;d iterate over the whole database; not ideal.  So
+we will bind the predicate to <code>rdf:type</code> and now if we call any of the iteration methods on the <code>Getter</code> we&#39;d only
+pull back statements whose predicate is <code>rdf:type</code></p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>        aGetter.predicate(RDF.TYPE);</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-33">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-33">&#182;</a>
+              </div>
+              <p>We can also bind the subject and get a specific type statement, in this case, we&#39;ll get all the type triples
+for <em>this</em> individual.  In our example, that&#39;ll be a single triple.</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>        aGetter.subject(aURI);
+
+        aIter = aGetter.iterator();
+
+        System.out.println(<span class="string">"\nJust a single statement now..."</span>);
+
+        <span class="keyword">while</span> (aIter.hasNext()) {
+            System.out.println(aIter.next());
+        }</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-34">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-34">&#182;</a>
+              </div>
+              <p>Close your Iterations!</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>        aIter.close();</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-35">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-35">&#182;</a>
+              </div>
+              <p><code>Getter</code> objects are stateful, so we can remove the filter on the predicate position by setting it back to null.</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>        aGetter.predicate(<span class="keyword">null</span>);</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-36">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-36">&#182;</a>
+              </div>
+              <p>Subject is still bound to the value of <code>aURI</code> so we can use the <code>graph</code> method of <code>Getter</code> to get a graph of all
+the triples where <code>aURI</code> is the subject, effectively performing a basic describe query.</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>        aGraph = aGetter.graph();
+
+        System.out.println(<span class="string">"\nFinally, the same results as earlier, but as a graph..."</span>);
+        <span class="keyword">for</span> (Statement aStmt : aGraph) {
+            System.out.println(aStmt);
+        }</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-37">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-37">&#182;</a>
+              </div>
+              <p>Lastly, <em>always</em> <em>close</em> your Connections.</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>        aConn.close();</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-38">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-38">&#182;</a>
+              </div>
+              <p>We&#39;re done with the example, so we need to make sure we shut down the server we started.</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>        aServer.stop();
+    }
+}</pre></div></div>
+            
+        </li>
+        
+    </ul>
+  </div>
+</body>
+</html>

@@ -1,0 +1,47 @@
+<!-- <p>The following are the configuration options for the Database text search and transactional support:</p>
+ -->
+<br/>
+
+<div class="row">
+  <div class="col-md-6">
+    <h3>Search</h3>
+    <hr>
+
+    <form role="form">
+      <div class="form-group" data-option="search.enabled">
+        <label for="search.enabled" title="{{= it.metadataInfo['search.enabled'].help}}">{{= it.metadataInfo['search.enabled'].label}}</label>
+        <br/>
+        <input id="search.enabled" type="checkbox" {{? it.metadataModel['search.enabled']}}checked{{?}}>
+      </div>
+
+      <div class="form-group" data-option="search.reindex.mode">
+        <label for="cronExpr" class="control-label" title="{{= it.metadataInfo['search.reindex.mode'].help}}">{{= it.metadataInfo['search.reindex.mode'].label}}</label>
+        {{~ it.metadataInfo['search.reindex.mode'].input.options :opt }}
+        <div class="radio">
+          <label>
+            {{ var checkedOpt = (it.metadataModel['search.reindex.mode']) ? it.metadataModel['search.reindex.mode'] : "sync"; }}
+            {{ checkedOpt = (checkedOpt !== "sync" && checkedOpt !== "async") ? "cron expression" : checkedOpt; }}
+            <input type="radio" name="search.reindex.mode" id="{{= opt}}" value="{{= opt}}" {{ if (checkedOpt === opt) { }}checked{{ } }}>
+            {{= opt}}
+            {{? opt.indexOf("cron") >= 0 }}
+            <input id="cronExpr" type="text" class="form-control" placeholder="e.g. 0 15 10 ? * *" {{if (checkedOpt === "cron expression") { }}value="{{= it.metadataModel['search.reindex.mode']}}"{{ } else { }}disabled{{ } }}>
+            {{?}}
+          </label>
+        </div>
+        {{~}}
+      </div>
+    </form>
+  </div>
+  <div class="col-md-6">
+    <h3>Transactions</h3>
+    <hr>
+
+    <form role="form">
+      <div class="form-group" data-option="transactions.durable">
+        <label for="transactions.durable" title="{{= it.metadataInfo['transactions.durable'].help}}">{{= it.metadataInfo['transactions.durable'].label}}</label>
+        <br/>
+        <input id="transactions.durable" type="checkbox" {{? it.metadataModel['transactions.durable']}}checked{{?}}>
+      </div>
+    </form>
+  </div>
+</div>

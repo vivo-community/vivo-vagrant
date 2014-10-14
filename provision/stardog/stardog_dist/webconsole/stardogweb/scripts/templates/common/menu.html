@@ -1,0 +1,47 @@
+<nav class="navbar navbar-default" role="navigation">
+  <div class="container-fluid">
+    <!-- Brand and toggle get grouped for better mobile display -->
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="#" style="padding: 8px;">
+          <img class="logo" src="images/sd.png" style="height: 32px;"> Stardog Admin
+      </a>
+    </div>
+
+    <!-- Collect the nav links, forms, and other content for toggling -->
+    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+      <ul class="nav navbar-nav">
+        <li><a class="icon icon-data" href="/#/databases">Databases</a></li>
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle icon icon-lock" data-toggle="dropdown" data-bypass="true">Security <b class="caret"></b></a>
+          <ul class="dropdown-menu">
+            <li><a class="icon icon-user" href="/#/security/users">Users</a></li>
+            <li><a class="icon icon-t-shirt" href="/#/security/roles">Roles</a></li>
+          </ul>
+        </li>
+        <li><a class="icon icon-search" href="/#/queries">Query Management</a></li>
+        {{? it.monitor}}
+        <li><a class="icon icon-tv" href="/#/monitor">Monitor</a></li>
+        {{?}}
+        
+      </ul>
+      {{? it.security}}
+      <ul class="nav navbar-nav navbar-right">
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle icon icon-user" data-toggle="dropdown" data-bypass="true">{{=it.username}} <b class="caret"></b></a>
+          <ul class="dropdown-menu">
+            <li><a class="icon icon-stack" href="/#/security/users/{{=it.username}}">My Profile</a></li>
+            <!-- <li><a class="icon icon-settings" href="/#/settings">Settings</a></li> -->
+            <li><a class="icon icon-key" href="/#/logout">Exit</a></li>
+          </ul>
+        </li>
+      </ul>
+      {{?}}
+    </div>
+  </div>
+</nav>

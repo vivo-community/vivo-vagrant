@@ -1,0 +1,133 @@
+<html>
+<head>
+<link href="css/bootstrap.min.css" rel="stylesheet" media="screen">
+</head>
+<style>
+    body { margin: 50px; }
+</style>
+<body>
+<hr/>
+<h1 class="text-info">stardog vcs list Manual Page
+<hr/>
+<h1 class="text-info">NAME</h1>
+<br/>
+<div class="row"><div class="span8 offset1">stardog vcs list &mdash;Lists versions in a database.</div>
+</div>
+<br/>
+<h1 class="text-info">SYNOPSIS</h1>
+<br/>
+<div class="row">
+<div class="span8 offset1">
+stardog vcs list [ --after &lt;after&gt; ] [ --before &lt;before&gt; ] [ --committer &lt;committer&gt; ] [ {-l | --limit} &lt;limit&gt; ] [ {-o | --offset} &lt;offset&gt; ] [ {-p | --passwd} &lt;password&gt; ] [ {-P | --ask-password} ] [ {-u | --username} &lt;username&gt; ] [ {-v | --verbose} ] [--] &lt;database&gt;</div>
+</div>
+<br/>
+<h1 class="text-info">OPTIONS</h1>
+<br/>
+<div class="row">
+<div class="span8 offset1">
+--after &lt;after&gt;</div>
+</div>
+<div class="row">
+<div class="span8 offset2">
+Limits the versions displayed to only those committed after this date. The date should be a valid xsd:date (YYYY-MM-DD) or xsd:dateTime (YYYY-MM-DDTHH:MM:SS) value.</div>
+</div>
+<div class="row">
+<div class="span8 offset1">
+--before &lt;before&gt;</div>
+</div>
+<div class="row">
+<div class="span8 offset2">
+Limits the versions displayed to only those committed before this date. The date should be a valid xsd:date (YYYY-MM-DD) or xsd:dateTime (YYYY-MM-DDTHH:MM:SS) value.</div>
+</div>
+<div class="row">
+<div class="span8 offset1">
+--committer &lt;committer&gt;</div>
+</div>
+<div class="row">
+<div class="span8 offset2">
+Limits the versions displayed to only those committed by this user.</div>
+</div>
+<div class="row">
+<div class="span8 offset1">
+-l &lt;limit&gt;, --limit &lt;limit&gt;</div>
+</div>
+<div class="row">
+<div class="span8 offset2">
+Limits the number of versions to show. </div>
+</div>
+<div class="row">
+<div class="span8 offset1">
+-o &lt;offset&gt;, --offset &lt;offset&gt;</div>
+</div>
+<div class="row">
+<div class="span8 offset2">
+Offset results; default 0.</div>
+</div>
+<div class="row">
+<div class="span8 offset1">
+-p &lt;password&gt;, --passwd &lt;password&gt;</div>
+</div>
+<div class="row">
+<div class="span8 offset2">
+Password.</div>
+</div>
+<div class="row">
+<div class="span8 offset1">
+-P, --ask-password</div>
+</div>
+<div class="row">
+<div class="span8 offset2">
+Prompt for password.</div>
+</div>
+<div class="row">
+<div class="span8 offset1">
+-u &lt;username&gt;, --username &lt;username&gt;</div>
+</div>
+<div class="row">
+<div class="span8 offset2">
+User name.</div>
+</div>
+<div class="row">
+<div class="span8 offset1">
+-v, --verbose</div>
+</div>
+<div class="row">
+<div class="span8 offset2">
+Verbose flag that causes more detailed information to be printed</div>
+</div>
+<div class="row">
+<div class="span8 offset1">
+--
+</div>
+</div>
+<div class="row">
+<div class="span8 offset2">
+This option can be used to separate command-line options from the list of argument, (useful when arguments might be mistaken for command-line options
+</div>
+</div>
+<div class="row">
+<div class="span8 offset1">
+&lt;database&gt;</div>
+</div>
+<div class="row">
+<div class="span8 offset2">
+The name of the database or the full connection string of the database to connect to. If only the name is provided, the default server URL will be pre-pended to the name of the database in order to construct the connection string. Connection parameters such as ';reasoning=QL' can be included in the provided database name. Connection parameters specified like this can be overridden by specific options on the command. The default server URL will be read from the JVM argument 'stardog.default.cli.server'. If the JVM argument is not set, the default value 'snarl://localhost:5820' is used. If the server URL has no explicit port value, the default port value '5820' is used.  To use a secure connection, you should specify the full connection string and postfix 's' to the protocol, e.g. snarls or https.</div>
+</div>
+<br/>
+<h1 class="text-info">EXAMPLES</h1>
+<br/>
+<div class="row">
+<div class="span12 offset1">
+<p>
+Lists all the versions (commits) in a database</p>
+<pre>
+    $ stardog version list myDb</pre>
+<p>
+$ stardog version list --committer userName myDb</p>
+<pre>
+* Lists all the versions committed bin a time range user</pre>
+</div>
+</div>
+</body>
+</html>
+

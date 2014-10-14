@@ -1,0 +1,160 @@
+<html>
+<head>
+<link href="css/bootstrap.min.css" rel="stylesheet" media="screen">
+</head>
+<style>
+    body { margin: 50px; }
+</style>
+<body>
+<hr/>
+<h1 class="text-info">stardog reasoning explain Manual Page
+<hr/>
+<h1 class="text-info">NAME</h1>
+<br/>
+<div class="row"><div class="span8 offset1">stardog reasoning explain &mdash;Provide the explanation for an inference or inconsistency.</div>
+</div>
+<br/>
+<h1 class="text-info">SYNOPSIS</h1>
+<br/>
+<div class="row">
+<div class="span8 offset1">
+stardog reasoning explain [ {-f | --format} &lt;format&gt; ] [ {-i | --inconsistency} ] [ {-l | --limit} &lt;limit&gt; ] [ {-m | --merge} ] [ --named-graphs ] [ {-o | --output-format} &lt;format&gt; ] [ {-p | --passwd} &lt;password&gt; ] [ {-P | --ask-password} ] [ {-r | --reasoning} &lt;level&gt; ] [ {-u | --username} &lt;username&gt; ] [ {-v | --verbose} ] [--] &lt;database&gt; &lt;input&gt;...</div>
+</div>
+<br/>
+<h1 class="text-info">OPTIONS</h1>
+<br/>
+<div class="row">
+<div class="span8 offset1">
+-f &lt;format&gt;, --format &lt;format&gt;</div>
+</div>
+<div class="row">
+<div class="span8 offset2">
+Input data format: NTRIPLES, RDF/XML, TURTLE, TRIG, TRIX, N3, NQUADS</div>
+</div>
+<div class="row">
+<div class="span8 offset1">
+-i, --inconsistency</div>
+</div>
+<div class="row">
+<div class="span8 offset2">
+Explain inconsistency of the database</div>
+</div>
+<div class="row">
+<div class="span8 offset1">
+-l &lt;limit&gt;, --limit &lt;limit&gt;</div>
+</div>
+<div class="row">
+<div class="span8 offset2">
+Limits the number of explanation returned. The default limit is 1. Note that, when a RDF output format is selected and the limit is set to higher than 1, there is no way to distinguish which triple in the output belongs to which explanation. In TEXT and TREE outputs there will be an empty line separating different explanations.</div>
+</div>
+<div class="row">
+<div class="span8 offset1">
+-m, --merge</div>
+</div>
+<div class="row">
+<div class="span8 offset2">
+Merge proof trees with common nodes. This works only with TREE format and when the limit is is set higher than 1.</div>
+</div>
+<div class="row">
+<div class="span8 offset1">
+--named-graphs</div>
+</div>
+<div class="row">
+<div class="span8 offset2">
+Retrieves and prints the source named graphs for triples in the explanation. If this option is enabled, the output format should support named graphs too.</div>
+</div>
+<div class="row">
+<div class="span8 offset1">
+-o &lt;format&gt;, --output-format &lt;format&gt;</div>
+</div>
+<div class="row">
+<div class="span8 offset2">
+Output format for the explanation: [TEXT, TREE, NTRIPLES, RDF/XML, TURTLE, TRIG, TRIX, N3, NQUADS]. The default format is 'TEXT' where the explanation is rendered in a concise, human-readable format.</div>
+</div>
+<div class="row">
+<div class="span8 offset1">
+-p &lt;password&gt;, --passwd &lt;password&gt;</div>
+</div>
+<div class="row">
+<div class="span8 offset2">
+Password.</div>
+</div>
+<div class="row">
+<div class="span8 offset1">
+-P, --ask-password</div>
+</div>
+<div class="row">
+<div class="span8 offset2">
+Prompt for password.</div>
+</div>
+<div class="row">
+<div class="span8 offset1">
+-r &lt;level&gt;, --reasoning &lt;level&gt;</div>
+</div>
+<div class="row">
+<div class="span8 offset2">
+The reasoning level to use for query. Can be one of [NONE, QL, RL, EL, SL, DL, RDFS]</div>
+</div>
+<div class="row">
+<div class="span8 offset1">
+-u &lt;username&gt;, --username &lt;username&gt;</div>
+</div>
+<div class="row">
+<div class="span8 offset2">
+User name.</div>
+</div>
+<div class="row">
+<div class="span8 offset1">
+-v, --verbose</div>
+</div>
+<div class="row">
+<div class="span8 offset2">
+Verbose flag that causes more detailed information to be printed</div>
+</div>
+<div class="row">
+<div class="span8 offset1">
+--
+</div>
+</div>
+<div class="row">
+<div class="span8 offset2">
+This option can be used to separate command-line options from the list of argument, (useful when arguments might be mistaken for command-line options
+</div>
+</div>
+<div class="row">
+<div class="span8 offset1">
+&lt;database&gt; &lt;input&gt;</div>
+</div>
+<div class="row">
+<div class="span8 offset2">
+The name of the database or the full connection string of the database to connect to. If only the name is provided, the default server URL will be pre-pended to the name of the database in order to construct the connection string. Connection parameters such as ';reasoning=QL' can be included in the provided database name. Connection parameters specified like this can be overridden by specific options on the command. The default server URL will be read from the JVM argument 'stardog.default.cli.server'. If the JVM argument is not set, the default value 'snarl://localhost:5820' is used. If the server URL has no explicit port value, the default port value '5820' is used.  To use a secure connection, you should specify the full connection string and postfix 's' to the protocol, e.g. snarls or https. The subsequent argument is the inference to explain. This can either be a file name or an RDF string. When Turtle string is given as an argument the prefixes stored in the database can be omitted.</div>
+</div>
+<br/>
+<h1 class="text-info">DISCUSSION</h1>
+<br/>
+<div class="row">
+<div class="span8 offset1">
+Returns an explanation for the inference in the given file or for the inconsistency of the database. If provided, the input file should contain a single axiom. The explanation output is the minimal set of asserted statements in the database that are needed for the inference to hold. The statements in the explanation can be rendered in any RDF format but by default they will be rendered in a concise, human-readable, text format. There is also a proof tree format where the statements are rendered in hierarchical structure. Nodes in the proof tree are grouped under inferred statements that make it easier to understand the explanation.</div>
+</div>
+<br/>
+<h1 class="text-info">EXAMPLES</h1>
+<br/>
+<div class="row">
+<div class="span12 offset1">
+<p>
+Basic inference explanation with SL reasoning level:</p>
+<pre>
+    $ stardog reasoning explain -r SL myDb "ex:JohnDoe a ont:Person"</pre>
+<p>
+Get up to 10 explanations along with named graph info and merge common explanations:</p>
+<pre>
+    $ stardog reasoning explain -r SL -l 10 --merge --named-graphs myDb ":Employee rdfs:subClassOf :Person"</pre>
+<p>
+Read axiom to explain from a file and output the explanation in Turtle format:</p>
+<pre>
+    $ stardog reasoning explain -r SL -o turtle myDb axiomToExplain.ttl</pre>
+</div>
+</div>
+</body>
+</html>
+

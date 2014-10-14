@@ -1,0 +1,55 @@
+<!-- <p>The following are the configuration options for the Database reasoning capabilities:</p>
+ -->
+<br/>
+
+<div class="row">
+  <div class="col-md-6">
+    <h3>Reasoning</h3>
+    <hr>
+
+    <form role="form">
+      <div class="form-group" data-option="reasoning.consistency.automatic">
+        <label for="reasoning.consistency.automatic" class="control-label" title="{{= it.metadataInfo['reasoning.consistency.automatic'].help}}">{{= it.metadataInfo['reasoning.consistency.automatic'].label}}</label>
+        <br/>
+        <input id="reasoning.consistency.automatic" type="checkbox" {{? it.metadataModel['reasoning.consistency.automatic']}}checked{{?}}>
+      </div>
+
+      <div class="form-group" data-option="reasoning.punning.enabled">
+        <label for="reasoning.punning.enabled" class="control-label" title="{{= it.metadataInfo['reasoning.punning.enabled'].help}}">{{= it.metadataInfo['reasoning.punning.enabled'].label}}</label>
+        <br/>
+        <input id="reasoning.punning.enabled" type="checkbox" {{? it.metadataModel['reasoning.punning.enabled']}}checked{{?}}>
+      </div>
+
+      <div class="form-group" data-option="reasoning.schema.graphs">
+        <label for="reasoning.schema.graphs" class="control-label" title="{{= it.metadataInfo['reasoning.schema.graphs'].help}}">{{= it.metadataInfo['reasoning.schema.graphs'].label}}</label>
+        <input id="reasoning.schema.graphs" type="text" class="form-control" placeholder="e.g. http://clarkparsia.com/onto/tbox#" {{? it.metadataModel['reasoning.schema.graphs']}}value="{{= it.metadataModel['reasoning.schema.graphs']}}"{{?}}>
+      </div>
+    </form>
+  </div>
+  <div class="col-md-6">
+    <h3>ICV</h3>
+    <hr>
+
+    <form role="form">
+      <div class="form-group" data-option="icv.enabled">
+        <label for="icv.enabled" class="control-label" title="{{= it.metadataInfo['icv.enabled'].help}}">{{= it.metadataInfo['icv.enabled'].label}}</label>
+        <br/>
+        <input id="icv.enabled" type="checkbox" {{? it.metadataModel['icv.enabled']}}checked{{?}}>
+      </div>
+
+      <div class="form-group" data-option="icv.active.graphs">
+        <label for="icv.active.graphs" class="control-label" title="{{= it.metadataInfo['icv.active.graphs'].help}}">{{= it.metadataInfo['icv.active.graphs'].label}}</label>
+        <input id="icv.active.graphs" type="text" class="form-control" placeholder="e.g. http://clarkparsia.com/onto/icv#" {{? it.metadataModel['icv.active.graphs']}}value="{{= it.metadataModel['icv.active.graphs']}}"{{?}}>
+      </div>
+
+      <div class="form-group" data-option="icv.reasoning.type">
+        <label for="icv.reasoning.type" class="control-label" title="{{= it.metadataInfo['icv.reasoning.type'].help}}">{{= it.metadataInfo['icv.reasoning.type'].label}}</label>
+        <select id="icv.reasoning.type" name="icv.reasoning.type" class="form-control">
+          {{~ it.metadataInfo['icv.reasoning.type'].input.options :opt}}
+          <option value="{{= opt}}" {{ if (it.metadataModel['icv.reasoning.type'] === opt) { }}selected{{ } }}>{{= opt}}</option>
+          {{~}}
+        </select>
+      </div>
+    </form>
+  </div>
+</div>

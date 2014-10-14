@@ -1,0 +1,19 @@
+{{? it['database.online']}}
+<td class="db-status"><span class="label label-success">online</span></td>
+{{??}}
+<td class="db-status"><span class="label label-danger">offline</span></td>
+{{?}}
+
+<td class="db-name">{{= it['database.name']}}</td>
+<td class="db-date-change"><div data-toggle="tooltip" data-placement="top" title="{{= it['database.time.modification.tooltip']}}">{{= it['database.time.modification']}}</div></td>
+
+{{? it['search.enabled']}}
+<td class="db-boolean"><span class="badge alert-success"><i class="glyphicon glyphicon-ok"></i></span></td>
+{{??}}
+<td class="db-boolean"><span class="badge alert-danger"><i class="glyphicon glyphicon-remove"></i></span></td>
+{{?}}
+
+<td class="db-index-type">
+  <button type="button" class="btn btn-default btn-xs btn-browse" data-toggle="tooltip" data-placement="top" title="Browse Schema" {{? !it['database.online']}}disabled{{?}}><i class="fa fa-sitemap"></i></button>
+  <button type="button" class="btn btn-default btn-xs btn-query" data-toggle="tooltip" data-placement="top" title="SPARQL Query" {{? !it['database.online']}}disabled{{?}}><i class="fa fa-terminal"></i></button>
+</td>

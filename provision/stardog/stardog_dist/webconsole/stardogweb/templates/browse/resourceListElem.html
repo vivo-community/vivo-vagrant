@@ -1,0 +1,32 @@
+{{#if [@egadLabel]}}<td property="{{[@id]}}"><a href="#!/browse/{{#encodeURIComp [@type]}}{{this}}{{/encodeURIComp}}/{{#encodeURIComp [@id]}}{{this}}{{/encodeURIComp}}">{{[@egadLabel]}}</a></td>
+{{else}}
+<td property="{{[@id]}}"><a href="#!/browse/{{#encodeURIComp [@type]}}{{this}}{{/encodeURIComp}}/{{#encodeURIComp [@id]}}{{this}}{{/encodeURIComp}}">{{#localname [@id]}}{{this}}{{/localname}}</a></td>
+{{/if}}
+
+{{#each additionalFields}}
+  <td>{{this}}</td>
+{{/each}}
+
+{{#if actions}}
+	{{#isArray actions}}
+	<td>
+	<div class="btn-group">
+	  <a class="btn btn-default btn-xs dropdown-toggle" data-toggle="dropdown" href="#" data-bypass="true">
+	    Actions
+	    <span class="caret"></span>
+	  </a>
+	  <ul class="dropdown-menu">
+	    <!-- dropdown menu links -->
+	    {{#actions}}
+	    	<li><a href="#!/{{module}}/{{#encodeURIComp ../[@id]}}{{this}}{{/encodeURIComp}}">{{function}}</a></li>
+	    {{/actions}}
+	  </ul>
+	</div>
+	</td>
+	{{else}}
+	<td>
+		<a class="btn btn-default btn-xs" href="#!/{{actions.module}}/{{#encodeURIComp ../[@id]}}{{this}}{{/encodeURIComp}}">{{actions.function}}</a>
+	</td>
+	{{/isArray}}
+{{/if}}
+

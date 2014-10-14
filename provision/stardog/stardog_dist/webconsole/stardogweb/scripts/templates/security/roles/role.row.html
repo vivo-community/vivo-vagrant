@@ -1,0 +1,10 @@
+<td class="role-name">{{= it['role.name']}}</td>
+{{? it['role.users']}}
+<td class="role-users">
+{{~ it['role.users'] :value}}
+  <span class="label label-primary">{{= value}}</span>
+{{~}}
+</td>
+{{??}}
+<td class="role-users"><i>No users assigned</i></td>
+{{?}}

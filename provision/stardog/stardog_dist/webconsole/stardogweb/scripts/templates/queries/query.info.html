@@ -1,0 +1,77 @@
+<div class="panel-heading">
+  <h4 class="panel-title">
+    <a data-toggle="collapse" data-parent="#accordion" href="#query{{= it.id}}" data-bypass="false">
+      <span class="badge">#{{= it.id}}</span>
+      {{? it.query_abstract}}<code>{{! it.query_abstract}}</code>{{?}} 
+      {{? it.user}}by <code>{{= it.user}}</code>{{?}} 
+      {{? it.db}}running on <code>{{= it.db}}</code>{{?}} 
+      {{? it.startTime}}started on <strong>{{= it.startTime_short}}</strong>{{?}}
+      {{? it.executionTime}}<div class="exectime-inline pull-right"></div>{{?}}
+    </a>
+  </h4>
+</div>
+<div id="query{{= it.id}}" class="panel-collapse collapse">
+  <div class="panel-body">
+    <div class="row">
+      <div class="col-md-4">
+        <form role="form">
+          {{? it.user}}
+          <div class="form-group">
+            <label class="control-label">Username:</label>
+            <span data-key="username">{{= it.user}}</span>
+          </div>
+          {{?}}
+          {{? it.db}}
+          <div class="form-group">
+            <label class="control-label">Database:</label>
+            <span data-key="database">{{= it.db}}</span>
+          </div>
+          {{?}}
+          {{? it.reasoning}}
+          <div class="form-group">
+            <label class="control-label">Reasoning Level:</label>
+            <span data-key="database">{{= it.reasoning}}</span>
+          </div>
+          {{?}}
+        </form>
+      </div>
+      <div class="col-md-4">
+        <form role="form">
+          {{? it.startTime}}
+          <div class="form-group">
+            <label class="control-label">Started:</label>
+            <span data-key="started">{{= it.startTime_long}}</span>
+          </div>
+          {{?}}
+          {{? it.executionTime}}
+          <div class="form-group exectime">
+            <label class="control-label">Elapsed:</label>
+          </div>
+          {{?}}
+          {{? it.timeout}}
+          <div class="form-group">
+            <label class="control-label">Timeout (ms):</label>
+            <span>{{= it.timeout}} ms</span>
+          </div>
+          {{?}}
+        </form>
+      </div>
+      {{? it.id}}
+      <div class="col-md-4">
+        <button class="btn btn-danger btn-kill pull-right" style="width: 60px;">Kill</button>
+      </div>
+      {{?}}
+    </div>
+    {{? it.query}}
+    <div class="row">
+      <div class="col-md-12">
+        <form>
+          <label class="control-label">Query <sub><a href="{{= it.db}}#!/query/{{= encodeURIComponent(it.query) }}" target="_blank">Edit</a></sub></label>
+          <textarea  class="form-control sparql-mode">
+          </textarea>
+        </form>
+      </div>
+    </div>
+    {{?}}
+  </div>
+</div>

@@ -1,0 +1,57 @@
+<button type="button" class="close pull-right">&times;</button>
+{{#if [@id]}}
+<button class="btn btn-link addDataType"><i class="icon-plus"/></button>
+<strong class="property_label" data-toggle="tooltip" data-placement="right" title="{{[@egadComment]}}">
+  {{#if [@egadLabel]}}{{[@egadLabel]}}{{else}}{{#localname [@id]}}{{this}}{{/localname}}{{/if}}
+</strong>
+<div class="controls">
+  <ul class="list-no-bullets obj-prop-container">
+    {{#if [@value]}}
+      {{#each [@value]}}
+      <li>
+        {{#isObject this}}
+          {{#islongtext [@value] size=156}}
+          <div class="row">
+            <textarea class="dataTypeIn propertyInput" rows="6" style="width:65%;">{{[@value]}}</textarea>
+            <span class="label label-default">@</span>
+            <input class="form-control dataLanguage" type="text" maxlength="2" value="{{[@language]}}" style="width: 12%; display: inline;">
+            <button class="btn btn-default removeDataType" type="button" style="width: 10%;"><i class="icon-remove" /></button>
+          </div>
+          {{else}}
+          <div class="row">
+            <input class="form-control dataTypeIn propertyInput" type="text" value="{{[@value]}}" style="width: 65%; display: inline;">
+            <span class="label label-default">@</span>
+            <input class="form-control dataLanguage" type="text" maxlength="2" value="{{[@language]}}" style="width: 12%; display: inline;">
+            <button class="btn btn-default removeDataType" type="button" style="width: 10%;"><i class="icon-remove" /></button>
+          </div>
+          {{/islongtext}}
+        {{else}}
+          {{#islongtext this size=156}}
+          <div class="row">
+            <textarea class="dataTypeIn propertyInput" rows="6" style="width:65%;">{{this}}</textarea>
+            <span class="label label-default">@</span>
+            <input class="dataLanguage" type="text" value="" style="width:5%;">
+            <button class="btn btn-default removeDataType" type="button" style="width: 10%;"><i class="icon-remove" /></button>
+          </div>
+          {{else}}
+          <div class="row">
+            <input class="form-control dataTypeIn propertyInput" type="text" value="{{this}}" style="width: 65%; display: inline;">
+            <span class="label label-default">@</span>
+            <input class="form-control dataLanguage" type="text" maxlength="2" value="" style="width: 12%; display: inline;">
+            <button class="btn btn-default removeDataType" type="button" style="width: 10%;"><i class="icon-remove" /></button>
+          </div>
+          {{/islongtext}}
+        {{/isObject}}
+      </li>
+      {{/each}}
+    {{else}}
+    <li>
+      <div class="row">
+        <input class="form-control dataTypeIn propertyInput" type="text" value="" style="width:90%;">
+        <button class="btn btn-default removeDataType" type="button"><i class="icon-remove" /></button>
+      </div>
+    </li>
+    {{/if}}
+  </ul>
+</div>
+{{/if}}

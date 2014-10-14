@@ -1,0 +1,105 @@
+<div class="panel panel-default">
+    <div class="panel-heading">
+        <h3>Database Metadata</h3>
+    </div>
+    <div class="panel-body">
+      <div id="metadataCols" data-columns salvattore="2 .col.col-md-6">
+        <div class="metadata-elem well">
+          <label>Database Name</label>
+          <span>{{[database.name]}}</span>
+        </div>
+        <div class="metadata-elem well">
+          <label>Database Namespaces</label>
+          <ul>
+            {{#each [database.namespaces]}}
+            <li>{{this}}</li>
+            {{/each}}
+          </ul>
+        </div>
+        <div class="metadata-elem well">
+          <label>Database Online</label>
+          <span>{{#if [database.online]}}Yes{{else}}No{{/if}}</span>
+        </div>
+        <div class="metadata-elem well">
+          <label>Database Time Creation</label>
+          <span>{{[database.time.creation]}}</span>
+        </div>
+        <div class="metadata-elem well">
+          <label>Last Modified</label>
+          <span>{{[database.time.modification]}}</span>
+        </div>
+        <div class="metadata-elem well">
+          <label>Index Size (Triples)</label>
+          <span>{{[index.size]}}</span>
+        </div>
+        <div class="metadata-elem well">
+          <label>Index Type</label>
+          <span>{{[index.type]}}</span>
+        </div>
+        <div class="metadata-elem well">
+          <label>Index Persist</label>
+          <span>{{#if [index.persist]}}Yes{{else}}No{{/if}}</span>
+        </div>
+        <div class="metadata-elem well">
+          <label>Index Literals Canonical</label>
+          <span>{{#if [index.literals.canonical]}}Yes{{else}}No{{/if}}</span>
+        </div>
+        <div class="metadata-elem well">
+          <label>Index Named Graphs</label>
+          <span>{{#if [index.named.graphs]}}Yes{{else}}No{{/if}}</span>
+        </div>
+        <div class="metadata-elem well">
+          <label>Index Statistics Update Automatic</label>
+          <span>{{#if [index.statistics.update.automatic]}}Yes{{else}}No{{/if}}</span>
+        </div>
+        <div class="metadata-elem well">
+          <label>Index Differential Enable Limit (Triples)</label>
+          <span>{{[index.differential.enable.limit]}}</span>
+        </div>
+        <div class="metadata-elem well">
+          <label>Index Differential Enable Limit (Triples)</label>
+          <span>{{[index.differential.merge.limit]}}</span>
+        </div>
+        <div class="metadata-elem well">
+          <label>ICV Enabled</label>
+          <span>{{#if [icv.enabled]}}Yes{{else}}No{{/if}}</span>
+        </div>
+        <div class="metadata-elem well">
+          <label>ICV Reasoning Type</label>
+          <span>{{[icv.reasoning.type]}}</span>
+        </div>
+        <div class="metadata-elem well">
+          <label>ICV Active Graphs</label>
+          <span>{{[icv.active.graphs]}}</span>
+        </div>
+        <div class="metadata-elem well">
+          <label>ICV Consistency Automatic</label>
+          <span>{{#if [icv.consistency.automatic]}}Yes{{else}}No{{/if}}</span>
+        </div>
+        <div class="metadata-elem well">
+          <label>Reasoning Consistency Automatic</label>
+          <span>{{#if [reasoning.consistency.automatic]}}Yes{{else}}No{{/if}}</span>
+        </div>
+        <div class="metadata-elem well">
+          <label>Reasoning Punning Automatic</label>
+          <span>{{#if [reasoning.punning.enabled]}}Yes{{else}}No{{/if}}</span>
+        </div>
+        <div class="metadata-elem well">
+          <label>Reasoning Schema Graphs</label>
+          <span>{{[reasoning.schema.graphs]}}</span>
+        </div>
+        <div class="metadata-elem well">
+          <label>Search Enabled</label>
+          <span>{{#if [search.enabled]}}Yes{{else}}No{{/if}}</span>
+        </div>
+        <div class="metadata-elem well">
+          <label>Search Reindex Mode</label>
+          <span>{{[search.reindex.mode]}}</span>
+        </div>
+        <div class="metadata-elem well">
+          <label>Transactions Durable</label>
+          <span>{{#if [transactions.durable]}}Yes{{else}}No{{/if}}</span>
+        </div>
+      </div>
+    </div>
+</div>

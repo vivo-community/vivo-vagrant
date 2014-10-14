@@ -1,0 +1,23 @@
+{{#if [@egadLabel]}}
+  <h2 id="page_title">{{[@egadLabel]}}</h2>
+  <div id="classType"></div>
+{{else}}
+  <h2 id="page_title">{{#localname [@id]}}{{this}}{{/localname}} Details</h2>
+  <div id="classType"></div>
+{{/if}}
+
+
+<div class="row">
+  <div class="col-md-10">
+    <div id="propsForm" typeof="{{[rdf:type]}}" about="{{[@id]}}" data-columns salvattore="2 .column.col-md-6">
+    </div>
+  </div>
+  <div class="col-md-2">
+    <ul class="nav nav-list affix highlight">
+      <li><a id="btnEdit" href="#" data-bypass="true"><i class="icon-pencil"></i> Edit</a></li>
+      <li><a id="btnDelete" href="#" data-bypass="true"><i class="icon-remove"></i> Delete</a></li>
+      <li class="divider"></li>
+      <li><a id="btnTree" href="#" data-bypass="true"><i class="icon-list"></i> Tree Browser</a></li>
+    </ul>
+  </div>
+</div>

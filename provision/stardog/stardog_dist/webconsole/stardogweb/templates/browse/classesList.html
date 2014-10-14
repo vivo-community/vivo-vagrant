@@ -1,0 +1,9 @@
+<p>
+{{#each this}}
+{{#if [rdfs:label]}}
+  <a href="#!/browse/{{#linkFormat [@id]}}{{this}}{{/linkFormat}}"><span class="label label-primary">{{[rdfs:label]}}</span></a>
+{{else}}
+  <a href="#!/browse/{{#linkFormat [@id]}}{{this}}{{/linkFormat}}"><span class="label label-primary">{{#localname [@id]}}{{this}}{{/localname}}</span></a>
+{{/if}}
+{{/each}}
+</p>

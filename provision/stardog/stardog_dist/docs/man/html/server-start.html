@@ -1,0 +1,146 @@
+<html>
+<head>
+<link href="css/bootstrap.min.css" rel="stylesheet" media="screen">
+</head>
+<style>
+    body { margin: 50px; }
+</style>
+<body>
+<hr/>
+<h1 class="text-info">stardog-admin server start Manual Page
+<hr/>
+<h1 class="text-info">NAME</h1>
+<br/>
+<div class="row"><div class="span8 offset1">stardog-admin server start &mdash;Starts the Stardog Server.</div>
+</div>
+<br/>
+<h1 class="text-info">SYNOPSIS</h1>
+<br/>
+<div class="row">
+<div class="span8 offset1">
+stardog-admin server start [ --bind &lt;network interface&gt; ] [ --disable-security ] [ --enable-ssl ] [ --home &lt;home&gt; ] [ --logfile &lt;log file&gt; ] [ --no-cors ] [ --no-http ] [ --no-snarl ] [ --no-web-console ] [ --port &lt;port&gt; ] [ --require-ssl ]</div>
+</div>
+<br/>
+<h1 class="text-info">OPTIONS</h1>
+<br/>
+<div class="row">
+<div class="span8 offset1">
+--bind &lt;network interface&gt;</div>
+</div>
+<div class="row">
+<div class="span8 offset2">
+Specify the address of the network interface the Stardog server should bind to, the default is 0.0.0.0 Port should be specified separately with the --port option.</div>
+</div>
+<div class="row">
+<div class="span8 offset1">
+--disable-security</div>
+</div>
+<div class="row">
+<div class="span8 offset2">
+Disable security flag. If this flag is set, security for the server is completely disabled.</div>
+</div>
+<div class="row">
+<div class="span8 offset1">
+--enable-ssl</div>
+</div>
+<div class="row">
+<div class="span8 offset2">
+Enable SSL for the server; server will automatically enable SSL on a per-connection basis to supports secure & unsecured clients.</div>
+</div>
+<div class="row">
+<div class="span8 offset1">
+--home &lt;home&gt;</div>
+</div>
+<div class="row">
+<div class="span8 offset2">
+Stardog home directory location.</div>
+</div>
+<div class="row">
+<div class="span8 offset1">
+--logfile &lt;log file&gt;</div>
+</div>
+<div class="row">
+<div class="span8 offset2">
+Stardog log file.</div>
+</div>
+<div class="row">
+<div class="span8 offset1">
+--no-cors</div>
+</div>
+<div class="row">
+<div class="span8 offset2">
+No CORS support flag. If this flag is set, CORS support in the HTTP server will be disabled.</div>
+</div>
+<div class="row">
+<div class="span8 offset1">
+--no-http</div>
+</div>
+<div class="row">
+<div class="span8 offset2">
+No HTTP protocol flag. If this flag is set, the HTTP interface will be disabled.  Cannot be used with --no-snarl</div>
+</div>
+<div class="row">
+<div class="span8 offset1">
+--no-snarl</div>
+</div>
+<div class="row">
+<div class="span8 offset2">
+No SNARL protocol flag. If this flag is set, the SNARL interface will be disabled.  Cannot be used with --no-http.</div>
+</div>
+<div class="row">
+<div class="span8 offset1">
+--no-web-console</div>
+</div>
+<div class="row">
+<div class="span8 offset2">
+No Stardog Web Console flag. If this flag is set, the Stardog Web Console in the HTTP server will be disabled.</div>
+</div>
+<div class="row">
+<div class="span8 offset1">
+--port &lt;port&gt;</div>
+</div>
+<div class="row">
+<div class="span8 offset2">
+Specify the port the server will bind to</div>
+</div>
+<div class="row">
+<div class="span8 offset1">
+--require-ssl</div>
+</div>
+<div class="row">
+<div class="span8 offset2">
+Require SSL for the server; client connections which do not use SSL will be immediately closed.</div>
+</div>
+<br/>
+<h1 class="text-info">DISCUSSION</h1>
+<br/>
+<div class="row">
+<div class="span8 offset1">
+By default, the server answers SNARL and HTTP protocols on port 5820.A different port for the server can be specified with the --port option. The HTTP interface may be disabled entirely using --no-http.</div>
+</div>
+<br/>
+<h1 class="text-info">EXAMPLES</h1>
+<br/>
+<div class="row">
+<div class="span12 offset1">
+<p>
+Start a Stardog server with the default options:</p>
+<pre>
+    $ stardog-admin server start</pre>
+<p>
+Start a Stardog server with security disabled:</p>
+<pre>
+    $ stardog-admin server start --disable-security</pre>
+<p>
+Run a Stardog server on localhost only with a different port</p>
+<pre>
+    $ stardog-admin server start --bind 127.0.0.1 --port 5804</pre>
+<p>
+Start a Stardog server which required SSL connections from clients</p>
+<pre>
+    $ stardog-admin server start --require-ssl</pre>
+</div>
+</div>
+</body>
+</html>
+

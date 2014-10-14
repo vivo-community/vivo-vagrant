@@ -1,0 +1,58 @@
+.\" generated with Ronn/v0.7.3
+.\" http://github.com/rtomayko/ronn/tree/0.7.3
+.
+.TH "STARDOG\-ADMIN_USER_PASSWD" "8" "August 2014" "Clark & Parsia" "stardog-admin"
+.
+.SH "NAME"
+\fBstardog\-admin_user_passwd\fR \- Changes user password\.
+.
+.SH "SYNOPSIS"
+\fBstardog\-admin\fR [ \-\-server \fIserver url\fR ] \fBuser\fR \fBpasswd\fR [ {\-N | \-\-new\-password} \fInew password\fR ] [ {\-p | \-\-passwd} \fIpassword\fR ] [ {\-P | \-\-ask\-password} ] [ {\-u | \-\-username} \fIusername\fR ] [ {\-v | \-\-verbose} ] [\-\-] [ \fItarget user\fR ]
+.
+.SH "OPTIONS"
+.
+.TP
+\fB\-N\fR \fInew password\fR, \fB\-\-new\-password\fR \fInew password\fR
+New password for user\. If not provided, the user will be prompted to enter it\.
+.
+.TP
+\fB\-p\fR \fIpassword\fR, \fB\-\-passwd\fR \fIpassword\fR
+Password\.
+.
+.TP
+\fB\-P\fR, \fB\-\-ask\-password\fR
+Prompt for password\.
+.
+.TP
+\fB\-\-server\fR \fIserver url\fR
+URL of Stardog Server\. If this option isn\'t specified, it will be read from JVM argument \'stardog\.default\.cli\.server\'\. If the JVM arg isn\'t set, the default value \'snarl://localhost:5820\' is used\. If server URL has no explicit port value, the default port value \'5820\' is used\. Example: \'stardog \-\-server snarl://12\.34\.56\.78:5820 server stop\'
+.
+.TP
+\fB\-u\fR \fIusername\fR, \fB\-\-username\fR \fIusername\fR
+User name\.
+.
+.TP
+\fB\-v\fR, \fB\-\-verbose\fR
+Verbose flag that causes more detailed information to be printed
+.
+.TP
+\-\-
+This option can be used to separate command\-line options from the list of arguments (useful when arguments might be mistaken for command\-line options)\.
+.
+.TP
+\fItarget user\fR
+User whose password is to be changed, if different from current user\.
+.
+.SH "DISCUSSION"
+Sets a new password for a user, either the current user or a user as specified on the command line\. Passwords must be at least four (4) and at most twenty (20) characters long and cannot contain whitespaces\.
+.
+.SH "EXAMPLES"
+.
+.TP
+Change the password of the current user, john:
+$ stardog\-admin user passwd \-\-username john
+.
+.TP
+Change the password of a specific user, bob:
+$ stardog\-admin user passwd \-\-username admin bob
+

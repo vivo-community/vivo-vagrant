@@ -1,0 +1,37 @@
+<div>
+  <div id="messageDiv" class="fade in" style="display:none; margin:auto auto;">
+  </div>
+  <div id="view_frame" class="app_content" style="width:100%;">
+    <h2>Query Panel</h2>
+
+    <div class="panel-group" id="accordion">
+      <!-- First group -->
+      <div class="panel panel-default">
+        <div class="panel-heading">
+          <a id="accordionTools" data-toggle="collapse" data-bypass="true" href="#collapseTwo">
+            {{#if collapseTwo}}<i class="icon-collapse"></i>{{else}}<i class="icon-expand"></i>{{/if}} <strong>{{#if collapseTwo}}Hide{{else}}Show{{/if}} SPARQL Editor</strong>
+          </a>
+        </div>
+        <div id="collapseTwo" class="panel-collapse collapse {{#if collapseTwo}}in{{/if}}">
+          <div id="query" class="panel-body" style="height: 560px; overflow: auto;">
+          </div>
+        </div>
+      </div>
+
+      <!-- Second group -->
+      <div class="panel panel-default">
+        <div class="panel-heading">
+          <a data-toggle="collapse" data-bypass="true" href="#collapseThree">
+            <i class="icon-list-alt"></i> Results
+          </a>
+        </div>
+        <div id="collapseThree" class="panel-collapse collapse {{#if collapseThree}}in{{/if}}">
+          <div class="panel-body">
+            <div id="results_table"></div>
+            <div id="btnExport"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

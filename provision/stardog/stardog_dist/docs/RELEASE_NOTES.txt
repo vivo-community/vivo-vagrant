@@ -1,0 +1,2149 @@
+2.2.1 Changes
+----------------------------------------------------------------------------
+
+* ADDED: Query panel in Web Console supports SPARQL Update queries
+
+* ADDED: `server status` command to admin CLI
+
+* ADDED: Bulk load from local files
+
+* ADDED: Save query button in Web Console query panel
+
+* ADDED: Method to ExpressionFactory to programmatically create a Stardog Rule from a String
+
+* ADDED: Optimizations for property path evaluation
+
+* MODIFIED: Moved system monitoring into separate page in the web console
+
+* MODIFIED: Check $STARDOG_HOME for file system permissions issues before startup
+
+* MODIFIED: Improved help for `role grant`
+
+* MODIFIED: Return proper status code for invalid export query format
+
+* MODIFIED: Improved round-trip performance of data-time objects in value canonicalization
+
+* MODIFIED: Better cardinality of estimation of chains of joins
+
+* MODIFIED: Extended coverage of database repair utility
+
+* MODIFIED: Better cardinality estimations for scans over union named graphs
+
+* MODIFIED: Improved error logging on server side
+
+* MODIFIED: Throw an error when modifying the reasoning level of a query within a transaction
+
+* MODIFIED: Removed concurrency bottleneck in disk lookups of cardinality statistics
+
+* MODIFIED: Improved error messages on startup when required jar files are missing
+
+* FIXED: Homepage content depending on Watchdog is incorrect for community builds
+
+* FIXED: Queries using "count(distinct *) as ?c" always return a count of 1
+
+* FIXED: Explanations of update queries
+
+* FIXED: Missing semicolon in .bat files causes classpath errors
+
+* FIXED: Lost aggregate function when no explicit group provided in query
+
+* FIXED: Incorrect canonicalization of IN filter expressions
+
+* FIXED: StardogRepositoryConnection.setAutoCommit starts a transaction
+
+* FIXED: Reference to obsolete JSON-LD library
+
+* FIXED: Query results export throws a parse error
+
+* FIXED: Literal values in web console should be escaped when inserted into a page
+
+* FIXED: Inconsistent `getDBOptions` in HTTP Admin falsely reporting `db doesn't exist` message
+
+* FIXED: Failed update queries print wrong message
+
+* FIXED: Handling of very large literals (> 8MB) causes problems during bulk loads
+
+* FIXED: Database can be left in locked state under high numbers of concurrent commits
+
+* FIXED: Direct memory size used for off-heap allocations is incorrect
+
+* FIXED: JSON Serialization errors for Metadata payloads
+
+* FIXED: Invalid connection string yields an NPE
+
+* FIXED: Differential index metadata not flushed to disk
+
+* FIXED: Explaining IC violations can produce NoSuchElementExceptions
+
+* FIXED: Describe queries are slow with union named graphs
+
+* FIXED: False positive detecting 'ask' queries in Query Panel
+
+* FIXED: Language tags are not rendering correctly in Web Console
+
+* FIXED: Invalid rules are included in the rule base
+
+* FIXED: Reasoner can remain locked if there are errors computing new state during commit
+
+* FIXED: Query Panel route double decodes input parameters
+
+* FIXED: Overflow error when querying uncommitted state when changes contain duplicates
+
+* FIXED: In the Web Console, formats in the 'Export as...' drop-down menu on the query panel should be filtered
+according to the query that was executed
+
+2.2 Changes
+----------------------------------------------------------------------------
+
+* ADDED: Support for RDF versioning
+
+* ADDED: Admin support for webconsole
+
+* ADDED: Password file similar to postgres for the CLI
+
+* ADDED: Support compressed database exports
+
+* MODIFIED: Support acceptable hostnames via CORS
+
+* MODIFIED: Improved recognition of data properties during schema extraction
+
+* MODIFIED: Updated to Sesame 2.7.12
+
+* MODIFIED: Increase default password max length to 1024 characters
+
+* MODIFIED: Dropped support for SD-Connection-String header
+
+* MODIFIED: Dropped support for SD-Query-Bindings header
+
+* MODIFIED: Clickable elements in schema browser made more obvious
+
+* MODIFIED: Updated to Netty 4.0.20
+
+* MODIFIED: Improved performance of distinct operator for unsorted results
+
+* MODIFIED: Updated to Lucene 4.8.1
+
+* MODIFIED: Updated to Guava 17.0
+
+* MODIFIED: Improved filter selectivity estimations
+
+* MODIFIED: Improved error message when searching over non-searchable database
+
+* MODIFIED: Improved error message when reasoning consistency check CLI command is incorrectly formatted
+
+* MODIFIED: Disabled non-strict parsing when using durable transactions
+
+* MODIFIED: Strict parsing now a database option
+
+* MODIFIED: Check literals on insert is folded into strict parsing
+
+* MODIFIED: Significant reduction in memory usage and increased performance for transferring RDF over the wire
+
+* MODIFIED: StardogDatasetGraph implements the Jena Transactional interface
+
+* MODIFIED: Deprecate usage of Jena BulkUpdateHandler
+
+* MODIFIED: Do not wrap StardogDatasetGraph in DatasetGraphMap, use internal cache instead
+
+* MODIFIED: Reduce default Lucene write buffer size from 1G to 256M
+
+* FIXED: 'value already present' error when querying using reasoning
+
+* FIXED: Expressions in a projection which are used in an order by are incorrectly parsed
+
+* FIXED: Direct type does not return results when there are equivalent classes
+
+* FIXED: "No authenticated user" error when iterating over IC violations
+
+* FIXED: Constraints using max cardinality does not produce expected violations
+
+* FIXED: Exception thrown due to invalid restrictions during schema extraction
+
+* FIXED: Web console is not working for IE 8/9
+
+* FIXED: Interactions between join optimizers can produce suboptimal joins for patterns with unbound predicates
+
+* FIXED: INSERT DATA with language-tagged literal results in exception
+
+* FIXED: Inserting a triple/quad with a BNode ID that consists of a single character (e.g., :b)
+duplicates this character (:bb)
+
+* FIXED: Database exports don't use stored namespaces
+
+* FIXED: "NQUADS" is not recognized as a valid RDF format
+
+* FIXED: Transitive properties in PROV are not recognized
+
+* FIXED: Schema queries do not return distinct results
+
+* FIXED: "NTriples" is not recognized as a valid RDF format
+
+* FIXED: Counter of allocated off-heap memory does not take into account allocations via ByteBuffer.allocateDirect
+
+* FIXED: Filter exists expressions in an optional join cannot be translated into a plan
+
+* FIXED: Rules containing NOT IN expressions in FILTERs might produce incomplete results
+
+* FIXED: NPE in schema operator
+
+* FIXED: ICV guard mode used incorrect reasoning type
+
+* FIXED: Describe queries return no results when query.all.graphs is enabled
+
+* FIXED: Query plan explanations when obtained via SNARL protocol do not reflect reasoning level
+
+* FIXED: CSV and TSV are not recognized as valid HTTP result formats
+
+* FIXED: Aggregate functions are incorrectly canonicalized
+
+* FIXED: Temp files created during data uploads for stream storage are not deleted when transaction is complete
+
+* FIXED: Getting namespaces for db over HTTP returns duplicated mappings
+
+* FIXED: Batch file to run Stardog fails on Windows when path has spaces in it
+
+* FIXED: Running search queries without a search index yields an NPE
+
+* FIXED: Failure of termination condition in an outer join which resulted in an infinite join
+
+* FIXED: Cannot migrate large databases
+
+* FIXED: Large files cannot be added via HTTP protocol
+
+* FIXED: Service loader does not ignore comments
+
+* FIXED: Parse error for xsd:gyear typed literals with the value `1`
+
+* FIXED: Persistant databases show "Index Persist: No" in webconsole
+
+* FIXED: Incorrect status code for query not found in HTTP API
+
+* FIXED: NPE during data obfuscation over SNARL protocol
+
+* FIXED: Cannot export large databases to client
+
+* FIXED: Losing results with order by & limit from incorrect solution modifier optimization
+
+* FIXED: Starting server without web console only half works
+
+* FIXED: Can return incorrect results from index scan when an active graph is explicitly specified
+
+* FIXED: ArrayIndexOutOfBoundsException can occur when multiple projections appear in a plan
+
+* FIXED: Find method of StardogDatasetGraph is incorrect
+
+* FIXED: Implement all update functions in StardogDatasetGraph
+
+* FIXED: A implies {o} is a valid EL axiom, but not accepted by SL profile
+
+* FIXED: Keys are not recognized as valid EL axioms
+
+
+2.1.3 Changes
+----------------------------------------------------------------------------
+
+* ADDED: Support for configuration of password requirements
+
+* FIXED: Override of default URL server does not work
+
+* FIXED: Incorrect error message when failing to connect over HTTP to server w/ HTTP disabled
+
+* FIXED: When custom bind address is used, server start output does not correctly reflect address server is listening on
+
+* FIXED: BNodes declared in head of insert/delete queries are static
+
+* FIXED: Need more graceful handling of query bindings header when it's the empty string
+
+* FIXED: Doubled-typed literal values which are .equals, could canonicalize to different identifiers
+
+* FIXED: Incomplete reasoning with property chains
+
+* FIXED: Non-deterministic connection failures over SNARL protocol in a server under high load
+
+* FIXED: SPARQL count optimization can rewrite count expressions to things which are not semantically equivalent
+
+* FIXED: Commits which contain the removal of an empty named graph yield an NPE during commit to search index
+
+* FIXED: Update queries via Sesame bindings throw exceptions
+
+* FIXED: Setting query properties on a Sesame query, such as includedInferred, does not work as expected
+
+* FIXED: Repository.getContextIDs returns a non-unique list of contexts
+
+* FIXED: Getting the size of a specific named graph via StardogRepositoryConnection yields an UnsupportedOperationException
+
+* FIXED: Shells scripts do not quote paths which fails in the presence of paths with spaces and the like
+
+* FIXED: Memory mapped tx log files on Windows can get mangled when mem-mapped contents are flushed to disk
+
+* FIXED: Computation of very large query result sets slows down due to cache thrashing
+
+* MODIFIED: Starting server with --no-web-console should print a message
+
+* MODIFIED: CLI export help needs some clarification
+
+2.1.2 Changes
+----------------------------------------------------------------------------
+* ADDED: Auto-complete feature in Web console's query panel
+
+* ADDED: Load query from file in Web console's query panel
+
+* ADDED: SNARL API support for performing an export
+
+* ADDED: Server side export support
+
+* ADDED: Arithmetic operations for date/time values
+
+* FIXED: Incorrectly handling filter inlining when variable in OPTIONAL side of join
+
+* FIXED: Most recent version of chrome breaks the webconsole layout
+
+* FIXED: CORS method `OPTION` is missing
+
+* FIXED: DISTINCT operator could return only a REDUCED result set in some cases with reasoning
+
+* FIXED: Correctly verify property paths during optimization when both start & end point are unbound
+
+* FIXED: Rewritten plans might incorrectly share variables which can lead to empty results
+
+* FIXED: In the Web console, prefixes included in the query panel seem to be irrelevant
+
+* FIXED: Corrected rendering of accented characters in welcome screen
+
+* FIXED: Export cli function does not use RDF format aliases
+
+* FIXED: Unexpected result for HAVING (bound(...)) expression
+
+* FIXED: Incorrect handling of function expressions within a bind
+
+* FIXED: Do not create superfluous temp files which are not used or deleted
+
+* FIXED: Be less aggressive about moving intermediate results off heap
+
+* FIXED: Failure of termination condition in an outer join which resulted in an infinite join
+
+* MODIFIED: Improved error message using using non-existent file to query command on CLI
+
+* MODIFIED: Updated to Sesame 2.7.10
+
+* MODIFIED: Updated to Protobuf 2.5.0
+
+* MODIFIED: Updated to Netty 4.0.17
+
+* MODIFIED: Updated to Lucene 4.7.0
+
+2.1.1 Changes
+----------------------------------------------------------------------------
+
+* ADDED: Several new SPARQL filter functions from the .NetRDF library
+
+* ADDED: Allow RDF strings to be passed as input to explain command
+
+* ADDED: CLI explain option to return multiple explanations
+
+* FIXED: Explanation generation with SPARQL rules
+
+* FIXED: Explanation merging to handle more cases 
+
+* FIXED: Obfuscation CLI commands to work with config files
+
+* FIXED: Obfuscation CLI commands to handle SPARQL rules properly
+
+* FIXED: Regex filter persisted over multiple queries
+
+* FIXED: Cast exception during describe query evaluation over named graphs
+
+* FIXED: Properties which are both symmetric and transitive are not handled correctly
+
+* FIXED: Incorrect mime-types sent to server for file references
+
+* FIXED: Some optionals, when mixed with distinct, still do not return distinct results
+
+* FIXED: Large numbers of unique BNodes in nq, trig, and trix formats cause RIO to use too much memory
+
+* FIXED: Buffers used during bulk loading can take up too much memory when large literals are used
+
+* MODIFIED: Fallback handling of access to sun.misc.Unsafe for JDK's which do not support it
+
+* MODIFIED: Improved filter pushing optimization
+
+* MODIFIED: Warning printed from 'role grant' command when multiple actions are provided
+
+2.1 Changes
+----------------------------------------------------------------------------
+
+* ADDED: Support for bzip2 compressed input files (with extension .bz2)
+
+* ADDED: Auto-repair mechanism for common types of index errors
+
+* ADDED: Generation of multiple proofs for inferences & inconsistencies
+
+* ADDED: Database repair, backup & restore utilities
+
+* ADDED: FROM/FROM NAMED 'default' can be used as an alias to query default graph
+
+* ADDED: 'dbms-admin:shutdown' permission to allow non-superusers which hold that permission, to shutdown the server
+
+* ADDED: Improved query scalability by flowing intermediate results off-heap or onto disk.  Note: flowing off-heap requires an Oracle JDK due to its use of sun.misc.Unsafe
+
+* ADDED: Significant improvement in performance of bulk loading and total scalability of a database
+
+* ADDED: Named Graph information in proofs
+
+* ADDED: Proofs for integrity constraint violations
+
+* FIXED: NaN displayed in waldo search results
+
+* FIXED: Web console hangs when using with SSL
+
+* FIXED: Log redirection at startup messes up the logger output
+
+* FIXED: Over-eager update plan caching resulting in different update queries executing the same update
+
+* FIXED: Search index is not needlessly rebuilt on stardog
+
+* FIXED: HTTP server on OpenJDK does not always close connections
+
+* FIXED: Web console not loading on Win7 when Stardog is run as a service
+
+* FIXED: Stardog Rules do not use the pre-defined database namespaces
+
+* FIXED: Encoding of special characters in web console
+
+* FIXED: Issue in query optimizer where a more optimal plan could accidentally get discarded
+
+* FIXED: Built-in values (such as owl:Thing) used inside filters are not correctly recognized
+
+* FIXED: Queries using reasoning and FILTER NOT EXISTS could return incomplete results
+
+* FIXED: Cannot shutdown server over HTTP if security is disabled
+
+* FIXED: Functions with zero args, such as BNODE(), can produce incorrect results
+
+* FIXED: now() returns the time the server started, not the actual current time
+
+* FIXED: Asking for the types of a class yields an exception
+
+* FIXED: Axioms using HasValue expressions can case type queries to produce incorrect results
+
+* FIXED: Value for subject in THEN clause is not returned
+
+* FIXED: BIND optimizer can incorrectly order the BIND expressions
+
+* FIXED: IF-THEN rules might fail to recognize term types
+
+* FIXED: Windows service does not always shut down cleanly
+
+* MODIFIED: Reduced memory footprint of queries while being executed
+
+* MODIFIED: Optimizing a database will also rebuild its search index
+
+* MODIFIED: Make database namespaces meta property creatable
+
+* MODIFIED: Database meta properties cannot be re-initialized to prevent malicious users from changing their behavior
+
+* MODIFIED: Updated to Netty 4.0.14
+
+* MODIFIED: Updated to Sesame 2.7.7
+
+2.0.3 Changes
+----------------------------------------------------------------------------
+
+* ADDED: manpages
+
+* ADDED: Support for punning when using reasoning & rdf:type
+
+* FIXED: Browse tab was missing classes in IE9
+
+* FIXED: Bug in Watchdog API JSON serialization
+
+* FIXED: Watchdog information in web console not visible on Windows
+
+* FIXED: Bug in rendering of columns in web console homepage in IE & FF
+
+* FIXED: Missing elements in web console in IE
+
+* FIXED: Correctly handle line breaks in proof tree serialization
+
+* FIXED: Missing final byte when formatting query results using 'Accept-Encoding: gzip,deflate'
+
+* FIXED: Parsing of queries which use the Stardog directType built-in
+
+* MODIFIED: Improved performance of web console in IE
+
+* MODIFIED: Improved group help, including full synopsis, in CLI
+
+2.0.2 Changes
+----------------------------------------------------------------------------
+* ADDED: Support for the "Accept-Encoding: gzip" header over HTTP; enables sending of gzipped responses.
+
+* ADDED: Graph store protocol to support gzipped content
+
+* MODIFIED: Improved load progress monitor based on the number of bytes read
+
+* MODIFIED: Deprecated the SD-Connection-String header, now specified as a parameter to the request
+
+* MODIFIED: Updated to Guava 15
+
+* FIXED: Correctly handling specifying the dataset over SPARQL protocol
+
+* FIXED: Bug in literal canonicalization
+
+* FIXED: Bogus warnings about absorption from Pellet
+
+* FIXED: Re-indexing of searchable databases regardless of whether or not the search index needs to be updated
+
+* FIXED: Pressing key shortcut multiple times for the help in the web console displayed the help multiple times
+
+* FIXED: Construct queries do not produce results
+
+* FIXED: Not able to add properties to individuals in web console
+
+* FIXED: Query over partitioned graphs in Jena does not work
+
+* FIXED: Using :textMatch in a query against a non-searchable database causes the web console to spin forever
+
+* FIXED: Typing a number in query panel results paper gives an error
+
+* FIXED: Blank lines pre-pended to SPARQL queries in web console
+
+* FIXED: Negative execution times for queries when retrieved over SNARL protocol
+
+* FIXED: HTTP server accepting gzip files for data add/remove commands
+
+* FIXED: Strict parsing turns off RDF/XML parser checks some of which are very memory intensive
+
+* FIXED: Disabled BNode caching in N-Triples parser which are very memory intensive
+
+* FIXED: 400 errors when db name is included in connection string header
+
+* FIXED: Loading of database options in CLI so they can correctly be set
+
+* FIXED: Evaluation of queries using distinct with a complex, expression-based sort in the order by clause
+
+* FIXED: Correctly send challenge response in all cases to avoid a browser caching bad credentials
+
+* FIXED: Bug in proof rendering over HTTP
+
+* FIXED: SWRL rules containing non-atomic body atoms could cause incorrect results
+
+* FIXED: 'db status' admin CLI command returned an incorrect size for the database
+
+* FIXED: HTTP server OOM when a large Content-Length for an incoming POST is used
+
+* FIXED: Transactions state on the client was not correctly cleared in some error cases
+
+* FIXED: Handling of large gzipped files in the HTTP protocol
+
+* FIXED: Translation of rules with star-shaped body atoms
+
+2.0.1 Changes
+----------------------------------------------------------------------------
+* ADDED: Support for GZip encoded files in the HTTP protocol
+
+* ADDED: More extensive reasoning functionality exposed via ReasoningConnection
+
+* FIXED: System DB corruption due to starting two Stardog servers using same home directory
+
+* FIXED: Exporting data in web console occasionally hangs
+
+* FIXED: 5822 is no longer the default port for HTTP protocol
+
+* FIXED: Context indexes sometimes out of date after a named graph update
+
+* FIXED: --disable-security flag actually disables security complete, works for both HTTP & SNARL protocols
+
+* FIXED: Error when using user supplied prefixes in a query via the web console
+
+* FIXED: Multiple key shortcut dialogs can be displayed at once
+
+* FIXED: IO error with large responses over HTTP
+
+* FIXED: Web console loading issues in Windows 7
+
+* FIXED: DB corruption when multiple Stardog servers are started at once
+
+* FIXED: Improved handling of completely unbound patterns during reasoning avoiding incomplete results
+
+* FIXED: Better error response from server when authentication fails
+
+* FIXED: Resolved concurrency issue in ICV guard mode validation when competing threads are attempting to validate & commit
+
+* FIXED: .bat files can be run from outside of the bin directory and better respect setting STARDOG_HOME environment variable
+
+* MODIFIED: Unified SPARQL & SWRL UUID functions
+
+* MODIFIED: Better handling of duplicate results in construct queries including when projection uses fully-qualified results
+
+* MODIFIED: Improved feedback for adding/removing data via the web console
+
+* MODIFIED: External links opened in new tab in web console
+
+* MODIFIED: Reduced memory overhead of streaming modifications
+
+* MODIFIED: Improved bulk load performance for files without named graphs (RDF/XML, Turtle, etc.) 
+
+2.0 Changes
+----------------------------------------------------------------------------
+* ADDED: SPARQL Update
+
+* ADDED: Web Console
+
+* ADDED: Proofs for reasoning explanations
+
+* ADDED: JMX monitoring
+
+* ADDED: PROV support
+
+* ADDED: SL reasoning profile
+
+* ADDED: Client & Server dependencies are cleanly separated
+
+* ADDED: Evaluation of non-recursive datalog queries to improve reasoning performance
+
+* ADDED: SPARQL-based IF/THEN rules syntax
+
+* ADDED: New, significantly faster, SPARQL parser
+
+* ADDED: Native SSL support for SNARL & HTTP protocols
+
+* ADDED: Single Stardog server, both protocols run on the same port within the same server.
+
+* ADDED: CLI commands to obfuscate RDF data and SPARQL queries for sharing sensitive data
+
+* ADDED: Type detection of variables in queries with reasoning
+
+* ADDED: Ability to load server-side files via the SNARL API
+
+* ADDED: Support for Sesame directSubClassOf, directSubPropertyOf
+
+* FIXED: Filter expression inlining when used with a group-by expression
+
+* FIXED: Lock upgrading in search connections which resulted in deadlock in some circumstances
+
+* FIXED: ICV export added to shell completion scripts
+
+* FIXED: Error in reasoning where some rules could prevented rewriting
+
+* FIXED: Handling of '=' in namespaces
+
+* FIXED: Exception thrown by describe queries via CLI
+
+* FIXED: EOF exception over HTTP for large datasets
+
+* FIXED: Rewriting error when punning is used
+
+* FIXED: Leading comment characters break query type sniffing
+
+* FIXED: Auto closing of result sets when using embedded connections
+
+* FIXED: Error in named graph lookups in Jena bindings
+
+* FIXED: Bug in reasoning where equivalent classes/properties were not correctly accounted for
+
+* FIXED: Querying for properties/individuals via OWL's built-in classes produced empty results with reasoning
+
+* FIXED: Bug in reasoning leading to incomplete answers when punning is used
+
+* FIXED: Corner case in sameterm inlining where the expression was incorrectly bound
+
+* FIXED: Bug in query answering where the variable used in a group by was not bound
+
+* FIXED: The command 'server start' now supports --logfile option on Windows too
+
+* FIXED: Handling of limit & offset in searches on the CLI
+
+* FIXED: Parse error for small threshold values in search queries
+
+* FIXED: NPE during the evaluation of some FILTER EXISTS queries where the predicate is not bound
+
+* FIXED: Filter comparison for literals of unequal datatypes when the literals are inlined into the query
+
+* MODIFIED: Printing search results in a formatted table
+
+* MODIFIED: Using a single namespace for Stardog extensions & default URIs
+
+* MODIFIED: Better error messages for malformed literals which create value errors during query evaluation
+
+* MODIFIED: Removed unused -u,-p,-P flags from server start
+
+* MODIFIED: Search results on CLI sorted by score
+
+* MODIFIED: Minimized roundtrips to security module to reduce overhead
+
+* MODIFIED: Improved literal comparisons in filters
+
+* MODIFIED: Improved query planner performance
+
+* MODIFIED: Significant improvement to write performance
+
+* MODIFIED: Updated Netty to 4.0.9
+
+* MODIFIED: Updated Sesame to 2.7.3
+
+* MODIFIED: SNARL API, Jena & Sesame bindings
+
+1.2.3 Changes
+----------------------------------------------------------------------------
+* ADDED: ICV export feature to CLI
+
+* ADDED: fish shell autocomplete scripts
+
+* ADDED: SPARQL constraints can be added directly via CLI
+
+* FIXED: Missing completions from bash autocomplete scripts
+
+* FIXED: Improved error messages when using the CLI
+
+* FIXED: Using variables in the predicate position with reasoning lead to
+incomplete results
+
+* FIXED: Deserialization errors when commas are used in namespace declarations,
+for example in tag URIs.
+
+* FIXED: Add/Remove data over HTTP with strict-parsing enabled
+
+* FIXED: Handling of strict-parsing when creating a database, option was
+ignored
+
+* MODIFIED: Improved help content for default options in CLI
+
+* MODIFIED: ICV CLI commands to use admin credentials by default
+
+1.2.2 Changes
+----------------------------------------------------------------------------
+
+* ADDED: ln, log, atan, asin, acos, sinh, cosh, tang, toDegrees & toRadians to
+Stardog built-in function library.  These are in the tag:stardog:api:functions: 
+namespace.
+
+* FIXED: NPE when using SNARL protocol with a select query that has no variables.
+
+* FIXED: Removed a source of non-determinism during query rewriting leading to less
+variance in performance of queries with reasoning
+
+* FIXED: Corrected namespace rendering in explanations
+
+* FIXED: Exception handling in begin/commit/rollback in Empire bindings
+
+* FIXED: Improved performance of rewriting in queries where atoms are repeated
+
+* FIXED: Bug in iteration cursor propagation during a join
+
+* FIXED: Corrected execution order planning of chains of dependent SWRL builtins.
+
+1.2.1 Changes
+----------------------------------------------------------------------------
+
+* FIXED: Order of parameters for CLI commands data add and data remove
+
+* FIXED: Autocomplete for 'stardog query' is fixed
+
+* FIXED: Added hooks for SWRL trigonometric functions (sin, cos, tan) in
+the query engine.  These functions are available in the SWRLB namespace:
+http://www.w3.org/2003/11/swrlb#
+
+* FIXED: Modified the service loader to resolve issues that arise in
+multiple classloader environments, such as in a servlet container.
+
+* FIXED: Resolved issue where SWRL rules with bound arguments in the head
+of the rule produced incorrect results.
+
+* FIXED: Corrected the execution planning for SWRL rules where multiple
+built-ins are chained together -- outputs of one as inputs of another.
+
+1.2 Changes
+----------------------------------------------------------------------------
+
+* ADDED: Query management functionality to list and kill running queries
+(API, SNARL, HTTP, CLI extensions).
+
+* ADDED: New configuration option to automatically kill queries when
+execution time exceeds a timeout (default 5 min).
+
+* ADDED: A new logger to log information about slow queries.
+
+* ADDED: Extend Connection interface to easily login to StardogDBMS to
+perform administrative action.
+
+* ADDED: New CLI with improved online help, command groups, and consistent
+response codes.
+
+* ADDED: SNARL and HTTP protocols support queries that use stored namespaces
+similar to CLI.
+
+* ADDED: New transaction layer which uses async writes & mem mapped logs to
+improve durable logging performance.
+
+* ADDED: Support for the ARQ builtins pi, e, sqrt, min & max.
+
+* ADDED: HTTP server now supports the SPARQL Service Description spec.
+
+* ADDED: New, more performant security layer.
+
+* ADDED: Explain data inconsistencies via the reasoning connection.
+
+* ADDED: Better caching of rewrites of query plans to improve reasoning
+throughput
+
+* ADDED: Improved performance of write caching as requests to add/remove
+data are appended to a transaction
+
+* FIXED: CLI error messages are not consistent regardless of which protocol
+is used to connect to the database.
+
+* FIXED: Handling of several SWRL builtins, including comparison operators
+such as greaterThan or lessThanOrEqual, such that their use yields correct
+query results.
+
+* FIXED: Resolved an issue where lookup queries from Stardog's
+SesameRepository implementation where incorrectly handled by the plan cache.
+
+* FIXED: Applied better ordering to conjuncts in a rewritten plan to improve
+determinism in reasoning query performance.
+
+* FIXED: Jena named Datasets now work correctly
+
+* FIXED: Calling ConstraintViolation.getViolations a second time in HTTP
+connections returns empty results.
+
+* FIXED: Printing very long literals without whitespace in query results.
+
+* FIXED: Bug in plan caching where unknown constants introduced in reasoning
+could result in incorrect query results.
+
+* FIXED: Closed vulnerability to billion laughs attack.
+
+* FIXED: Query parsing bug where the name of variable could affect the
+resulting algebra.
+
+* FIXED: ICV security permissions...now correctly set permissions for
+specific access to ICV constraints independent of DB access.
+
+* FIXED: Using an unsupported output format while displaying the user/role
+permission table no longer fails silently.
+
+* FIXED: Property paths to detect cycles now correctly return results.
+
+* FIXED: Lock issue with concurrent writes to the Waldo index
+
+* MODIFIED: Moved search related configuration options from DatabaseOptions to SearchOptions.
+
+* MODIFIED: Output of query CLI function is less verbose, but supports
+--verbose to get additional information.
+
+* MODIFIED: Whitespace is no longer allowed in passwords, and passwords must
+be at least four characters long.
+
+* MODIFIED: Database, user, and role names now have a maximum size of 64
+characters.
+
+* MODIFIED: Password must be specified when creating a new user
+
+* MODIFIED: Additional step of describing a literal during search
+indexing is now optional, and disabled by default which increases search
+indexing performance in most cases.  Can be enabled by setting the
+'waldo.describe.during.indexing' option in your stardog.properties file.
+
+* MODIFIED: Updated to Sesame 2.7.0, Jena 2.10.0, Lucene 4.2.0, Shiro 1.2.1.
+
+* MODIFIED: Online & Offline no longer take a wait/no wait option, they
+are synchronous actions. The current methods are left in the DBMS API,
+but deprecated, to be removed in the next major version. If you are using
+these methods from the CLI and need them to be asynchronous, background the
+task. If you're using them programmatically, use a Thread.
+
+* MODIFIED: 400 code is returned from the server if an invalid name is
+provided for a database.
+
+* MODIFIED: More comprehensive Stardog-specific error codes returned from
+the server in the HTTP protocol in the response header.
+
+* REMOVED: Removed the Stardog Shell from the distribution.
+
+* REMOVED: http.max.connections.per.route configuration option.
+
+* DEPRECATION: autoCommit & remove(Query) are deprecated in the Connection
+API, to be removed in the next release.
+
+Miscellaneous 1.2 Notes
+----------------------------------------------------------------------------
+
+* A reminder that 1.2 includes a completely new CLI which is not backward
+compatible with previous versions. Also, we are now including a bash
+auto-complete script for the Stardog CLI, installation instructions are
+included at the top of the file.
+
+* Transaction failure recovery has been fixed.  If there is a fatal error
+in a transaction commit or rollback such that the state of the database is
+in-doubt, it will be immediately taken offline and recovery of the failed
+transaction will be performed.  Recovery is automatic, and the database
+will be brought back online once it is completed.  In the event recovery
+could not be completed without manual intervention, the database will remain
+offline as to avoid data loss.
+
+* The new security layer introduces some minor changes to how security
+works.  The security chapter in the documentation goes in-depth on how
+security works in Stardog, but the major changes:
+
+        ** 'edit' in the user group of the CLI was removed in favor of
+        addrole, removerole, disable, enable
+
+        ** the LIST action is deprecated and no longer enforced.
+
+        ** REVOKE & EXECUTE actions have been added
+
+        ** Listing all users or roles requires different permissions
+
+        ** Ok to use wildcards for deleting permissions
+
+        ** Added new ADMIN resource for database administrative actions such
+        as online & offline
+
+        ** You must specify a password when creating a user
+
+* We are publishing a detailed 'spec' for the Stardog HTTP protocol at
+http://docs.stardog.apiary.io/ While currently complete, it's documentation
+is a bit sparse.  We'll be improving that in the future and hope that
+it serves as a good resource to complement the network chapter in the
+documentation.
+
+* Finally, several methods in the Security API & SNARL API are marked for
+deprecation, they will be removed in the next major release.  Also, any
+methods in the APIs which are marked with the @Beta annotation are subject
+to change at any time.
+
+1.1.5 Changes
+----------------------------------------------------------------------------
+
+* FIXED: Bug in query optimizer where the sort order was not correctly taken
+into account resulting in poor plan selection.
+
+* FIXED: Handling of BGPs where a Literal value is used as the subject.
+Avoiding inadvertently assuming it's a URI and returning results when
+performing reasoning, or throwing a cast error.
+
+* FIXED: Resolved issue with memory usage of the admin client
+
+* ADDED: New option 'leading.wildcard.search.enabled' which can be
+configured in stardog.properties, for enabling the leading wildcard search
+support in the Lucene QueryParser.
+
+* NOTE: We have deprecated the current CLI and a new version will be
+provided starting in 1.2.
+
+1.1.4 Changes
+----------------------------------------------------------------------------
+
+* FIXED: CLI commands that output tabular data might trim results (depending
+on word wrap boundaries).  This resolves namespace metadata updates not
+being visible.
+
+* FIXED: Server stop now correctly prompts for password when -P is used.
+
+* FIXED: Fixed the error in query rewriting that lead to the cryptic
+"Invalid term in query" error on a client.
+
+1.1.3 Changes
+----------------------------------------------------------------------------
+
+* ADDED: A new configuration option to control preserving bnode ID behavior
+in parsing.
+
+* MODIFIED: More efficient copy of http multi-part attachments when creating
+a database via the http admin interface.
+
+* MODIFIED: Using ThreadSafeClientConnManager in Admin HTTP client.
+
+* MODIFIED: ICV translation from OWL to SPARQL now uses SPARQL 1.1 (FILTER
+NOT EXISTS)
+
+* FIXED: Using same internal ID for bnodes coming from different files.
+
+* FIXED: Unsupported exception throw for symmetric properties in reasoning
+queries.
+
+* FIXED: Bug with reasoning queries containing OPTIONALs.
+
+* FIXED: Reasoning is not used for the expressions inside FILTER [NOT]
+EXISTS.
+
+1.1.2 Changes
+----------------------------------------------------------------------------
+
+* ADDED: New optimizer for sub queries.
+
+* MODIFIED: Optimization of EXISTS queries to better account for runtime
+usage.
+
+* FIXED: Bug in cached query solution handling in joins.
+
+* FIXED: Resolved two issues with the evaluation of nested property paths.
+
+* FIXED: Missing query results while updates on other threads are continuing
+
+* FIXED: Empty passwords no longer allowed.
+
+* FIXED: Properly displaying user's permissions when same set of actions was
+granted by different roles.
+
+* FIXED: Displaying all roles that granted user a permission.
+
+* FIXED: Displaying user's permissions in the case when the executing user
+has read permission to the user resource but not some of its roles.
+
+1.1.1 Changes
+----------------------------------------------------------------------------
+
+* FIXED: Deadlock in Connection.remove().query() when in embedded mode
+
+* FIXED: Duplicates in search results caused by repeated addition of a
+triple to the database
+
+* FIXED: Non-termination in evaluation of largely nested filters
+
+* FIXED: Non-termination in evaluation of nested optionals within graph
+patterns
+
+* FIXED: Corrected issue in method which finds transactions in logs
+requiring recovery
+
+* FIXED: Error in HTTP client where last byte of payload could be truncated
+
+* FIXED: Issue in error code translation in the HTTP client
+
+* FIXED: Connections to HTTP server were not getting closed when
+invalid/supported mime-types were requested for query responses.
+
+* FIXED: Resolved issue where filter exists was not using the active graph
+as specified in the from/from where clause of the query.
+
+1.1 Changes
+----------------------------------------------------------------------------
+
+* ADDED: Support for transitivity reasoning.
+
+* ADDED: SWRL support.
+
+* ADDED: SPARQL 1.1 Query support.
+
+* ADDED: directType, strictSubclassOf & strictSubPropertyOf support.
+
+* ADDED: Limited support for creating new individuals in your rules.
+
+* ADDED: Grouping quads by their named graphs in the export output for
+prettier results.
+
+* FIXED: Top & Bottom properties are not incorrectly included in results of
+queries with reasoning.
+
+* FIXED: NullPointerException when using sameTerm filter with a variable
+that was unbound due to an optional or union.
+
+* FIXED: NullPointerException in SNARL client connection when client is used
+in concurrent environment.
+
+* FIXED: Incorrect results when reasoning with reflexive properties in some
+corner cases.
+
+* FIXED: Clear & Remove context where not getting correctly propagated to
+transaction logs.
+
+* FIXED: Clear all was not clearing search index.
+
+* FIXED: sameTerm inlining optimization was violating scope of a graph
+clause.
+
+* FIXED: Waldo full text searches over contexts (using from/from named or
+graph) were not always correctly setting the context of the results.
+
+* FIXED: Assertion of contexts in the search index is correct when bulk
+loading.
+
+* FIXED: Could not assign r/w permissions directly to database metadata.
+
+* FIXED: Resolved bug in security where only write access was required for
+reads once a transaction was active on a connection.
+
+* FIXED: Bug in query planning that could cause it to not terminate for
+queries with deeply nested optionals.
+
+* FIXED: Old versions of statistics (on disk) are correctly cleaned up on
+Windows systems.
+
+* FIXED: Can now revoke all permissions a role/user has for a resource.
+
+* MODIFIED: Faster triple pattern evaluation with reasoning for patterns
+using rdf:type when other patterns bind the subject or object.
+
+* MODIFIED: New search indexing algorithm which computes search indexes in a
+single pass over the RDF index for a significant speed improvement
+
+* MODIFIED: New format for search indexes
+
+* MODIFIED: Sesame API bindings.  StardogSail has been deprecated & removed.
+Users should stick with StardogRepository.
+
+* MODIFIED: Updated Jena to 2.7.4
+
+* MODIFIED: Updated Sesame to 2.6.9
+
+* MODIFIED: Updated Lucene to 4.0.0
+
+* MODIFIED: Updated OpenRdf Utils to 0.8 & CP Utils to 2.3
+
+1.0.8 Changes
+----------------------------------------------------------------------------
+
+* ADDED: Accept Contexts.ALL as a synonym for "clear all" in the HTTP
+endpoint.
+
+* FIXED: Issue with queries involving reasoning that used Thing or Nothing
+in filters, which in some cases, could return incorrect answers.
+
+* FIXED: Granting a permission to a role no longer causes the Role to show
+up in the Users list.
+
+* FIXED: Dropping a Role which is still in use now throws the correct type
+of exception
+
+* FIXED: NPE during evaluation of a query which uses a variable in a filter
+that is not used in a BGP.
+
+* MODIFIED: Clarified documentation in admin create (database) regarding
+whether or not name is required
+
+* MODIFIED: Updated javadocs for Connection to discuss some thread safety
+issues and a note in Query regarding injection attacks and correct use of
+the parameter method.
+
+1.0.7 Changes
+----------------------------------------------------------------------------
+
+* ADDED: Filter pushing optimization which will move filters deeper into
+plans when it appears to be advantageous to do so
+
+* MODIFIED: Literal comparison improved to increase filter performance
+
+* MODIFIED: Improved inlining of constants from filter expressions
+
+* MODIFIED: Improvements to bulk loading at database creation time resulting
+in up to 20% increase in load speed.
+
+* MODIFIED: Improved add/remove performance to existing databases
+
+* MODIFIED: More aggressive flushing of database contents to disk to
+minimize risk of data corruption when Stardog server is not properly shut
+down
+
+1.0.6 Changes
+----------------------------------------------------------------------------
+
+* FIXED: File streams from HTTP add/remove payloads are closed and cleaned
+up in all cases, reducing the number of open temp files.  Improves shutdown
+performance
+
+* FIXED: text/turtle & application/ld+json now work for the HTTP protocol as
+return format mime types
+
+* FIXED: Error in query evaluation of deeply nested outer joins
+
+* FIXED: Issue with a rewriting optimization corner case that could result
+in non-termination
+
+1.0.5 Changes
+----------------------------------------------------------------------------
+
+* FIXED: Evaluation error in Union skipping & error handling in both SNARL &
+HTTP protocols
+
+* FIXED: Incorrect results when unions are used in queries which are
+rewritten
+
+* MODIFIED: New query planner introduced
+
+1.0.4 Changes
+----------------------------------------------------------------------------
+
+* ADDED: Ability to convert Integrity Constraints to SPARQL queries using
+the API or the CLI
+
+* ADDED: Support for running Stardog as a Windows service
+
+* ADDED: Support for parameteric queries in CLI query command with (-b,
+--bind) option so variables in a given query can be bound to constant values
+before execution
+
+* FIXED: CLI command "explain plan" works with queries that use namespaces
+stored in the database
+
+* FIXED: Reasoning queries returning incomplete results while retrieving
+inverse property inferences
+
+* MODIFIED: CONSTRUCT query results in HTTP protocol use namespace prefixes
+from the query to return more concise output
+
+* MODIFIED: Error checking in audit/access log configuration to report more
+informative error messages
+
+1.0.3 Changes
+----------------------------------------------------------------------------
+
+* FIXED: Issues with batch files in Windows when JAVA_HOME was set to a path
+containing a space
+
+* FIXED: Bug in propagation of errors midstream in the SNARL protocol
+
+* FIXED: Bug where sort order information on unions in a plan was lost
+resulting in slower queries
+
+* ADDED: Ability to load files from a directory recursively
+
+* ADDED: ReasoningConnection.getBaseConnection to provide access to
+underlying (nonreasoning) connection
+
+* MODIFIED: New log file header record added with log metadata
+
+* MODIFIED: Included the log file descriptor, log.proto, in distribution
+
+1.0.2 Changes
+----------------------------------------------------------------------------
+
+* ADDED: Stardog Community version and COMMUNITY_LICENSE.txt
+
+* ADDED: IC validation support in SNARL and HTTP protocols
+
+* ADDED: HTTP Admin protocol calls to add databases, users, roles
+
+* ADDED: Support for SPARQL 1.1 Graph Store Protocol (with the exception of
+PATCH method)
+
+* FIXED: Issues with concurrent reads and writes
+
+* FIXED: Bug with duplicate results with queries containing UNIONs.
+
+* MODIFIED: Improved performance for concurrent connections updating the
+database
+
+* MODIFIED: Server start message to clarify Stardog listens on all network
+interfaces
+
+* MODIFIED: Classpath manifests in Stardog jars so only CLI jar defines a
+classpath
+
+* MODIFIED: Netty jars to version 3.5.2
+
+* MODIFIED: Moved LICENSE.txt to EVALUATION_LICENSE.txt
+
+1.0.1 Changes
+----------------------------------------------------------------------------
+* ADDED: Stardog documentation is now served by the Stardog HTTP server at
+the URL http://host:port/docs
+
+* ADDED: Store prefix mappings inside Stardog database metadata and prefix
+declarations are automatically added to queries executed through CLI and
+used in query results
+
+* ADDED: HTTP protocol for Stardog admin commands that lets any Stardog
+admin command (creating a database, adding users, changing permissions,
+etc.) can be run through HTTP in addition to the default SNARL protocol
+Note: if you contemplate implementing a client of the HTTP API, it is
+not yet stable and a few parts of it will change in the next (1.0.2)
+release. When in doubt, ask on the support forum and we can guide you.
+(This means you, Rob Vesse and Ron Zettlemoyer!)
+
+* ADDED: Access and audit logging in Stardog server to log events such as
+authentication events, queries and transactional change
+
+* FIXED: Make login functions in StardogDBMS publicly accessible
+
+* FIXED: Validation problems in CLI for very long query strings
+
+* FIXED: Commits hanging when durable transactions option is enabled
+
+* FIXED: Stardog sometimes failing to generate an error for syntax errors
+during add even though no data is added
+
+1.0 Changes
+----------------------------------------------------------------------------
+* MODIFIED: New login functions in StardogDBMS to clarify which server
+(embedded or remote) we are connecting to
+
+* FIXED: Handling DESCRIBE queries where triples about the resource to
+describe occur in named graphs
+
+* FIXED: Handling DESCRIBE queries with multiple resources to describe
+
+* ADDED: Handling DESCRIBE queries with multiple resources to 1.0 RC1
+Changes
+----------------------------------------------------------------------------
+
+* ADDED: Batch files for executing the Stardog command line in Windows
+
+* ADDED: directSubClassOf & directSubPropertyOf (same sparqldl namespace
+that is used by Pellet 'http://pellet.owldl.com/ns/sdle#') which can be used
+to get the explicit sub class/properties in a query that is using reasoning.
+
+* ADDED: New command line function to check whether or not the database is
+consistent.
+
+* ADDED: New command line function 'explain inference' to explain reasoning
+results (existing 'explain' command has been renamed to 'explain plan' to
+avoid confusion).
+
+* FIXED: Resolved issue where an unbound type operator, "?s a ?o" produced
+incorrect inferences for some ontologies where there is interaction b/w
+domain/range & hasValue axioms.
+
+* FIXED: Bug in the checking of user & role resource names when they're
+using the All permission, eg "user:*"
+
+* FIXED: Consistency checks will not fail (say the db is inconsistent) when
+the consistency check requires reasoning services not provided by Stardog,
+such as datatype reasoning.
+
+* FIXED: Deadlock in bulk loading which can occur when the bulk load exceeds
+5B triples.
+
+* FIXED: Consistency checks for functional data properties which require
+literal value validations
+
+* FIXED: Bug in axiom filtering for the EL profile that let non-EL axioms
+into an EL knowledge base
+
+* FIXED: Bug in reasoning in the type operator where nominal are used within
+an equivalence or subclass axiom
+
+* FIXED: Race condition in index commits in highly multi-threaded
+environments
+
+* MODIFIED: Clarified error message when using search but the database does
+not have search enabled
+
+* MODIFIED: Consistency checking performance improved
+
+* MODIFIED: Bulk loading performance improved at larger scales
+
+* MODIFIED: Small reduction in memory overhead of query response streams
+
+0.9.6 Changes
+----------------------------------------------------------------------------
+
+* FIXED: Checking consistency of a database over HTTP.
+
+* FIXED: Resolved regex issue used to validate input to security where some
+valid inputs could be rejected.
+
+* FIXED: Multiline queries passed to CLI explain are now correctly parsed.
+
+* FIXED: Inconsistent usage of base URI used for parsing when one is not
+specified by the user.
+
+* FIXED Fixed an issue with automated TBox extraction where some parts
+of the ABox were incorrectly put into the TBox resulting in slower than
+expected performance for queries involving reasoning.
+
+* FIXED: Bug in reasoning query evaluation where the property variable is
+unbound which resulted in incorrect inferences to be returned.
+
+* FIXED: Password decoding in SNARL was incorrectly padding when converting
+to/from UTF-8 resulting in passwords sent over HTTP failing to match the
+password in the user database which only occurred with passwords over a
+certain length.
+
+* FIXED: Queries with reasoning where the predicate in a BGP is unbound does
+not correctly return explicit statements when the schema is not present.
+
+* FIXED: Context variables, such as "graph ?g { ... }" are correctly used in
+joins and used for join ordering.
+
+* FIXED: Issue with decimal inlining where negative scale values were
+handled incorrectly resulting in decimal values being mangled on load.
+
+* MODIFIED: Avoiding reclassification of TBox after commit when the TBox
+contents did not change.  Significant improvement in commit performance for
+databases with expressive TBoxes.
+
+* MODIFIED: Handling of add/remove operations on the server resulting in
+decreased memory overhead and up to a 50% increase in the time it takes to
+process the change.
+
+* MODIFIED: DL queries that involve ABox operators now cause errors at query
+time.
+
+* MODIFIED: Inferences involving Top/Bottom Object/Data property are
+ignored.
+
+* MODIFIED: Offlining a database will drop the database completely out of
+memory reducing server overhead of having large, offline databases.
+
+* MODIFIED: Increased packet size in SNARL protocol changing maximum size
+from 64k to 16.7M bytes.  This raises the maximum size of a triple or query
+that can be exchanged to the protocol to nearly 17MB and should avoid any
+issues with loading datasets with large literals.  Earlier versions of
+the SNARL protocol from 0.9.5 and earlier are not compatible with the new
+format.
+
+* MODIFIED: Storage format of RDF concepts loaded into Stardog has been
+changed.  This is a backwards incompatible change in format and no migration
+is possible.
+
+* MODIFIED: Significant performance increase in loading throughput through
+better utilization of system resources to perform concurrent loading and in
+a more compact on disk format for some parts of the database contents.
+
+* MODIFIED: Handling of typed literal values in query evaluation resulting
+in performance improvements in queries which perform math & comparison
+operations on datatyped literals.
+
+* MODIFIED: Reduced overhead of query plan generation resulting in
+performance increases for smaller queries where execution time does not
+dominate planning time.
+
+0.9.5 Changes
+----------------------------------------------------------------------------
+
+* FIXED: Name of index copy target is validated so you cannot copy a
+database and give it an invalid name.
+
+* FIXED: Printing result of ASK queries in the CLI.
+
+* FIXED: Format parsing for construct queries on the CLI where unrecognized
+format types were resulting in NullPointerExceptions.
+
+* FIXED: Databases which fail to initialize are no longer added to the
+server.
+
+* FIXED: Better cleanup of databases which failed to be created.
+
+* FIXED: Query explain over HTTP POST works and no longer returns a
+NOT_ACCEPTABLE response.
+
+* MODIFIED: Increased performance of database copy.
+
+* MODIFIED: Clearer error message when the server subcommand is mistyped.
+
+* MODIFIED: Improved access to disk indexes resulting in significant query
+performance improvements in many workloads.
+
+* MODIFIED: Clearer output messages from the 'drop' CLI command.
+
+0.9.4 Changes
+----------------------------------------------------------------------------
+
+* FIXED: Order by will correctly use secondary, tertiary, etc. orderings.
+
+* FIXED: Null values in sorting are correctly sorted as the lowest value.
+
+* FIXED: Resolved issue related to reusing a variable multiple times in the
+same BGP, correct results are now produced.
+
+* FIXED: Changed handling of Channel close events in database server to
+avoid endless propagation back to the client, particularly on Windows.
+
+* FIXED: Database cleanup on close events to avoid corrupting metadata.
+
+* FIXED: Handling of type errors in regex filter.
+
+* MODIFIED: New algorithm for handling ?x rdf:type ?o and :inst rdf:type
+?o BGP's in queries with reasoning resulting in significant performance
+improvements.
+
+* MODIFIED: ChannelFactory is shared amongst all clients in the same JVM to
+avoid OOM errors due to an issue with Netty (NETTY-424).
+
+* MODIFIED: Login process to obtain a connection to a database changed to
+reduce connection overhead.
+
+* MODIFIED: Shiro session timeout handling to avoid erroneous timeouts
+during long processes, such as bulk loads.
+
+0.9.3 Changes
+----------------------------------------------------------------------------
+
+* MODIFIED: Server start script gracefully handles the situation when
+STARDOG_HOME does not exist, is not a directory, or is not writable
+
+* MODIFIED: Connection string parameters are now validated, errors are
+thrown when unknown parameters are provided.
+
+* MODIFIED: Return result of empty query results in SPARQL JSON format when
+accessing the HTTP query endpoint directly.  Returning an empty binding set
+instead of empty JSON.
+
+* MODIFIED: Checking of Accept headers for the query HTTP endpoint to better
+handle the case when multiple Accept headers are sent to the endpoint, but
+only one is relevant for the type of results to be returned.
+
+* MODIFIED: Reporting of query execution time of select queries in CLI to
+better reflect total execution time.
+
+* FIXED: Resolved issue in query generation arising from a variable being
+used in a BGP, context statement, and within an optional causing no results
+to be returned.
+
+* FIXED: Bug in query planner where a join variable was also used in a
+filter with an equality test.
+
+* FIXED: Bug in ICV when datatype restrictions are used in conjunction with
+a datatype property
+
+* FIXED: Dropping database on Windows now works; Windows was holding files
+open and we could not delete them.
+
+* FIXED: NPE when retrieving an unknown option for a database
+
+* FIXED: Inferences were missed because hasValue restrictions were
+incorrectly filtered in RL & EL profiles
+
+0.9.2.1 Changes
+----------------------------------------------------------------------------
+
+* FIXED: NPE when retrieving user permissions
+
+0.9.2 Changes
+----------------------------------------------------------------------------
+
+* MODIFIED: Security layer implementation changed to provide better
+performance when manipulating user, role, and permission information
+
+* MODIFIED: Reasoning & ICV interfaces to be more consistent along
+consistency checking & validation
+
+* MODIFIED: Major improvements to query rewriting performance.  Rewrites are
+up to 3x faster, resulting in a noticeable improvement in executing queries
+with reasoning
+
+* MODIFIED: Improved CLI help
+
+* MODIFIED: Friendlier error messages when invalid SPARQL queries are
+provided in the command line
+
+* MODIFIED: More verbose startup & shutdown logging information
+
+* MODIFIED: Better output for ICV validation when the database is trivially
+valid
+
+* MODIFIED: A solution to quickly find nearly optimal query plans in case
+plan optimization takes too long
+
+* MODIFIED: Improved hash join algorithm for faster processing in case there
+are multiple alternative join keys
+
+* FIXED: Bug in query plan caching that could result in incorrect plans
+being used for similar queries
+
+* FIXED: Fixed cardinality estimations for some named graph scans
+
+* FIXED: Significantly better cardinality estimations for large plans,
+particularly involving multiple unions.  Can result in improvements of up to
+50% when bad joins can be avoided.
+
+* FIXED: Bug in ICV when getting constraints for a new database that does
+not yet have any constraints
+
+* FIXED: NPE that can arise during query evaluation after loading a large
+dataset
+
+* FIXED: Searchable configuration property can now be changed after creation
+
+* FIXED: Database load errors no longer prevent kernel from starting
+
+* FIXED: Autocompletion for local files in Stardog Shell works regardless of
+other parameters used in the command
+
+0.9.1 Changes
+----------------------------------------------------------------------------
+
+* ADDED: Stardog Shell
+
+* MODIFIED: Auto-update of statistics now lockless
+
+* MODIFIED: Made visible extension point for custom SPARQL functions.
+
+* FIXED: Cardinality estimation for queries across named graphs
+
+0.9 Changes
+----------------------------------------------------------------------------
+
+* ADDED: new native protocol, SNARL, based on Netty and Google's Protocol
+Buffers
+
+* ADDED: new system catalog for all system info, metadata, etc.
+
+* ADDED: new search system over RDF literals, integrated with SPARQL query
+eval
+
+* ADDED: new server management: online, offline databases; better server
+startup, shutdown, and locking
+
+* ADDED: CLI now supports remote db administration, many new subcommands
+
+* ADDED: new Quartz-based job scheduler with cron expression scheduling
+
+* ADDED: new, optimized index support for named graphs and triples-only
+databases
+
+* ADDED: new, differential write indexes with customizable merge thresholds
+
+* ADDED: new customizable TBOX (i.e., reasoning schema or ontology)
+extraction & management
+
+* ADDED: new Stardog configuration system, including database creation
+templates
+
+* ADDED: new reasoning services (explanation, satisfiability, consistency
+checking) available programmatically
+
+* ADDED: reasoning extended to named graphs
+
+* ADDED: ICV validation extended to named graphs
+
+* ADDED: new or improved support for NQUADS, Trig, TSV, and CSV
+
+* ADDED: improved concurrency in data loading
+
+* ADDED: consistent use of <tt>mmap()</tt> for better performance
+
+* ADDED: load GZIP-compressed files directly, including ZIP files with
+multiple RDF
+
+* MODIFIED: new security system, including user management, granular roles
+and permissions model
+
+* MODIFIED: new statistics computation & recomputation algorithms
+
+* MODIFIED: updated documentation
+
+* FIXED: many (many!) known bugs
+
+NOTE: 0.9 introduces backwards incompatible changes in the on-disk format
+of Stardog databases.  The migrate command in the CLI will not be able to
+migrate 0.7.3 or earlier databases to the current format.  You will need to
+recreate the databases if you have an existing Stardog installation.
+
+0.7.3 Changes
+----------------------------------------------------------------------------
+
+* ADDED: New SNARL Connection view, ReasoningConnection which exposes the
+functions provided by the Stardog reasoner.
+
+* ADDED: Support in ReasoningConnection for obtaining the explanation for an
+inference.
+
+* ADDED: Explanations of IC violations as the expected and/or missing
+statements that make up the violation
+
+* ADDED: New example for using explanation facilities, updating ICV example.
+
+* MODIFIED: Improved error messages when CLI fails to connect to a database.
+
+* FIXED: Bug in the handling of reflexive properties when they involve TOP
+
+* FIXED: Bug in initialization of TOP operator with bound objects, resolves
+NPE in execution
+
+* FIXED: Bug in bnode handling in TBox extraction
+
+0.7.2 Changes
+----------------------------------------------------------------------------
+
+* ADDED: RDFS & DL reasoning types.  DL reasoning type supports schema-only
+queries.
+
+* ADDED: Execution optimizations for when TOP appears in a query due to
+reasoning
+
+* MODIFIED: Sesame Repository/Sail implementation to use a SNARL Connection
+per Sail/RepositoryConnection rather than per Repository.
+
+* MODIFIED: Better formatting of query results in CLI query command
+including new formatting options.
+
+* FIXED: Retrieving ranges of data properties in reasoner.
+
+* FIXED: Read transaction isolation bug for mulitple connections against the
+same database.
+
+* FIXED: Bug related to incorrect reassociation of Shiro auth credentials
+with pooled connections.
+
+0.7.1 Changes
+----------------------------------------------------------------------------
+
+* ADDED: Canonicalization of literal values on input, either bulk loading or
+normal add operations.  Canonlicalization can be disabled when creating the
+database if it is not desired, but is on by default.
+
+* MODIFIED: CLI connection strings no longer assume you are connecting to
+an embedded store when no protocol is supplied.  You must now specify a
+protocol.
+
+* FIXED: ExpressionFactory is no longer stripped from the core jar file
+
+* FIXED: Multiline queries work with CLI now
+
+* FIXED: Bug in loading IC's from file, occasionally constraints could be
+malformed
+
+0.7 Changes
+----------------------------------------------------------------------------
+
+* ADDED: Bulk insert/removal performance on existing databases greatly
+improved via concurrent application of changes to the index and the
+introduction of a differential index.
+
+* ADDED: Stardog reasoner now supports OWL2 EL and RL reasoning types.
+These can be specified at connection time and EL & RL reasoning is performed
+at query time the same as QL.
+
+* ADDED: Support for 'hybrid' and TBox queries for all reasoning types.
+
+* ADDED: Support for Integrity Constraints.
+
+* MODIFIED: Propogation of reasoner state amongst open connection to the
+reasoner, state is better shared across connections requiring less overhead
+to maintain the up to date state.
+
+* MODIFIED: 'delete' was renamed to 'drop' in the command line.
+
+* FIXED: Bug in two-phase commits for changes to a reasoner
+
+* NOTE: The version of Sesame changes with this release from 2.3.3 to 2.3.4,
+which is not an official release.  There was a bug [1] in the serialization
+of Sesame result sets for select queries using their binary format which we
+discovered while working on Stardog 0.7.  The fix for SES-852 was included
+in their 2.6 branch, so we had to backport the change to Sesame 2.3.3; we
+called that version Sesame 2.3.4.
+
+[1] http://www.openrdf.org/issues/browse/SES-852
+
+0.6.10 Changes
+----------------------------------------------------------------------------
+
+* FIXED: Fixed an issue with not always consuming the HTTP response which
+could lead to not releasing HTTP connections to the pool and it its eventual
+exhaustion.
+
+* MODIFIED: Improved algebraic rewriting of query plans which avoid multiple
+evaluation of the same part of the query, e.g., the operator in both parts
+of a UNION.
+
+* MODIFIED: A better handling of the UNION operator by sorting its output
+which facilitates joins with other operators in the query plan.
+
+* MODIFIED: A better handling of deep chains of nested joins by maintaining
+a certain order of intermediate results produced by hash joins and avoiding
+page loads.
+
+* MODIFIED: An improved, threadsafe implementation of the query plan cache,
+which is now concurrently accessible from all connections. This allows
+the server to reuse a previously optimized query plan for a structurally
+equivalent query executed by another client.
+
+* ADDED: an init startup script for a Stardog server so that it can
+automatically start with other system services at the boot time.
+
+0.6.9 Changes
+----------------------------------------------------------------------------
+
+* FIXED: Fixed an issue pertaining to QL rewrites with optionals that use a
+filter which was causing incorrect results for some QL queries (ticket #44).
+
+* FIXED: Fixed query evaluation where the presence of a particular
+combintation of union, optional, and distinct can lead to nondistinct result
+sets (ticket #48).
+
+* FIXED: Fixed the passing of the disableSecurity flag into the HTTP server
+
+* FIXED: Fixed a bug in the rendering of SPARQL queries using isBlank with
+remote endpoints
+
+* FIXED: Fixed a bug in query evaluation arising from a certain combination
+of order by, limit, and optional where the sort key is on a variable bound
+by an optional pattern.
+
+* FIXED: User specified query bindings specified via Query.parameter are
+correctly serialized and sent to the remote server.
+
+* MODIFIED: Query rewriting now fails when a query has BGP's that are not
+supported by the reasoner; this is strict mode.  Strict mode can be disabled
+and the reasoner will rewrite only the BGP's it supports.  This introduces a
+JVM flag 'strictReasoning' for controlling this behavior.
+
+* MODIFIED: HTTP connection will now switch over to HTTP POST if the SPARQL
+query is very long to avoid any potential URL overflow issues.
+
+* ADDED: CLI now includes an 'export' function to dump the contents of part
+or all of a Stardog database to RDF.
+
+0.6.8 Changes
+----------------------------------------------------------------------------
+
+* ADDED: Updated POM to include Avro
+
+* ADDED: Avro schema included in distribution.
+
+* FIXED: Fixed a bug in the caching of the current list of databases, could
+still access deleted databases in some circumstances. (ticket #42)
+
+* FIXED: Fixed an bug in the handling of unions in the QL reasoner.  Nested
+unions were occasionally getting duplicated leading to incorrect results
+without the distinct modifier. (ticket #43, #46)
+
+* MODIFIED: Better handling of constant values in construct queries
+decreasing the time it takes to create and return the Statements constructed
+by the query.
+
+* MODIFIED: Increased the speed of some index scans by avoiding some page
+reads
+
+* MODIFIED: Better execution plan reuse & caching, similar to Prepared
+Statements, in structurally equivalent plans.
+
+* MODIFIED: Significantly improved join-join cardinality estimations.
+
+* MODIFIED: Query optimizer does a better job with join selection and can
+often pick a better join for the execution.
+
+* MODIFIED: Avro & HTTP connections are eagerly validated by the driver so
+invalid connections will fail on connect rather than on first action.
+
+* MODIFIED: Transaction ID generation changed to reduce chance of ID
+collision
+
+* MODIFIED: Internal connection management, both with raw database
+connections and HTTP based connections to address deadlock issues in highly
+concurrent environments
+
+0.6.7 Changes
+----------------------------------------------------------------------------
+
+* FIXED: HTTP error in construct queries via the Jena bindings
+
+* ADDED: New CLI command 'server' which can start any of the installed
+Stardog servers
+
+* ADDED: New Avro-based RPC protocol for Stardog Connections
+
+* ADDED: Maven POM file included in distribution
+
+0.6.6 Changes
+----------------------------------------------------------------------------
+
+* FIXED: incorrect query evaluation results in some corner cases involving
+OPTIONAL
+
+* MODIFIED: Improved query evaluation performance with a new query planner
+
+* MODIFIED: command-line interface to accept global args: --home,
+--change-buffer-size, --disable-security
+
+* MODIFIED: command-line add, remove, create commands to include
+--strict-parsing option
+
+0.6.5 Changes
+----------------------------------------------------------------------------
+
+* FIXED: Bug in query evaluation where we were missing results when the
+first entry in an iterator in a disk index occurs on a page boundry
+
+* ADDED: Support for fulltext search via our semantic search engine Waldo.
+
+0.6.2 Changes
+----------------------------------------------------------------------------
+
+* FIXED: Typo in HTTP protocol, Trig & Trix mimetypes were switched.
+
+* FIXED: Bug in left outer joins when the right hand operator was initially
+empty causing the first solution set to be missed. (ticket #39)
+
+* FIXED: Resolved IllegalArgumentException which was incorrectly thrown from
+the Jena integration when a query w/ optionals was executed against a remote
+Stardog database returning null values in the response.
+
+* FIXED: Bug in detection of special BNode syntax in queries for ensuring
+BNode stability in queries.
+
+0.6.1 Changes
+----------------------------------------------------------------------------
+
+* FIXED: Debugging exception thrown when using log4j bindings for SLF4j with
+the logging level set to debug. (ticket #36)
+
+* FIXED: Issue with calcuation of optionals in joins when the optional
+binding is at the beginning or end of an iteration. (ticket #34)
+
+* FIXED: Resolved synchronization issue for connections to an index that are
+fetched from the internal connection pool.  Resolves getting already closed
+connections from the pool. (ticket #37)
+
+* FIXED: Datatyped literals used in filters were getting munged during QL
+rewrites resulting in an exception. (ticket #35)
+
+* MODIFIED: Iteration over disk indices modified to more efficiently
+calcuate which pages are actually required to answer the query and avoid
+loading intermediate pages.
+
+0.6 Changes
+----------------------------------------------------------------------------
+
+* FIXED: Bug pertaining to loading datasets which use literals larger than
+8k.
+
+* FIXED: Bug in the writer locks that could allow multiple writers access to
+an index in a multithreaded environment, which usually lead to corruptted
+indexes (ticket #29).
+
+* FIXED: Issue with the CLI's database create command, multiple calls in
+rapid succession to create databases caused some of the new databases to be
+lost (ticket #32).
+
+* FIXED: QL query rewriter was mangling the variables used within the query
+in certain situations causing query results to be incorrect (ticket #30).
+
+* FIXED: QL query rewriter was not correctly respecting variable
+substitutions with datatyped literals and was subsequently losing the
+variable binding specified by the user (ticket #31).
+
+* FIXED: FROM/FROM Named clauses were incorrectly set to the HTTP server
+
+* MODIFIED: Improved index page load speed.
+
+* MODIFIED: Reduced memory requirements in the indexes wrt to cache overhead
+
+* MODIFIED: Persistence of memory indexes to disk is now done in parallel to
+the greatest extent possible yield a significant increase in save (and load)
+performance.  This required changing the on disk format of memory indexes.
+Old versions of memory indexes are unfortunately, backwards incompatible
+with these updates.  We apologize for the inconvenience.
+
+* MODIFIED: On format of disk-based indexes.  This helps us resolve some
+issues we had with the previous format, and increases load speed, but the
+index format is backwards incompatible with the previous indexes.  However,
+we provide a migration utility in the command line program for changing
+old disk indexes to the new format.  See the CLI for more information on
+migrating old indexes (or ping the mailing list).
+
+* MODIFIED: Decreased memory usage in the query engine
+
+* MODIFIED: Added a change buffer in the layer between the SNARL API and
+the underlying index it is connected to.  This allows most changes within a
+transaction to be pushed into the index at once increasing the performance
+of commits as the changes can mostly be applied in bulk.
+
+0.5.3 Changes
+----------------------------------------------------------------------------
+
+* ADDED: Internal buffer for changes via the Sesame API, triples are no
+longer added to the Stardog database one at a time via the SAIL API.  They
+are buffered until the buffer is full, a read operation occurs, or the
+transaction is committed.
+
+* FIXED: Internal bookkeeping for the state of the system information,
+timestamp for last update time is correctly updated and you should not get
+the out of sync warnings printed to the console.
+
+* FIXED: Incorrect return code for parse errors in HTTP protocol.
+
+* FIXED: NPE thrown by TBox extractor when encountering non object/data
+properties.
+
+* FIXED: Correct behavior for SPARQL queries w/ QL reasoning that uses the
+'GRAPH' keyword.  BGP's in graph contexts are not rewritten as inferences
+are put into the default, no context, graph.  Hybrid queries that include
+some patterns against the default graph and others against patterns in graph
+contexts are correctly partially rewritten. (ticket #27)
+
+0.5.2 Changes
+----------------------------------------------------------------------------
+
+* MODIFIED: Add, Remove and Clear Contexts now take an optional query
+parameter, "graph-uri" which specfies the named graph the operation should
+be executed against.  This deprecates the use of this parameter *in* the
+actual URL.  See HTTP_PROTOCOL.txt for additional details.
+
+* MODIFIED: Temp files used to track changes during transactions and to
+buffer results coming into HTTP server are more aggresively removed.
+
+* FIXED: Specifying 'null' as the context to remove via the Connection API
+now actually deletes the default context rather than the entire contents of
+the database.
+
+* FIXED: Cast exception caused during QL query execution when the usage of
+the property in the query does not match the type (object v data) of the
+property in the kb. (ticket #24)
+
+* FIXED: NPE during evaluation of a query with QL reasoning enabled when the
+query has a optionals nested inside of a graph statement. (ticket #26)
+
+* FIXED: Could get NPE's during filter evaluation (compare expressions only)
+if one of the variables in the expression was not bound to any value in a
+BGP.
+
+* FIXED: Malformed literals in inserts could come back and cause errors when
+being removed.  Errors are now thrown when a malformed literal (invalid
+language tag or inconsistent xsd datatype) is inserted into the database.
+(ticket #22 & #25)
+
+* FIXED: Resolving BGP's across contexts using wildcards (e.g. graph ?g {
+... }) was losing information between the contexts leading to incorrect
+results and/or null values in the results. (ticket #20 & #21)
+
+* ADDED: Gremlin integration via our Sesame Sail implementation and the
+Blueprints API.  See the README for more details on the integration.
+
+* ADDED: statements(subject, predicate, object, context) to the Remover API
+and deprecated statement(...); the latter only accepted non-null values,
+while the former does accept nulls as wildcards, so it is safe to replace
+all usages of one with the other. statement(...) is marked as deprecated and
+schedule for removal from the API no earler than 0.6.
+
+0.5.1 Changes
+----------------------------------------------------------------------------
+
+* FIXED: Deleting statements with wildcards via a StardogRepository.
+
+* ADDED: Support for the Sesame RepositoryFactory & Config APIs so Stardog
+can be used via the OpenRDF shell and Workbench.
+
+* ADDED: Native connection pools for Stardog connections.  See the examples
+for code demonstrating how to configure and use them.
+
+0.5 Changes
+----------------------------------------------------------------------------
+
+* FIXED: Query objects reference to database was not refeshed after commit
+or rollback of transaction. (ticket #15)
+
+* FIXED: Bug in queries with graph contexts using unbound variables via an
+HTTP connection; the variable was getting mangled.
+
+* MODIFIED: Introduced new Flex Indexes into the Database structure.
+
+* ADDED: Shiro based security layer
+
+0.4.10 Changes
+----------------------------------------------------------------------------
+
+* FIXED: Bug in the concurrent calcuation of statistics where a latch could
+get stuck when certain types of exceptions occured during processing
+
+* FIXED: Issue in Remove CLI where description did not match behavior;
+Specifying only a context now deletes the context as stated in the
+documentation. (ticket #17)
+
+* FIXED: Bug in removing a context within a durable transaction that caused
+the transaction record to get corrupted. (ticket #16)
+
+* MODIFIED: Changed Add CLI to print an error message if no files are
+specified to add to the database.
+
+* MODIFIED: Removed default parse format of RDF/XML from add & remove
+operations.  If a specific format is specified, that is used, otherwise the
+format based on the file extension will be used.  This brings the behavior
+of add & remove inline with create.  RDF/XML is still used as the fallback
+when no format is specified and there is a nonstandard extension on the
+file.
+
+* MODIFIED: Modified how some filters are evaluated greatly increasing the
+speed in which basic (and/or/not & compares) filters are executed.
+
+0.4.9 Changes
+----------------------------------------------------------------------------
+
+* ADDED: Handling of the TOP concept in the OWL 2 QL reasoner
+
+* ADDED: New query operator which provides more efficient evaluation of
+queries where order by and limit are used.
+
+* ADDED: System information regarding which databases are present will be
+reloaded from disk when it is changed by an external source.
+
+* ADDED: JVM flag to disable strict mode of parsing.
+
+* FIXED: Encoding of graph URIs in remove context calls to HTTP server.
+
+* FIXED: Typo in route which effectively hid the remove context endpoint in
+the HTTP server.
+
+* FIXED: Mangling of ASK queries when sending them to the HTTP server.
+(ticket #13)
+
+* FIXED: Typo in help information in the add/remove data commands in the
+CLI.
+
+* FIXED: BOM markers at the start of files will be gracefully handled
+instead of failing to parse.
+
+* FIXED: If copy of system info on disk is more recent than cached copy in
+memory, it will not be overwritten on shutdown. (ticket #11)
+
+* FIXED: UnsupportedOperationException thrown when clearing a context within
+a transaction. (ticket #12)
+
+* FIXED: IllegalArgumentException thrown when literals are used in query
+atoms going through rewriting. (ticket #9)
+
+* FIXED: ClassCastException when non-QL axioms are used. (ticket #8)
+
+* FIXED: Issue with deleting directories when STARDOG_HOME contains relative
+paths. (ticket #6)
+
+* FIXED: NullPointerException when top level scope contains an empty set of
+query atoms. (ticket #7)
+
+* FIXED: Closing temporary files in the data directory used for some file
+operations.
+
+* FIXED: Concurrent modification exception from an iterator when persisting
+memory indexes to disk asynchronously.
+
+* FIXED: HTTP protocol was dropping context information from queries.
+
+* MODIFIED: Queueing of jobs during concurrent loading to avoid running out
+of memory when processing large datasets. This also reduces the amount of
+memory used during loading.
+
+* MODIFIED: Altered algorithm to get better estimates of join cardinalities.
+
+* MODIFIED: Memory databases to use new statistics algorithm.
+
+0.4.8 Changes
+----------------------------------------------------------------------------
+
+* ADDED: Creation of db indices is done in parallel. It is an experimental
+feature which can be disabled via the JVM flag (disableConcurrent); note,
+that concurrent loading requires more RAM than serial loading. Either give
+Stardog more RAM (i.e., as much as you cann spare) on startup or pass the
+disableConcurrent flag.
+
+* FIXED: Query atoms of the form { ?a ?a ?b } now return correct results
+
+* FIXED: Bug in multi-key joins
+
+* FIXED: Bug in QL reasoning optimizer for detecting empty joins
+
+* FIXED: File exhaustion bug.  When Sesame integration was used with the
+HTTP server, the server did not always close the temporary files used to
+track the incoming edits causing some systems to report too many files were
+open.
+
+* FIXED: Bug in query evaluation where the named graph bound in a pattern
+could cause an exception during execution.
+
+* FIXED: Cardinality estimates in index statistics
+
+* FIXED: bug in stardog.sh script so that it can run anywhere (thanks Alin
+Dreghiciu for this fix)
+
+* MODIFIED: The name of the file being added/removed from a database in the
+command line is now printed.
+
+0.4.7 Changes
+----------------------------------------------------------------------------
+
+* Fixed an NPE in the HTTP server (reported by Brian Sletten)
+
+* make the QL axioms parser more strictly respect the OWL spec, especially
+w/r/t to the set of datatypes that QL supports

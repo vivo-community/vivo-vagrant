@@ -1,0 +1,58 @@
+<div class="panel panel-default">
+  <div class="panel-heading"><h4>Advanced Search</h4></div>
+  <div class="panel-body">
+    <form style="height: 100%;" class="form-horizontal" role="form">
+      <input type="text" id="searchProxy" class="input-block-level form-control">
+      <br/>
+      <fieldset>
+        <legend>Find things matching...</legend>
+        <div class="form-group">
+          <label class="col-md-2 control-label" for="asMatchWords">all these words:</label>
+          <div class="col-md-10">
+            <input type="text" id="asMatchWords" class="searchInput input-block-level form-control">
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="col-md-2 control-label" for="asMatchPhrase">this exact phrase:</label>
+          <div class="col-md-10">
+            <input type="text" id="asMatchPhrase" class="searchInput input-block-level form-control">
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="col-md-2 control-label" for="asOrMatch1">one or more of these words:</label>
+          <div class="col-md-10">
+            <div class="row">
+              <div class="col-md-3">
+                <input type="text" id="asOrMatch1" class="searchInput form-control">
+              </div>
+              <div class="col-md-1">
+                <label>or</label>
+              </div>
+              <div class="col-md-3">
+                <input type="text" id="asOrMatch2" class="searchInput form-control">
+              </div>
+              <div class="col-md-1">
+                <label>or</label>
+              </div>
+              <div class="col-md-3">
+                <input type="text" id="asOrMatch3" class="searchInput form-control">
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="col-md-2 control-label" for="asNoMatch">but none of these words:</label>
+          <div class="col-md-10">
+            <input type="text" id="asNoMatch" class="searchInput input-block-level form-control">
+          </div>
+        </div>
+        <div class="form-group">
+          <div class="col-md-12">
+            <input type="text" id="search" class="form-control" name="query">
+            <button type="btn btn-primary" id="btnSearch" class="btn btn-primary pull-right">Go!</button>
+          </div>
+        </div>
+      </fieldset>
+    </form>
+  </div>
+</div>

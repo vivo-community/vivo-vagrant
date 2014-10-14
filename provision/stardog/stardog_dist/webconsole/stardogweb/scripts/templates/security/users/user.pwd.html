@@ -1,0 +1,30 @@
+<div id="newPwd" class="modal fade bs-example-modal-sm" role="dialog" aria-labelledby="newPwdLabel" aria-hidden="true">
+  <div class="modal-dialog modal-sm">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        <h4 id="newPwdLabel" class="modal-title">Change user password</h4>
+      </div>
+      <div class="modal-body">
+        <div id="modalAlerts"></div>
+        <form class="form-horizontal" role="form">
+          <div class="form-group">
+            <label for="inputPwd" class="col-sm-2 control-label">New password</label>
+            <div class="col-sm-10">
+              <input type="password" class="form-control" id="inputPwd" placeholder="Password">
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="input2Pwd" class="col-sm-2 control-label">Confirm password</label>
+            <div class="col-sm-10">
+              <input type="password" class="form-control" id="input2Pwd" placeholder="Password">
+            </div>
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button id="btnSave" type="button" class="btn btn-primary" disabled>Save</button>
+      </div>
+    </div>
+  </div>
+</div>

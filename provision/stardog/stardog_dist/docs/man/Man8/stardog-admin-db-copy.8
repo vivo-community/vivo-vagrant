@@ -1,0 +1,54 @@
+.\" generated with Ronn/v0.7.3
+.\" http://github.com/rtomayko/ronn/tree/0.7.3
+.
+.TH "STARDOG\-ADMIN_DB_COPY" "8" "August 2014" "Clark & Parsia" "stardog-admin"
+.
+.SH "NAME"
+\fBstardog\-admin_db_copy\fR \- Copies an existing database\.
+.
+.SH "SYNOPSIS"
+\fBstardog\-admin\fR [ \-\-server \fIserver url\fR ] \fBdb\fR \fBcopy\fR {\-c | \-\-copy\-to} \fIcopy to\fR [ {\-p | \-\-passwd} \fIpassword\fR ] [ {\-P | \-\-ask\-password} ] [ {\-u | \-\-username} \fIusername\fR ] [ {\-v | \-\-verbose} ] [\-\-] \fIsource db\fR
+.
+.SH "OPTIONS"
+.
+.TP
+\fB\-c\fR \fIcopy to\fR, \fB\-\-copy\-to\fR \fIcopy to\fR
+Database to copy to\.
+.
+.TP
+\fB\-p\fR \fIpassword\fR, \fB\-\-passwd\fR \fIpassword\fR
+Password\.
+.
+.TP
+\fB\-P\fR, \fB\-\-ask\-password\fR
+Prompt for password\.
+.
+.TP
+\fB\-\-server\fR \fIserver url\fR
+URL of Stardog Server\. If this option isn\'t specified, it will be read from JVM argument \'stardog\.default\.cli\.server\'\. If the JVM arg isn\'t set, the default value \'snarl://localhost:5820\' is used\. If server URL has no explicit port value, the default port value \'5820\' is used\. Example: \'stardog \-\-server snarl://12\.34\.56\.78:5820 server stop\'
+.
+.TP
+\fB\-u\fR \fIusername\fR, \fB\-\-username\fR \fIusername\fR
+User name\.
+.
+.TP
+\fB\-v\fR, \fB\-\-verbose\fR
+Verbose flag that causes more detailed information to be printed
+.
+.TP
+\-\-
+This option can be used to separate command\-line options from the list of arguments (useful when arguments might be mistaken for command\-line options)\.
+.
+.TP
+\fIsource db\fR
+Database to copy from\.
+.
+.SH "DISCUSSION"
+Copies a database exactly as\-is to a new database with the specified name\. All current settings and contents are preserved in the copy\. The database to be copied must be offline, and the copy of the database will initially be offline as well\.
+.
+.SH "EXAMPLES"
+.
+.TP
+Copy the database \'foo\' to the database \'bar\':
+$ stardog\-admin db copy \-c bar foo
+

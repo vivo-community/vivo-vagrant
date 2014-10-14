@@ -1,0 +1,10 @@
+<button type="button" class="close pull-right">&times;</button>
+{{#if [@id]}}
+  <strong class="property_label" data-toggle="tooltip" data-placement="right" title="{{[@egadComment]}}">
+  {{#if [@egadLabel]}}{{[@egadLabel]}}{{else}}{{#localname [@id]}}{{this}}{{/localname}}{{/if}}
+  </strong>
+  <div style="margin-top: 10px;">
+      <div class="controls obj-prop-container">
+      </div>
+  </div>
+{{/if}}
