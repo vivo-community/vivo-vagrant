@@ -1,0 +1,21 @@
+{{#if [@id]}}
+  <strong class="property_label" data-toggle="tooltip" data-placement="right" title="{{[@egadComment]}}">
+  {{#if [@egadLabel]}}{{[@egadLabel]}}{{else}}{{#localname [@id]}}{{this}}{{/localname}}{{/if}}
+  </strong>
+  <div class="controls">
+    {{#if [@value]}}
+    {{#islongtext [@value] size=156}}
+      <textarea disabled class="form-control" rows="4" style="width: 98%">{{[@value]}}</textarea>
+    {{else}}
+      <span>
+        {{[@value]}}
+      </span>
+    {{/islongtext}}
+    {{#if [@language]}}
+        <span class="badge badge-info">{{[@language]}}</span>
+    {{/if}}
+    {{else}}
+      <span class="label label-warning">Empty</span>
+    {{/if}}
+  </div>
+{{/if}}

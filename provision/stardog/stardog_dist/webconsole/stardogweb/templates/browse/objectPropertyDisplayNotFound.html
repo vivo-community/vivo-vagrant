@@ -1,0 +1,9 @@
+{{#if [@isExternal]}}
+	{{#if [@isImage]}}
+	<a href="{{#decodeURIComp [@id]}}{{this}}{{/decodeURIComp}}" target="_blank" class="editable" data-type="text"><img src="{{#decodeURIComp [@id]}}{{this}}{{/decodeURIComp}}" style="width: 100%;"/></a>
+	{{else}}
+	<a href="{{#decodeURIComp [@id]}}{{this}}{{/decodeURIComp}}" target="_blank" class="editable" data-type="text">{{#truncateStr [@id] size=60 decode=true}}{{this}}{{/truncateStr}}</a>
+	{{/if}}
+{{else}}
+<a href="#!/browse/resource/{{[@id]}}" target="_blank" class="editable" data-type="text">{{#truncateStr [@id] size=60 decode=true}}{{this}}{{/truncateStr}}</a>
+{{/if}}

@@ -1,0 +1,124 @@
+<html>
+<head>
+<link href="css/bootstrap.min.css" rel="stylesheet" media="screen">
+</head>
+<style>
+    body { margin: 50px; }
+</style>
+<body>
+<hr/>
+<h1 class="text-info">stardog-admin db restore Manual Page
+<hr/>
+<h1 class="text-info">NAME</h1>
+<br/>
+<div class="row"><div class="span8 offset1">stardog-admin db restore &mdash;Restore a database from a backup.</div>
+</div>
+<br/>
+<h1 class="text-info">SYNOPSIS</h1>
+<br/>
+<div class="row">
+<div class="span8 offset1">
+stardog-admin [ --server &lt;server url&gt; ]db restore [ {-n | --name} &lt;new name&gt; ] [ {-o | --overwrite} ] [ {-p | --passwd} &lt;password&gt; ] [ {-P | --ask-password} ] [ {-u | --username} &lt;username&gt; ] [ {-v | --verbose} ] [--] &lt;backup location&gt;</div>
+</div>
+<br/>
+<h1 class="text-info">OPTIONS</h1>
+<br/>
+<div class="row">
+<div class="span8 offset1">
+-n &lt;new name&gt;, --name &lt;new name&gt;</div>
+</div>
+<div class="row">
+<div class="span8 offset2">
+Specify a new name for the restored database</div>
+</div>
+<div class="row">
+<div class="span8 offset1">
+-o, --overwrite</div>
+</div>
+<div class="row">
+<div class="span8 offset2">
+If the database being restored already exists, overwrite the existing copy with the restored version</div>
+</div>
+<div class="row">
+<div class="span8 offset1">
+-p &lt;password&gt;, --passwd &lt;password&gt;</div>
+</div>
+<div class="row">
+<div class="span8 offset2">
+Password.</div>
+</div>
+<div class="row">
+<div class="span8 offset1">
+-P, --ask-password</div>
+</div>
+<div class="row">
+<div class="span8 offset2">
+Prompt for password.</div>
+</div>
+<div class="row">
+<div class="span8 offset1">
+--server &lt;server url&gt;</div>
+</div>
+<div class="row">
+<div class="span8 offset2">
+URL of Stardog Server. If this option isn't specified, it will be read from JVM argument 'stardog.default.cli.server'. If the JVM arg isn't set, the default value 'snarl://localhost:5820' is used. If server URL has no explicit port value, the default port value '5820' is used.  Example: 'stardog --server snarl://12.34.56.78:5820 server stop' </div>
+</div>
+<div class="row">
+<div class="span8 offset1">
+-u &lt;username&gt;, --username &lt;username&gt;</div>
+</div>
+<div class="row">
+<div class="span8 offset2">
+User name.</div>
+</div>
+<div class="row">
+<div class="span8 offset1">
+-v, --verbose</div>
+</div>
+<div class="row">
+<div class="span8 offset2">
+Verbose flag that causes more detailed information to be printed</div>
+</div>
+<div class="row">
+<div class="span8 offset1">
+--
+</div>
+</div>
+<div class="row">
+<div class="span8 offset2">
+This option can be used to separate command-line options from the list of argument, (useful when arguments might be mistaken for command-line options
+</div>
+</div>
+<div class="row">
+<div class="span8 offset1">
+&lt;backup location&gt;</div>
+</div>
+<div class="row">
+<div class="span8 offset2">
+The full path on disk of the backup to restore</div>
+</div>
+<br/>
+<h1 class="text-info">DISCUSSION</h1>
+<br/>
+<div class="row">
+<div class="span8 offset1">
+Restores a database from its backup.  The location of the backup should be the full path to the backup, not the location of the backup directory as specified in your Stardog configuration. By default, the name of a database is saved in its backup, so there is no need to specify a name for the restored database.  However, if you wish to restore the backup to a different database, a new name can be provided, which must be unique.  A backup will not be restored over an existing database of the same name, to force an overwrite using the restored database, use the -o/--overwrite flag.  You cannot overwrite and specify a new name.If overwrite is not specified, and a new name is not provided, and a database with the name of the database to be restored already exists, the restore operation will not succeed.</div>
+</div>
+<br/>
+<h1 class="text-info">EXAMPLES</h1>
+<br/>
+<div class="row">
+<div class="span12 offset1">
+<p>
+Restore a database from its backup:</p>
+<pre>
+    $ stardog-admin db restore $STARDOG_HOME/.backup/myDb/2012-06-21</pre>
+<p>
+Restore a database to a new copy:</p>
+<pre>
+    $ stardog-admin db restore --name restoredMyDb $STARDOG_HOME/.backup/myDb/2012-06-21</pre>
+</div>
+</div>
+</body>
+</html>
+

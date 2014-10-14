@@ -1,0 +1,145 @@
+<html>
+<head>
+<link href="css/bootstrap.min.css" rel="stylesheet" media="screen">
+</head>
+<style>
+    body { margin: 50px; }
+</style>
+<body>
+<hr/>
+<h1 class="text-info">stardog icv explain Manual Page
+<hr/>
+<h1 class="text-info">NAME</h1>
+<br/>
+<div class="row"><div class="span8 offset1">stardog icv explain &mdash;Explains Integrity Constraint violations command that supports validating the database (or a subset of it via named graphs) with existing or new constraints. New constraints should be specified as arguments passed at the end. If no new constraints are given then the constraints stored in the database will be used.</div>
+</div>
+<br/>
+<h1 class="text-info">SYNOPSIS</h1>
+<br/>
+<div class="row">
+<div class="span8 offset1">
+stardog icv explain [ --contexts &lt;contexts&gt;... ] [ {-f | --format} &lt;format&gt; ] [ {-l | --limit} &lt;limit&gt; ] [ {-m | --merge} ] [ --named-graphs ] [ {-o | --output-format} &lt;format&gt; ] [ {-p | --passwd} &lt;password&gt; ] [ {-P | --ask-password} ] [ {-r | --reasoning} &lt;level&gt; ] [ {-u | --username} &lt;username&gt; ] [ {-v | --verbose} ] [--] &lt;dbname&gt; &lt;constraint_files&gt;...</div>
+</div>
+<br/>
+<h1 class="text-info">OPTIONS</h1>
+<br/>
+<div class="row">
+<div class="span8 offset1">
+--contexts &lt;contexts&gt;</div>
+</div>
+<div class="row">
+<div class="span8 offset2">
+The list of contexts which should be validated, if none are specified, the entire database is validated wrt to the provided constraint(s).</div>
+</div>
+<div class="row">
+<div class="span8 offset1">
+-f &lt;format&gt;, --format &lt;format&gt;</div>
+</div>
+<div class="row">
+<div class="span8 offset2">
+RDF Format [N-TRIPLES, RDF/XML, TURTLE, TRIG] for the constraints or [SPARQL] for constraints specified as SPARQL queries.</div>
+</div>
+<div class="row">
+<div class="span8 offset1">
+-l &lt;limit&gt;, --limit &lt;limit&gt;</div>
+</div>
+<div class="row">
+<div class="span8 offset2">
+Limits the number of explanation returned. The default limit is 1. Note that, when a RDF output format is selected and the limit is set to higher than 1, there is no way to distinguish which triple in the output belongs to which explanation. In TEXT and TREE outputs there will be an empty line separating different explanations.</div>
+</div>
+<div class="row">
+<div class="span8 offset1">
+-m, --merge</div>
+</div>
+<div class="row">
+<div class="span8 offset2">
+Merge proof trees with common nodes. This works only with TREE format and when the limit is is set higher than 1.</div>
+</div>
+<div class="row">
+<div class="span8 offset1">
+--named-graphs</div>
+</div>
+<div class="row">
+<div class="span8 offset2">
+Retrieves and prints the source named graphs for triples in the explanation. If this option is enabled, the output format should support named graphs too.</div>
+</div>
+<div class="row">
+<div class="span8 offset1">
+-o &lt;format&gt;, --output-format &lt;format&gt;</div>
+</div>
+<div class="row">
+<div class="span8 offset2">
+Output format for the explanation: [TEXT, TREE, NTRIPLES, RDF/XML, TURTLE, TRIG, TRIX, N3, NQUADS]. The default format is 'TEXT' where the explanation is rendered in a concise, human-readable format.</div>
+</div>
+<div class="row">
+<div class="span8 offset1">
+-p &lt;password&gt;, --passwd &lt;password&gt;</div>
+</div>
+<div class="row">
+<div class="span8 offset2">
+Password.</div>
+</div>
+<div class="row">
+<div class="span8 offset1">
+-P, --ask-password</div>
+</div>
+<div class="row">
+<div class="span8 offset2">
+Prompt for password.</div>
+</div>
+<div class="row">
+<div class="span8 offset1">
+-r &lt;level&gt;, --reasoning &lt;level&gt;</div>
+</div>
+<div class="row">
+<div class="span8 offset2">
+The reasoning level to use for query. Can be one of [NONE, QL, RL, EL, SL, DL, RDFS]</div>
+</div>
+<div class="row">
+<div class="span8 offset1">
+-u &lt;username&gt;, --username &lt;username&gt;</div>
+</div>
+<div class="row">
+<div class="span8 offset2">
+User name.</div>
+</div>
+<div class="row">
+<div class="span8 offset1">
+-v, --verbose</div>
+</div>
+<div class="row">
+<div class="span8 offset2">
+Verbose flag that causes more detailed information to be printed</div>
+</div>
+<div class="row">
+<div class="span8 offset1">
+--
+</div>
+</div>
+<div class="row">
+<div class="span8 offset2">
+This option can be used to separate command-line options from the list of argument, (useful when arguments might be mistaken for command-line options
+</div>
+</div>
+<div class="row">
+<div class="span8 offset1">
+&lt;dbname&gt; &lt;constraint_files&gt;</div>
+</div>
+<div class="row">
+<div class="span8 offset2">
+The name of the database or the full connection string of the database to connect to. If only the name is provided, the default server URL will be pre-pended to the name of the database in order to construct the connection string. Connection parameters such as ';reasoning=QL' can be included in the provided database name. Connection parameters specified like this can be overridden by specific options on the command. The default server URL will be read from the JVM argument 'stardog.default.cli.server'. If the JVM argument is not set, the default value 'snarl://localhost:5820' is used. If the server URL has no explicit port value, the default port value '5820' is used.  To use a secure connection, you should specify the full connection string and postfix 's' to the protocol, e.g. snarls or https. Then optionally the list of files which contain Integrity Constraints.</div>
+</div>
+<br/>
+<h1 class="text-info">EXAMPLES</h1>
+<br/>
+<div class="row">
+<div class="span12 offset1">
+<p>
+Validate only the specified contexts</p>
+<pre>
+    $ stardog validate --contexts http://example.org/context1 http://example.org/context2</pre>
+</div>
+</div>
+</body>
+</html>
+

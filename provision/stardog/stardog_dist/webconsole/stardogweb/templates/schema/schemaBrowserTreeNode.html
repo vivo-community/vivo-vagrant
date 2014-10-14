@@ -1,0 +1,13 @@
+{{#if [@isProperty]}}
+  {{#if label}}
+  <i class="icon icon-tree icon-plus"></i> <a href="#!/browse/using/{{#encodeURIComp type}}{{this}}{{/encodeURIComp}}" class="schemaTooltip" data-bypass="true" data-toggle="tooltip" data-placement="right" title="{{type}}"><strong>{{label}}</strong></a>
+  {{else}}
+  <i class="icon icon-tree icon-plus"></i> <a href="#!/browse/using/{{#encodeURIComp type}}{{this}}{{/encodeURIComp}}" class="schemaTooltip" data-bypass="true" data-toggle="tooltip" data-placement="right" title="{{type}}"><strong>{{#localname type}}{{this}}{{/localname}}</strong></a>
+  {{/if}}
+{{else}}
+  {{#if label}}
+  <i class="icon icon-tree icon-plus"></i> <a href="#!/browse/{{#encodeURIComp type}}{{this}}{{/encodeURIComp}}" class="schemaTooltip" data-bypass="true" data-toggle="tooltip" data-placement="right" title="{{type}}"><strong>{{label}}</strong></a>
+  {{else}}
+  <i class="icon icon-tree icon-plus"></i> <a href="#!/browse/{{#encodeURIComp type}}{{this}}{{/encodeURIComp}}" class="schemaTooltip" data-bypass="true" data-toggle="tooltip" data-placement="right" title="{{type}}"><strong>{{#localname type}}{{this}}{{/localname}}</strong></a>
+  {{/if}}
+{{/if}}

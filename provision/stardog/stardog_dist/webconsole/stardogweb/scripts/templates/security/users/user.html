@@ -1,0 +1,29 @@
+<div id="menu"></div>
+
+<div id="alert"></div>
+
+<div class="panel panel-default">
+  <div class="panel-heading">
+    <div class="row">
+      <div class="col-md-10">
+        <h1 class="sw-icon icon-user">{{=it["username"]}}
+          <button id="btnDeleteUser" class="btn btn-danger btn-xs" style="margin-left: 10px;">Delete</button>
+          <button id="btnChangePwd" class="btn btn-warning btn-xs" style="margin-left: 10px;">Change Password</button>
+        </h1>
+      </div>
+      <div class="col-md-2 addtooltip" title="User Enabled" style="margin-top: 25px;">
+        <input id="userEnabled" type="checkbox"/>
+      </div>
+
+    </div>
+  </div>
+
+  <div class="panel-body">
+    <div class="row">
+      <div id="userPermissions" class="col-md-6">
+      </div>
+      <div id="userRoles" class="col-md-6">
+      </div>
+    </div>
+  </div>
+</div>

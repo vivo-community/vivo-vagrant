@@ -1,0 +1,19 @@
+<div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="Delete resource" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        <h3>Instance deleted!</h3>
+      </div>
+      <div class="modal-body">
+        <p>You have successfully deleted the instance <strong>{{#if [@egadLabel]}}{{[@egadLabel]}}{{else}}{{#localname [@id]}}{{this}}{{/localname}}{{/if}}</strong>. </p>
+
+        <p>To undo this action, click in the button below.</p>
+      </div>
+      <div class="modal-footer">
+        <button id="btnUndo" class="btn btn-default" data-dismiss="modal" aria-hidden="true">Undo</button>
+        <button id="btnOk" class="btn btn-danger" data-dismiss="modal" aria-hidden="true">Ok</button>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,58 @@
+.\" generated with Ronn/v0.7.3
+.\" http://github.com/rtomayko/ronn/tree/0.7.3
+.
+.TH "STARDOG\-ADMIN_ROLE_GRANT" "8" "August 2014" "Clark & Parsia" "stardog-admin"
+.
+.SH "NAME"
+\fBstardog\-admin_role_grant\fR \- Grants a permission to a role\.
+.
+.SH "SYNOPSIS"
+\fBstardog\-admin\fR [ \-\-server \fIserver url\fR ] \fBrole\fR \fBgrant\fR {\-a | \-\-action} \fIaction\fR\.\.\. {\-o | \-\-object} \fIobj\fR [ {\-p | \-\-passwd} \fIpassword\fR ] [ {\-P | \-\-ask\-password} ] [ {\-u | \-\-username} \fIusername\fR ] [ {\-v | \-\-verbose} ] [\-\-] \fIrole name\fR
+.
+.SH "OPTIONS"
+.
+.TP
+\fB\-a\fR \fIaction\fR, \fB\-\-action\fR \fIaction\fR
+Action to be permitted: [read,write,create,delete,grant,revoke,execute,all]\.
+.
+.TP
+\fB\-o\fR \fIobj\fR, \fB\-\-object\fR \fIobj\fR
+Target resource (user:username, db:databasename)\.
+.
+.TP
+\fB\-p\fR \fIpassword\fR, \fB\-\-passwd\fR \fIpassword\fR
+Password\.
+.
+.TP
+\fB\-P\fR, \fB\-\-ask\-password\fR
+Prompt for password\.
+.
+.TP
+\fB\-\-server\fR \fIserver url\fR
+URL of Stardog Server\. If this option isn\'t specified, it will be read from JVM argument \'stardog\.default\.cli\.server\'\. If the JVM arg isn\'t set, the default value \'snarl://localhost:5820\' is used\. If server URL has no explicit port value, the default port value \'5820\' is used\. Example: \'stardog \-\-server snarl://12\.34\.56\.78:5820 server stop\'
+.
+.TP
+\fB\-u\fR \fIusername\fR, \fB\-\-username\fR \fIusername\fR
+User name\.
+.
+.TP
+\fB\-v\fR, \fB\-\-verbose\fR
+Verbose flag that causes more detailed information to be printed
+.
+.TP
+\-\-
+This option can be used to separate command\-line options from the list of arguments (useful when arguments might be mistaken for command\-line options)\.
+.
+.TP
+\fIrole name\fR
+Role to which the permission is to be added\.
+.
+.SH "DISCUSSION"
+Grants the specified permission to the role\. Only one action (\-a/\-\-action) can be specified per role grant\.
+.
+.SH "EXAMPLES"
+.
+.TP
+Grant the \'aRoleName\' role the \'create\' permission over db:\fI, ie, the permission to create databases\fR
+$ stardog\-admin role grant \-n aRoleName \-a create \-o db:
+

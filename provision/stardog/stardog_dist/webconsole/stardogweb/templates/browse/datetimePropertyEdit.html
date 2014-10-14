@@ -1,0 +1,46 @@
+<button type="button" class="close pull-right">&times;</button>
+{{#if [@id]}}
+<button class="btn btn-link addDataType"><i class="icon-plus"/></button>
+<strong class="property_label" data-toggle="tooltip" data-placement="right" title="{{[@egadComment]}}">
+  {{#if [@egadLabel]}}{{[@egadLabel]}}{{else}}{{#localname [@id]}}{{this}}{{/localname}}{{/if}}
+</strong>
+<div class="controls">
+  <ul class="list-no-bullets obj-prop-container">
+    {{#if [@value]}}
+      {{#each [@value]}}
+      <li>
+        <div class="row">
+        {{#isObject this}}
+          <form class="form-inline">
+            <div class="form-group" style="width: 83%;">
+              <div class="input-group date" data-date-format="YYYY-MM-DD HH:mm:ss">
+                <input type="text" class="form-control dataTypeIn propertyInput" value="{{[@value]}}"/>
+                <span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span>
+                </span>
+              </div>
+            </div>
+            <button class="btn btn-default removeDataType" style="width: 10%;"><i class="icon-remove" /></button>
+          </form>
+        {{/isObject}}
+        </div>
+      </li>
+      {{/each}}
+    {{else}}
+    <li>
+      <div class="row">
+        <form class="form-inline">
+          <div class="form-group" style="width: 83%;">
+            <div class="input-group date" data-date-format="YYYY-MM-DD HH:mm:ss">
+              <input type="text" class="form-control dataTypeIn propertyInput"/>
+              <span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span>
+              </span>
+            </div>
+          </div>
+          <button class="btn btn-default removeDataType" style="width: 10%;"><i class="icon-remove" /></button>
+        </form>
+      </div>
+    </li>
+    {{/if}}
+  </ul>
+</div>
+{{/if}}

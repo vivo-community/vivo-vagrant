@@ -1,0 +1,11 @@
+<div class="objPropDisplay">
+{{#isArray [@type]}}
+<a href="#!/browse/{{#encodeURIComp [@type].[0]}}{{this}}{{/encodeURIComp}}/{{#encodeURIComp [@id]}}{{this}}{{/encodeURIComp}}" class="editable" data-type="text">{{#if [@egadLabel]}}{{[@egadLabel]}}{{else}}{{#localname [@id]}}{{this}}{{/localname}}{{/if}}</a>
+{{else}}
+{{#if [@type]}}
+<a href="#!/browse/{{#encodeURIComp [@type]}}{{this}}{{/encodeURIComp}}/{{#encodeURIComp [@id]}}{{this}}{{/encodeURIComp}}" class="editable" data-type="text">{{#if [@egadLabel]}}{{[@egadLabel]}}{{else}}{{#localname [@id]}}{{this}}{{/localname}}{{/if}}</a> 
+{{else}}
+<a href="#!/browse/resource/{{#encodeURIComp [@id]}}{{this}}{{/encodeURIComp}}" class="editable" data-type="text">{{#if [@egadLabel]}}{{[@egadLabel]}}{{else}}{{#localname [@id]}}{{this}}{{/localname}}{{/if}}</a> 
+{{/if}}
+{{/isArray}}
+</div>

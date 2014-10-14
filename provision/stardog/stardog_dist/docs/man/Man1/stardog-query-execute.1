@@ -1,0 +1,63 @@
+.\" generated with Ronn/v0.7.3
+.\" http://github.com/rtomayko/ronn/tree/0.7.3
+.
+.TH "STARDOG_QUERY_EXECUTE" "1" "August 2014" "Clark & Parsia" "stardog"
+.
+.SH "NAME"
+\fBstardog_query_execute\fR \- Executes a query against a database; prints the query results on STDOUT\.
+.
+.SH "SYNOPSIS"
+\fBstardog\fR \fBquery\fR \fBexecute\fR [ {\-b | \-\-bind} \fIvariables to bind\fR\.\.\. ] [ {\-f | \-\-format} \fIresultFormat\fR ] [ {\-p | \-\-passwd} \fIpassword\fR ] [ {\-P | \-\-ask\-password} ] [ {\-r | \-\-reasoning} \fIlevel\fR ] [ {\-u | \-\-username} \fIusername\fR ] [ {\-v | \-\-verbose} ] [\-\-] \fIdatabase\fR \fIquery\fR\.\.\.
+.
+.SH "OPTIONS"
+.
+.TP
+\fB\-b\fR \fIvariables to bind\fR, \fB\-\-bind\fR \fIvariables to bind\fR
+Variable bindings\. One or more variable bindings to apply before executing query\. Each binding is provided as a \'var=value\' pair; multiple bindings should be separated with whitespaces\. Variables must exist in the query and the value should be a valid RDF term in TURTLE syntax\. Namespaces stored in the database can be used in the values\.
+.
+.TP
+\fB\-f\fR \fIresultFormat\fR, \fB\-\-format\fR \fIresultFormat\fR
+Result format for RDF [NTRIPLES, RDF/XML, TURTLE, TRIG, TRIX, N3, NQUADS] or SPARQL [SPARQL, JSON, TEXT, CSV, TSV, HTML]\.
+.
+.TP
+\fB\-p\fR \fIpassword\fR, \fB\-\-passwd\fR \fIpassword\fR
+Password\.
+.
+.TP
+\fB\-P\fR, \fB\-\-ask\-password\fR
+Prompt for password\.
+.
+.TP
+\fB\-r\fR \fIlevel\fR, \fB\-\-reasoning\fR \fIlevel\fR
+The reasoning level to use for query\. Can be one of [NONE, QL, RL, EL, SL, DL, RDFS]
+.
+.TP
+\fB\-u\fR \fIusername\fR, \fB\-\-username\fR \fIusername\fR
+User name\.
+.
+.TP
+\fB\-v\fR, \fB\-\-verbose\fR
+Verbose flag that causes more detailed information to be printed
+.
+.TP
+\-\-
+This option can be used to separate command\-line options from the list of arguments (useful when arguments might be mistaken for command\-line options)\.
+.
+.TP
+\fIdatabase\fR \fIquery\fR
+The name of the database or the full connection string of the database to connect to\. If only the name is provided, the default server URL will be pre\-pended to the name of the database in order to construct the connection string\. Connection parameters such as \';reasoning=QL\' can be included in the provided database name\. Connection parameters specified like this can be overridden by specific options on the command\. The default server URL will be read from the JVM argument \'stardog\.default\.cli\.server\'\. If the JVM argument is not set, the default value \'snarl://localhost:5820\' is used\. If the server URL has no explicit port value, the default port value \'5820\' is used\. To use a secure connection, you should specify the full connection string and postfix \'s\' to the protocol, e\.g\. snarls or https\. The subsequent argument is the SPARQL query string to execute\. This can either be a file name or a SPARQL query string\.
+.
+.SH "EXAMPLES"
+.
+.TP
+Basic query execution:
+$ stardog query myDb "select * where { ?s ?p ?o }"
+.
+.TP
+Execute a query with some specified bindings:
+$ stardog query \-b "s=<http://example\.org/test>" p=ex:name o=\e"John Doe\e"\' myDb "select * {?s ?p ?o}"
+.
+.TP
+Execute a query with reasoning:
+$ stardog query myDb;reasoning=QL "select ?type where { <urn:an:individual> rdf:type ?type }"
+

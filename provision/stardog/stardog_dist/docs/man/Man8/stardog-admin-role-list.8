@@ -1,0 +1,37 @@
+.\" generated with Ronn/v0.7.3
+.\" http://github.com/rtomayko/ronn/tree/0.7.3
+.
+.TH "STARDOG\-ADMIN_ROLE_LIST" "8" "August 2014" "Clark & Parsia" "stardog-admin"
+.
+.SH "NAME"
+\fBstardog\-admin_role_list\fR \- Lists all roles\.
+.
+.SH "SYNOPSIS"
+\fBstardog\-admin\fR [ \-\-server \fIserver url\fR ] \fBrole\fR \fBlist\fR [ {\-f | \-\-format} \fIformat\fR ] [ {\-p | \-\-passwd} \fIpassword\fR ] [ {\-P | \-\-ask\-password} ] [ {\-u | \-\-username} \fIusername\fR ] [ {\-v | \-\-verbose} ]
+.
+.SH "OPTIONS"
+.
+.TP
+\fB\-f\fR \fIformat\fR, \fB\-\-format\fR \fIformat\fR
+Output format, one of [TEXT, CSV, HTML]\. The default is \'TEXT\'\.
+.
+.TP
+\fB\-p\fR \fIpassword\fR, \fB\-\-passwd\fR \fIpassword\fR
+Password\.
+.
+.TP
+\fB\-P\fR, \fB\-\-ask\-password\fR
+Prompt for password\.
+.
+.TP
+\fB\-\-server\fR \fIserver url\fR
+URL of Stardog Server\. If this option isn\'t specified, it will be read from JVM argument \'stardog\.default\.cli\.server\'\. If the JVM arg isn\'t set, the default value \'snarl://localhost:5820\' is used\. If server URL has no explicit port value, the default port value \'5820\' is used\. Example: \'stardog \-\-server snarl://12\.34\.56\.78:5820 server stop\'
+.
+.TP
+\fB\-u\fR \fIusername\fR, \fB\-\-username\fR \fIusername\fR
+User name\.
+.
+.TP
+\fB\-v\fR, \fB\-\-verbose\fR
+Verbose flag that causes more detailed information to be printed
+

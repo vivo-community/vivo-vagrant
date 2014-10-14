@@ -1,0 +1,41 @@
+<div id="menu"></div>
+
+<div id="alert"></div>
+
+<div class="panel panel-default scroll list">
+  <div class="panel-heading">
+    <div class="row">
+      <div class="col-md-10">
+        <h1 class="sw-icon icon-data">Databases</h1>
+      </div>
+      <div class="col-md-2">
+        <button id="newDB" class="btn btn-success pull-right" style="margin-top: 20px;">New DB</button>
+      </div>
+    </div>
+  </div>
+  <div class="panel-body" style="height: 800px;">
+      <div class="row">
+        <div class="col-md-12">
+          <div class="input-group">
+            <span class="input-group-addon"><i class="icon icon-search"></i></span>
+            <input id="inDBFilter" type="search" class="form-control" placeholder="Type to search by database name">
+          </div>
+        </div>
+      </div>
+      <br />
+      <br />
+      <div class="scroll" style="height: 700px; margin-top: -21px;">
+        <table class="table table-bordered table-responsive table-hover">
+          <theader>
+            <th class="db-status">Status</th>
+            <th class="db-name">Name</th>
+            <th class="db-date-change">Last commit</th>
+            <th class="db-boolean">Search Enabled</th>
+            <th class="db-index-type">Actions</th>
+          </theader>
+          <tbody id="dbs">
+          </tbody>
+        </table>
+      </div>
+  </div>
+</div>

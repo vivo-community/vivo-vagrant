@@ -1,0 +1,40 @@
+<div class="panel-heading">
+  <strong>Permissions</strong>
+  <button id="addPermissionRow" class="btn btn-success btn-xs pull-right">Add Permission</button>
+</div>
+<div class="panel-body">
+ <!--  <div class="input-group" style="height: 34px;">
+    <span class="input-group-addon"><i class="icon icon-search"></i></span>
+    <input id="inRoleFilter" type="search" class="form-control" style="height: inherit" placeholder="Type to search permissions">
+  </div> -->
+  <br/>
+  <div style="height: 73px;">
+    <table class="table table-responsive table-hover">
+      <thead>
+        <tr >
+          <tr>
+            <th rowspan="2" style="width:30%;"><span class="addtooltip" title="Some Stardog entity or service to which access is to be controlled">Resource Type</span></th>
+            <th rowspan="2" style="width:30%;"><span class="addtooltip" title="The name of a specific Stardog resource">Resource Name</span></th>
+            <th colspan="7"><span class="addtooltip" title="Valid actions">Permissions</span></th>
+            <!-- <th rowspan="2"><span class="addtooltip" title="Source of the permission">Source</span></th> -->
+          </tr>
+          <tr>
+            <th><span class="addtooltip" title="create">C</span></th>
+            <th><span class="addtooltip" title="delete">D</span></th>
+            <th><span class="addtooltip" title="read">R</span></th>
+            <th><span class="addtooltip" title="write">W</span></th>
+            <th><span class="addtooltip" title="grant">G</span></th>
+            <th><span class="addtooltip" title="revoke">K</span></th>
+            <th><span class="addtooltip" title="execute">X</span></th>
+          </tr>
+        <tr>
+      </thead>
+    </table>
+  </div>
+  <div class="scroll" style="height: 389px">
+    <table class="table table-responsive table-hover">
+      <tbody id="permissions">
+      </tbody>
+    </table>
+  </div>
+</div>

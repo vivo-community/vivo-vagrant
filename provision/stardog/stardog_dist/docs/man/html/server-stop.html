@@ -1,0 +1,90 @@
+<html>
+<head>
+<link href="css/bootstrap.min.css" rel="stylesheet" media="screen">
+</head>
+<style>
+    body { margin: 50px; }
+</style>
+<body>
+<hr/>
+<h1 class="text-info">stardog-admin server stop Manual Page
+<hr/>
+<h1 class="text-info">NAME</h1>
+<br/>
+<div class="row"><div class="span8 offset1">stardog-admin server stop &mdash;Issues a shutdown request to a Stardog server.</div>
+</div>
+<br/>
+<h1 class="text-info">SYNOPSIS</h1>
+<br/>
+<div class="row">
+<div class="span8 offset1">
+stardog-admin [ --server &lt;server url&gt; ]server stop [ {-p | --passwd} &lt;password&gt; ] [ {-P | --ask-password} ] [ {-u | --username} &lt;username&gt; ] [ {-v | --verbose} ]</div>
+</div>
+<br/>
+<h1 class="text-info">OPTIONS</h1>
+<br/>
+<div class="row">
+<div class="span8 offset1">
+-p &lt;password&gt;, --passwd &lt;password&gt;</div>
+</div>
+<div class="row">
+<div class="span8 offset2">
+Password.</div>
+</div>
+<div class="row">
+<div class="span8 offset1">
+-P, --ask-password</div>
+</div>
+<div class="row">
+<div class="span8 offset2">
+Prompt for password.</div>
+</div>
+<div class="row">
+<div class="span8 offset1">
+--server &lt;server url&gt;</div>
+</div>
+<div class="row">
+<div class="span8 offset2">
+URL of Stardog Server. If this option isn't specified, it will be read from JVM argument 'stardog.default.cli.server'. If the JVM arg isn't set, the default value 'snarl://localhost:5820' is used. If server URL has no explicit port value, the default port value '5820' is used.  Example: 'stardog --server snarl://12.34.56.78:5820 server stop' </div>
+</div>
+<div class="row">
+<div class="span8 offset1">
+-u &lt;username&gt;, --username &lt;username&gt;</div>
+</div>
+<div class="row">
+<div class="span8 offset2">
+User name.</div>
+</div>
+<div class="row">
+<div class="span8 offset1">
+-v, --verbose</div>
+</div>
+<div class="row">
+<div class="span8 offset2">
+Verbose flag that causes more detailed information to be printed</div>
+</div>
+<br/>
+<h1 class="text-info">DISCUSSION</h1>
+<br/>
+<div class="row">
+<div class="span8 offset1">
+Initiates the shutdown of a Stardog server. All pending jobs are cancelled, but running jobs are allowed to complete. Databases are taken offline immediately, rolling back all pending transactions.</div>
+</div>
+<br/>
+<h1 class="text-info">EXAMPLES</h1>
+<br/>
+<div class="row">
+<div class="span12 offset1">
+<p>
+Stop the database running at the default location:</p>
+<pre>
+    $ stardog-admin server stop</pre>
+<p>
+Stop a database running remotely:</p>
+<pre>
+    $ stardog-admin --server snarl://12.34.56.78:5820 server stop</pre>
+</div>
+</div>
+</body>
+</html>
+

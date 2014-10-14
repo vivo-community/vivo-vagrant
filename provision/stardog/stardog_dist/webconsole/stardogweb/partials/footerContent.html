@@ -1,0 +1,37 @@
+<div class="row">
+    <div class="col-md-2">
+        <strong>Application Modules</strong>
+        <ul class="list-no-bullets">
+        {{#each footer.modules}}
+        {{#if label}}
+          {{#ifnotequal label 'Search'}}
+            <li><a href="{{mainUrl}}">{{label}}</a></li>
+            {{else}}
+              {{#if metadata.[search.enabled]}}
+                <li><a href="{{mainUrl}}">{{label}}</a></li>
+              {{/if}}
+          {{/ifnotequal}}
+          {{/if}}
+        {{/each}}
+        </ul>
+    </div>
+    <div class="col-md-2 col-md-offset-1">
+        <strong>About</strong>
+        <ul class="list-no-bullets">
+          <li><a href="http://stardog.com" target="_blank">Stardog</a></li>
+          <li><a href="http://clarkparsia.com" target="_blank">Clark &amp; Parsia, LLC</a></li>
+        </ul>
+    </div>
+    <div class="col-md-2 col-md-offset-1">
+        <strong>Help</strong>
+        <ul class="list-no-bullets">
+          <li><a href="http://docs.stardog.com" target="_blank">Stardog Docs</a></li>
+        </ul>
+    </div>
+    <div class="col-md-2">
+      <a href="http://stardog.com" target="_blank"><img src="img/sdog.png" style="height: 100px;"></a>
+    </div>
+    <div class="col-md-2">
+      <a href="http://clarkparsia.com" target="_blank"><img src="img/cp.png" style="width: 150px;"></a>
+    </div>
+</div>

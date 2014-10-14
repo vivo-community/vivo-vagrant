@@ -1,0 +1,82 @@
+.\" generated with Ronn/v0.7.3
+.\" http://github.com/rtomayko/ronn/tree/0.7.3
+.
+.TH "STARDOG_REASONING_EXPLAIN" "1" "August 2014" "Clark & Parsia" "stardog"
+.
+.SH "NAME"
+\fBstardog_reasoning_explain\fR \- Provide the explanation for an inference or inconsistency\.
+.
+.SH "SYNOPSIS"
+\fBstardog\fR \fBreasoning\fR \fBexplain\fR [ {\-f | \-\-format} \fIformat\fR ] [ {\-i | \-\-inconsistency} ] [ {\-l | \-\-limit} \fIlimit\fR ] [ {\-m | \-\-merge} ] [ \-\-named\-graphs ] [ {\-o | \-\-output\-format} \fIformat\fR ] [ {\-p | \-\-passwd} \fIpassword\fR ] [ {\-P | \-\-ask\-password} ] [ {\-r | \-\-reasoning} \fIlevel\fR ] [ {\-u | \-\-username} \fIusername\fR ] [ {\-v | \-\-verbose} ] [\-\-] \fIdatabase\fR \.\.\.
+.
+.SH "OPTIONS"
+.
+.TP
+\fB\-f\fR \fIformat\fR, \fB\-\-format\fR \fIformat\fR
+Input data format: NTRIPLES, RDF/XML, TURTLE, TRIG, TRIX, N3, NQUADS
+.
+.TP
+\fB\-i\fR, \fB\-\-inconsistency\fR
+Explain inconsistency of the database
+.
+.TP
+\fB\-l\fR \fIlimit\fR, \fB\-\-limit\fR \fIlimit\fR
+Limits the number of explanation returned\. The default limit is 1\. Note that, when a RDF output format is selected and the limit is set to higher than 1, there is no way to distinguish which triple in the output belongs to which explanation\. In TEXT and TREE outputs there will be an empty line separating different explanations\.
+.
+.TP
+\fB\-m\fR, \fB\-\-merge\fR
+Merge proof trees with common nodes\. This works only with TREE format and when the limit is is set higher than 1\.
+.
+.TP
+\fB\-\-named\-graphs\fR
+Retrieves and prints the source named graphs for triples in the explanation\. If this option is enabled, the output format should support named graphs too\.
+.
+.TP
+\fB\-o\fR \fIformat\fR, \fB\-\-output\-format\fR \fIformat\fR
+Output format for the explanation: [TEXT, TREE, NTRIPLES, RDF/XML, TURTLE, TRIG, TRIX, N3, NQUADS]\. The default format is \'TEXT\' where the explanation is rendered in a concise, human\-readable format\.
+.
+.TP
+\fB\-p\fR \fIpassword\fR, \fB\-\-passwd\fR \fIpassword\fR
+Password\.
+.
+.TP
+\fB\-P\fR, \fB\-\-ask\-password\fR
+Prompt for password\.
+.
+.TP
+\fB\-r\fR \fIlevel\fR, \fB\-\-reasoning\fR \fIlevel\fR
+The reasoning level to use for query\. Can be one of [NONE, QL, RL, EL, SL, DL, RDFS]
+.
+.TP
+\fB\-u\fR \fIusername\fR, \fB\-\-username\fR \fIusername\fR
+User name\.
+.
+.TP
+\fB\-v\fR, \fB\-\-verbose\fR
+Verbose flag that causes more detailed information to be printed
+.
+.TP
+\-\-
+This option can be used to separate command\-line options from the list of arguments (useful when arguments might be mistaken for command\-line options)\.
+.
+.TP
+\fIdatabase\fR
+The name of the database or the full connection string of the database to connect to\. If only the name is provided, the default server URL will be pre\-pended to the name of the database in order to construct the connection string\. Connection parameters such as \';reasoning=QL\' can be included in the provided database name\. Connection parameters specified like this can be overridden by specific options on the command\. The default server URL will be read from the JVM argument \'stardog\.default\.cli\.server\'\. If the JVM argument is not set, the default value \'snarl://localhost:5820\' is used\. If the server URL has no explicit port value, the default port value \'5820\' is used\. To use a secure connection, you should specify the full connection string and postfix \'s\' to the protocol, e\.g\. snarls or https\. The subsequent argument is the inference to explain\. This can either be a file name or an RDF string\. When Turtle string is given as an argument the prefixes stored in the database can be omitted\.
+.
+.SH "DISCUSSION"
+Returns an explanation for the inference in the given file or for the inconsistency of the database\. If provided, the input file should contain a single axiom\. The explanation output is the minimal set of asserted statements in the database that are needed for the inference to hold\. The statements in the explanation can be rendered in any RDF format but by default they will be rendered in a concise, human\-readable, text format\. There is also a proof tree format where the statements are rendered in hierarchical structure\. Nodes in the proof tree are grouped under inferred statements that make it easier to understand the explanation\.
+.
+.SH "EXAMPLES"
+.
+.TP
+Basic inference explanation with SL reasoning level:
+$ stardog reasoning explain \-r SL myDb "ex:JohnDoe a ont:Person"
+.
+.TP
+Get up to 10 explanations along with named graph info and merge common explanations:
+$ stardog reasoning explain \-r SL \-l 10 \-\-merge \-\-named\-graphs myDb ":Employee rdfs:subClassOf :Person"
+.
+.TP
+Read axiom to explain from a file and output the explanation in Turtle format:
+$ stardog reasoning explain \-r SL \-o turtle myDb axiomToExplain\.ttl
+

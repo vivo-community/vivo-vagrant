@@ -1,0 +1,103 @@
+<div id="menu"></div>
+
+<div id="alert"></div>
+
+<div class="row">
+  <div class="col-md-12">
+    <div class="panel panel-default scroll list">
+      <div class="panel-heading">
+        <h3 class="panel-title"><i class="fa fa-cogs"></i> Server</h3>
+      </div>
+      <div class="panel-body">
+        <div class="row">
+          <div class="col-md-6">
+            <form role="form">
+              {{? it['dbms.os']}}
+              <div class="form-group">
+                <label class="control-label">System Platform:</label>
+                <span data-key="database">{{= it['dbms.os']}}</span>
+              </div>
+              {{?}}
+              {{? it['dbms.home']}}
+              <div class="form-group">
+                <label class="control-label">Stardog Home:</label>
+                <span data-key="database">{{= it['dbms.home']}}</span>
+              </div>
+              {{?}}
+              {{? it['dbms.uptime']}}
+              <div class="form-group">
+                <label class="control-label">System Uptime:</label>
+                <span data-key="username">{{= it['dbms.uptime_formatted']}}</span>
+              </div>
+              {{?}}
+            </form>
+          </div>
+          <div class="col-md-6">
+            <form role="form">
+              {{? it['dbms.arch']}}
+              <div class="form-group">
+                <label class="control-label">System Architecture:</label>
+                <span data-key="database">{{= it['dbms.arch']}}</span>
+              </div>
+              {{?}}
+              {{? it['dbms.version']}}
+              <div class="form-group">
+                <label class="control-label">Stardog Version:</label>
+                <span data-key="username">{{= it['dbms.version']}}</span>
+              </div>
+              {{?}}
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="row">
+  <div class="col-md-6">
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <h3 class="panel-title"><i class="icon icon-data"></i> Databases</h3>
+      </div>
+      <div class="panel-body">
+        <div style="height: 37px;">
+          <table class="table table-bordered table-responsive">
+            <theader>
+              <th style="width:80%;">Name</th>
+              <th style="width:20%; text-align: center;">Status</th>
+            </theader>
+          </table>
+        </div>
+        <div class="scroll" style="height: 400px;">
+          <table class="table table-bordered table-responsive table-hover">
+            <tbody id="dbs">
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="col-md-6">
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <h3 class="panel-title"><i class="icon icon-user"></i> Users</h3>
+      </div>
+      <div class="panel-body">
+        <div style="height: 37px;">
+          <table class="table table-bordered table-responsive">
+            <theader>
+              <th style="width:60%;">User name</th>
+              <th style="width:40%; text-align: center;">Roles</th>
+            </theader>
+          </table>
+        </div>
+        <div class="scroll" style="height: 400px;">
+          <table class="table table-bordered table-responsive table-hover">
+            <tbody id="users">
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,18 @@
+<h1>Welcome,</h1>
+
+<p>This is the EGAD Application homepage. You can customize this page by creating your own content using <a href="http://handlebarsjs.com" target="_blank">Handlebars templating</a>, <a href="http://twitter.github.io/bootstrap/" target="_blank">Bootstrap</a> UI components an a little bit of configuration in your EGAD app configuration file.</p>
+
+<p>Once you have your homepage content in an <code>*.html</code> file, you can reference it in the configuration file of your application using the <code>content</code> property of the <code>home</code> module, having something like the following section in the configuration file:</p>
+
+<pre><code>...
+"modules": {                                        # the modules section of the configuration file
+    "home": {                                       # home module descriptor
+      "content": "mycontent/somepage.html"          # reference to the homepage template content, 
+    },                                              #   relative to the configuration file
+    ...
+}
+</code></pre>
+
+<p>Remember that after any change in the configuration file you need to re-generate your application to make your changes effective, you can use the <code>update</code> command of the EGAD CLI to do this:</p>
+
+<pre><code>$ egad update -j config.js</code></pre>

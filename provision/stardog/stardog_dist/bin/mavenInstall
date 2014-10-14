@@ -1,0 +1,79 @@
+#!/bin/bash
+
+RELBINDIR="`dirname \"$0\"`"
+BINDIR="`( cd \"$RELBINDIR\" && pwd )`"
+if [ -z "$BINDIR" ] ; then
+  echo "$0: Path of executable is not accessible." >&2
+  exit 1
+fi
+DISTDIR=$BINDIR/..
+
+TEMPLATENAME="`basename $0`"
+if [ -z "$TEMPLATENAME" ] ; then
+  echo "$0: Can't get basename of this file." >&2
+  exit 1
+fi
+
+TMPDIRECTORY="`mktemp -d /tmp/${TEMPLATENAME}.XXXXXX`"
+if [ -z "$TMPDIRECTORY" ] ; then
+  echo "$0: Can't create temporary directory." >&2
+  exit 1
+fi
+
+hash unzip 2>/dev/null || { echo >&2 "$0 requires unzip but it's not installed - aborting."; exit 1; }
+
+# Install artifacts that have a POM
+while read ARTIFACT; do
+    if [[ "${ARTIFACT:0:1}" != "#" ]]; then
+        unzip $DISTDIR/$ARTIFACT 'META-INF/maven/*' -d $TMPDIRECTORY
+        POMFILE="`find $TMPDIRECTORY -name pom.xml -print`"
+        mvn install:install-file -Dfile=$DISTDIR/$ARTIFACT -DpomFile=$POMFILE
+        rm -rf $TMPDIRECTORY/META-INF
+    fi
+done <<!
+client/api/cp-common-openrdf-2.0.5.jar
+client/api/cp-common-utils-3.1.3.jar
+client/api/data-exporter-1.0.0.jar
+client/api/jsonld-java-0.5.0.jar
+client/api/openrdf-sesame-2.7.12.jar
+client/api/protocols-api-client-2.2.1.jar
+client/api/protocols-api-shared-2.2.1.jar
+client/api/stardog-common-rdf-2.2.1.jar
+client/api/stardog-common-utils-2.2.1.jar
+client/api/stardog-icv-core-api-2.2.1.jar
+client/api/stardog-openrdf-utils-2.2.1.jar
+client/api/stardog-protocols-spec-client-2.2.1.jar
+client/api/stardog-protocols-spec-shared-2.2.1.jar
+client/api/stardog-reasoning-api-2.2.1.jar
+client/api/stardog-reasoning-shared-2.2.1.jar
+client/api/stardog-search-api-2.2.1.jar
+client/api/stardog-shared-2.2.1.jar
+client/api/stardog-snarl-api-2.2.1.jar
+client/empire/empire-0.8.6.jar
+client/empire/stardog-empire-2.2.1.jar
+client/http/stardog-http-client-2.2.1.jar
+client/http/stardog-http-shared-2.2.1.jar
+client/http/stardog-icv-http-client-2.2.1.jar
+client/http/stardog-reasoning-http-client-2.2.1.jar
+client/http/stardog-search-http-client-2.2.1.jar
+client/jena/stardog-jena-2.2.1.jar
+client/sesame/stardog-sesame-2.2.1.jar
+client/snarl/bigpacket-client-2.2.1.jar
+client/snarl/bigpacket-shared-2.2.1.jar
+client/snarl/cp-common-protobuf-1.2.jar
+client/snarl/stardog-icv-api-2.2.1.jar
+client/snarl/stardog-icv-shared-2.2.1.jar
+client/snarl/stardog-icv-snarl-client-2.2.1.jar
+client/snarl/stardog-icv-snarl-shared-2.2.1.jar
+client/snarl/stardog-reasoning-protocol-shared-2.2.1.jar
+client/snarl/stardog-reasoning-snarl-client-2.2.1.jar
+client/snarl/stardog-reasoning-snarl-shared-2.2.1.jar
+client/snarl/stardog-search-snarl-client-2.2.1.jar
+client/snarl/stardog-snarl-client-2.2.1.jar
+client/snarl/stardog-snarl-shared-2.2.1.jar
+client/snarl/stardog-watchdog-protocol-shared-2.2.1.jar
+client/snarl/stardog-watchdog-snarl-client-2.2.1.jar
+client/snarl/stardog-watchdog-snarl-shared-2.2.1.jar
+!
+
+rm -rf $TMPDIRECTORY

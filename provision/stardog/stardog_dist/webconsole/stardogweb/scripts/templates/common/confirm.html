@@ -1,0 +1,17 @@
+<div id="confirmModal" class="modal fade bs-example-modal-sm" role="dialog" aria-labelledby="confirmLabel" aria-hidden="true">
+  <div class="modal-dialog modal-sm">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        <h4 id="confirmLabel" class="modal-title">{{= it.title}}</h4>
+      </div>
+      <div class="modal-body">
+        {{= it.body}}
+        <input id="inConfirmDB" type="text" class="form-control modalInput" placeholder="Name">
+      </div>
+      <div class="modal-footer">
+        <button id="btnOk" type="button" class="btn btn-danger" disabled>{{= it.btnlabel}}</button>
+      </div>
+    </div>
+  </div>
+</div>

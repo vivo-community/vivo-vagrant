@@ -1,0 +1,64 @@
+.\" generated with Ronn/v0.7.3
+.\" http://github.com/rtomayko/ronn/tree/0.7.3
+.
+.TH "STARDOG\-ADMIN_DB_BACKUP" "8" "August 2014" "Clark & Parsia" "stardog-admin"
+.
+.SH "NAME"
+\fBstardog\-admin_db_backup\fR \- Create a backup of an existing database\.
+.
+.SH "SYNOPSIS"
+\fBstardog\-admin\fR [ \-\-server \fIserver url\fR ] \fBdb\fR \fBbackup\fR [ {\-p | \-\-passwd} \fIpassword\fR ] [ {\-P | \-\-ask\-password} ] [ {\-t | \-\-to} \fIbackup location\fR ] [ {\-u | \-\-username} \fIusername\fR ] [ {\-v | \-\-verbose} ] [\-\-] \fIdb\fR
+.
+.SH "OPTIONS"
+.
+.TP
+\fB\-p\fR \fIpassword\fR, \fB\-\-passwd\fR \fIpassword\fR
+Password\.
+.
+.TP
+\fB\-P\fR, \fB\-\-ask\-password\fR
+Prompt for password\.
+.
+.TP
+\fB\-\-server\fR \fIserver url\fR
+URL of Stardog Server\. If this option isn\'t specified, it will be read from JVM argument \'stardog\.default\.cli\.server\'\. If the JVM arg isn\'t set, the default value \'snarl://localhost:5820\' is used\. If server URL has no explicit port value, the default port value \'5820\' is used\. Example: \'stardog \-\-server snarl://12\.34\.56\.78:5820 server stop\'
+.
+.TP
+\fB\-t\fR \fIbackup location\fR, \fB\-\-to\fR \fIbackup location\fR
+Provide a specific location to save the backup; overrides the default location\.
+.
+.TP
+\fB\-u\fR \fIusername\fR, \fB\-\-username\fR \fIusername\fR
+User name\.
+.
+.TP
+\fB\-v\fR, \fB\-\-verbose\fR
+Verbose flag that causes more detailed information to be printed
+.
+.TP
+\-\-
+This option can be used to separate command\-line options from the list of arguments (useful when arguments might be mistaken for command\-line options)\.
+.
+.TP
+\fIdb\fR
+The database which should be backed up
+.
+.SH "DISCUSSION"
+Create a complete backup copy of a database\. As opposed to export, which is a logical copy and only provides a snapshot of the contents of the database, a backup is a physical copy and preserves database metadata in addition to the contents so an exact copy can be made during a restore\. By default, backups are stored in the \'\.backup\' directory in your Stardog home, but you can use the \'backup\.dir\' property in your \'stardog\.configuration\' file to specify a different location for backups or you can override any default using the \-t/\-\-to option\. Within the backup directory, backups are stored by database, and for each database, in date\-versioned directories\.
+.
+.P
+Your typical backup directory would have a layout similar to this: \.backup/myDb/2013\-10\-02 \.backup/myDb/2013\-10\-11 \.backup/myOtherDb/2013\-06\-21
+.
+.P
+Within each of those directories are the actual backups themselves\. If you want to restore a database from one of those backups, you will have to use the complete path to the backup, not just the path to the top level directory as specified by this property, ie, \fBdb restore $STARDOG_HOME/\.backup/myDb/2013\-10\-02\fR
+.
+.SH "EXAMPLES"
+.
+.TP
+Create a back of the \'myDatabase\' database in the default backup directory:
+$ stardog\-admin db backup myDatabase
+.
+.TP
+Save the backup of the database \'myDatabase\' to a specific directory:
+$ stardog\-admin db backup \-\-to /my/backup/dir myDatabase
+

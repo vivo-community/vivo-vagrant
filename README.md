@@ -8,6 +8,7 @@ The virtual machine will boot and install VIVO 1.7 and its dependencies.  This w
  * [VirtualBox](https://www.virtualbox.org/) or [VMWare Fusion](http://www.vmware.com/products/fusion).
  * [Vagrant](https://docs.vagrantup.com/v2/installation/index.html).
  * Git - if you are new to git, you might want to use the Github desktop client. [Windows](http://windows.github.com/) and [Mac](http://mac.github.com/) versions are available.
+ * You must obtain a stardog license and put it in the `provision/stardog` folder.  You can obtain this [here.](http://stardog.com/)
 
 This Vagrant box is intended for development and experimentation only.  Change default user names and passwords.
 

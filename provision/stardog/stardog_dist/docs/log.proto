@@ -1,0 +1,113 @@
+// Copyright (c) 2010 - 2012 -- Clark & Parsia, LLC. <http://www.clarkparsia.com>
+// For more information about licensing and copyright of this software, please contact
+// inquiries@clarkparsia.com or visit http://stardog.com
+
+package com.complexible.stardog.logging.protobuf;
+
+option java_outer_classname = "ProtobufLogging";
+
+// This is default, but it's nice to be explicit
+option optimize_for = SPEED;
+
+// Log header, present at the start of every log file
+//
+// Includes the timestamp of when the log file was created both in milliseconds and nanoseconds.
+// Both timestamps are included for reference; nanosecond timestamps are included on each event,
+// however Java does not guarantee that the nanoseconds returned by System.nanoTime is the nanoseconds
+// since the epoch.  It only guarantees they are precise with respect to elapsed time since some arbitrary
+// starting point, from their documentation: "can only be used to measure elapsed time and is not
+// related to any other notion of system or wall-clock time" So while it can return wall clock time,
+// and often does, it is not guaranteed.  So provide the system wall clock time in milliseconds
+// as a reference for the nanoseconds time as that provides the starting point for calculating
+// the exact time an event occurred.
+message Header {
+    // the version format of the rest of the log
+    required int32  version         = 1 [default = 1];
+
+    // the current time, in milliseconds, that the log file was created
+    required int64  timestampInMS   = 2;
+
+    // the current time, in nanoseconds, that the log file was created
+    required int64  timestampInNS   = 3;
+}
+
+// Representation of the equivalent event object in Stardog (com.clarkparsia.stardog.KernelEvent)
+message KernelEvent {
+
+	// the type of the event.  This is the encoded ordinal value of com.clarkparsia.stardog.KernelEventType
+	// the original event type can be recovered by KernelEventTypes.values()[type]
+    required int32  type        = 1;
+
+    // The event types:
+	// 0 CreateDatabase,
+	// 1 DropDatabase,
+	// 2 Online,
+	// 3 Offline,
+	// 4 Shutdown,
+	// 5 Copy,
+	// 6 Migrate,
+	// 7 Optimize,
+	// 8 GetOption,
+	// 9 SetOption,
+	//10 ConnectionOpen,
+	//11 ConnectionClose,
+	//12 Authentication,
+	//13 TxBegin,
+	//14 TxCommit,
+	//15 TxRollback,
+	//16 DataAdd,
+	//17 DataRemove,
+	//18 DataRemoveContext,
+	//19 DataRemoveAll,
+	//20 Query,
+	// security stuff
+	//21 AddUser,
+	//22 DeleteUser,
+	//23 ChangePassword,
+	//24 ChangeUserEnabled,
+	//25 ListUsers,
+	//26 GetSuperStatus,
+	//27 GetEnabledStatus,
+	//28 SetEnabledStatus,
+	//29 GetUserRoles,
+	//30 SetUserRoles,
+	//31 AddRole,
+	//32 DeleteRole,
+	//33 ListRoles,
+	//34 GetUsersWithRole,
+	//35 UserPermissionGrant,
+	//36 UserPermissionRevoke,
+	//37 RolePermissionGrant,
+	//38 RolePermissionRevoke,
+	//39 GetUserPermissions,
+	//40 GetRolePermissions,
+	//41 GetEffectiveUserPermissions;
+    
+    // the name of the logged in user that initiated the event
+    required string user        = 2;
+
+    // the IP of the user who initiated the event
+    optional string ip          = 3;
+
+    // the timestamp of the event in nanoseconds, usually since the epoch.  This is gathered from
+    // System.nanoTime() on the server which generated the event.  So the timezone for the timestamp
+    // is whatever timezone is set on the host machine, and could be measured in something else
+    // besides seconds since the epoch; the Javadoc for the method says it's measured from an arbitrary
+    // point in time.  However, since the method is consistently used to stamp all events, timestamp
+    // at least offers relative ordering of the time for each event.
+    required int64 timestamp   = 4;
+
+    // A mask for flags which are associated with the event.  Each bit in the integer corresponds to the
+    // enum Flags in KernelEvent.  Enums are 1 ordered, so the enum with ordinal value 3 is encoded
+    // in the third bit of the integer, i.e. it will be 1 if the flag is present.
+    // On failure, the lowest bit is set to 0
+    required int32	flags		= 5 [default=0];
+
+    // the value associated with the event encoded as a byte array.  This is usually a string value as bytes
+    // in UTF-8 encoding, but generally can be anything that is supported by ByteIO, which occasionally is
+    // a serialized Java object.  In those cases, it's often a List of serializable objects, usually Strings.
+    optional bytes  value       = 6;
+
+    // the database which generated the event
+    optional string db          = 7;
+}

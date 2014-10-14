@@ -1,0 +1,6 @@
+<td style="width:80%;">{{= it['database.name']}}</td>
+{{? it['database.online']}}
+<td style="width:20%; text-align: center;"><span class="label label-success">online</span></td>
+{{??}}
+<td style="width:20%; text-align: center;"><span class="label label-danger">offline</span></td>
+{{?}}

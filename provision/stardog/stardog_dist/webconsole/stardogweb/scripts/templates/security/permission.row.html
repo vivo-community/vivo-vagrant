@@ -1,0 +1,18 @@
+{{ if (it['resource_type'] === '*') { }}
+    <td style="width:30%;"><i class="glyphicon glyphicon-asterisk"></i></td>
+{{ } else { }}
+    <td style="width:30%;">{{= it['resource_type']}}</td>
+{{ } }}
+{{ if (it.resource === '*') { }}
+    <td style="width:30%;"><i class="glyphicon glyphicon-asterisk"></i></td>
+{{ } else { }}
+    <td style="width:30%;">{{= it.resource}}</td>
+{{ } }}
+
+<td><input type="checkbox" data-action="create" {{? it.actions.create}}checked{{?}}></td>
+<td><input type="checkbox" data-action="delete" {{? it.actions.delete}}checked{{?}}></td>
+<td><input type="checkbox" data-action="read" {{? it.actions.read}}checked{{?}}></td>
+<td><input type="checkbox" data-action="write" {{? it.actions.write}}checked{{?}}></td>
+<td><input type="checkbox" data-action="grant" {{? it.actions.grant}}checked{{?}}></td>
+<td><input type="checkbox" data-action="revoke" {{? it.actions.revoke}}checked{{?}}></td>
+<td><input type="checkbox" data-action="execute" {{? it.actions.execute}}checked{{?}}></td>

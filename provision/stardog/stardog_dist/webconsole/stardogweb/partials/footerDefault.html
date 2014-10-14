@@ -1,0 +1,62 @@
+<div class="row">
+    {{#if footer.modules}}
+    <div class="col-md-2">
+        <strong>Application Modules</strong>
+        <ul class="list-no-bullets">
+        {{#each footer.modules}}
+          {{#if label}}
+            {{#if mainUrl}}
+            <li><a href="{{mainUrl}}">{{label}}</a></li>
+            {{else}}
+            <li>{{label}}</li>
+            {{/if}}
+          {{else}}
+            {{#if mainUrl}}
+            <li><a href="{{mainUrl}}">{{mainUrl}}</a></li>
+            {{/if}}
+          {{/if}}
+        {{/each}}
+        </ul>
+    </div>
+    {{/if}}
+    {{#if footer.about}}
+    <div class="col-md-2 {{#if footer.modules}}col-md-offset-1{{/if}}">
+        <strong>About</strong>
+        <ul class="list-no-bullets">
+        {{#each footer.about}}
+          {{#if label}}
+            {{#if mainUrl}}
+            <li><a href="{{mainUrl}}">{{label}}</a></li>
+            {{else}}
+            <li>{{label}}</li>
+            {{/if}}
+          {{else}}
+            {{#if mainUrl}}
+            <li><a href="{{mainUrl}}">{{mainUrl}}</a></li>
+            {{/if}}
+          {{/if}}
+        {{/each}}
+        </ul>
+    </div>
+    {{/if}}
+    {{#if footer.help}}
+    <div class="col-md-2 col-md-offset-1">
+        <strong>Help</strong>
+        <ul class="list-no-bullets">
+        {{#each footer.help}}
+          {{#if label}}
+            {{#if mainUrl}}
+            <li><a href="{{mainUrl}}">{{label}}</a></li>
+            {{else}}
+            <li>{{label}}</li>
+            {{/if}}
+          {{else}}
+            {{#if mainUrl}}
+            <li><a href="{{mainUrl}}">{{mainUrl}}</a></li>
+            {{/if}}
+          {{/if}}
+        {{/each}}
+        </ul>
+    </div>
+    {{/if}}
+</div>

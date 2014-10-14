@@ -1,0 +1,50 @@
+.\" generated with Ronn/v0.7.3
+.\" http://github.com/rtomayko/ronn/tree/0.7.3
+.
+.TH "STARDOG_QUERY_EXPLAIN" "1" "August 2014" "Clark & Parsia" "stardog"
+.
+.SH "NAME"
+\fBstardog_query_explain\fR \- Returns an execution plan for the given query\.
+.
+.SH "SYNOPSIS"
+\fBstardog\fR \fBquery\fR \fBexplain\fR [ {\-p | \-\-passwd} \fIpassword\fR ] [ {\-P | \-\-ask\-password} ] [ {\-r | \-\-reasoning} \fIlevel\fR ] [ {\-u | \-\-username} \fIusername\fR ] [ {\-v | \-\-verbose} ] [\-\-] \fIdatabase\fR \fIquery\fR\.\.\.
+.
+.SH "OPTIONS"
+.
+.TP
+\fB\-p\fR \fIpassword\fR, \fB\-\-passwd\fR \fIpassword\fR
+Password\.
+.
+.TP
+\fB\-P\fR, \fB\-\-ask\-password\fR
+Prompt for password\.
+.
+.TP
+\fB\-r\fR \fIlevel\fR, \fB\-\-reasoning\fR \fIlevel\fR
+The reasoning level to use for query\. Can be one of [NONE, QL, RL, EL, SL, DL, RDFS]
+.
+.TP
+\fB\-u\fR \fIusername\fR, \fB\-\-username\fR \fIusername\fR
+User name\.
+.
+.TP
+\fB\-v\fR, \fB\-\-verbose\fR
+Verbose flag that causes more detailed information to be printed
+.
+.TP
+\-\-
+This option can be used to separate command\-line options from the list of arguments (useful when arguments might be mistaken for command\-line options)\.
+.
+.TP
+\fIdatabase\fR \fIquery\fR
+The name of the database or the full connection string of the database to connect to\. If only the name is provided, the default server URL will be pre\-pended to the name of the database in order to construct the connection string\. Connection parameters such as \';reasoning=QL\' can be included in the provided database name\. Connection parameters specified like this can be overridden by specific options on the command\. The default server URL will be read from the JVM argument \'stardog\.default\.cli\.server\'\. If the JVM argument is not set, the default value \'snarl://localhost:5820\' is used\. If the server URL has no explicit port value, the default port value \'5820\' is used\. To use a secure connection, you should specify the full connection string and postfix \'s\' to the protocol, e\.g\. snarls or https\. The subsequent argument is the SPARQL query string to execute\. This can either be a file name or a SPARQL query string\.
+.
+.SH "DISCUSSION"
+Given a query, this command returns the optimized execution plan for the query against a database\. If the connection uses reasoning, the resulting plan will take that into account\.
+.
+.SH "EXAMPLES"
+.
+.TP
+Return an execution plan for the specified query against the db \'myDb\':
+$ stardog query explain myDb "SELECT ?title WHERE { <http://example\.org/book/book1> <http://purl\.org/dc/elements/1\.1/title> ?title \. }"
+

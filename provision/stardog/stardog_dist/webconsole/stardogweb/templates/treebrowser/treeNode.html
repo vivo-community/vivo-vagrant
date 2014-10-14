@@ -1,0 +1,48 @@
+<li class="node"><i class="icon icon-chevron-right"></i> 
+<strong>
+{{#if [@type]}}
+	{{#isArray [@type]}}
+<a href="#!/browse/{{#encodeURIComp [@type].[0]}}{{this}}{{/encodeURIComp}}/{{#encodeURIComp [@id]}}{{this}}{{/encodeURIComp}}" data-toggle="tooltip" data-placement="right" title="{{[@type]}}">
+		{{#if [@egadLabel]}}{{[@egadLabel]}}{{else}}{{#localname [@id]}}{{this}}{{/localname}}{{/if}}</a>
+	{{else}}
+<a href="#!/browse/{{#encodeURIComp [@type]}}{{this}}{{/encodeURIComp}}/{{#encodeURIComp [@id]}}{{this}}{{/encodeURIComp}}" data-toggle="tooltip" data-placement="right" title="{{[@type]}}">
+		{{#if [@egadLabel]}}{{[@egadLabel]}}{{else}}{{#localname [@id]}}{{this}}{{/localname}}{{/if}}</a> 
+	{{/isArray}}
+{{else}}
+	{{#if [@found]}}
+<a href="#!/browse/resource/{{#encodeURIComp [@id]}}{{this}}{{/encodeURIComp}}" data-toggle="tooltip" data-placement="right" title="owl:Thing">
+		{{#if [@egadLabel]}}{{[@egadLabel]}}{{else}}{{#localname [@id]}}{{this}}{{/localname}}{{/if}}</a> 
+	{{else}}
+		{{#if [@value]}}
+			{{#isURL [@value]}}
+	<a href="{{#decodeURIComp [@value]}}{{this}}{{/decodeURIComp}}" target="_blank">{{#decodeURIComp [@value]}}{{this}}{{/decodeURIComp}}</a>
+			{{else}}
+				{{#if [@egadLabel]}}
+					{{#isURL [@egadLabel]}}
+						<a href="{{#decodeURIComp [@egadLabel]}}{{this}}{{/decodeURIComp}}" target="_blank">{{#decodeURIComp [@egadLabel]}}{{this}}{{/decodeURIComp}}</a>
+					{{else}}
+						{{[@egadLabel]}}
+					{{/isURL}}
+				{{else}}
+					{{[@value]}}
+				{{/if}}
+			{{/isURL}}
+		{{else}}
+			{{#isURL [@id]}}
+	<a href="{{#decodeURIComp [@id]}}{{this}}{{/decodeURIComp}}" target="_blank">{{#decodeURIComp [@id]}}{{this}}{{/decodeURIComp}}</a>
+			{{else}}
+				{{#if [@egadLabel]}}
+					{{#isURL [@egadLabel]}}
+						<a href="{{#decodeURIComp [@egadLabel]}}{{this}}{{/decodeURIComp}}" target="_blank">{{#decodeURIComp [@egadLabel]}}{{this}}{{/decodeURIComp}}</a>
+					{{else}}
+						{{[@egadLabel]}}
+					{{/isURL}}
+				{{else}}
+					{{[@id]}}
+				{{/if}}
+			{{/isURL}}
+		{{/if}}
+	{{/if}}
+{{/if}}</strong></li>
+<ul class="propertyList">
+</ul>
