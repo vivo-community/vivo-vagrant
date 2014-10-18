@@ -1,0 +1,145 @@
+<html>
+<head>
+<link href="css/bootstrap.min.css" rel="stylesheet" media="screen">
+</head>
+<style>
+    body { margin: 50px; }
+</style>
+<body>
+<hr/>
+<h1 class="text-info">stardog vcs commit Manual Page
+<hr/>
+<h1 class="text-info">NAME</h1>
+<br/>
+<div class="row"><div class="span8 offset1">stardog vcs commit &mdash;Commits a new version by adding and removing triples specified in files. Different from the 'data add/remove' commands, this command allows one to add and remove triples in one commit and associate a commit message. Removals are performed  before additions.</div>
+</div>
+<br/>
+<h1 class="text-info">SYNOPSIS</h1>
+<br/>
+<div class="row">
+<div class="span8 offset1">
+stardog vcs commit [ --add &lt;add&gt;... ] [ {-f | --format} &lt;rdf format&gt; ] [ {-g | --named-graph} &lt;named graph&gt; ] {-m | --message} &lt;message&gt; [ {-p | --passwd} &lt;password&gt; ] [ {-P | --ask-password} ] [ --remove &lt;remove&gt;... ] [ --remove-all ] [ --server-side ] [ {-u | --username} &lt;username&gt; ] [ {-v | --verbose} ] [--] &lt;database&gt;</div>
+</div>
+<br/>
+<h1 class="text-info">OPTIONS</h1>
+<br/>
+<div class="row">
+<div class="span8 offset1">
+--add &lt;add&gt;</div>
+</div>
+<div class="row">
+<div class="span8 offset2">
+Files whose contents will be added to the database.</div>
+</div>
+<div class="row">
+<div class="span8 offset1">
+-f &lt;rdf format&gt;, --format &lt;rdf format&gt;</div>
+</div>
+<div class="row">
+<div class="span8 offset2">
+Data format. The supported formats are NTRIPLES, RDF/XML, TURTLE, TRIG, TRIX, N3, NQUADS. If no format is specified, the file name will be used to guess the required format.</div>
+</div>
+<div class="row">
+<div class="span8 offset1">
+-g &lt;named graph&gt;, --named-graph &lt;named graph&gt;</div>
+</div>
+<div class="row">
+<div class="span8 offset2">
+Target named graph. If no named graph is specified, the default graph will be used. This is the named graph where data will be modified. If a graph format that specifies context is used, such as TRIG, this will override the context specified in the by the format.</div>
+</div>
+<div class="row">
+<div class="span8 offset1">
+-m &lt;message&gt;, --message &lt;message&gt;</div>
+</div>
+<div class="row">
+<div class="span8 offset2">
+The commit message that will be associated with the version.</div>
+</div>
+<div class="row">
+<div class="span8 offset1">
+-p &lt;password&gt;, --passwd &lt;password&gt;</div>
+</div>
+<div class="row">
+<div class="span8 offset2">
+Password.</div>
+</div>
+<div class="row">
+<div class="span8 offset1">
+-P, --ask-password</div>
+</div>
+<div class="row">
+<div class="span8 offset2">
+Prompt for password.</div>
+</div>
+<div class="row">
+<div class="span8 offset1">
+--remove &lt;remove&gt;</div>
+</div>
+<div class="row">
+<div class="span8 offset2">
+Files whose contents will be removed from the database.</div>
+</div>
+<div class="row">
+<div class="span8 offset1">
+--remove-all</div>
+</div>
+<div class="row">
+<div class="span8 offset2">
+Remove all flag. If this flag is set, all data in the database will be removed.</div>
+</div>
+<div class="row">
+<div class="span8 offset1">
+--server-side</div>
+</div>
+<div class="row">
+<div class="span8 offset2">
+Server-side file IO. If this flag is set, it will be assumed that the input files passed reside on the server and the client wil just send the file path to the server.</div>
+</div>
+<div class="row">
+<div class="span8 offset1">
+-u &lt;username&gt;, --username &lt;username&gt;</div>
+</div>
+<div class="row">
+<div class="span8 offset2">
+User name.</div>
+</div>
+<div class="row">
+<div class="span8 offset1">
+-v, --verbose</div>
+</div>
+<div class="row">
+<div class="span8 offset2">
+Verbose flag that causes more detailed information to be printed</div>
+</div>
+<div class="row">
+<div class="span8 offset1">
+--
+</div>
+</div>
+<div class="row">
+<div class="span8 offset2">
+This option can be used to separate command-line options from the list of argument, (useful when arguments might be mistaken for command-line options
+</div>
+</div>
+<div class="row">
+<div class="span8 offset1">
+&lt;database&gt;</div>
+</div>
+<div class="row">
+<div class="span8 offset2">
+The name of the database or the full connection string of the database to connect to. If only the name is provided, the default server URL will be pre-pended to the name of the database in order to construct the connection string. Connection parameters such as ';reasoning=QL' can be included in the provided database name. Connection parameters specified like this can be overridden by specific options on the command. The default server URL will be read from the JVM argument 'stardog.default.cli.server'. If the JVM argument is not set, the default value 'snarl://localhost:5820' is used. If the server URL has no explicit port value, the default port value '5820' is used.  To use a secure connection, you should specify the full connection string and postfix 's' to the protocol, e.g. snarls or https.</div>
+</div>
+<br/>
+<h1 class="text-info">EXAMPLES</h1>
+<br/>
+<div class="row">
+<div class="span12 offset1">
+<p>
+Commits a new version by adding and removing some triples and specifying a commit message</p>
+<pre>
+    $ stardog version commit --add add_file1.ttl add_file2.ttl --remove remove_file.ttl -m "This is an example commit" myDb</pre>
+</div>
+</div>
+</body>
+</html>
+

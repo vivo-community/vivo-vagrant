@@ -1,0 +1,120 @@
+<html>
+<head>
+<link href="css/bootstrap.min.css" rel="stylesheet" media="screen">
+</head>
+<style>
+    body { margin: 50px; }
+</style>
+<body>
+<hr/>
+<h1 class="text-info">stardog-admin db offline Manual Page
+<hr/>
+<h1 class="text-info">NAME</h1>
+<br/>
+<div class="row"><div class="span8 offset1">stardog-admin db offline &mdash;Takes a database offline.</div>
+</div>
+<br/>
+<h1 class="text-info">SYNOPSIS</h1>
+<br/>
+<div class="row">
+<div class="span8 offset1">
+stardog-admin [ --server &lt;server url&gt; ]db offline [ {-p | --passwd} &lt;password&gt; ] [ {-P | --ask-password} ] [ --timeout &lt;timeout&gt; ] [ {-u | --username} &lt;username&gt; ] [ {-v | --verbose} ] [--] &lt;database&gt;</div>
+</div>
+<br/>
+<h1 class="text-info">OPTIONS</h1>
+<br/>
+<div class="row">
+<div class="span8 offset1">
+-p &lt;password&gt;, --passwd &lt;password&gt;</div>
+</div>
+<div class="row">
+<div class="span8 offset2">
+Password.</div>
+</div>
+<div class="row">
+<div class="span8 offset1">
+-P, --ask-password</div>
+</div>
+<div class="row">
+<div class="span8 offset2">
+Prompt for password.</div>
+</div>
+<div class="row">
+<div class="span8 offset1">
+--server &lt;server url&gt;</div>
+</div>
+<div class="row">
+<div class="span8 offset2">
+URL of Stardog Server. If this option isn't specified, it will be read from JVM argument 'stardog.default.cli.server'. If the JVM arg isn't set, the default value 'snarl://localhost:5820' is used. If server URL has no explicit port value, the default port value '5820' is used.  Example: 'stardog --server snarl://12.34.56.78:5820 server stop' </div>
+</div>
+<div class="row">
+<div class="span8 offset1">
+--timeout &lt;timeout&gt;</div>
+</div>
+<div class="row">
+<div class="span8 offset2">
+Minutes to wait before database is put offline. If no timeout is specified, the default timeout of 3 minutes is used.</div>
+</div>
+<div class="row">
+<div class="span8 offset1">
+-u &lt;username&gt;, --username &lt;username&gt;</div>
+</div>
+<div class="row">
+<div class="span8 offset2">
+User name.</div>
+</div>
+<div class="row">
+<div class="span8 offset1">
+-v, --verbose</div>
+</div>
+<div class="row">
+<div class="span8 offset2">
+Verbose flag that causes more detailed information to be printed</div>
+</div>
+<div class="row">
+<div class="span8 offset1">
+--
+</div>
+</div>
+<div class="row">
+<div class="span8 offset2">
+This option can be used to separate command-line options from the list of argument, (useful when arguments might be mistaken for command-line options
+</div>
+</div>
+<div class="row">
+<div class="span8 offset1">
+&lt;database&gt;</div>
+</div>
+<div class="row">
+<div class="span8 offset2">
+The name of the database for the operation</div>
+</div>
+<br/>
+<h1 class="text-info">DISCUSSION</h1>
+<br/>
+<div class="row">
+<div class="span8 offset1">
+Initiates the offlining of a database. The offline operation optionally takes a timeout which, when specified, provides a window where the database is not yet offline. While in this window, no new connections will be accepted but all open connections will be allowed to complete their actions. Once the timeout has been reached, any remaining connections are closed, open transactions are rolled back, and the database is put offline.</div>
+</div>
+<br/>
+<h1 class="text-info">EXAMPLES</h1>
+<br/>
+<div class="row">
+<div class="span12 offset1">
+<p>
+Take a database 'foo' offline:</p>
+<pre>
+    $ stardog-admin db offline foo</pre>
+<p>
+Take the database 'foo' offline, but wait 15 minutes for open connections to complete their actions:</p>
+<pre>
+    $ stardog-admin db offline --timeout 15 foo </pre>
+<p>
+Take the database 'foo' offline immediately:</p>
+<pre>
+    $ stardog-admin db offline --timeout 0 foo </pre>
+</div>
+</div>
+</body>
+</html>
+

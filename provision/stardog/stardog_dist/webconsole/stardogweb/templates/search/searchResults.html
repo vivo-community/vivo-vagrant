@@ -1,0 +1,52 @@
+<legend>
+  Search Results {{#if term}}for: <em class="search-term">{{#decodeURIComp term}}{{this}}{{/decodeURIComp}}</em>{{/if}}
+</legend>
+
+
+{{#if results}}
+
+  {{#prtable results name="results" class="table-hover"}}
+
+  <!-- URI or label -->
+  <td><a href="#!/browse/resource/{{#encodeURIComp uri}}{{/encodeURIComp}}">{{#if label}}{{label}}{{else}}{{#localname uri}}{{this}}{{/localname}}{{/if}}</a></td>
+
+  <!-- types -->
+  <td>
+  {{#each types}}
+  <a href="#!/browse/{{#encodeURIComp uri}}{{/encodeURIComp}}"><span class="label label-primary">{{#if label}}{{label}}{{else}}{{#localname uri}}{{this}}{{/localname}}{{/if}}</span></a>
+  {{/each}}
+  </td>
+
+  <!-- matched results -->
+  <td>
+  {{#each matches}}
+    <div class="row">
+      <div class=col-sm-5>
+        <span class="label label-success">property</span> {{#if propertyLabel}}{{propertyLabel}}{{else}}{{#localname propertyUri}}{{this}}{{/localname}}{{/if}}
+      </div>
+      <div class=col-sm-7>
+        <span class="label label-default">string</span> {{string}}
+      </div>
+    </div>
+
+  {{/each}}
+</td>
+
+  {{/prtable}}
+
+  <ul class="pager pagination">
+    <li class="previous">
+      <a {{#if prevPage}}href="{{prevPage}}"{{else}}href="#" style="visibility: hidden"{{/if}}>&larr; Previous</a>
+    </li>
+    <li class="next">
+      <a {{#if nextPage}}href="{{nextPage}}"{{else}}href="#" style="visibility: hidden"{{/if}}>Next &rarr;</a>
+    </li>
+  </ul>
+{{else}}
+  <h3>No search results.</h3>
+  <ul class="pager pagination">
+    <li class="previous">
+      <a {{#if prevPage}}href="{{prevPage}}"{{else}}href="#" style="visibility: hidden"{{/if}}>&larr; Previous</a>
+    </li>
+  </ul>
+{{/if}}

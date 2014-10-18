@@ -1,0 +1,20 @@
+<div id="menu"></div>
+
+<div id="alert"></div>
+
+<div class="panel panel-default">
+  <div class="panel-heading">
+    <h1 class="sw-icon icon-data">New database</h1>
+  </div>
+  <div class="panel-body">
+  </div>
+  <div class="panel-footer">
+    <button id="btnFinish" class="btn btn-default" {{? !it.showFinish}}style="visibility: hidden;"{{?}}><i class="glyphicon glyphicon-ok-sign"></i> Finish</button>
+    
+    {{? it.showNext}}
+    <button id="btnNext" class="btn btn-default pull-right">Next <i class="glyphicon glyphicon-circle-arrow-right"></i></button>
+    {{?}}
+
+    <button id="btnBack" class="btn btn-default pull-right" style="margin-right: 10px; {{? !it.showBack}}visibility: hidden;{{?}}"><i class="glyphicon glyphicon-circle-arrow-left"></i> Back</button>
+  </div>
+</div>

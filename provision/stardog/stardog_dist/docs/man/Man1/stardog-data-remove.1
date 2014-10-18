@@ -1,0 +1,70 @@
+.\" generated with Ronn/v0.7.3
+.\" http://github.com/rtomayko/ronn/tree/0.7.3
+.
+.TH "STARDOG_DATA_REMOVE" "1" "August 2014" "Clark & Parsia" "stardog"
+.
+.SH "NAME"
+\fBstardog_data_remove\fR \- Removes RDF from a database; prints status on STDOUT\.
+.
+.SH "SYNOPSIS"
+\fBstardog\fR \fBdata\fR \fBremove\fR [ {\-a | \-\-all} ] [ {\-f | \-\-format} \fIrdf format\fR ] [ {\-g | \-\-named\-graph} \fInamed graph\fR ] [ {\-p | \-\-passwd} \fIpassword\fR ] [ {\-P | \-\-ask\-password} ] [ \-\-server\-side ] [ {\-u | \-\-username} \fIusername\fR ] [ {\-v | \-\-verbose} ] [\-\-] \fIdatabase\fR \fIname\fR \fIfiles\fR\.\.\.
+.
+.SH "OPTIONS"
+.
+.TP
+\fB\-a\fR, \fB\-\-all\fR
+Remove all flag\. If this flag is set, all data in the database will be removed\.
+.
+.TP
+\fB\-f\fR \fIrdf format\fR, \fB\-\-format\fR \fIrdf format\fR
+Data format\. The supported formats are NTRIPLES, RDF/XML, TURTLE, TRIG, TRIX, N3, NQUADS\. If no format is specified, the file name will be used to guess the required format\.
+.
+.TP
+\fB\-g\fR \fInamed graph\fR, \fB\-\-named\-graph\fR \fInamed graph\fR
+Target named graph\. If no named graph is specified, the default graph will be used\. This is the named graph where data will be modified\. If a graph format that specifies context is used, such as TRIG, this will override the context specified in the by the format\.
+.
+.TP
+\fB\-p\fR \fIpassword\fR, \fB\-\-passwd\fR \fIpassword\fR
+Password\.
+.
+.TP
+\fB\-P\fR, \fB\-\-ask\-password\fR
+Prompt for password\.
+.
+.TP
+\fB\-\-server\-side\fR
+Server\-side file IO\. If this flag is set, it will be assumed that the input files passed reside on the server and the client wil just send the file path to the server\.
+.
+.TP
+\fB\-u\fR \fIusername\fR, \fB\-\-username\fR \fIusername\fR
+User name\.
+.
+.TP
+\fB\-v\fR, \fB\-\-verbose\fR
+Verbose flag that causes more detailed information to be printed
+.
+.TP
+\-\-
+This option can be used to separate command\-line options from the list of arguments (useful when arguments might be mistaken for command\-line options)\.
+.
+.TP
+\fIdatabase\fR \fIname\fR \fIfiles\fR
+The name of the database or the full connection string of the database to connect to\. If only the name is provided, the default server URL will be pre\-pended to the name of the database in order to construct the connection string\. Connection parameters such as \';reasoning=QL\' can be included in the provided database name\. Connection parameters specified like this can be overridden by specific options on the command\. The default server URL will be read from the JVM argument \'stardog\.default\.cli\.server\'\. If the JVM argument is not set, the default value \'snarl://localhost:5820\' is used\. If the server URL has no explicit port value, the default port value \'5820\' is used\. To use a secure connection, you should specify the full connection string and postfix \'s\' to the protocol, e\.g\. snarls or https\. Subsequent arguments are the list of files whose contents should be added to or removed from the database\.
+.
+.SH "DISCUSSION"
+Removes data from the database in a single commit\. The remove operation is atomic: if multiple files are being removed from the database and there is an error removing one or more of the files, the entire operation will be rolled back\.
+.
+.SH "EXAMPLES"
+.
+.TP
+Clear all contents of the database \'myDb\':
+$ stardog data remove \-\-all myDb
+.
+.TP
+Remove data from the default graph of the database \'myDb\':
+$ stardog data remove myDb file\.rdf
+.
+.TP
+Remove data from a specific named graph of the database \'myDb\':
+$ stardog data \-\-named\-graph http://example\.org/context remove myDb file\.rdf
+

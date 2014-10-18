@@ -1,0 +1,123 @@
+Clark & Parsia LLC
+
+Stardog Evaluation License, version 2.2.1, 12 August 2014
+
+This licenses governs your use of the accompanying software, Stardog 2.2.1
+(hereafter, "the product"); if you use the product, you accept this license.
+If you do not accept this license, do not use the product.
+
+In summary, this license allows you to use the product free of charge for
+the purpose of evaluating Stardog.
+
+Evaluation License Terms and Conditions
+---------------------------------------
+
+Clark & Parsia, LLC ("C&P") is willing to license the product to you only
+upon the condition that you accept all of the terms contained in this
+Evaluation License Agreement ("Agreement"). Please read the Agreement
+carefully. By using or installing the product, you accept all of the terms
+of this agreement.
+
+If you are agreeing to this license on behalf of an entity other than an
+individual person, you represent that you are binding and have the right to
+bind the entity to the terms and conditions of this Agreement.
+
+1. Subject of Agreement. 
+
+The product, as referred to in this Agreement, shall be the binary software
+package "stardog-2.2.1.zip" (or "stardog-2.2.1.tgz"). The product consists
+of a WAR file and any documentation provided in the downloaded package.
+
+2. Grant of License. 
+
+C&P grants you a non-exclusive, non-transferable, limited license without
+fees to install, execute, and use internally the product for evaluation use.
+"Evaluation use" means testing the product for a period of not more than 30
+days; after expiration of that term, you are no longer permitted to evaluate
+version 2.2.1 of the product without further license grant from C&P.
+
+3. Restrictions and Reservation of Rights. 
+
+(a) Any use beyond the provisions of 2. Grants of License is prohibited.
+The product and copies of the product provided to you under this Agreement
+are copyrighted and licensed, not sold, to you by C&P. C&P reserves all
+copyrights and other intellectual property rights. This includes, but is not
+limited to, the right to modify, make available or public, rent out, lease,
+sell, lend or otherwise distribute the product. This does not apply as far
+as applicable law may require otherwise, or if C&P grants you additional
+rights of use in a separate agreement in writing.
+
+(b) You may NOT do any of the following:
+
+    (i) modify the product; (ii) sell, rent, lease, lend or encumber the
+    product; (iii) remove or alter any proprietary legends or notices
+    contained in the product; or (iv) decompile, or reverse engineer the
+    product (unless enforcement of these restrictions is prohibited by
+    applicable law).
+
+(c) No right, title or interest in or to any trademark, service mark, logo
+or trade name of C&P or its licensors is granted under this Agreement.
+
+4. Termination. 
+
+The Agreement is effective on the Date you download the product and remains
+effective until terminated. Your rights under this Agreement will terminate
+immediately without notice from C&P if you materially breach it or take
+any action in derogation of C&P's or its licensors' rights to the product.
+C&P may terminate this Agreement should the product become, or in C&P's
+reasonable opinion likely to become, the subject of a claim of intellectual
+property infringement or trade secret misappropriation. Upon termination,
+you will cease use of, and destroy, the product and confirm compliance in
+writing to C&P. Sections 3-7, inclusive, will survive termination of the
+Agreement.
+
+5 Disclaimer of Warranty. 
+
+TO THE EXTENT NOT PROHIBITED BY APPLICABLE LAW, C&P PROVIDES THE PRODUCT "AS
+IS" WITHOUT WARRANTY OF ANY KIND, EITHER EXPRESSED OR IMPLIED, INCLUDING,
+BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY, FITNESS
+FOR A PARTICULAR PURPOSE OR NON-INFRINGEMENT, EXCEPT TO THE EXTENT THAT
+THESE DISCLAIMERS ARE HELD TO BE LEGALLY INVALID. The entire risk as to
+the quality and performance of the product is with you. Should it prove
+defective, you assume the cost of all necessary servicing, repair, or
+correction.
+
+6 Limitation of Liability. 
+
+TO THE EXTENT NOT PROHIBITED BY APPLICABLE LAW, IN NO EVENT WILL C&P OR ITS
+LICENSORS BE LIABLE FOR ANY LOST REVENUE, PROFIT OR DATA, OR FOR SPECIAL,
+INDIRECT, CONSEQUENTIAL, INCIDENTAL OR PUNITIVE DAMAGES, HOWEVER CAUSED
+REGARDLESS OF THE THEORY OF LIABILITY, ARISING OUT OF OR RELATED TO THE
+USE OF OR INABILITY TO USE PRODUCT, EVEN IF C&P HAS BEEN ADVISED OF THE
+POSSIBILITY OF SUCH DAMAGES. In no event will C&P's liability to you,
+whether in contract, tort (including negligence), or otherwise, exceed the
+amount paid by you for the product under this Agreement. Some states do not
+allow the exclusion of incidental or consequential damages, so some of the
+terms above may not be applicable to you.
+
+7 U.S. Government Restricted Rights. 
+
+If the product is being acquired by or on behalf of the U.S. Government or
+by a U.S. Government prime contractor or subcontractor (at any tier), then
+the Government's rights in the product and accompanying documentation will
+be only as set forth in this Agreement; this is in accordance with 48 CFR
+227.7201 through 227.7202-4 (for Department of Defense (DOD) acquisitions)
+and with 48 CFR 2.101 and 12.212 (for non-DOD acquisitions).
+
+8 Miscellaneous. 
+
+This Agreement is the entire agreement between you and C&P relating to its
+subject matter. It supersedes all prior or contemporaneous oral or written
+communications, proposals, representations and warranties and prevails over
+any conflicting or additional terms of any quote, order, acknowledgment,
+or other communication between the parties relating to its subject matter
+during the term of this Agreement. No modification of this Agreement will
+be binding, unless in writing and signed by an authorized representative of
+each party. If any provision of this Agreement is held to be unenforceable,
+this Agreement will remain in effect with the provision omitted, unless
+omission would frustrate the intent of the parties, in which case this
+Agreement will immediately terminate. Course of dealing and other standard
+business conditions of the parties or the industry shall not apply. Any
+action related to this Agreement will be governed by the law of the State
+of Virginia and controlling U.S. federal law. No choice of law rules of any
+jurisdiction will apply.

@@ -1,0 +1,141 @@
+// Copyright (c) 2010 - 2014 -- Clark & Parsia, LLC. <http://www.clarkparsia.com>
+// For more information about licensing and copyright of this software, please contact
+// inquiries@clarkparsia.com or visit http://stardog.com
+
+package com.complexible.stardog.protocols.snarl.admin;
+
+import "core.proto";
+
+option java_outer_classname = "AdminProtocol";
+
+// This is default, but it's nice to be explicit
+option optimize_for = SPEED;
+
+// Protobuf message for encoding a name.  This is usually something like a user or role name,
+// or the name of a database.
+message Name {
+	required	string	name	= 1;
+}
+
+// Similar to the Name message, this encodes a single name as a string and a boolean flag.
+// Used for changing the status of something named, such as enabling or disabling a user account.
+message NameAndFlag {
+	required string	name	= 1;
+	optional bool	flag	= 2;
+}
+
+message NameAndLong {
+	required string	name		= 1;
+	optional int64	longValue	= 2;
+}
+
+// Encodes a name and an array of strings.  Used for specifying the list of roles held by a user.
+message NameAndStrings {
+	required string	name	= 1;
+	repeated string	strings	= 2;
+}
+
+// A pair of names.  Used for specifying the name & new name for a database being copied.
+message NamePair {
+	required string			nameFirst	= 1;
+	required string			nameSecond	= 2;
+}
+
+// Protobuf representation of a Stardog Permission object
+message Permission {
+    // the name of the user or role the permission pertains to
+	required string	name			= 1;
+
+	// the type of action the the permission is about, such as read or write
+	required int32	action			= 2;
+
+	// the resource the permission is acting on, such as a database.
+	required bytes	resource		= 3;
+
+	// The name of the resource the permission is for, such as the name of the database
+	required string	resourceName	= 4;
+}
+
+// Create database request object.  Provided by the client to initiate the creation
+// of a database by the server
+message CreateInfo {
+    // the name of the new database
+	required string			name		= 1;
+
+	// a map of file names on the server to the context uri those files should be loaded
+	// into when the database is created.
+	repeated FileToContext	files		= 2;
+
+	// the database metadata options serialized as a byte erray.  ByteIO can be used
+	// to (de)serialize these to/from their original format.
+	required bytes			options		= 3;
+
+	/**
+	 * whether or not file objects described in {@link #files} were copied to the server by the client
+	 */
+	optional bool           copy_to_server = 4;
+}
+
+// Message used by CreateInfo which encode a file name & context URI pair.  Indicates that
+// the specified file should be loaded into the provided context during bulk loading.
+message FileToContext {
+	required string file	= 1;
+	optional string	context	= 2;
+}
+
+// Message which encodes a Name and int pair.  Used to specify the database that should be
+// taken online or put offline, and the type identifier for how the database should be put
+// on or offline.
+//
+// Second integer is currently a placeholder and is not used.
+message NameAndIntPair {
+	required string name		= 1;
+	optional int32	intFirst	= 2;
+	optional int32	intSecond	= 3;
+}
+
+// Protobuf representation of a QueryInfo object
+message QueryInfo {
+	// query ID
+	required string id			= 1;
+
+	// query string
+	required string query 		= 2;
+
+	// name of the database query is running one
+	optional string db		 	= 3;
+
+	// name of the user running the query
+	optional string user 		= 4;
+
+	// when query execution started
+	required int64 startTime 	= 5;
+
+	// when query execution ended
+	optional int64 endTime 		= 6;
+
+	// timeout value for the query
+	optional int64 timeout 		= 7;
+
+	// reasoning level for query
+	required string reasoning 	= 8 [ default = "NONE" ];
+
+	// kernel ID
+    required string kernelId	= 9;
+}
+
+message QueryInfoList {
+	repeated QueryInfo queries = 1;
+}
+
+message CreateUser {
+    required    string  username    = 1;
+    required    bool    superuser   = 2;
+    required    bytes   password    = 3;
+}
+
+message Restore {
+	required    string  file        = 1;
+	optional    bool    overwrite   = 2 [ default = false ];
+	optional    string  name        = 3;
+}

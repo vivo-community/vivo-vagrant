@@ -44,6 +44,14 @@ cd ../Vitro
 git checkout maint-rel-1.7
 cd ..
 
+#copy over uf modifications
+#cp -r productMods/* VIVO/productMods/
+#rm -rf VIVO/rdf
+#cp -r rdf VIVO/rdf
+
+#rm -rf Vitro/webapp/rdf
+#cp -r rdf Vitro/webapp/rdf
+
 #Copy build properties into app directory
 cp /home/vagrant/provision/vivo/build.properties $APPDIR/.
 #Copy runtime properties into data directory

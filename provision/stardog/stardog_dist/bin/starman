@@ -1,0 +1,48 @@
+#!/bin/bash
+
+# if not set, set $STARDOG to the parent of the folder in which this script is stored
+if [ -z "$STARDOG" ]; then
+  SOURCE="${BASH_SOURCE[0]}"
+  while [ -h "$SOURCE" ]; do # resolve $SOURCE until the file is no longer a symlink
+    STARDOG="$( cd -P "$( dirname "$SOURCE" )" && pwd )"
+    SOURCE="$(readlink "$SOURCE")"
+    [[ $SOURCE != /* ]] && SOURCE="$STARDOG/$SOURCE" # if $SOURCE was a relative symlink, we need to resolve it relative to the path where the symlink file was located
+  done
+  STARDOG="$( cd -P "$( dirname "$SOURCE" )" && pwd )/.."
+fi
+
+if [[ `uname -s` == CYGWIN* ]]; then
+  PATHVAR=`cygpath -m "$STARDOG"`
+  PATHDELIM=";"
+else
+  PATHVAR="$STARDOG"
+  PATHDELIM=":"
+fi
+
+if [[ -z "${STARMAN}" ]]; then
+  # if no $STARMAN was defined, use $STARDOG 
+  STARMAN=${STARDOG}
+fi
+if [ ! -e $STARMAN/starman-*.jar ]; then
+  STARMAN=${STARDOG}/pack
+fi
+if [[ -z "${STARMAN_HOME}" ]]; then
+  STARMAN_LOGS=~/.starman
+else
+  STARMAN_LOGS=$STARMAN_HOME
+fi
+
+STARMAN_JAVA_ARGS="-Dapple.awt.UIElement=true -Xmx256m -Xms256m -XX:MaxPermSize=128m -Dstarman.logs=${STARMAN_LOGS}"
+
+cat << EOF
+
+DISCLAIMER: *Stardog Cluster 2.2.1 is *beta software* and should NOT be used for production purposes.*
+To file bug reports about Stardog Cluster, please email stardog@clarkparsia.com.
+
+EOF
+
+if [ $# -eq 0 ]; then
+  java $STARMAN_JAVA_ARGS -jar $STARMAN/starman-*.jar help
+else
+  java $STARMAN_JAVA_ARGS -jar $STARMAN/starman-*.jar $@
+fi

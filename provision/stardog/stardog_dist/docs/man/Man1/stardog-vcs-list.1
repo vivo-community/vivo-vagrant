@@ -1,0 +1,70 @@
+.\" generated with Ronn/v0.7.3
+.\" http://github.com/rtomayko/ronn/tree/0.7.3
+.
+.TH "STARDOG_VCS_LIST" "1" "August 2014" "Clark & Parsia" "stardog"
+.
+.SH "NAME"
+\fBstardog_vcs_list\fR \- Lists versions in a database\.
+.
+.SH "SYNOPSIS"
+\fBstardog\fR \fBvcs\fR \fBlist\fR [ \-\-after \fIafter\fR ] [ \-\-before \fIbefore\fR ] [ \-\-committer \fIcommitter\fR ] [ {\-l | \-\-limit} \fIlimit\fR ] [ {\-o | \-\-offset} \fIoffset\fR ] [ {\-p | \-\-passwd} \fIpassword\fR ] [ {\-P | \-\-ask\-password} ] [ {\-u | \-\-username} \fIusername\fR ] [ {\-v | \-\-verbose} ] [\-\-] \fIdatabase\fR
+.
+.SH "OPTIONS"
+.
+.TP
+\fB\-\-after\fR \fIafter\fR
+Limits the versions displayed to only those committed after this date\. The date should be a valid xsd:date (YYYY\-MM\-DD) or xsd:dateTime (YYYY\-MM\-DDTHH:MM:SS) value\.
+.
+.TP
+\fB\-\-before\fR \fIbefore\fR
+Limits the versions displayed to only those committed before this date\. The date should be a valid xsd:date (YYYY\-MM\-DD) or xsd:dateTime (YYYY\-MM\-DDTHH:MM:SS) value\.
+.
+.TP
+\fB\-\-committer\fR \fIcommitter\fR
+Limits the versions displayed to only those committed by this user\.
+.
+.TP
+\fB\-l\fR \fIlimit\fR, \fB\-\-limit\fR \fIlimit\fR
+Limits the number of versions to show\.
+.
+.TP
+\fB\-o\fR \fIoffset\fR, \fB\-\-offset\fR \fIoffset\fR
+Offset results; default 0\.
+.
+.TP
+\fB\-p\fR \fIpassword\fR, \fB\-\-passwd\fR \fIpassword\fR
+Password\.
+.
+.TP
+\fB\-P\fR, \fB\-\-ask\-password\fR
+Prompt for password\.
+.
+.TP
+\fB\-u\fR \fIusername\fR, \fB\-\-username\fR \fIusername\fR
+User name\.
+.
+.TP
+\fB\-v\fR, \fB\-\-verbose\fR
+Verbose flag that causes more detailed information to be printed
+.
+.TP
+\-\-
+This option can be used to separate command\-line options from the list of arguments (useful when arguments might be mistaken for command\-line options)\.
+.
+.TP
+\fIdatabase\fR
+The name of the database or the full connection string of the database to connect to\. If only the name is provided, the default server URL will be pre\-pended to the name of the database in order to construct the connection string\. Connection parameters such as \';reasoning=QL\' can be included in the provided database name\. Connection parameters specified like this can be overridden by specific options on the command\. The default server URL will be read from the JVM argument \'stardog\.default\.cli\.server\'\. If the JVM argument is not set, the default value \'snarl://localhost:5820\' is used\. If the server URL has no explicit port value, the default port value \'5820\' is used\. To use a secure connection, you should specify the full connection string and postfix \'s\' to the protocol, e\.g\. snarls or https\.
+.
+.SH "EXAMPLES"
+.
+.IP "\(bu" 4
+Lists all the versions (commits) in a database: $ stardog version list myDb
+.
+.IP "\(bu" 4
+$ stardog version list \-\-committer userName myDb:
+.
+.IP "\(bu" 4
+Lists all the versions committed bin a time range user
+.
+.IP "" 0
+

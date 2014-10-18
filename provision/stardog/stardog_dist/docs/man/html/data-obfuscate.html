@@ -1,0 +1,144 @@
+<html>
+<head>
+<link href="css/bootstrap.min.css" rel="stylesheet" media="screen">
+</head>
+<style>
+    body { margin: 50px; }
+</style>
+<body>
+<hr/>
+<h1 class="text-info">stardog data obfuscate Manual Page
+<hr/>
+<h1 class="text-info">NAME</h1>
+<br/>
+<div class="row"><div class="span8 offset1">stardog data obfuscate &mdash;Exports the contents of a database in obfuscated RDF.</div>
+</div>
+<br/>
+<h1 class="text-info">SYNOPSIS</h1>
+<br/>
+<div class="row">
+<div class="span8 offset1">
+stardog data obfuscate [ {-c | --config} &lt;obfuscation configuration&gt; ] [ --compression &lt;Compression&gt; ] [ {-f | --format} &lt;RDF Format&gt; ] [ {-g | --named-graph} &lt;export named graph(s)&gt;... ] [ {-p | --passwd} &lt;password&gt; ] [ {-P | --ask-password} ] [ {-s | --server-side} ] [ {-u | --username} &lt;username&gt; ] [ {-v | --verbose} ] [--] &lt;dbname&gt; &lt;export file&gt;...</div>
+</div>
+<br/>
+<h1 class="text-info">OPTIONS</h1>
+<br/>
+<div class="row">
+<div class="span8 offset1">
+-c &lt;obfuscation configuration&gt;, --config &lt;obfuscation configuration&gt;</div>
+</div>
+<div class="row">
+<div class="span8 offset2">
+Configuration file for obfuscation</div>
+</div>
+<div class="row">
+<div class="span8 offset1">
+--compression &lt;Compression&gt;</div>
+</div>
+<div class="row">
+<div class="span8 offset2">
+Compression formot [GZIP, BZ2] for the exported data.</div>
+</div>
+<div class="row">
+<div class="span8 offset1">
+-f &lt;RDF Format&gt;, --format &lt;RDF Format&gt;</div>
+</div>
+<div class="row">
+<div class="span8 offset2">
+RDF Format [NTRIPLES, RDF/XML, TURTLE, TRIG, TRIX, N3, NQUADS] for the exported data.</div>
+</div>
+<div class="row">
+<div class="span8 offset1">
+-g &lt;export named graph(s)&gt;, --named-graph &lt;export named graph(s)&gt;</div>
+</div>
+<div class="row">
+<div class="span8 offset2">
+Named graph(s) to export.  Multiple options are separated by whitespaces, e.g., '-g "urn:context1 urn:context2"'. The keyword ALL can be used if all named graphs in the db are desired, and the keyword DEFAULT can be used to export the default graph. When used as the last option, values should be followed by '--' to denote the end of the named graphs."</div>
+</div>
+<div class="row">
+<div class="span8 offset1">
+-p &lt;password&gt;, --passwd &lt;password&gt;</div>
+</div>
+<div class="row">
+<div class="span8 offset2">
+Password.</div>
+</div>
+<div class="row">
+<div class="span8 offset1">
+-P, --ask-password</div>
+</div>
+<div class="row">
+<div class="span8 offset2">
+Prompt for password.</div>
+</div>
+<div class="row">
+<div class="span8 offset1">
+-s, --server-side</div>
+</div>
+<div class="row">
+<div class="span8 offset2">
+Export the data to the server</div>
+</div>
+<div class="row">
+<div class="span8 offset1">
+-u &lt;username&gt;, --username &lt;username&gt;</div>
+</div>
+<div class="row">
+<div class="span8 offset2">
+User name.</div>
+</div>
+<div class="row">
+<div class="span8 offset1">
+-v, --verbose</div>
+</div>
+<div class="row">
+<div class="span8 offset2">
+Verbose flag that causes more detailed information to be printed</div>
+</div>
+<div class="row">
+<div class="span8 offset1">
+--
+</div>
+</div>
+<div class="row">
+<div class="span8 offset2">
+This option can be used to separate command-line options from the list of argument, (useful when arguments might be mistaken for command-line options
+</div>
+</div>
+<div class="row">
+<div class="span8 offset1">
+&lt;dbname&gt; &lt;export file&gt;</div>
+</div>
+<div class="row">
+<div class="span8 offset2">
+The name of the database or the full connection string of the database to connect to. If only the name is provided, the default server URL will be pre-pended to the name of the database in order to construct the connection string. Connection parameters such as ';reasoning=QL' can be included in the provided database name. Connection parameters specified like this can be overridden by specific options on the command. The default server URL will be read from the JVM argument 'stardog.default.cli.server'. If the JVM argument is not set, the default value 'snarl://localhost:5820' is used. If the server URL has no explicit port value, the default port value '5820' is used.  To use a secure connection, you should specify the full connection string and postfix 's' to the protocol, e.g. snarls or https. The second argument is the file to write the output to; if not specified, the output is written to STDOUT.</div>
+</div>
+<br/>
+<h1 class="text-info">DISCUSSION</h1>
+<br/>
+<div class="row">
+<div class="span8 offset1">
+Exports RDF data from a database similar to the export command but obfuscates the contents of the RDF by replacing all URIs, bnodes, and string literals using a message digest algorithm. Non-string typed literals (integers, floats, dates, etc.) are left unchanged. The obfuscation is guided by a configuration file. Configurations can specify which URIs and strings will be obfuscated by defining inclusion and exclusion filters.</div>
+</div>
+<br/>
+<h1 class="text-info">EXAMPLES</h1>
+<br/>
+<div class="row">
+<div class="span12 offset1">
+<p>
+Obfuscate the database 'myDb' using default configuration:</p>
+<pre>
+    $ stardog data obfuscate myDb</pre>
+<p>
+Obfuscate a named graph of the database 'myDb' as TRIG:</p>
+<pre>
+    $ stardog data obfuscate --format TRIG --named-graph http://mycontext.org/theContextid myDb</pre>
+<p>
+Obfuscate the database 'myDb' using a custom configuration and output to a file in TURTLE:</p>
+<pre>
+    $ stardog data obfuscate --config my_config.ttl myDb export.ttl</pre>
+</div>
+</div>
+</body>
+</html>
+

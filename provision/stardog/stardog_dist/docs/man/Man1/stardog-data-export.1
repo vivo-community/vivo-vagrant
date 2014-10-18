@@ -1,0 +1,82 @@
+.\" generated with Ronn/v0.7.3
+.\" http://github.com/rtomayko/ronn/tree/0.7.3
+.
+.TH "STARDOG_DATA_EXPORT" "1" "August 2014" "Clark & Parsia" "stardog"
+.
+.SH "NAME"
+\fBstardog_data_export\fR \- Exports the contents of a database in RDF\.
+.
+.SH "SYNOPSIS"
+\fBstardog\fR \fBdata\fR \fBexport\fR [ \-\-compression \fICompression\fR ] [ {\-f | \-\-format} \fIRDF Format\fR ] [ {\-g | \-\-named\-graph} \fIexport named graph(s)\fR\.\.\. ] [ {\-p | \-\-passwd} \fIpassword\fR ] [ {\-P | \-\-ask\-password} ] [ {\-s | \-\-server\-side} ] [ {\-u | \-\-username} \fIusername\fR ] [ {\-v | \-\-verbose} ] [\-\-] \fIdbname\fR \fIexport file\fR\.\.\.
+.
+.SH "OPTIONS"
+.
+.TP
+\fB\-\-compression\fR \fICompression\fR
+Compression formot [GZIP, BZ2] for the exported data\.
+.
+.TP
+\fB\-f\fR \fIRDF Format\fR, \fB\-\-format\fR \fIRDF Format\fR
+RDF Format [NTRIPLES, RDF/XML, TURTLE, TRIG, TRIX, N3, NQUADS] for the exported data\.
+.
+.TP
+\fB\-g\fR \fIexport named graph(s)\fR, \fB\-\-named\-graph\fR \fIexport named graph(s)\fR
+Named graph(s) to export\. Multiple options are separated by whitespaces, e\.g\., \'\-g "urn:context1 urn:context2"\'\. The keyword ALL can be used if all named graphs in the db are desired, and the keyword DEFAULT can be used to export the default graph\. When used as the last option, values should be followed by \'\-\-\' to denote the end of the named graphs\."
+.
+.TP
+\fB\-p\fR \fIpassword\fR, \fB\-\-passwd\fR \fIpassword\fR
+Password\.
+.
+.TP
+\fB\-P\fR, \fB\-\-ask\-password\fR
+Prompt for password\.
+.
+.TP
+\fB\-s\fR, \fB\-\-server\-side\fR
+Export the data to the server
+.
+.TP
+\fB\-u\fR \fIusername\fR, \fB\-\-username\fR \fIusername\fR
+User name\.
+.
+.TP
+\fB\-v\fR, \fB\-\-verbose\fR
+Verbose flag that causes more detailed information to be printed
+.
+.TP
+\-\-
+This option can be used to separate command\-line options from the list of arguments (useful when arguments might be mistaken for command\-line options)\.
+.
+.TP
+\fIdbname\fR \fIexport file\fR
+The name of the database or the full connection string of the database to connect to\. If only the name is provided, the default server URL will be pre\-pended to the name of the database in order to construct the connection string\. Connection parameters such as \';reasoning=QL\' can be included in the provided database name\. Connection parameters specified like this can be overridden by specific options on the command\. The default server URL will be read from the JVM argument \'stardog\.default\.cli\.server\'\. If the JVM argument is not set, the default value \'snarl://localhost:5820\' is used\. If the server URL has no explicit port value, the default port value \'5820\' is used\. To use a secure connection, you should specify the full connection string and postfix \'s\' to the protocol, e\.g\. snarls or https\. The second argument is the file to write the output to; if not specified, the output is written to STDOUT\.
+.
+.SH "DISCUSSION"
+Exports the database in the specified format to the specified output file, else to STDOUT\. By default, only the default graph will be exported\. To export the entire database, or a specific set of named graphs, use the \-g/\-\-named\-graph parameter to specify the graphs to export\. If no format is specified, the format is determined from the output file name; otherwise, TURTLE is the default\. Exports of large databases should be performed on the server using the \-\-server\-side flag\. This will save the RDF using the specified format in the export directory for the server\.
+.
+.SH "EXAMPLES"
+.
+.TP
+Export the database \'myDb\' as NTRIPLES:
+$ stardog data export \-\-format NTRIPLES myDb
+.
+.TP
+Export the entire database \'myDb\' to a file in TURTLE:
+$ stardog data export \-\-named\-graph ALL \-\- myDb export\.ttl
+.
+.TP
+Export two named graphs of the database \'myDb\' as TRIG:
+$ stardog data export \-\-named\-graph http://examples\.org/graph1 http://examples\.org/graph2 \-\-format TRIG myDb
+.
+.TP
+Export the database \'myDb\' to a file in TURTLE:
+$ stardog data export myDb export\.ttl
+.
+.TP
+Export the database \'myDb\' to a gzipped file in TURTLE:
+$ stardog data export myDb export\.ttl\.gz
+.
+.TP
+Export the database \'myDb\' as TRIG to a file on the server
+$ stardog data export \-\-format TRIG \-\-server\-side myDb
+

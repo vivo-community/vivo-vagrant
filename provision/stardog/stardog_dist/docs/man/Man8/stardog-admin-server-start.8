@@ -1,0 +1,78 @@
+.\" generated with Ronn/v0.7.3
+.\" http://github.com/rtomayko/ronn/tree/0.7.3
+.
+.TH "STARDOG\-ADMIN_SERVER_START" "8" "August 2014" "Clark & Parsia" "stardog-admin"
+.
+.SH "NAME"
+\fBstardog\-admin_server_start\fR \- Starts the Stardog Server\.
+.
+.SH "SYNOPSIS"
+\fBstardog\-admin\fR \fBserver\fR \fBstart\fR [ \-\-bind \fInetwork interface\fR ] [ \-\-disable\-security ] [ \-\-enable\-ssl ] [ \-\-home \fIhome\fR ] [ \-\-logfile \fIlog file\fR ] [ \-\-no\-cors ] [ \-\-no\-http ] [ \-\-no\-snarl ] [ \-\-no\-web\-console ] [ \-\-port \fIport\fR ] [ \-\-require\-ssl ]
+.
+.SH "OPTIONS"
+.
+.TP
+\fB\-\-bind\fR \fInetwork interface\fR
+Specify the address of the network interface the Stardog server should bind to, the default is 0\.0\.0\.0 Port should be specified separately with the \-\-port option\.
+.
+.TP
+\fB\-\-disable\-security\fR
+Disable security flag\. If this flag is set, security for the server is completely disabled\.
+.
+.TP
+\fB\-\-enable\-ssl\fR
+Enable SSL for the server; server will automatically enable SSL on a per\-connection basis to supports secure & unsecured clients\.
+.
+.TP
+\fB\-\-home\fR \fIhome\fR
+Stardog home directory location\.
+.
+.TP
+\fB\-\-logfile\fR \fIlog file\fR
+Stardog log file\.
+.
+.TP
+\fB\-\-no\-cors\fR
+No CORS support flag\. If this flag is set, CORS support in the HTTP server will be disabled\.
+.
+.TP
+\fB\-\-no\-http\fR
+No HTTP protocol flag\. If this flag is set, the HTTP interface will be disabled\. Cannot be used with \-\-no\-snarl
+.
+.TP
+\fB\-\-no\-snarl\fR
+No SNARL protocol flag\. If this flag is set, the SNARL interface will be disabled\. Cannot be used with \-\-no\-http\.
+.
+.TP
+\fB\-\-no\-web\-console\fR
+No Stardog Web Console flag\. If this flag is set, the Stardog Web Console in the HTTP server will be disabled\.
+.
+.TP
+\fB\-\-port\fR \fIport\fR
+Specify the port the server will bind to
+.
+.TP
+\fB\-\-require\-ssl\fR
+Require SSL for the server; client connections which do not use SSL will be immediately closed\.
+.
+.SH "DISCUSSION"
+By default, the server answers SNARL and HTTP protocols on port 5820\.A different port for the server can be specified with the \-\-port option\. The HTTP interface may be disabled entirely using \-\-no\-http\.
+.
+.SH "EXAMPLES"
+.
+.TP
+Start a Stardog server with the default options:
+$ stardog\-admin server start
+.
+.TP
+Start a Stardog server with security disabled:
+$ stardog\-admin server start \-\-disable\-security
+.
+.TP
+Run a Stardog server on localhost only with a different port
+$ stardog\-admin server start \-\-bind 127\.0\.0\.1 \-\-port 5804
+.
+.TP
+Start a Stardog server which required SSL connections from clients
+$ stardog\-admin server start \-\-require\-ssl
+

@@ -1,0 +1,90 @@
+.\" generated with Ronn/v0.7.3
+.\" http://github.com/rtomayko/ronn/tree/0.7.3
+.
+.TH "STARDOG\-ADMIN_DB_CREATE" "8" "August 2014" "Clark & Parsia" "stardog-admin"
+.
+.SH "NAME"
+\fBstardog\-admin_db_create\fR \- Creates a new database\.
+.
+.SH "SYNOPSIS"
+\fBstardog\-admin\fR [ \-\-server \fIserver url\fR ] \fBdb\fR \fBcreate\fR [ {\-c | \-\-config} \fIconfig\fR ] [ \-\-copy\-server\-side ] [ {\-d | \-\-durable} ] [ {\-i | \-\-index\-triples\-only} ] [ {\-n | \-\-name} \fIname\fR ] [ {\-o | \-\-options} \fIoptions\fR\.\.\. ] [ {\-p | \-\-passwd} \fIpassword\fR ] [ {\-P | \-\-ask\-password} ] [ {\-s | \-\-searchable} ] [ {\-t | \-\-type} \fItype\fR ] [ {\-u | \-\-username} \fIusername\fR ] [ {\-v | \-\-verbose} ] [\-\-] [ \fIfile\fR\.\.\. ]
+.
+.SH "OPTIONS"
+.
+.TP
+\fB\-c\fR \fIconfig\fR, \fB\-\-config\fR \fIconfig\fR
+Database configuration file\. This file specifies the name and options to use when creating the database\. Options specified explicitly on the command line override those in the configuration file\.
+.
+.TP
+\fB\-\-copy\-server\-side\fR
+Flag to specify whether or not files to be bulk loaded should be copied to the remote machine\. By default, files are not copied, only the specified paths are sent to the machine with the expectation that the exist on the server\. So to transfer the files to be bulk loaded, you must specify this option\.
+.
+.TP
+\fB\-d\fR, \fB\-\-durable\fR
+Durable transactions flag\. Enables durable transactions for recovery after failure\. Non\-durable transactions are more performant\.
+.
+.TP
+\fB\-i\fR, \fB\-\-index\-triples\-only\fR
+Triples\-only indexes flag\. Enables the creation of triples\-only indexes for the database to be created\. By default, Stardog supports named graph indexes\. This option should be used only if no named graph information is anticipated\. Quads may still be added, but in that case query performance will tend to degrade\. WARNING: this option can only be set at creation time and cannot be changed later without rebuilding all indexes; use with caution\.
+.
+.TP
+\fB\-n\fR \fIname\fR, \fB\-\-name\fR \fIname\fR
+Database name\. The first letter must be an alpha character\. Subsequent characters may be alphanumeric, underscore, or dash\. The name is a required property of a database, but it can be omitted on the command line if it is specified in a configuration file via the \-c/\-\-config flag\.
+.
+.TP
+\fB\-o\fR \fIoptions\fR, \fB\-\-options\fR \fIoptions\fR
+Database configuration options\. Each option is a \'key=value\' pair; multiple options are separated by whitespaces, e\.g\., \'\-o "option1=value1 option2=value2"\'\. When used as the last option, values should be followed by \'\-\-\' if a list of files for bulk load is also specified\.
+.
+.TP
+\fB\-p\fR \fIpassword\fR, \fB\-\-passwd\fR \fIpassword\fR
+Password\.
+.
+.TP
+\fB\-P\fR, \fB\-\-ask\-password\fR
+Prompt for password\.
+.
+.TP
+\fB\-s\fR, \fB\-\-searchable\fR
+Searchable flag\. Enables full\-text search of the database contents\. If the flag is set search indexes will be built when the database is created and maintained subsequently\.
+.
+.TP
+\fB\-\-server\fR \fIserver url\fR
+URL of Stardog Server\. If this option isn\'t specified, it will be read from JVM argument \'stardog\.default\.cli\.server\'\. If the JVM arg isn\'t set, the default value \'snarl://localhost:5820\' is used\. If server URL has no explicit port value, the default port value \'5820\' is used\. Example: \'stardog \-\-server snarl://12\.34\.56\.78:5820 server stop\'
+.
+.TP
+\fB\-t\fR \fItype\fR, \fB\-\-type\fR \fItype\fR
+Database type: [M]emory or [D]isk (default)\.
+.
+.TP
+\fB\-u\fR \fIusername\fR, \fB\-\-username\fR \fIusername\fR
+User name\.
+.
+.TP
+\fB\-v\fR, \fB\-\-verbose\fR
+Verbose flag that causes more detailed information to be printed
+.
+.TP
+\-\-
+This option can be used to separate command\-line options from the list of arguments (useful when arguments might be mistaken for command\-line options)\.
+.
+.TP
+\fIfile\fR
+The list of files to bulk load into the database when it is created\.
+.
+.SH "DISCUSSION"
+The new database will be persisted to the Stardog home directory and set online\. Files to be added to the database may be passed as final arguments\. If a directory is passed as one of the final arguments, all the files in that directory and its child directories will be recursively loaded to the database\. Additionally, zip files will be uncompressed and the RDF files they contain will be loaded\. Files with unrecognized extensions, or that produce parse errors, will be (silently) ignored\. By default, files are not copied to the remote server; only the paths are sent\. If the files do not exist on the remote server, the \'\-\-copy\-server\-side\' flag should be specified in order to copy them before creating the database and bulk loading the information\.
+.
+.SH "EXAMPLES"
+.
+.TP
+Create a new database with the default options by providing a name and a set of initial datasets to load:
+$ stardog\-admin db create \-n my\-database input\.ttl another_file\.rdf moredata\.rdf\.gz
+.
+.TP
+Create an empty database from a configuration file:
+$ stardog\-admin db create \-c database\.properties
+.
+.TP
+Create a database with initial input to be bulk loaded and some other options:
+$ stardog\-admin db create \-n db1 \-o icv\.enabled=true icv\.reasoning\.type=QL \-\- input\.ttl
+

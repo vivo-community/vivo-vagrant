@@ -1,0 +1,66 @@
+.\" generated with Ronn/v0.7.3
+.\" http://github.com/rtomayko/ronn/tree/0.7.3
+.
+.TH "STARDOG_QUERY_SEARCH" "1" "August 2014" "Clark & Parsia" "stardog"
+.
+.SH "NAME"
+\fBstardog_query_search\fR \- Performs a full\-text search over the database; prints results on STDOUT\.
+.
+.SH "SYNOPSIS"
+\fBstardog\fR \fBquery\fR \fBsearch\fR [ {\-l | \-\-limit} \fIlimit\fR ] [ {\-o | \-\-offset} \fIoffset\fR ] [ {\-p | \-\-passwd} \fIpassword\fR ] [ {\-P | \-\-ask\-password} ] {\-q | \-\-query} \fIquery\fR [ {\-t | \-\-threshold} \fIthreshold\fR ] [ {\-u | \-\-username} \fIusername\fR ] [ {\-v | \-\-verbose} ] [\-\-] \fIdatabase\fR
+.
+.SH "OPTIONS"
+.
+.TP
+\fB\-l\fR \fIlimit\fR, \fB\-\-limit\fR \fIlimit\fR
+Max number of search results; default: 50\.
+.
+.TP
+\fB\-o\fR \fIoffset\fR, \fB\-\-offset\fR \fIoffset\fR
+Offset search results; default 0\.
+.
+.TP
+\fB\-p\fR \fIpassword\fR, \fB\-\-passwd\fR \fIpassword\fR
+Password\.
+.
+.TP
+\fB\-P\fR, \fB\-\-ask\-password\fR
+Prompt for password\.
+.
+.TP
+\fB\-q\fR \fIquery\fR, \fB\-\-query\fR \fIquery\fR
+Search query in standard Lucene query syntax\. More information about Lucene query syntax at http://bit\.ly/Z02mfV
+.
+.TP
+\fB\-t\fR \fIthreshold\fR, \fB\-\-threshold\fR \fIthreshold\fR
+Minimum score threshold for results
+.
+.TP
+\fB\-u\fR \fIusername\fR, \fB\-\-username\fR \fIusername\fR
+User name\.
+.
+.TP
+\fB\-v\fR, \fB\-\-verbose\fR
+Verbose flag that causes more detailed information to be printed
+.
+.TP
+\-\-
+This option can be used to separate command\-line options from the list of arguments (useful when arguments might be mistaken for command\-line options)\.
+.
+.TP
+\fIdatabase\fR
+The name of the database or the full connection string of the database to connect to\. If only the name is provided, the default server URL will be pre\-pended to the name of the database in order to construct the connection string\. Connection parameters such as \';reasoning=QL\' can be included in the provided database name\. Connection parameters specified like this can be overridden by specific options on the command\. The default server URL will be read from the JVM argument \'stardog\.default\.cli\.server\'\. If the JVM argument is not set, the default value \'snarl://localhost:5820\' is used\. If the server URL has no explicit port value, the default port value \'5820\' is used\. To use a secure connection, you should specify the full connection string and postfix \'s\' to the protocol, e\.g\. snarls or https\.
+.
+.SH "DISCUSSION"
+Uses Waldo, the Stardog Lucene integration, to perform a full\-text search over the contents of the database\. This will return all individuals which have a literal whose value which matches the input search term\. Because the search is over the literal values, but this function returns individuals, you can see repeated individuals when an one has multiple values which match the search term\. If you want to retrieve the literals instead, or want to perform more sophisticated filtering, you can use the SPARQL search syntax which is explained in more detail at http://docs\.stardog\.com/using/#sd\-Searching\.
+.
+.SH "EXAMPLES"
+.
+.TP
+Perform the default search
+$ stardog query search \-q \'the search string\' myDb
+.
+.TP
+Perform a search with a minimum threshold and maximum number of results
+$ stardog query search \-q \'the search string\' \-l 100 \-t 5 myDb
+

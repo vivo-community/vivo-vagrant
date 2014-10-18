@@ -1,3 +1,5 @@
 .vagrant*
 *~
 work/*
+
+provision/stardog/stardog-license-key.bin

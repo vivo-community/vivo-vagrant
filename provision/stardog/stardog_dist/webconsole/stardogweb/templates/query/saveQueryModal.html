@@ -1,0 +1,22 @@
+<div class="modal fade" id="saveQueryModal" tabindex="-1" role="dialog" aria-labelledby="Save query" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        <h4>Save as...</h4>
+      </div>
+      <div class="modal-body">
+        <form id="inputForm" role="form">
+          <div class="form-group">
+            <label for="inFilename">Filename:</label>
+            <input id="inFilename" type="text" class="form-control" placeholder="e.g. query.sparql">
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button id="btnCancel" class="btn btn-default" data-dismiss="modal" aria-hidden="true">Cancel</button>
+        <button id="btnSave" class="btn btn-primary" data-dismiss="modal" aria-hidden="true">Save</button>
+      </div>
+    </div>
+  </div>
+</div>

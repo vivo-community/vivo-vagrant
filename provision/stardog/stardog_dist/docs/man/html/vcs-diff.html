@@ -1,0 +1,121 @@
+<html>
+<head>
+<link href="css/bootstrap.min.css" rel="stylesheet" media="screen">
+</head>
+<style>
+    body { margin: 50px; }
+</style>
+<body>
+<hr/>
+<h1 class="text-info">stardog vcs diff Manual Page
+<hr/>
+<h1 class="text-info">NAME</h1>
+<br/>
+<div class="row"><div class="span8 offset1">stardog vcs diff &mdash;Prints the difference between two versions.</div>
+</div>
+<br/>
+<h1 class="text-info">SYNOPSIS</h1>
+<br/>
+<div class="row">
+<div class="span8 offset1">
+stardog vcs diff [ --canonical ] [ {-f | --format} &lt;resultFormat&gt; ] [ {-p | --passwd} &lt;password&gt; ] [ {-P | --ask-password} ] [ --single ] [ {-u | --username} &lt;username&gt; ] [ {-v | --verbose} ] [--] &lt;database&gt; &lt;version&gt;...</div>
+</div>
+<br/>
+<h1 class="text-info">OPTIONS</h1>
+<br/>
+<div class="row">
+<div class="span8 offset1">
+--canonical</div>
+</div>
+<div class="row">
+<div class="span8 offset2">
+Combines all additions and removals such that all redundant updates are filtered. Note that, this operaiton requires to store all the changes in memory and might run out of memory if changes are large.</div>
+</div>
+<div class="row">
+<div class="span8 offset1">
+-f &lt;resultFormat&gt;, --format &lt;resultFormat&gt;</div>
+</div>
+<div class="row">
+<div class="span8 offset2">
+Result format for diffs [SPARQL, PATCH].</div>
+</div>
+<div class="row">
+<div class="span8 offset1">
+-p &lt;password&gt;, --passwd &lt;password&gt;</div>
+</div>
+<div class="row">
+<div class="span8 offset2">
+Password.</div>
+</div>
+<div class="row">
+<div class="span8 offset1">
+-P, --ask-password</div>
+</div>
+<div class="row">
+<div class="span8 offset2">
+Prompt for password.</div>
+</div>
+<div class="row">
+<div class="span8 offset1">
+--single</div>
+</div>
+<div class="row">
+<div class="span8 offset2">
+Reverts a single version.</div>
+</div>
+<div class="row">
+<div class="span8 offset1">
+-u &lt;username&gt;, --username &lt;username&gt;</div>
+</div>
+<div class="row">
+<div class="span8 offset2">
+User name.</div>
+</div>
+<div class="row">
+<div class="span8 offset1">
+-v, --verbose</div>
+</div>
+<div class="row">
+<div class="span8 offset2">
+Verbose flag that causes more detailed information to be printed</div>
+</div>
+<div class="row">
+<div class="span8 offset1">
+--
+</div>
+</div>
+<div class="row">
+<div class="span8 offset2">
+This option can be used to separate command-line options from the list of argument, (useful when arguments might be mistaken for command-line options
+</div>
+</div>
+<div class="row">
+<div class="span8 offset1">
+&lt;database&gt; &lt;version&gt;</div>
+</div>
+<div class="row">
+<div class="span8 offset2">
+The name of the database or the full connection string of the database to connect to. If only the name is provided, the default server URL will be pre-pended to the name of the database in order to construct the connection string. Connection parameters such as ';reasoning=QL' can be included in the provided database name. Connection parameters specified like this can be overridden by specific options on the command. The default server URL will be read from the JVM argument 'stardog.default.cli.server'. If the JVM argument is not set, the default value 'snarl://localhost:5820' is used. If the server URL has no explicit port value, the default port value '5820' is used.  To use a secure connection, you should specify the full connection string and postfix 's' to the protocol, e.g. snarls or https.Subsequent arguments specify the version range to revert. Version range</div>
+</div>
+<br/>
+<h1 class="text-info">EXAMPLES</h1>
+<br/>
+<div class="row">
+<div class="span12 offset1">
+<p>
+Prints the differences between the head version and its previous versions; i.e. the changes in last commit</p>
+<pre>
+    $ stardog version diff myDb</pre>
+<p>
+$ stardog version diff myDb de44369d-cc7b-4244-a3fb-3f6e271420b0</p>
+<pre>
+* Prints the differences between two versions, i.e. all the changes committed after the first version until the second version (inclusive)</pre>
+<p>
+Prints the difference between the given version and its previous version, i.e. the changes committed in a specific version</p>
+<pre>
+    $ stardog version revert --single myDb de44369d-cc7b-4244-a3fb-3f6e271420b0 </pre>
+</div>
+</div>
+</body>
+</html>
+

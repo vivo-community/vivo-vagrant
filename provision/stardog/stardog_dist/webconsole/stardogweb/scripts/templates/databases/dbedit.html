@@ -1,0 +1,90 @@
+<div id="menu"></div>
+
+<div id="alert"></div>
+
+<nav class="navbar navbar-default" role="navigation">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-2">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+    </div>
+
+    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-2">
+      <button id="btnCancel" type="button" class="btn btn-danger navbar-btn"><i class="glyphicon glyphicon-remove"></i> Cancel</button>
+      <button id="btnSave" type="button" class="btn btn-primary navbar-btn navbar-right"><i class="glyphicon glyphicon-save"></i> Save</button>
+    </div>
+  </div>
+</nav>
+
+<div class="row">
+  <div class="col-md-12">
+
+    <div class="panel panel-default">
+
+      <div class="panel-heading">
+        <h1 class="sw-icon icon-data">{{=it.metadata["database.name"]}}</h1>
+      </div>
+
+      <div class="panel-body">
+        {{~ it["metadata.groups"] :value}}
+        {{ if (value.elements && value.elements.length >0) { }}
+        <h4>{{= value.groupName}}</h4>
+        <table class="table table-striped">
+          <tbody>
+            {{~ value["elements"] :opt}}
+            {{ if (it.metadata.hasOwnProperty(opt.id) && opt.mutable) { }}
+            <tr style="width: 100%;">
+              <td style="width: 60%;">
+                <span class="addtooltip" {{? opt.help}}title="{{= opt.help }}"{{?}}>{{= opt.label}}</span>
+              </td>
+              <td style="width: 40%;">
+                {{ if (opt.input && opt.input.type === "text") { }}
+                <input type="text" class="form-control" data-option="{{= opt.id }}" value="{{= it.metadata[opt.id]}}">
+                {{ } else if (opt.input.type === "textarea") { }}
+                <textarea class="form-control" data-option="{{= opt.id }}" rows="5">{{= it.metadata[opt.id]}}</textarea>
+                {{ } else if (opt.input.type === "number") { }}
+                <input type="text" class="form-control" data-option="{{= opt.id }}" value="{{= it.metadata[opt.id]}}">
+                {{ } else if (opt.input.type === "checkbox") { }}
+                <input type="checkbox" class="switch" data-option="{{= opt.id }}" {{? it.metadata[opt.id]}}checked{{?}}>
+                {{ } else if (opt.input.type === "select") { }}
+                <select class="form-control" name="{{= opt.id}}" data-option="{{= opt.id }}">
+                  {{~ opt.input.options :val }}
+                  <option value="{{= val}}">{{= val}}</option>
+                  {{~}}
+                </select>
+                {{ } else if (opt.input.type === "multiselect") { }}
+                <select class="multiselect" multiple="multiple" name="{{= opt.id}}" data-option="{{= opt.id }}">
+                  {{~ opt.input.options :val }}
+                  <option value="{{= val}}">{{= val}}</option>
+                  {{~}}
+                </select>
+                {{ } else if (opt.input.type === "multiinput" && opt.id === "database.namespaces") { }}
+                <div id="namespaces" class="multiinput" data-option="{{= opt.id }}">
+                  {{ var nsArray = it.metadata[opt.id]; }}
+                  {{~ nsArray :ns :index}}
+                  <div class="input-group" style="margin-bottom: 5px; height: 34px;">
+                    <input type="text" class="form-control" placeholder="e.g. =http://clarkparsia.com/defaultNS#" style="height:inherit;" value="{{= ns}}">
+                    <span class="input-group-btn" style="height:inherit;">
+                      <button class="btn btn-danger btn-remove" type="button" style="height:inherit;"><i class="glyphicon glyphicon-remove"></i></button>
+                    </span>
+                  </div>
+                  {{~}}
+                </div>
+                <button id="btnAddNS" class="btn btn-primary">Add namespace</button>
+                {{ } }}
+              </td>
+            </tr>
+            {{ } }}
+            {{~}}
+          </tbody>
+        </table>
+        {{ } }}
+        {{~}}
+      </div>
+    </div>
+  </div>
+</div>

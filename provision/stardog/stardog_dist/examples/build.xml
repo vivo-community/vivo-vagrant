@@ -1,0 +1,117 @@
+<?xml version="1.0"?>
+
+<project name="Stardog Examples" default="dist" basedir=".">
+	<description>
+		Build script for Stardog examples
+	</description>
+
+	<!-- This assumes that this build file is part of Stardog distribution (in "examples" directory);
+		   that is, the root of Stardog distribution is one directory up (..) -->
+	<property name="stardog.distribution" location=".."/>
+
+	<property name="examples.build" location="build"/>
+	<property name="examples.src" location="src"/>
+	<property name="examples.dist" location="dist"/>
+
+	<property name="examples.jar" value="stardog-examples.jar"/>
+
+	<path id="examples.class.path">
+		<fileset dir="${stardog.distribution}">
+			<!-- Include (almost) all jars from the distribution on the class path -->
+			<include name="**/*.jar"/>
+		</fileset>
+	</path>
+
+	<target name="init">
+		<pathconvert targetos="unix" property="classpath" refid="examples.class.path" />
+
+		<mkdir dir="${examples.build}"/>
+	</target>
+
+	<target name="clean">
+		<delete dir="${examples.build}"/>
+		<delete file="${examples.jar}"/>
+	</target>
+
+	<target name="compile" depends="init">
+		<javac source="1.6" target="1.6" srcdir="${examples.src}" destdir="${examples.build}" debug="yes" deprecation="no">
+			<classpath refid="examples.class.path"/>
+		</javac>
+	</target>
+
+	<target name="dist" depends="compile">
+		<jar jarfile="${examples.jar}" basedir="${examples.build}"/>
+	</target>
+
+	<target name="run">
+		<echo message="JenaIntegration"/>
+		<java classname="com.complexible.stardog.examples.jena.JenaIntegration" fork="true" failonerror="true">
+			<classpath>
+				<path refid="examples.class.path"/>
+				<fileset dir=".">
+					<include name="*.jar"/>
+				</fileset>
+			</classpath>
+		</java>
+
+		<echo message="SesameExample"/>
+		<java classname="com.complexible.stardog.examples.sesame.SesameExample" fork="true" failonerror="true">
+			<classpath>
+				<path refid="examples.class.path"/>
+				<fileset dir=".">
+					<include name="*.jar"/>
+				</fileset>
+			</classpath>
+		</java>
+
+		<echo message="ExplanationExample"/>
+		<java classname="com.complexible.stardog.examples.api.ExplanationExample" fork="true" failonerror="true">
+			<classpath>
+				<path refid="examples.class.path"/>
+				<fileset dir=".">
+					<include name="*.jar"/>
+				</fileset>
+			</classpath>
+		</java>
+
+		<echo message="ICVDocsExample"/>
+		<java classname="com.complexible.stardog.examples.api.ICVDocsExample" fork="true" failonerror="true">
+			<classpath>
+				<path refid="examples.class.path"/>
+				<fileset dir=".">
+					<include name="*.jar"/>
+				</fileset>
+			</classpath>
+		</java>
+
+		<echo message="ICVExample"/>
+		<java classname="com.complexible.stardog.examples.api.ICVExample" fork="true" failonerror="true">
+			<classpath>
+				<path refid="examples.class.path"/>
+				<fileset dir=".">
+					<include name="*.jar"/>
+				</fileset>
+			</classpath>
+		</java>
+
+		<echo message="ReasoningExample"/>
+		<java classname="com.complexible.stardog.examples.api.ReasoningExample" fork="true" failonerror="true">
+			<classpath>
+				<path refid="examples.class.path"/>
+				<fileset dir=".">
+					<include name="*.jar"/>
+				</fileset>
+			</classpath>
+		</java>
+
+		<echo message="WaldoAPIExample"/>
+		<java classname="com.complexible.stardog.examples.api.WaldoAPIExample" fork="true" failonerror="true">
+			<classpath>
+				<path refid="examples.class.path"/>
+				<fileset dir=".">
+					<include name="*.jar"/>
+				</fileset>
+			</classpath>
+		</java>
+	</target>
+</project>

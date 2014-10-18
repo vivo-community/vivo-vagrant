@@ -1,0 +1,130 @@
+#!/bin/bash
+
+# holds values 1, 2, 3, 4, or 5 depending on the option
+# (home|disable-security|background|pidfile|logfile)
+current_option=0
+
+# if not set, set $STARDOG to the parent of the folder in which this script is stored
+if [ -z "$STARDOG" ]; then
+  SOURCE="${BASH_SOURCE[0]}"
+  while [ -h "$SOURCE" ]; do # resolve $SOURCE until the file is no longer a symlink
+    STARDOG="$( cd -P "$( dirname "$SOURCE" )" && pwd )"
+    SOURCE="$(readlink "$SOURCE")"
+    [[ $SOURCE != /* ]] && SOURCE="$STARDOG/$SOURCE" # if $SOURCE was a relative symlink, we need to resolve it relative to the path where the symlink file was located
+  done
+  STARDOG="$( cd -P "$( dirname "$SOURCE" )" && pwd )/.."
+fi
+
+if [[ `uname -s` == CYGWIN* ]]; then
+  PATHVAR=`cygpath -m "$STARDOG"`
+  PATHDELIM=";"
+else
+  PATHVAR="$STARDOG"
+  PATHDELIM=":"
+fi
+
+#CLASSPATH=$(find "." -name '*.jar' -print0 | xargs -0 echo  | tr ' ' ':')
+CLASSPATH="${PATHVAR}/client/api/*${PATHDELIM}${PATHVAR}/client/cli/*${PATHDELIM}${PATHVAR}/client/http/*${PATHDELIM}${PATHVAR}/client/snarl/*${PATHDELIM}${PATHVAR}/server/dbms/*${PATHDELIM}${PATHVAR}/server/http/*${PATHDELIM}${PATHVAR}/server/snarl/*${PATHDELIM}${PATHVAR}/client/pack/*${PATHDELIM}${PATHVAR}/server/pack/*"
+
+MARKER="+++++SUCCESS+++++"
+
+signal_handler_first_stage() {
+  if [ -z "$HANDLER_EXECUTED" ]; then
+      HANDLER_EXECUTED=1
+      kill $TAILPID
+  fi
+
+  exit
+}
+
+process_exists() {
+  kill -s 0 $1 > /dev/null 2>&1
+
+  return $? 
+}
+
+PRG="$0"
+
+while [ -h "$PRG" ] ; do
+   ls=`ls -ld "$PRG"`
+   link=`expr "$ls" : '.*-> \(.*\)$'`
+   if expr "$link" : '/.*' > /dev/null; then
+       PRG="$link"
+   else
+       PRG=`dirname "$PRG"`/"$link"
+   fi
+done
+
+DIRNAME=`dirname "$PRG"`
+
+if [ -n "${JAVA_HOME}" -a -x "${JAVA_HOME}/bin/java" ]; then
+ java="${JAVA_HOME}/bin/java"
+else
+ java=java
+fi
+
+if [ -z "${STARDOG_JAVA_ARGS}" ]; then
+ STARDOG_JAVA_ARGS="-Xmx2g -Xms2g -Dapple.awt.UIElement=true -Dfile.encoding=UTF-8"
+fi
+
+if [ "$1" = "server" ]; then
+  if [ "$2" = "start" ]; then
+    BACKGROUND=true
+  fi
+fi
+
+if [ "$1" = "cluster" ]; then
+  if [ "$2" = "proxystart" ]; then
+    BACKGROUND=true
+  fi
+  if [ "$2" = "zkstart" ]; then
+    BACKGROUND=true
+  fi
+fi
+
+if [ -n "$BACKGROUND" ]; then
+if [[ `uname -s` == CYGWIN* ]]; then
+  SERVER_START_LOG=`mktemp -p $PATHVAR -t stardog-server-start.XXXXXXXX`    # PATHVAR is the cygpath of stardog home
+else
+  SERVER_START_LOG=`mktemp -t stardog-server-start.XXXXXXXX`
+fi
+
+  if [ "$?" != "0" ]; then
+    echo Failed to create a temporary file
+  else 
+    export SERVER_START_LOG
+    TEMP_FILE_CREATED=1
+  fi
+
+  trap "signal_handler_first_stage" INT TERM 
+
+  "${java}" ${STARDOG_JAVA_ARGS} -Dstardog.install.location="${STARDOG}" -XX:SoftRefLRUPolicyMSPerMB=1 -XX:+UseParallelOldGC -XX:+UseCompressedOops -server -classpath "${CLASSPATH}" com.complexible.stardog.cli.admin.CLI "$@" &
+  PID=$!
+
+  if [ $TEMP_FILE_CREATED -eq 1 ]; then
+    LOG_FILE_READY=0
+
+    EXIT_CODE=0
+    while [ $LOG_FILE_READY -eq 0 ]; do
+      sleep 1
+
+      if [ `cat $SERVER_START_LOG | grep "$MARKER" | wc -l` -ne 0 ]; then
+        # server started succesfully
+        LOG_FILE_READY=1
+      fi
+
+      process_exists $PID
+      if [ "$?" != "0" ]; then
+        # server failed to start
+        EXIT_CODE=1
+        LOG_FILE_READY=1
+      fi
+    done
+
+    trap - INT TERM EXIT
+    rm $SERVER_START_LOG
+    exit $EXIT_CODE
+  fi
+else
+  exec "${java}" ${STARDOG_JAVA_ARGS} -Dstardog.install.location="${STARDOG}" -XX:SoftRefLRUPolicyMSPerMB=1 -XX:+UseParallelOldGC -XX:+UseCompressedOops -server -classpath "${CLASSPATH}" com.complexible.stardog.cli.admin.CLI "$@"
+fi

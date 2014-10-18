@@ -1,0 +1,176 @@
+<html>
+<head>
+<link href="css/bootstrap.min.css" rel="stylesheet" media="screen">
+</head>
+<style>
+    body { margin: 50px; }
+</style>
+<body>
+<hr/>
+<h1 class="text-info">stardog-admin db create Manual Page
+<hr/>
+<h1 class="text-info">NAME</h1>
+<br/>
+<div class="row"><div class="span8 offset1">stardog-admin db create &mdash;Creates a new database.</div>
+</div>
+<br/>
+<h1 class="text-info">SYNOPSIS</h1>
+<br/>
+<div class="row">
+<div class="span8 offset1">
+stardog-admin [ --server &lt;server url&gt; ]db create [ {-c | --config} &lt;config&gt; ] [ --copy-server-side ] [ {-d | --durable} ] [ {-i | --index-triples-only} ] [ {-n | --name} &lt;name&gt; ] [ {-o | --options} &lt;options&gt;... ] [ {-p | --passwd} &lt;password&gt; ] [ {-P | --ask-password} ] [ {-s | --searchable} ] [ {-t | --type} &lt;type&gt; ] [ {-u | --username} &lt;username&gt; ] [ {-v | --verbose} ] [--] [ &lt;file&gt;... ]</div>
+</div>
+<br/>
+<h1 class="text-info">OPTIONS</h1>
+<br/>
+<div class="row">
+<div class="span8 offset1">
+-c &lt;config&gt;, --config &lt;config&gt;</div>
+</div>
+<div class="row">
+<div class="span8 offset2">
+Database configuration file. This file specifies the name and options to use when creating the database. Options specified explicitly on the command line override those in the configuration file.</div>
+</div>
+<div class="row">
+<div class="span8 offset1">
+--copy-server-side</div>
+</div>
+<div class="row">
+<div class="span8 offset2">
+Flag to specify whether or not files to be bulk loaded should be copied to the remote machine. By default, files are not copied, only the specified paths are sent to the machine with the expectation that the exist on the server.  So to transfer the files to be bulk loaded, you must specify this option.</div>
+</div>
+<div class="row">
+<div class="span8 offset1">
+-d, --durable</div>
+</div>
+<div class="row">
+<div class="span8 offset2">
+Durable transactions flag. Enables durable transactions for recovery after failure. Non-durable transactions are more performant.</div>
+</div>
+<div class="row">
+<div class="span8 offset1">
+-i, --index-triples-only</div>
+</div>
+<div class="row">
+<div class="span8 offset2">
+Triples-only indexes flag. Enables the creation of triples-only indexes for the database to be created. By default, Stardog supports named graph indexes. This option should be used only if no named graph information is anticipated. Quads may still be added, but in that case query performance will tend to degrade. WARNING: this option can only be set at creation time and cannot be changed later without rebuilding all indexes; use with caution.</div>
+</div>
+<div class="row">
+<div class="span8 offset1">
+-n &lt;name&gt;, --name &lt;name&gt;</div>
+</div>
+<div class="row">
+<div class="span8 offset2">
+Database name. The first letter must be an alpha character. Subsequent characters may be alphanumeric, underscore, or dash. The name is a required property of a database, but it can be omitted on the command line if it is specified in a configuration file via the -c/--config flag.</div>
+</div>
+<div class="row">
+<div class="span8 offset1">
+-o &lt;options&gt;, --options &lt;options&gt;</div>
+</div>
+<div class="row">
+<div class="span8 offset2">
+Database configuration options. Each option is a 'key=value' pair; multiple options are separated by whitespaces, e.g., '-o "option1=value1 option2=value2"'. When used as the last option, values should be followed by '--' if a list of files for bulk load is also specified.</div>
+</div>
+<div class="row">
+<div class="span8 offset1">
+-p &lt;password&gt;, --passwd &lt;password&gt;</div>
+</div>
+<div class="row">
+<div class="span8 offset2">
+Password.</div>
+</div>
+<div class="row">
+<div class="span8 offset1">
+-P, --ask-password</div>
+</div>
+<div class="row">
+<div class="span8 offset2">
+Prompt for password.</div>
+</div>
+<div class="row">
+<div class="span8 offset1">
+-s, --searchable</div>
+</div>
+<div class="row">
+<div class="span8 offset2">
+Searchable flag. Enables full-text search of the database contents. If the flag is set search indexes will be built when the database is created and maintained subsequently.</div>
+</div>
+<div class="row">
+<div class="span8 offset1">
+--server &lt;server url&gt;</div>
+</div>
+<div class="row">
+<div class="span8 offset2">
+URL of Stardog Server. If this option isn't specified, it will be read from JVM argument 'stardog.default.cli.server'. If the JVM arg isn't set, the default value 'snarl://localhost:5820' is used. If server URL has no explicit port value, the default port value '5820' is used.  Example: 'stardog --server snarl://12.34.56.78:5820 server stop' </div>
+</div>
+<div class="row">
+<div class="span8 offset1">
+-t &lt;type&gt;, --type &lt;type&gt;</div>
+</div>
+<div class="row">
+<div class="span8 offset2">
+Database type: [M]emory or [D]isk (default).</div>
+</div>
+<div class="row">
+<div class="span8 offset1">
+-u &lt;username&gt;, --username &lt;username&gt;</div>
+</div>
+<div class="row">
+<div class="span8 offset2">
+User name.</div>
+</div>
+<div class="row">
+<div class="span8 offset1">
+-v, --verbose</div>
+</div>
+<div class="row">
+<div class="span8 offset2">
+Verbose flag that causes more detailed information to be printed</div>
+</div>
+<div class="row">
+<div class="span8 offset1">
+--
+</div>
+</div>
+<div class="row">
+<div class="span8 offset2">
+This option can be used to separate command-line options from the list of argument, (useful when arguments might be mistaken for command-line options
+</div>
+</div>
+<div class="row">
+<div class="span8 offset1">
+&lt;file&gt;</div>
+</div>
+<div class="row">
+<div class="span8 offset2">
+The list of files to bulk load into the database when it is created.</div>
+</div>
+<br/>
+<h1 class="text-info">DISCUSSION</h1>
+<br/>
+<div class="row">
+<div class="span8 offset1">
+The new database will be persisted to the Stardog home directory and set online. Files to be added to the database may be passed as final arguments. If a directory is passed as one of the final arguments, all the files in that directory and its child directories will be recursively loaded to the database. Additionally, zip files will be uncompressed and the RDF files they contain will be loaded. Files with unrecognized extensions, or that produce parse errors, will be (silently) ignored. By default, files are not copied to the remote server; only the paths are sent.  If the files do not exist on the remote server, the '--copy-server-side' flag should be specified in order to copy them before creating the database and bulk loading the information.</div>
+</div>
+<br/>
+<h1 class="text-info">EXAMPLES</h1>
+<br/>
+<div class="row">
+<div class="span12 offset1">
+<p>
+Create a new database with the default options by providing a name and a set of initial datasets to load:</p>
+<pre>
+    $ stardog-admin db create -n my-database input.ttl another_file.rdf moredata.rdf.gz</pre>
+<p>
+Create an empty database from a configuration file:</p>
+<pre>
+    $ stardog-admin db create -c database.properties</pre>
+<p>
+Create a database with initial input to be bulk loaded and some other options:</p>
+<pre>
+    $ stardog-admin db create -n db1 -o icv.enabled=true icv.reasoning.type=QL -- input.ttl</pre>
+</div>
+</div>
+</body>
+</html>
+

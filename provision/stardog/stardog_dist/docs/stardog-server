@@ -1,0 +1,82 @@
+#!/bin/bash
+
+# chkconfig: 345 26 74
+# description: Stardog database
+# processname: stardog-admin
+
+### BEGIN INIT INFO
+# Provides: stardog-server
+# Required-Start: $syslog $local_fs
+# Required-Stop: $syslog $local_fs
+# Default-Start:  3 4 5
+# Default-Stop: 0 1 6
+# Short-Description: start and stop Stardog database
+# Description: Stardog database
+### END INIT INFO
+
+# This is startup script for stardog server to be executed during system startup
+# (e.g., to be put in /etc/init.d together with other startup scripts)
+
+##########################################################################
+# IMPORTANT!!!                                                           #
+# Replace the values below with the right values for your configuration  #
+##########################################################################
+
+# Run stardog as the specified user
+# To run as root (discouraged), leave the value empty
+USERNAME=stardog
+
+# stardog home
+STARDOG_HOME=
+
+# path to the directory where stardog CLI script is located
+STARDOG_BIN=
+
+# log file
+LOG_FILE=
+
+# specify port where server will be listening
+PORT=5820
+
+# Path to bash
+BASH=/bin/bash
+
+start() 
+{
+  echo "Starting stardog"
+  if test -n "$USERNAME"; then
+    su $USERNAME - -c "$BASH ${STARDOG_BIN}/stardog-admin server start --logfile $LOG_FILE --home $STARDOG_HOME --port $PORT"
+  else
+    $BASH ${STARDOG_BIN}/stardog-admin server start --logfile $LOG_FILE --home $STARDOG_HOME --port $PORT
+  fi
+}
+
+stop()
+{
+   echo "Stopping stardog"
+
+  if test -n "$USERNAME"; then
+    su $USERNAME - -c "$BASH ${STARDOG_BIN}/stardog-admin --server snarl://localhost:$PORT/ server stop"
+  else
+    $BASH ${STARDOG_BIN}/stardog-admin --server snarl://localhost:$PORT/ server stop
+  fi
+}
+
+case "$1" in
+    start)
+        start
+        ;;
+
+    stop)
+        stop
+        ;;
+
+    restart|reload)
+        stop
+        start
+        ;;
+
+    *)
+        echo "Usage: $0 {start|stop|restart}"
+        exit 1;
+esac

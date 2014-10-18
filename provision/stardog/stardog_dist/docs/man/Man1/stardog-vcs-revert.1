@@ -1,0 +1,61 @@
+.\" generated with Ronn/v0.7.3
+.\" http://github.com/rtomayko/ronn/tree/0.7.3
+.
+.TH "STARDOG_VCS_REVERT" "1" "August 2014" "Clark & Parsia" "stardog"
+.
+.SH "NAME"
+\fBstardog_vcs_revert\fR \- Reverts a database to a previous version\.
+.
+.SH "SYNOPSIS"
+\fBstardog\fR \fBvcs\fR \fBrevert\fR {\-m | \-\-message} \fImessage\fR [ {\-p | \-\-passwd} \fIpassword\fR ] [ {\-P | \-\-ask\-password} ] [ \-\-single ] [ {\-u | \-\-username} \fIusername\fR ] [ {\-v | \-\-verbose} ] [\-\-] \fIdatabase\fR \fIversion\fR\.\.\.
+.
+.SH "OPTIONS"
+.
+.TP
+\fB\-m\fR \fImessage\fR, \fB\-\-message\fR \fImessage\fR
+The commit message that will be associated with the version\.
+.
+.TP
+\fB\-p\fR \fIpassword\fR, \fB\-\-passwd\fR \fIpassword\fR
+Password\.
+.
+.TP
+\fB\-P\fR, \fB\-\-ask\-password\fR
+Prompt for password\.
+.
+.TP
+\fB\-\-single\fR
+Reverts a single version\.
+.
+.TP
+\fB\-u\fR \fIusername\fR, \fB\-\-username\fR \fIusername\fR
+User name\.
+.
+.TP
+\fB\-v\fR, \fB\-\-verbose\fR
+Verbose flag that causes more detailed information to be printed
+.
+.TP
+\-\-
+This option can be used to separate command\-line options from the list of arguments (useful when arguments might be mistaken for command\-line options)\.
+.
+.TP
+\fIdatabase\fR \fIversion\fR
+The name of the database or the full connection string of the database to connect to\. If only the name is provided, the default server URL will be pre\-pended to the name of the database in order to construct the connection string\. Connection parameters such as \';reasoning=QL\' can be included in the provided database name\. Connection parameters specified like this can be overridden by specific options on the command\. The default server URL will be read from the JVM argument \'stardog\.default\.cli\.server\'\. If the JVM argument is not set, the default value \'snarl://localhost:5820\' is used\. If the server URL has no explicit port value, the default port value \'5820\' is used\. To use a secure connection, you should specify the full connection string and postfix \'s\' to the protocol, e\.g\. snarls or https\.Subsequent arguments specify the version range to revert\. Version range
+.
+.SH "EXAMPLES"
+.
+.IP "\(bu" 4
+Reverts the last commit and restores the database to the previous version: $ stardog version revert myDb
+.
+.IP "\(bu" 4
+$ stardog version revert myDb de44369d\-cc7b\-4244\-a3fb\-3f6e271420b0:
+.
+.IP "\(bu" 4
+Reverts all the changes committed in a specific version and everything else until the second version
+.
+.IP "\(bu" 4
+Reverts the changes committed in one specific version\.: $ stardog version revert \-\-single myDb de44369d\-cc7b\-4244\-a3fb\-3f6e271420b0
+.
+.IP "" 0
+

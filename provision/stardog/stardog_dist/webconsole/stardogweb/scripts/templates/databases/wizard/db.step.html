@@ -1,0 +1,47 @@
+<p>This wizard will help you create a new Stardog database. It will go through al the options available for setting up a new DB. All the options are filled up with the default values. If all you need are the default options, just go ahead and click Finish, otherwise click Next.</p>
+
+<br/>
+
+<div class="row">
+  <div class="col-md-6">
+    <form role="form">
+      <div class="form-group" data-option="database.name">
+        <label for="database.name" class="control-label" title="{{= it.metadataInfo['database.name'].help}}">{{= it.metadataInfo['database.name'].label}}</label>
+        <input type="text" id="database.name" class="form-control" placeholder="Enter new database name" {{? it.metadataModel['database.name']}}value="{{= it.metadataModel['database.name']}}"{{?}}>
+      </div>
+
+      <div class="form-group" data-option="database.archetypes">
+        <label for="database.archetypes" class="control-label" title="{{= it.metadataInfo['database.archetypes'].help}}">{{= it.metadataInfo["database.archetypes"].label}}</label>
+        <br/>
+        <select id="database.archetypes" class="multiselect" multiple="multiple">
+          {{~ it.metadataInfo["database.archetypes"].input.options :opt }}
+          <option value="{{= opt}}"{{ if (it.metadataModel['database.archetypes'] && it.metadataModel['database.archetypes'].indexOf(opt) >=0 ) { }}selected{{ } }}>{{= opt}}</option>
+          {{~}}
+        </select>
+      </div>
+
+      <div class="form-group" data-option="database.online">
+        <label for="database.online" class="control-label" title="{{= it.metadataInfo['database.online'].help}}">{{= it.metadataInfo["database.online"].label}}</label>
+        <br/>
+        <input id="database.online" type="checkbox" {{? it.metadataModel['database.online']}}checked{{?}}>
+      </div>
+    </form>
+  </div>
+  <div class="col-md-6">
+    <div class="form-group" data-option="database.namespaces">
+      <label for="database.namespaces" class="control-label" title="{{= it.metadataInfo['database.namespaces'].help}}">{{= it.metadataInfo['database.namespaces'].label}}</label>
+      <div id="namespaces">
+        {{ var nsArray = it.metadataModel['database.namespaces']; }}
+        {{~ nsArray :ns :index}}
+        <div class="input-group" style="margin-bottom: 5px; height: 34px;">
+          <input type="text" class="form-control" placeholder="e.g. =http://clarkparsia.com/defaultNS#" style="height:inherit;" value="{{= ns}}">
+          <span class="input-group-btn" style="height:inherit;">
+            <button class="btn btn-danger btn-remove" type="button" style="height:inherit;"><i class="glyphicon glyphicon-remove"></i></button>
+          </span>
+        </div>
+        {{~}}
+      </div>
+      <button id="btnAddNS" class="btn btn-primary">Add namespace</button>
+    </div>
+  </div>
+</div>

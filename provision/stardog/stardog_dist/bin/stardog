@@ -1,0 +1,49 @@
+#!/bin/bash
+
+# if not set, set $STARDOG to the parent of the folder in which this script is stored
+if [ -z "$STARDOG" ]; then
+  SOURCE="${BASH_SOURCE[0]}"
+  while [ -h "$SOURCE" ]; do # resolve $SOURCE until the file is no longer a symlink
+    STARDOG="$( cd -P "$( dirname "$SOURCE" )" && pwd )"
+    SOURCE="$(readlink "$SOURCE")"
+    [[ $SOURCE != /* ]] && SOURCE="$STARDOG/$SOURCE" # if $SOURCE was a relative symlink, we need to resolve it relative to the path where the symlink file was located
+  done
+  STARDOG="$( cd -P "$( dirname "$SOURCE" )" && pwd )/.."
+fi
+
+if [[ `uname -s` == CYGWIN* ]]; then
+  PATHVAR=`cygpath -m "$STARDOG"`
+  PATHDELIM=";"
+else
+  PATHVAR="$STARDOG"
+  PATHDELIM=":"
+fi
+
+SLF4J_JARS=$(find "${PATHVAR}/server/dbms/" -name '*slf4j*.jar' -print0 | xargs -0 echo  | tr ' ' "${PATHDELIM}")
+CLASSPATH="${PATHVAR}/client/api/*${PATHDELIM}${PATHVAR}/client/cli/*${PATHDELIM}${PATHVAR}/client/http/*${PATHDELIM}${PATHVAR}/client/snarl/*${PATHDELIM}${PATHVAR}/client/pack/*${PATHDELIM}${SLF4J_JARS}"
+
+PRG="$0"
+
+while [ -h "$PRG" ] ; do
+   ls=`ls -ld "$PRG"`
+   link=`expr "$ls" : '.*-> \(.*\)$'`
+   if expr "$link" : '/.*' > /dev/null; then
+       PRG="$link"
+   else
+       PRG=`dirname "$PRG"`/"$link"
+   fi
+done
+
+DIRNAME=`dirname "$PRG"`
+
+if [ -n "${JAVA_HOME}" -a -x "${JAVA_HOME}/bin/java" ]; then
+ java="${JAVA_HOME}/bin/java"
+else
+ java=java
+fi
+
+if [ -z "${STARDOG_JAVA_ARGS}" ]; then
+ STARDOG_JAVA_ARGS="-Xmx2g -Dapple.awt.UIElement=true"
+fi
+
+exec "${java}" ${STARDOG_JAVA_ARGS} -client -classpath "${CLASSPATH}" com.complexible.stardog.cli.CLI "$@"

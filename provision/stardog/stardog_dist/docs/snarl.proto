@@ -1,0 +1,73 @@
+// Copyright (c) 2010 - 2014 -- Clark & Parsia, LLC. <http://www.clarkparsia.com>
+// For more information about licensing and copyright of this software, please contact
+// inquiries@clarkparsia.com or visit http://stardog.com
+
+package com.complexible.stardog.protocols.snarl;
+
+import "core.proto";
+import "bigpacket.proto";
+
+option java_outer_classname = "SNARL";
+
+// This is default, but it's nice to be explicit
+option optimize_for = SPEED;
+
+extend com.complexible.barc.ConnectionContext {
+	/**
+	 * the reasoning type for the connection
+	 */
+	optional string	reasoning	= 5;
+
+	/**
+	 * current transaction id
+	 */
+	optional com.complexible.common.protobuf.core.UID		tx		= 6;
+
+	/**
+	 * the name of the index we're connecting to
+	 */
+    optional string 	index	= 7;
+
+    /**
+     * whether or not search is enabled for the database we're connected to
+     */
+	optional bool search_enabled	    = 8 [default = false];
+
+	/**
+	 * whether or not reasoning is enabled for the database we're connected to
+	 */
+	optional bool reasoning_enabled		= 9	[default = false];
+
+	optional bool strict_parsing        = 10 [default = true];
+
+	optional bool preserve_bnode_ids    = 11 [default = true];
+
+	/**
+	 * For the FTP part of the SNARL protocol, this is the name of the file being transferred
+	 */
+	optional string file_name           = 12;
+}
+
+/**
+ * Message for the export RPC call
+ */
+message Export {
+    /**
+     * The contexts to export
+     */
+    required com.complexible.common.protobuf.core.ListOfStrings contexts    = 1;
+
+    /**
+     * The format to export into
+     */
+    required string                                             format      = 2;
+
+    /**
+     * Optionally, a file on the server side to save the exported data to
+     */
+    optional bool                                               server      = 3 [default = false];
+
+    optional bool                                               obfuscate   = 4 [default = false];
+
+    optional string                                             obfConfig   = 5;
+}

@@ -1,0 +1,7 @@
+{{#if [@id]}}
+  <strong class="property_label" data-toggle="tooltip" data-placement="right" title="{{[@egadComment]}}">
+  {{#if [@egadLabel]}}{{[@egadLabel]}}{{else}}{{#localname [@id]}}{{this}}{{/localname}}{{/if}}
+  </strong>
+  <div class="controls obj-prop-container">
+  </div>
+{{/if}}

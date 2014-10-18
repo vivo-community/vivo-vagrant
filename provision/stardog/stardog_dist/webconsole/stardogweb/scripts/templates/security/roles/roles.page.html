@@ -1,0 +1,38 @@
+<div id="menu"></div>
+
+<div id="alert"></div>
+
+<div class="panel panel-default scroll list">
+  <div class="panel-heading">
+    <div class="row">
+      <div class="col-md-10">
+        <h1 class="sw-icon icon-t-shirt">Roles</h1>
+      </div>
+      <div class="col-md-2">
+        <button id="btnNewRole" class="btn btn-success pull-right" style="margin-top: 20px;">New Role</button>
+      </div>
+    </div>
+  </div>
+  <div class="panel-body" style="height: 800px;">
+    <div class="row">
+      <div class="col-md-12">
+        <div class="input-group">
+          <span class="input-group-addon"><i class="icon icon-search"></i></span>
+          <input id="inRoleFilter" type="search" class="form-control" placeholder="Type to search by role name">
+        </div>
+      </div>
+    </div>
+    <br />
+    <br />
+    <div class="scroll" style="height: 700px; margin-top: -21px;">
+      <table class="table table-bordered table-responsive table-hover">
+        <theader>
+          <th class="role-name">Role name</th>
+          <th class="role-users">Users with role</th>
+        </theader>
+        <tbody id="roles">
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
