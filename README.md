@@ -75,4 +75,11 @@ $ vlog
 
 To install Karma: run `sudo /home/vagrant/provision/karma.sh install`.  The initial install will take about 10 minutes.  Once it's installed Karma can be started with `/home/vagrant/provision/karma.sh start`.  Karma runs in a web browser and will be available on your machine at `http://localhost:8000/`.
 
-[Violeta Ilik](http://library.tamu.edu/directory/people/vilik) from Texas A&M University has [presented](https://www.youtube.com/watch?v=aBLHGzui0_s) (starting at about 12:30) on how to model data for VIVO with Karma.  More information about Karma can be found in this [tutorial](https://github.com/InformationIntegrationGroup/karma-step-by-step) and on the project's [wiki](https://github.com/InformationIntegrationGroup/Web-Karma/wiki).  
+[Violeta Ilik](http://library.tamu.edu/directory/people/vilik) from Texas A&M University has [presented](https://www.youtube.com/watch?v=aBLHGzui0_s) (starting at about 12:30) on how to model data for VIVO with Karma.  More information about Karma can be found in this [tutorial](https://github.com/InformationIntegrationGroup/karma-step-by-step) and on the project's [wiki](https://github.com/InformationIntegrationGroup/Web-Karma/wiki). 
+
+## Stardog
+
+[Stardog](http://stardog.com/) is a fast, commercial triple store.  This vagrant is a proof-of-concept for running VIVO with a Stardog backend.  A couple of notes on what's required to get the two to talk to each other correctly.
+
+ * VIVO currently has no way to specify authentication parameters for a triple store, so Stardog must be started with security turned off.  This is extremely dangerous in production environments, but can likely be mitigated via proxy authentication (e.g. Apache or NGINX authentication).
+ * By default, SPARQL queries that do not specify a specific named graph query only the default graph.  This is most likely the correct way to handle such queries, but VIVO expects these queries to instead use the union of the default and all named graphs.  A slight configuration change is required for Stardog to support this. 
