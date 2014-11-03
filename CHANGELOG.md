@@ -1,3 +1,7 @@
+#####11/3/14
+
+ * Experimental support for Stardog support added in the `stardog` branch. 
+
 #####7/12/14
 
  * added a script to install [Karma](https://github.com/InformationIntegrationGroup/Web-Karma).
