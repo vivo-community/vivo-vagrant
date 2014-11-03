@@ -39,10 +39,18 @@ git clone https://github.com/lawlesst/vivo-project-template.git .
 git submodule init
 git submodule update
 cd VIVO/
-git checkout maint-rel-1.7
+git checkout maint-rel-1.6
 cd ../Vitro
-git checkout maint-rel-1.7
+git checkout maint-rel-1.6
 cd ..
+
+#copy over uf modifications
+#cp -r productMods/* VIVO/productMods/
+#rm -rf VIVO/rdf
+#cp -r rdf VIVO/rdf
+
+#rm -rf Vitro/webapp/rdf
+#cp -r rdf Vitro/webapp/rdf
 
 #Copy build properties into app directory
 cp /home/vagrant/provision/vivo/build.properties $APPDIR/.

@@ -1,2 +1,10 @@
 * text eol=lf
 *.sh text
+*.jar binary
+*.png binary
+*.ttf binary
+*.woff binary
+*.eot binary
+*.exe binary
+*.otf binary
+*.zip binary
