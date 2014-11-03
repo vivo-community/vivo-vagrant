@@ -8,7 +8,7 @@ The virtual machine will boot and install VIVO 1.7 and its dependencies.  This w
  * [VirtualBox](https://www.virtualbox.org/) or [VMWare Fusion](http://www.vmware.com/products/fusion).
  * [Vagrant](https://docs.vagrantup.com/v2/installation/index.html).
  * Git - if you are new to git, you might want to use the Github desktop client. [Windows](http://windows.github.com/) and [Mac](http://mac.github.com/) versions are available.
- * You must obtain a stardog license and put it in the `provision/stardog` folder.  You can obtain this [here.](http://stardog.com/)
+ * You must obtain a stardog license and the stardog binaries, and then put it in the `provision/stardog` folder.  You can obtain this [here.](http://stardog.com/)
 
 This Vagrant box is intended for development and experimentation only.  Change default user names and passwords.
 
@@ -81,5 +81,6 @@ To install Karma: run `sudo /home/vagrant/provision/karma.sh install`.  The init
 
 [Stardog](http://stardog.com/) is a fast, commercial triple store.  This vagrant is a proof-of-concept for running VIVO with a Stardog backend.  A couple of notes on what's required to get the two to talk to each other correctly.
 
+ * The provisioning scripts currently expect Stardog 2.2.2.  If you need to use a different version, you'll need to edit them slightly.
  * VIVO currently has no way to specify authentication parameters for a triple store, so Stardog must be started with security turned off.  This is extremely dangerous in production environments, but can likely be mitigated via proxy authentication (e.g. Apache or NGINX authentication).
  * By default, SPARQL queries that do not specify a specific named graph query only the default graph.  This is most likely the correct way to handle such queries, but VIVO expects these queries to instead use the union of the default and all named graphs.  A slight configuration change is required for Stardog to support this. 
