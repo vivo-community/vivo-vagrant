@@ -69,6 +69,11 @@ $ vlog
  $ vagrant up
  ~~~
 
+## Triplestores
+
+VIVO supports alernate triplestores via SPARQL 1.1.  Expermental support for [Stardog](http://stardog.com) has been added in the [`stardog`](https://github.com/lawlesst/vivo-vagrant/tree/stardog) branch of this repository.  Follow the directions in the README to get started.  
+
+
 ## Karma
 [Karma](http://www.isi.edu/integration/karma/) is a tool for mapping raw data in various formats (CSV, XML, etc) to RDF.  To assist with using Karma to model data for VIVO, a script is included to install Karma and its dependencies.  
 
