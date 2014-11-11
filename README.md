@@ -1,4 +1,5 @@
 # VIVO Vagrant
+[![Gitter](https://badges.gitter.im/Join Chat.svg)](https://gitter.im/lawlesst/vivo-vagrant?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 
 [Vagrant](http://www.vagrantup.com/) configuration and install scripts for running [VIVO](http://vivoweb.org) on a virtual machine, aka [Vagrant box](http://docs.vagrantup.com/v2/boxes.html), running an Ubuntu 64 Precise image.
 
