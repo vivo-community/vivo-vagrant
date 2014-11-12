@@ -72,7 +72,7 @@ $ vlog
 
 ## Triplestores
 
-VIVO supports alernate triplestores via SPARQL 1.1.  Expermental support for [Stardog](http://stardog.com) has been added in the [`stardog`](https://github.com/lawlesst/vivo-vagrant/tree/stardog) branch of this repository.  Follow the directions in the README to get started.  
+VIVO supports alernate triplestores via SPARQL 1.1.  A provisioning script for [Stardog](http://stardog.com) has been added in the [`stardog`](https://github.com/lawlesst/vivo-vagrant/tree/stardog) branch of this repository.  Follow the directions in the README to get started.  
 
 
 ## Karma
