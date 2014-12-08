@@ -42,6 +42,16 @@ echo mysql-server mysql-server/root_password_again password vivo | sudo debconf-
 sudo apt-get install -y mysql-server
 sudo apt-get install -y mysql-client
 
+# Instal AllegroGraph
+echo "Installing AllegroGraph"
+sudo apt-get install python-cjson python-pycurl
+sudo wget http://franz.com/ftp/pri/acl/ag/ag4.14.1/linuxamd64.64/agraph-4.14.1-linuxamd64.64.tar.gz /home/vagrant/provision
+sudo cd /home/vagrant/provision
+sudo tar zxf agraph-4.14.1-linuxamd64.64.tar.gz
+sudo mkdir -p /mnt/src/agraph-4.14.1
+sudo agraph-4.14.1/install-agraph /mnt/src/agraph-4.14.1
+sudo /mnt/src/agraph-4.14.1/bin/agraph-control --config /mnt/src/agraph-4.14.1/lib/agraph.cfg start
+
 #Call VIVO install
 source /home/vagrant/provision/vivo/install.sh
 
