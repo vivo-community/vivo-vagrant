@@ -8,6 +8,9 @@
 sudo apt-get install -y python-cjson python-pycurl rubygems
 sudo gem install json agraph --no-ri
 
+# AllegroGraph License
+cat /home/vagrant/provision/allegrograph/license_ag.txt
+
 # AllegroGraph 4.14.1
 sudo wget http://franz.com/ftp/pri/acl/ag/ag4.14.1/linuxamd64.64/agraph-4.14.1-linuxamd64.64.tar.gz
 sudo tar zxf agraph-4.14.1-linuxamd64.64.tar.gz
