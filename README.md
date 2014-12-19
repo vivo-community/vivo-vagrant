@@ -10,17 +10,24 @@ The virtual machine will boot and install VIVO 1.7 and its dependencies.  This w
  * [Vagrant](https://docs.vagrantup.com/v2/installation/index.html).
  * Git - if you are new to git, you might want to use the Github desktop client. [Windows](http://windows.github.com/) and [Mac](http://mac.github.com/) versions are available.
 
-This Vagrant box is intended for development and experimentation only.  Change default user names and passwords.
+This Vagrant box is intended for development and experimentation only.  __Change default user names and passwords.__
 
-## Install the VIVO Vagrant box
+## Install the VIVO Vagrant box with AllegroGraph Triple Store
 
 ~~~
-$ git clone https://github.com/lawlesst/vivo-vagrant.git vivo-vagrant
+$ git clone https://github.com/brunosoab/vivo-vagrant vivo-vagrant
 $ cd vivo-vagrant
+$ git checkout allegro-graph
 $ vagrant up
 ~~~
 
-When the Vagrant provisioning script is complete, the VIVO web application will be available in a browser on the host machine at `http://localhost:8080/vivo`.  You can log into your new VIVO with the default admin user (`vivo_root@school.edu`) and password (`rootPassword`), which are specified in the `/provision/vivo/deploy.properties` source file in this repository.
+When the Vagrant provisioning script is complete, the __VIVO web application__ will be available in a browser on the host machine at `http://localhost:8080/vivo` and __AllegroGraph Triple Store__ at `http://localhost:10035`.
+
+You need to create an anonymous account on AllegroGraph, so VIVO can access the AllegroGraph API without requiring a username and password. To do that, go to `http://localhost:10035/`, click on menu __admin >> users__ and then create an account called `anonymous` without password. Add `read/write` to the `vivo` repository and save the anonymous user. You may need to restart tomcat:
+
+    $ sudo service tomcat7 restart
+
+You can log into your new VIVO with the default admin user (`vivo_root@school.edu`) and password (`rootPassword`) and AllegroGraph with the login (`test`) and password (`xyzzy`), which are specified in the `/provision/vivo/deploy.properties` source file in this repository and `/provision/allegrograph/install.sh`.
 
 The source will be installed on the virtual machine at `/usr/local/vivo/`. Mac users can log into your Vagrant box securely using this command from a Terminal session.  Windows users will want to use an SSH utility, e.g. [Putty](http://www.chiark.greenend.org.uk/~sgtatham/putty/download.html):
 
@@ -39,6 +46,8 @@ $ vlog
  * VIVO data directory: `/usr/local/vdata`
  * Tomcat: `/var/lib/tomcat7/`
  * To start/stop Tomcat run `sudo /etc/init.d/tomcat start|stop|restart`.
+ * AllegroGraph: `
+ * To start/stop AllgroGraph `sudo agraph-4.14.1/agraph-control --config agraph-4.14.1/agraph.cfg start`
  * A Vagrant [shared directory](http://docs.vagrantup.com/v2/synced-folders/) is available at `/work` from the box.
  * Use the `vagrant suspend` and `vagrant resume` commands to manage your Vagrant box when not in use or if you plan to restart or shutdown the host system, as opposed to using the VirtualBox or VMWare Fusion admin user interface.
 
@@ -72,12 +81,12 @@ $ vlog
 
 ## Triplestores
 
-VIVO supports alernate triplestores via SPARQL 1.1.  A provisioning script for [Stardog](http://stardog.com) has been added in the [`stardog`](https://github.com/lawlesst/vivo-vagrant/tree/stardog) branch of this repository.  Follow the directions in the README to get started.  
+VIVO supports alernate triplestores via SPARQL 1.1.  A provisioning script for [Stardog](http://stardog.com) has been added in the [`stardog`](https://github.com/lawlesst/vivo-vagrant/tree/stardog) branch of this repository.  Follow the directions in the README to get started.
 
 
 ## Karma
-[Karma](http://www.isi.edu/integration/karma/) is a tool for mapping raw data in various formats (CSV, XML, etc) to RDF.  To assist with using Karma to model data for VIVO, a script is included to install Karma and its dependencies.  
+[Karma](http://www.isi.edu/integration/karma/) is a tool for mapping raw data in various formats (CSV, XML, etc) to RDF.  To assist with using Karma to model data for VIVO, a script is included to install Karma and its dependencies.
 
 To install Karma: run `sudo /home/vagrant/provision/karma.sh install`.  The initial install will take about 10 minutes.  Once it's installed Karma can be started with `/home/vagrant/provision/karma.sh start`.  Karma runs in a web browser and will be available on your machine at `http://localhost:8000/`.
 
-[Violeta Ilik](https://twitter.com/violetailik) has [presented](https://www.youtube.com/watch?v=aBLHGzui0_s) (starting at about 12:30) on how to model data for VIVO with Karma.  More information about Karma can be found in this [tutorial](https://github.com/InformationIntegrationGroup/karma-step-by-step) and on the project's [wiki](https://github.com/InformationIntegrationGroup/Web-Karma/wiki).  
+[Violeta Ilik](https://twitter.com/violetailik) has [presented](https://www.youtube.com/watch?v=aBLHGzui0_s) (starting at about 12:30) on how to model data for VIVO with Karma.  More information about Karma can be found in this [tutorial](https://github.com/InformationIntegrationGroup/karma-step-by-step) and on the project's [wiki](https://github.com/InformationIntegrationGroup/Web-Karma/wiki).

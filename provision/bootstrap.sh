@@ -42,6 +42,9 @@ echo mysql-server mysql-server/root_password_again password vivo | sudo debconf-
 sudo apt-get install -y mysql-server
 sudo apt-get install -y mysql-client
 
+#Call AllegroGraph install
+source /home/vagrant/provision/allegrograph/install.sh
+
 #Call VIVO install
 source /home/vagrant/provision/vivo/install.sh
 
