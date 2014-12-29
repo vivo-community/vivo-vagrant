@@ -7,7 +7,7 @@ The provisiong script will install the VIVO web application with the [AllegroGra
 ~~~
 $ git clone https://github.com/lawlesst/vivo-vagrant vivo-vagrant
 $ cd vivo-vagrant
-$ git checkout allegro-graph
+$ git checkout allegrograph
 $ vagrant up
 ~~~
 
