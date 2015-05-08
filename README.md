@@ -43,13 +43,11 @@ $ vlog
  * Use the `vagrant suspend` and `vagrant resume` commands to manage your Vagrant box when not in use or if you plan to restart or shutdown the host system, as opposed to using the VirtualBox or VMWare Fusion admin user interface.
 
 ## Upgrading or updating VIVO and Vitro
- * If you have a working vivo-vagrant box and don't want to re-provision your system, upgrading to a new release of VIVO and Vitro can be as simple as checking out the new release branch. 
+ * If you have a working vivo-vagrant box and don't want to re-provision your system, you can upgrade to a new release of VIVO by checking out the new release branch and rebuilding the application. 
  * 
   ~~~
  $ sudo /etc/init.d/tomcat7 stop
  $ cd /usr/local/vivo
- $ git fetch
- $ git checkout v1.x
  $ cd VIVO
  $ git fetch
  $ git checkout v1.x 
