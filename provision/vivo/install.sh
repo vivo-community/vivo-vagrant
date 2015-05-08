@@ -8,6 +8,7 @@
 APPDIR=/usr/local/vivo
 #Data directory - Solr index and VIVO application files will be stored here.
 DATADIR=/usr/local/vdata
+PROVDIR=/home/vagrant/provision
 #Tomcat webapp dir
 WEBAPPDIR=/var/lib/tomcat7/webapps
 #Database
@@ -39,15 +40,16 @@ git clone https://github.com/lawlesst/vivo-project-template.git .
 git submodule init
 git submodule update
 cd VIVO/
-git checkout maint-rel-1.7
+git checkout maint-rel-1.8
 cd ../Vitro
-git checkout maint-rel-1.7
+git checkout maint-rel-1.8
 cd ..
 
 #Copy build properties into app directory
-cp /home/vagrant/provision/vivo/build.properties $APPDIR/.
+cp $PROVDIR/vivo/build.properties $APPDIR/.
 #Copy runtime properties into data directory
-cp /home/vagrant/provision/vivo/runtime.properties $DATADIR/.
+cp $PROVDIR/vivo/runtime.properties $DATADIR/.
+cp $PROVDIR/vivo/applicationSetup.n3 $DATADIR/config/.
 
 #Stop tomcat
 sudo /etc/init.d/tomcat7 stop
@@ -74,7 +76,7 @@ sudo chown -R tomcat7:tomcat7 $WEBAPPDIR/vivo/
 
 #Add redicrect to /vivo in tomcat root
 sudo rm -f $WEBAPPDIR/ROOT/index.html
-sudo cp /home/vagrant/provision/vivo/index.jsp $WEBAPPDIR/ROOT/index.jsp
+sudo cp $PROVDIR/vivo/index.jsp $WEBAPPDIR/ROOT/index.jsp
 
 #Start Tomcat
 sudo /etc/init.d/tomcat7 start
