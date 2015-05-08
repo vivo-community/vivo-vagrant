@@ -1,3 +1,7 @@
+#####5/8/15
+
+ * changed the default install to be VIVO 1.8.  VIVO 1.5 - 1.7 are available in separate branches.  
+
 #####7/12/14
 
  * added a script to install [Karma](https://github.com/InformationIntegrationGroup/Web-Karma).
