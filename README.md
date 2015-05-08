@@ -3,7 +3,7 @@
 
 [Vagrant](http://www.vagrantup.com/) configuration and install scripts for running [VIVO](http://vivoweb.org) on a virtual machine, aka [Vagrant box](http://docs.vagrantup.com/v2/boxes.html), running an Ubuntu 64 Precise image.
 
-The virtual machine will boot and install VIVO 1.7 and its dependencies.  This will take several minutes for the initial install.
+The virtual machine will boot and install VIVO 1.8 and its dependencies.  This will take several minutes for the initial install.
 
 ## Prerequisites
  * [VirtualBox](https://www.virtualbox.org/) or [VMWare Fusion](http://www.vmware.com/products/fusion).
@@ -61,18 +61,18 @@ $ vlog
  ~~~
  $ vagrant up --provision
  ~~~
-
- * If you are interested in running VIVO 1.5, you can run checkout the v1.5 branch of this repository.
+ 
+ * If you are interested in running VIVO 1.5, 1.6, or 1.7 there are separate branches for each of those released version.
  ~~~
  $ git clone https://github.com/lawlesst/vivo-vagrant.git vivo-vagrant
  $ cd vivo-vagrant
- $ git checkout v1.5
+ $ git checkout v1.x
  $ vagrant up
  ~~~
 
 ## Triplestores
 
-VIVO supports alernate triplestores via SPARQL 1.1.  This Vagrant provisioning repository contains installation and configuration scripts for two other triple stores in separate branches.  
+VIVO supports alternate triplestores via SPARQL 1.1.  This Vagrant provisioning repository contains installation and configuration scripts for two other triple stores in separate branches.  
 
  * [Stardog](http://stardog.com) - see the [`stardog`](https://github.com/lawlesst/vivo-vagrant/tree/stardog) branch and README to get started.  
  * [AllegroGraph](http://franz.com/agraph/allegrograph/): see the [`allegrograph`](https://github.com/lawlesst/vivo-vagrant/tree/allegrograph) branch and README to get started.  
