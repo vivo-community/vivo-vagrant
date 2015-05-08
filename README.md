@@ -42,27 +42,49 @@ $ vlog
  * A Vagrant [shared directory](http://docs.vagrantup.com/v2/synced-folders/) is available at `/work` from the box.
  * Use the `vagrant suspend` and `vagrant resume` commands to manage your Vagrant box when not in use or if you plan to restart or shutdown the host system, as opposed to using the VirtualBox or VMWare Fusion admin user interface.
 
-## Updates to VIVO and Vitro code
- * From time to time, updates will be made to the current VIVO or Vitro release.  To make sure your VIVO Vagrant box is running the latest code, login to your box, shutdown Tomcat, and checkout the latest [VIVO](https://github.com/vivo-project/VIVO) and [Vitro](https://github.com/vivo-project/Vitro) code from Github.  For example:
+## Upgrading or updating VIVO and Vitro
+ * If you have a working vivo-vagrant box and don't want to re-provision your system, upgrading to a new release of VIVO and Vitro can be as simple as checking out the new release branch. 
+ * 
+  ~~~
+ $ sudo /etc/init.d/tomcat7 stop
+ $ cd /usr/local/vivo
+ $ cd VIVO
+ $ git fetch
+ $ git checkout v1.x 
+ $ cd ../Vitro
+ $ git fetch
+ $ git checkout v1.x
+ $ cd ..
+ $ sudo ant all
+ $ sudo /etc/init.d/tomcat7 start
+ ~~~
+
+ * You might also want to build your VIVO against unreleased code changes.  This can be done by identifying the branch that includes the changes you want to include, `cd` into the VIVO and Vitro updates and use Git to checkout the changes.  For example:
 
  ~~~
  $ sudo /etc/init.d/tomcat7 stop
  $ cd /usr/local/vivo
  $ cd VIVO
- $ git pull
+ $ git fetch
+ $ git checkout maint-rel-1.8
  $ cd ../Vitro
- $ git pull
+ $ git fetch
+ $ git checkout maint-rel-1.8
  $ cd ..
  $ sudo ant all
  $ sudo /etc/init.d/tomcat7 start
  ~~~
- * You can also, at anytime, re-provision your Vagrant box.  By running the following from your host machine.  Be sure to backup any data or code changes you have made beforehand.
+ 
+## Re-provisioning
+
+You can also, at anytime, re-provision your Vagrant box.  By running the following from your host machine.  This will reinstall all components of the Vagrant box and reinstall VIVO.  This will destroy any changes you've made to your VIVO installation so be sure to backup any data or code changes you have made beforehand.
 
  ~~~
  $ vagrant up --provision
  ~~~
  
- * If you are interested in running VIVO 1.5, 1.6, or 1.7 there are separate branches for each of those released version.
+##Running previous releases of VIVO and Vitro
+If you are interested in running VIVO 1.5, 1.6, or 1.7 there are separate branches for each of those released version.
  ~~~
  $ git clone https://github.com/lawlesst/vivo-vagrant.git vivo-vagrant
  $ cd vivo-vagrant
