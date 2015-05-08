@@ -72,7 +72,7 @@ $ vlog
 
 ## Triplestores
 
-VIVO supports alternate triplestores via SPARQL 1.1.  This Vagrant provisioning repository contains installation and configuration scripts for two other triple stores in separate branches.  
+VIVO supports alternate triplestores via SPARQL 1.1.  The vivo-vagrant repository contains installation and configuration scripts for two other triple stores in separate branches.  
 
  * [Stardog](http://stardog.com) - see the [`stardog`](https://github.com/lawlesst/vivo-vagrant/tree/stardog) branch and README to get started.  
  * [AllegroGraph](http://franz.com/agraph/allegrograph/): see the [`allegrograph`](https://github.com/lawlesst/vivo-vagrant/tree/allegrograph) branch and README to get started.  
