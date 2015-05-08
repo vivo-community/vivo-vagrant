@@ -48,6 +48,8 @@ $ vlog
   ~~~
  $ sudo /etc/init.d/tomcat7 stop
  $ cd /usr/local/vivo
+ $ git fetch
+ $ git checkout v1.x
  $ cd VIVO
  $ git fetch
  $ git checkout v1.x 
