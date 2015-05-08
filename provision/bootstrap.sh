@@ -1,8 +1,14 @@
 #!/bin/bash
 
+#
+# Setup the base box
+#
+
 export DEBIAN_FRONTEND=noninteractive
-set -e # Exit script immediately on first error.
-set -x # Print commands and their arguments as they are executed.
+#Exit on first error
+set -e
+#Print shell commands
+set -x
 
 #Update Ubuntu packages. Comment out during development
 sudo apt-get update -y
@@ -15,7 +21,7 @@ sudo cp -f /tmp/timezone /etc/timezone
 sudo cp -f /usr/share/zoneinfo/$area/$zone /etc/localtime
 
 # Basics.
-sudo apt-get install -y git-core mercurial vim screen wget curl raptor-utils unzip
+sudo apt-get install -y git vim screen wget curl raptor-utils unzip
 
 # Web server
 sudo apt-get install -y apache2
