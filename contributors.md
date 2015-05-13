@@ -5,4 +5,5 @@
 * Gabriel Birke - [@gbirke](https://github.com/gbirke)
 * Josh Hannah - [@joshhanna](https://github.com/joshhanna)
 * Shawn Medero - [@soypunk](https://github.com/soypunk)
+* Peter Murray - [@dltj](https://github.com/dltj)
 * Ted Lawless - @lawlesst
