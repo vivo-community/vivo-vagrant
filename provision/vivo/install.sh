@@ -30,6 +30,8 @@ mysql -uroot -pvivo -e "CREATE DATABASE IF NOT EXISTS $VIVO_DATABASE DEFAULT CHA
 sudo mkdir -p $APPDIR
 #Make data directory
 sudo mkdir -p $DATADIR
+#Make config directory
+sudo mkdir -p $DATADIR/config
 
 #Setup permissions and switch to app dir.
 sudo chown -R vagrant:vagrant $APPDIR
