@@ -51,7 +51,8 @@ cd ..
 cp $PROVDIR/vivo/build.properties $APPDIR/.
 #Copy runtime properties into data directory
 cp $PROVDIR/vivo/runtime.properties $DATADIR/.
-cp $PROVDIR/vivo/applicationSetup.n3 $DATADIR/config/.
+#Copy applicationSetup.n3 from Vitro into data directory
+cp $APPDIR/VIVO/config/example.applicationSetup.n3 $DATADIR/config/applicationSetup.n3
 
 #Stop tomcat
 sudo /etc/init.d/tomcat7 stop
