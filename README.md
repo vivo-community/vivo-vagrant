@@ -87,12 +87,19 @@ You can also, at anytime, re-provision your Vagrant box.  By running the followi
 From time to time, you might also want to rollback to a clean VIVO databae. To do this, follow the following steps. Warning - this will delete all the data in the VIVO store so be sure to have a backup or plan for restoring your data.
 
 * Stop Tomcat
- `$ sudo service tomcat7 stop`
+
+`$ sudo service tomcat7 stop`
+
 * Drop the VIVO database
+
 `$ mysql -uroot -pvivo drop database vivo17dev`
+
 * Recreate the VIVO database
+
 `$ mysql -uroot -pvivo -e "CREATE DATABASE IF NOT EXISTS $VIVO_DATABASE DEFAULT CHARACTER SET utf8;"`
+
 * Start tomcat
+
 `$ sudo service tomcat7 start`
  
 ##Running previous releases of VIVO and Vitro
