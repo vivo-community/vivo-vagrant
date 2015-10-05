@@ -89,8 +89,8 @@ From time to time, you might also want to rollback to a clean VIVO databae. To d
 A script is available at [`/provision/clear_vivo_db.sh`](./provision/clear_vivo_db.sh) to automate stopping the VIVO application, dropping the database, recreating it, and restarting the application.
 
 ~~~
-$cd ~/provision/
-$./reset_vivo_db.sh
+ $ cd ~/provision/
+ $ ./reset_vivo_db.sh
 ~~~
 
  
