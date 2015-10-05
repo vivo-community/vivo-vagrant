@@ -101,6 +101,11 @@ From time to time, you might also want to rollback to a clean VIVO databae. To d
 * Start tomcat
 
 `$ sudo service tomcat7 start`
+
+A script is available at [`/provision/clear_vivo_db.sh`](./provision/clear_vivo_db.sh) to automate this.
+
+`$ /home/vagrant/provision/clear_vivo_db.sh`
+
  
 ##Running previous releases of VIVO and Vitro
 If you are interested in running VIVO 1.5, 1.6, or 1.7 there are separate branches for each of those released version.
