@@ -96,7 +96,7 @@ From time to time, you might also want to rollback to a clean VIVO databae. To d
 
 * Recreate the VIVO database
 
-`$ mysql -uroot -pvivo -e "CREATE DATABASE IF NOT EXISTS $VIVO_DATABASE DEFAULT CHARACTER SET utf8;"`
+`$ mysql -uroot -pvivo -e "CREATE DATABASE IF NOT EXISTS vivo17dev DEFAULT CHARACTER SET utf8;"`
 
 * Start tomcat
 
