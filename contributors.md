@@ -2,6 +2,7 @@
 
 * Alex Viggio - [@aviggio](https://github.com/aviggio)
 * Bruno Soares - [@brunosoab](https://github.com/brunosoab)
+* Darren Weber - [@darrenleeweber](https://github.com/darrenleeweber)
 * Gabriel Birke - [@gbirke](https://github.com/gbirke)
 * Josh Hannah - [@joshhanna](https://github.com/joshhanna)
 * Shawn Medero - [@soypunk](https://github.com/soypunk)
