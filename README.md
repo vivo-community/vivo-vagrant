@@ -85,7 +85,7 @@ You can also, at anytime, re-provision your Vagrant box.  By running the followi
  ~~~
  
 ## Reseting the VIVO database
-From time to time, you might also want to rollback to a clean VIVO datasbae. A script is available at [`/provision/clear_vivo_db.sh`](./provision/clear_vivo_db.sh) to automate stopping the VIVO application, dropping the database, recreating it, and restarting the application. Warning - this will delete all the data in the VIVO store so be sure to have a backup or plan for restoring your data.
+From time to time, you might also want to rollback to a clean VIVO database. A script is available at [`/provision/reset_vivo_db.sh`](./provision/reset_vivo_db.sh) to automate stopping the VIVO application, dropping the database, recreating it, and restarting the application. Warning - this will delete all the data in the VIVO store so be sure to have a backup or plan for restoring your data.
 
 
 ~~~
