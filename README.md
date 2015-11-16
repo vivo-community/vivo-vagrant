@@ -4,7 +4,7 @@
 
 The virtual machine will boot and install VIVO 1.8.1 and its dependencies.  This will take several minutes for the initial install.
 
-If you have questions or encounter problems, please email the VIVO technical list at [vivo-dev-all@lists.sourceforge.net](https://lists.sourceforge.net/lists/listinfo/vivo-dev-all) or open issue here in the Github issue tracker.
+If you have questions or encounter problems, please email the VIVO technical list at [vivo-tech@googlegroups.com](https://groups.google.com/forum/#!forum/vivo-tech) or open issue here in the Github issue tracker.
 
 ## Prerequisites
  * [VirtualBox](https://www.virtualbox.org/) or [VMWare Fusion](http://www.vmware.com/products/fusion).
