@@ -48,21 +48,8 @@ echo mysql-server mysql-server/root_password_again password vivo | debconf-set-s
 apt-get install -y mysql-server
 apt-get install -y mysql-client
 
-#Call VIVO install
-source /home/vagrant/provision/vivo/install.sh
 
-#Append defaults to .bashrc
-#Alias for viewing VIVO log
-VLOG="alias vlog='less +F /usr/share/tomcat7/logs/vivo.all.log'"
-BASHRC=/home/vagrant/.bashrc
 
-if grep "$VLOG" $BASHRC > /dev/null
-then
-   echo "log alias exists"
-else
-   (echo;  echo $VLOG)>> $BASHRC
-   echo "log alias created"
-fi
 
 echo Box provisioned.
 
