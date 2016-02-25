@@ -48,10 +48,7 @@ echo mysql-server mysql-server/root_password_again password vivo | debconf-set-s
 apt-get install -y mysql-server
 apt-get install -y mysql-client
 
-
-
-
-echo Box provisioned.
+echo Box boostrapped.
 
 exit
 
