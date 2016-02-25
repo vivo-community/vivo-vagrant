@@ -7,8 +7,6 @@
 export DEBIAN_FRONTEND=noninteractive
 #Exit on first error
 set -e
-#Print shell commands
-set -x
 
 #Update Ubuntu packages. Comment out during development
 apt-get update -y
