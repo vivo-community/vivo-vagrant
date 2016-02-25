@@ -71,7 +71,7 @@ configureBuildVIVO(){
     #Copy runtime properties into data directory
     cp $PROVDIR/vivo/runtime.properties $DATADIR/.
     #Copy applicationSetup.n3 from Vitro into data directory
-    cp $PROVDIR/vivo/applicationSetup.n3 $APPDIR/config/applicationSetup.n3
+    cp $PROVDIR/vivo/applicationSetup.n3 $DATADIR/config/.
     #Copy log4j config to config directory
     cp $PROVDIR/vivo/log4j.properties $APPDIR/config/.
     #Build VIVO
