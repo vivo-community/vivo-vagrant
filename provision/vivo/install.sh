@@ -61,7 +61,6 @@ cloneVIVOTemplate(){
     cd ../Vitro
     git checkout maint-rel-1.8
     cd ..
-    return $TRUE
 }
 
 configureBuildVIVO(){
@@ -85,7 +84,6 @@ removeRDFFiles(){
     rm VIVO/rdf/abox/filegraph/continents.n3
     rm VIVO/rdf/abox/filegraph/us-states.rdf
     rm VIVO/rdf/abox/filegraph/geopolitical.abox.ver1.1-11-18-11.owl
-    return $TRUE
 }
 
 
@@ -101,7 +99,6 @@ setLogAlias() {
        (echo;  echo $VLOG)>> $BASHRC
        echo "log alias created"
     fi
-    return $TRUE
 }
 
 
@@ -135,6 +132,9 @@ setupTomcat
 
 #Set a log alias
 setLogAlias
+
+# Change tomcat options. See http://stackoverflow.com/a/27250730/758157
+sed -i 's|JAVA_OPTS=.*|JAVA_OPTS="-Djava.security.egd=file:/dev/./urandom -Djava.awt.headless=true -Xmx2048m -XX:MaxPermSize=512m -XX:+UseConcMarkSweepGC"|g' /etc/default/tomcat7
 
 #Start Tomcat
 /etc/init.d/tomcat7 start
