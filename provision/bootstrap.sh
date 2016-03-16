@@ -8,6 +8,10 @@ export DEBIAN_FRONTEND=noninteractive
 #Exit on first error
 set -e
 
+# Add vagrant user and group
+groupadd vagrant || echo "vagrant group exists"
+useradd -g vagrant vagrant || echo "vagrant user exists in group vagrant"
+
 #Update Ubuntu packages. Comment out during development
 apt-get update -y
 
