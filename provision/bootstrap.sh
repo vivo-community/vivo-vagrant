@@ -46,6 +46,9 @@ echo mysql-server mysql-server/root_password_again password vivo | debconf-set-s
 apt-get install -y mysql-server
 apt-get install -y mysql-client
 
+# Make Karma scripts executable
+chmod +x /home/vagrant/provision/karma.sh
+
 echo Box boostrapped.
 
 exit
