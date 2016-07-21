@@ -3,7 +3,7 @@
 #
 # Setup the base box
 #
-
+set -o verbose
 export DEBIAN_FRONTEND=noninteractive
 #Exit on first error
 set -e
@@ -45,6 +45,12 @@ echo mysql-server mysql-server/root_password password vivo | debconf-set-selecti
 echo mysql-server mysql-server/root_password_again password vivo | debconf-set-selections
 apt-get install -y mysql-server
 apt-get install -y mysql-client
+
+# Maven
+cd /usr/local
+wget http://mirrors.sonic.net/apache/maven/maven-3/3.3.9/binaries/apache-maven-3.3.9-bin.tar.gz
+tar -xvf apache-maven-3.3.9-bin.tar.gz
+ln -s /usr/local/apache-maven-3.3.9/bin/mvn /usr/bin/mvn
 
 # Make Karma scripts executable
 chmod +x /home/vagrant/provision/karma.sh
