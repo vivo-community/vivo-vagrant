@@ -9,7 +9,7 @@ export DEBIAN_FRONTEND=noninteractive
 #Exit on first error
 set -e
 #Print shell commands
-set -x
+set -o verbose
 
 #
 # -- Setup global variables and directories
@@ -21,62 +21,13 @@ DATADIR=/usr/local/vdata
 PROVDIR=/home/vagrant/provision
 #Tomcat webapp dir
 WEBAPPDIR=/var/lib/tomcat7/webapps
-#Database
-VIVO_DATABASE=vivo17dev
 
-#Make app directory
-mkdir -p $APPDIR
 #Make data directory
 mkdir -p $DATADIR
 #Make config directory
 mkdir -p $DATADIR/config
 #Make log directory
 mkdir -p $DATADIR/logs
-
-createDatabase() {
-    #create VIVO mysql database
-    mysql -uroot -pvivo -e "CREATE DATABASE IF NOT EXISTS $VIVO_DATABASE DEFAULT CHARACTER SET utf8;"
-}
-
-cloneVIVOTemplate(){
-    #VIVO will be installed in APPDIR.  You might want to put this
-    #in a shared folder so that the files can be edited from the
-    #host machine.  Building VIVO via the shared file
-    #system can be very slow, at least with Windows.  See
-    #http://docs.vagrantup.com/v2/synced-folders/nfs.html
-
-    #Remove existing app directory if present.
-    rm -rf $APPDIR && mkdir -p $APPDIR
-
-    #Setup permissions and switch to app dir.
-    chown -R vagrant:vagrant $APPDIR
-    cd $APPDIR
-
-    #Checkout three tiered build template from Github
-    git clone https://github.com/lawlesst/vivo-project-template.git .
-    git submodule init
-    git submodule update
-    cd VIVO/
-    git checkout maint-rel-1.8
-    cd ../Vitro
-    git checkout maint-rel-1.8
-    cd ..
-    return $TRUE
-}
-
-configureBuildVIVO(){
-    cd $APPDIR
-    #Copy build properties into app directory
-    cp $PROVDIR/vivo/build.properties $APPDIR/.
-    #Copy runtime properties into data directory
-    cp $PROVDIR/vivo/runtime.properties $DATADIR/.
-    #Copy applicationSetup.n3 from Vitro into data directory
-    cp $PROVDIR/vivo/applicationSetup.n3 $DATADIR/config/.
-    #Copy log4j config to config directory
-    cp $PROVDIR/vivo/log4j.properties $APPDIR/config/.
-    #Build VIVO
-    ant all -Dskiptests=true
-}
 
 removeRDFFiles(){
     #In development, you might want to remove these ontology and data files
@@ -91,7 +42,7 @@ removeRDFFiles(){
 
 setLogAlias() {
     #Alias for viewing VIVO log
-    VLOG="alias vlog='less +F $DATADIR/logs/vivo.all.log'"
+    VLOG="alias vlog='less +F /usr/share/tomcat7/logs/vivo.all.log'"
     BASHRC=/home/vagrant/.bashrc
 
     if grep "$VLOG" $BASHRC > /dev/null
@@ -106,13 +57,36 @@ setLogAlias() {
 
 
 setupTomcat(){
+    cd
     #Change permissions
-    chown -R tomcat7:tomcat7 $DATADIR
-    chown -R tomcat7:tomcat7 $WEBAPPDIR/vivo/
+    chown -R vagrant:tomcat7 $DATADIR
+    chown -R vagrant:tomcat7 $WEBAPPDIR/vivo/
+
+    chmod -R g+rws $DATADIR
+    chmod -R g+rws $WEBAPPDIR
 
     #Add redirect to /vivo in tomcat root
     rm -f $WEBAPPDIR/ROOT/index.html
     cp $PROVDIR/vivo/index.jsp $WEBAPPDIR/ROOT/index.jsp
+
+    return $TRUE
+}
+
+installVIVO(){
+    cd
+    rm -rf vivo
+    mkdir vivo
+    cd vivo
+    wget https://github.com/vivo-project/VIVO/releases/download/rel-1.9.0-rc1/vivo-1.9.0-rc1.tar.gz -O vivo.tar.gz
+    tar -xvf vivo.tar.gz
+    #Copy runtime properties into data directory
+    cp $PROVDIR/vivo/runtime.properties $DATADIR/.
+    #Copy applicationSetup.n3 from Vitro into data directory
+    cp $PROVDIR/vivo/applicationSetup.n3 $DATADIR/config/.
+    #Copy log4j config to config directory
+    cp $PROVDIR/vivo/log4j.properties webapp/src/main/webResources/WEB-INF/classes/.
+    cp $PROVDIR/vivo/settings.xml .
+    mvn install -s settings.xml
     return $TRUE
 }
 
@@ -120,15 +94,11 @@ setupTomcat(){
 #Stop tomcat
 /etc/init.d/tomcat7 stop
 
-#Create database
-createDatabase
+# add vagrant to tomcat7 group
+usermod -a -G tomcat7 vagrant
 
-#Checkout and VIVO from project template
-#This will take several minutes.
-cloneVIVOTemplate
-
-#Copy config files and setup.
-configureBuildVIVO
+# install the app
+installVIVO
 
 #Adjust tomcat permissions
 setupTomcat
