@@ -2,18 +2,15 @@
 # vi: set ft=ruby :
 
 Vagrant.configure("2") do |config|
-  config.vm.box = "precise64"
-  config.vm.box_url = "http://files.vagrantup.com/precise64.box"
 
   config.vm.provider "virtualbox" do |v,override|
-	v.name = "vagrant_vivo_precise64"
-	v.gui = false
-	v.cpus = 1
-	v.memory = 1024
+    config.vm.box = "ubuntu/trusty64"
+	  v.gui = false
+	  v.cpus = 1
+	  v.memory = 1024
   end
 
   config.vm.provider "vmware_fusion" do |v,override|
-	v.name = "vagrant_vivo_precise64"
 	v.gui = false
 	v.vmx["numvcpus"] = "1"
 	v.vmx["memsize"] = "1024"
@@ -37,8 +34,6 @@ Vagrant.configure("2") do |config|
   config.vm.network "forwarded_port", guest: 80, host: 8081
   config.vm.network "forwarded_port", guest: 8080, host: 8080
   config.vm.network "forwarded_port", guest: 8000, host: 8000
-  config.vm.network "forwarded_port", guest: 5000, host: 5000
-  config.vm.network "forwarded_port", guest: 3030, host: 3030
 
   # Share an additional folder to the guest VM. The first argument is
   # an identifier, the second is the path on the guest to mount the
