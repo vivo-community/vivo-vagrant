@@ -3,8 +3,7 @@
 #
 # Setup the base box
 #
-
-export DEBIAN_FRONTEND=noninteractive
+set -o verbose
 #Exit on first error
 set -e
 
@@ -25,30 +24,41 @@ cp -f /usr/share/zoneinfo/$area/$zone /etc/localtime
 # Basics.
 apt-get install -y git vim screen wget curl raptor-utils unzip
 
-# Web server
-apt-get install -y apache2
+# Install open jdk 8
+installJava(){
+    add-apt-repository ppa:openjdk-r/ppa -y
+    apt-get update -y
+    apt-get install openjdk-8-jdk -y
+}
 
-# Install Oracle Java 7 which best supports Java Advanced Imaging (JAI),
-# or uncomment line below and comment out other 6 lines to install OpenJDK7 instead
-#apt-get install -y openjdk-7-jdk
-apt-get install python-software-properties -y
-add-apt-repository ppa:webupd8team/java -y
-apt-get update -y
-echo debconf shared/accepted-oracle-license-v1-1 select true | debconf-set-selections
-echo debconf shared/accepted-oracle-license-v1-1 seen true | debconf-set-selections
-apt-get install oracle-java7-installer -y
+# Maven
+installMaven () {
+	cd /usr/local
+	rm -rf /usr/bin/mvn
+	rm -rf /usr/local/apache-maven-3.3.9
+	wget http://mirrors.sonic.net/apache/maven/maven-3/3.3.9/binaries/apache-maven-3.3.9-bin.tar.gz
+	tar -xvf apache-maven-3.3.9-bin.tar.gz
+	ln -s /usr/local/apache-maven-3.3.9/bin/mvn /usr/bin/mvn
+}
 
 # Install Tomcat 7 with JAVA_HOME export so Tomcat starts when install completes,
-# and then patch /etc/default/tomcat7 to specify Oracle Java 7
-export JAVA_HOME=/usr/lib/jvm/java-7-oracle
-apt-get install -y tomcat7 ant
-sed -i '/#JAVA_HOME.*$/a JAVA_HOME=/usr/lib/jvm/java-7-oracle/' /etc/default/tomcat7
+installTomcat () {
+	export JAVA_HOME=/usr/lib/jvm/java-8-openjdk-amd64
+	apt-get install -y tomcat7
+	sed -i '/#JAVA_HOME.*$/a JAVA_HOME=/usr/lib/jvm/java-8-openjdk-amd64' /etc/default/tomcat7
+}
 
 # MySQL
-echo mysql-server mysql-server/root_password password vivo | debconf-set-selections
-echo mysql-server mysql-server/root_password_again password vivo | debconf-set-selections
-apt-get install -y mysql-server
-apt-get install -y mysql-client
+# echo mysql-server mysql-server/root_password password vivo | debconf-set-selections
+# echo mysql-server mysql-server/root_password_again password vivo | debconf-set-selections
+# apt-get install -y mysql-server
+# apt-get install -y mysql-client
+
+
+
+installJava
+installMaven
+installTomcat
 
 # Make Karma scripts executable
 chmod +x /home/vagrant/provision/karma.sh

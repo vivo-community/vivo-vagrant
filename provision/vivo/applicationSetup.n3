@@ -26,9 +26,9 @@
     :hasImageProcessor            :jaiImageProcessor ;
     :hasFileStorage               :ptiFileStorage ;
     # Change here to use MySQL for triple store.
-    :hasContentTripleSource       :sdbContentTripleSource ;
+    #:hasContentTripleSource       :sdbContentTripleSource ;
     # Change here to use TDB file based triple store.
-    #:hasContentTripleSource       :tdbContentTripleSource ;
+    :hasContentTripleSource       :tdbContentTripleSource ;
     :hasConfigurationTripleSource :tdbConfigurationTripleSource ;
     :hasTBoxReasonerModule        :jfactTBoxReasonerModule .
 
