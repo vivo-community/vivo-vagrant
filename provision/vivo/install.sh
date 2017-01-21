@@ -14,8 +14,6 @@ set -o verbose
 #
 # -- Setup global variables and directories
 #
-#VIVO install location
-APPDIR=/usr/local/vivo
 #Data directory - Solr index and VIVO application files will be stored here.
 DATADIR=/usr/local/vdata
 PROVDIR=/home/vagrant/provision
@@ -73,7 +71,7 @@ setupTomcat(){
 }
 
 installVIVO(){
-    cd
+    cd /home/vagrant/
     rm -rf vivo
     mkdir vivo
     cd vivo
@@ -87,6 +85,7 @@ installVIVO(){
     cp $PROVDIR/vivo/log4j.properties webapp/src/main/webResources/WEB-INF/classes/.
     cp $PROVDIR/vivo/settings.xml .
     mvn install -s settings.xml
+    chown -R vagrant:tomcat7 ../
     return $TRUE
 }
 

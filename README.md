@@ -23,7 +23,7 @@ $ vagrant up
 
 When the Vagrant provisioning script is complete, the VIVO web application will be available in a browser on the host machine at `http://localhost:8080/vivo`.  You can log into your new VIVO with the default admin user (`vivo_root@school.edu`) and password (`rootPassword`), which are specified in the `/provision/vivo/deploy.properties` source file in this repository.
 
-The source will be installed on the virtual machine at `/usr/local/vivo/`. Mac users can log into your Vagrant box securely using this command from a Terminal session.  Windows users will want to use an SSH utility, e.g. [Putty](http://www.chiark.greenend.org.uk/~sgtatham/putty/download.html):
+The vivo application will be at `/home/vagrant/vivo`. Mac users can log into your Vagrant box securely using this command from a Terminal session.  Windows users will want to use an SSH utility, e.g. [Putty](http://www.chiark.greenend.org.uk/~sgtatham/putty/download.html):
 
 ~~~
 $ vagrant ssh
@@ -36,7 +36,7 @@ $ vlog
 ~~~
 
 ### Commands / system layout
- * VIVO application: `/usr/local/vivo`.
+ * VIVO application: `/home/vagrant/vivo`.
  * VIVO data directory: `/usr/local/vdata`
  * VIVO TDB triple store: `/usr/local/vdata/tdbContentModels`
  * Tomcat: `/var/lib/tomcat7/`
