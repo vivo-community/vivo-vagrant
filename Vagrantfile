@@ -4,7 +4,7 @@
 Vagrant.configure("2") do |config|
 
   config.vm.provider "virtualbox" do |v,override|
-    config.vm.box = "ubuntu/trusty64"
+    config.vm.box = "ubuntu/xenial64"
 	  v.gui = false
 	  v.cpus = 1
 	  v.memory = 1024

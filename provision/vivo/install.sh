@@ -40,7 +40,7 @@ removeRDFFiles(){
 
 setLogAlias() {
     #Alias for viewing VIVO log
-    VLOG="alias vlog='less +F /usr/share/tomcat7/logs/vivo.all.log'"
+    VLOG="alias vlog='less +F $DATADIR/logs/vivo.all.log'"
     BASHRC=/home/vagrant/.bashrc
 
     if grep "$VLOG" $BASHRC > /dev/null
@@ -57,11 +57,12 @@ setLogAlias() {
 setupTomcat(){
     cd
     #Change permissions
-    chown -R vagrant:tomcat7 $DATADIR
-    chown -R vagrant:tomcat7 $WEBAPPDIR/vivo/
-
-    chmod -R g+rws $DATADIR
-    chmod -R g+rws $WEBAPPDIR
+    dirs=( $DATADIR $WEBAPPDIR/vivo )
+    for dir in "${dirs[@]}"
+    do
+      chown -R vagrant:tomcat7 $dir
+      chmod -R g+rws $dir
+    done
 
     #Add redirect to /vivo in tomcat root
     rm -f $WEBAPPDIR/ROOT/index.html
