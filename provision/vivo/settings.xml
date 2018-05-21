@@ -4,7 +4,7 @@
 			<id>defaults</id>
 			<properties>
 				<app-name>vivo</app-name>
-				<vivo-dir>/usr/local/vdata</vivo-dir>
+				<vivo-dir>/usr/local/vivo/vdata</vivo-dir>
 				<tomcat-dir>/var/lib/tomcat7</tomcat-dir>
 				<default-theme>wilma</default-theme>
 			</properties>

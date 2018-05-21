@@ -1,0 +1,10 @@
+[Desktop Entry]
+Name=Eclipse 
+Type=Application
+Exec=env UBUNTU_MENUPROXY=0 eclipse
+Terminal=false
+Icon=eclipse
+Comment=Integrated Development Environment
+NoDisplay=false
+Categories=Development;IDE;
+Name[en]=Eclipse

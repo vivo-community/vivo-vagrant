@@ -5,9 +5,10 @@ Vagrant.configure("2") do |config|
 
   config.vm.provider "virtualbox" do |v,override|
     config.vm.box = "ubuntu/xenial64"
-	  v.gui = false
-	  v.cpus = 1
-	  v.memory = 1024
+	  v.gui = true
+	  v.cpus = 2
+	  v.memory = 4096
+	  v.customize ['modifyvm', :id, '--clipboard', 'bidirectional']  
   end
 
   config.vm.provider "vmware_fusion" do |v,override|
