@@ -47,7 +47,7 @@ $ vlog
 ## Starting the GUI and development environment
 Login to the system with vagrant ssh as mentioned above.
 Start the XFCE desktop with the command 
-$ sudo startxfce4
+$ startx
 
 ### Changing the display
  * set virtualbox to scaled mode
