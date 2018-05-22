@@ -1,29 +1,38 @@
-# VIVO Vagrant - v1.9
+# VIVO Vagrant - v1.9.3
 
 [Vagrant](http://www.vagrantup.com/) configuration and install scripts for running [VIVO](http://vivoweb.org) on a virtual machine, aka [Vagrant box](http://docs.vagrantup.com/v2/boxes.html), running an Ubuntu 64 Server 16.04.3 image.
 
-The virtual machine will boot and install VIVO 1.9 and its dependencies.  This will take several minutes for the initial install.
-
+The virtual machine will boot and install VIVO 1.9,3 and its dependencies.  This will take several minutes for the initial install.
+It installs VIVO via installing the VIVO 3 tier template located at: https://github.com/vivo-community/vivo-project-template
 If you have questions or encounter problems, please email the VIVO technical list at [vivo-tech@googlegroups.com](https://groups.google.com/forum/#!forum/vivo-tech) or open issue here in the Github issue tracker.
 
+## Purpose
+ * This virutal machine creates a standalone VIVO/Vitro development environment
+ * It downloads eclipse Oxygen for the IDE
+ * It downloads the full github repo for VIVO, Vitro, and a third tier.
+ * It installs the XFCE4 desktop gui environment
+ 
 ## Prerequisites
  * [VirtualBox](https://www.virtualbox.org/) or [VMWare Fusion](http://www.vmware.com/products/fusion).
  * [Vagrant](https://docs.vagrantup.com/v2/installation/index.html).
  * Git - if you are new to git, you might want to use the Github desktop client. [Windows](http://windows.github.com/) and [Mac](http://mac.github.com/) versions are available.
+ * The virtual machine is configured to use 4GB of RAM, so please ensure your system has enough memory to accomodate this
+ ( or shutdown most of your running applications prior to using this VM )
 
 This Vagrant box is intended for development and experimentation only.  Change default user names and passwords.
 
 ## Install the VIVO Vagrant box
 
 ~~~
-$ git clone https://github.com/lawlesst/vivo-vagrant.git vivo-vagrant
+$ git clone https://github.com/lawlesst/vivo-vagrant.git vivo-vagrant   ( note -- this will be the name of your VM, feel free to change the target name as appropriate )
 $ cd vivo-vagrant
 $ vagrant up
 ~~~
 
 When the Vagrant provisioning script is complete, the VIVO web application will be available in a browser on the host machine at `http://localhost:8080/vivo`.  You can log into your new VIVO with the default admin user (`vivo_root@school.edu`) and password (`rootPassword`), which are specified in the `/provision/vivo/deploy.properties` source file in this repository.
 
-The vivo application will be at `/home/vagrant/vivo`. Mac users can log into your Vagrant box securely using this command from a Terminal session.  Windows users will want to use an SSH utility, e.g. [Putty](http://www.chiark.greenend.org.uk/~sgtatham/putty/download.html):
+
+The vivo application will be at `/usr/local/vivo`. Mac users can log into your Vagrant box securely using this command from a Terminal session.  Windows users will want to use an SSH utility, e.g. [Putty](http://www.chiark.greenend.org.uk/~sgtatham/putty/download.html):
 
 ~~~
 $ vagrant ssh
@@ -35,10 +44,29 @@ Once you are logged in, you can view the default VIVO log output with this comma
 $ vlog
 ~~~
 
+## Starting the GUI and development environment
+Login to the system with vagrant ssh as mentioned above.
+Start the XFCE desktop with the command 
+$ sudo startxfce4
+
+### Changing the display
+ * set virtualbox to scaled mode
+   -- View -> Scaled Mode
+ * In the XFCE desktop - right click -> Applications -> Settings -> Display 
+    * Select a display that suites your display - eg 1400x1040 
+    * Click Apply
+    
+### Applications and issues in the desktop
+ * eclipse is installed and can be started with the eclipse command in the terminal
+ * firefox is installed and can be started with the firefox command in the terminal
+ * There are bugs which prevent cutting and pasting between the guest and host -- please report back if this is resolved.
+ 
+ 
+
 ### Commands / system layout
- * VIVO application: `/home/vagrant/vivo`.
- * VIVO data directory: `/usr/local/vdata`
- * VIVO TDB triple store: `/usr/local/vdata/tdbContentModels`
+ * VIVO application: `/usr/local/vivo`.  -- this is the https://github.com/vivo-community/vivo-project-template repo
+ * VIVO data directory: `/usr/local/vivo/vdata`
+ * VIVO Ttriple store: Mysql
  * Tomcat: `/var/lib/tomcat7/`
  * To start/stop Tomcat run `sudo /etc/init.d/tomcat start|stop|restart`.
  * A Vagrant [shared directory](http://docs.vagrantup.com/v2/synced-folders/) is available at `/work` from the box.
@@ -52,7 +80,7 @@ You can, at anytime, re-provision your Vagrant box.  By running the following fr
  $ vagrant up --provision
  ~~~
  
-## Reseting the VIVO database
+## Reseting the VIVO database  -- !!!! Below is only for TDB --- need to identify the mysql command up update the DOC
 From time to time, you might also want to rollback to a clean VIVO database. This can be done by stopping tomcat and removing the file-based TDB triple store: `rm /usr/local/vdata/tdbContentModels`. Warning - this will delete all of the data you have loaded into VIVO and any ontology changes.
 
  
