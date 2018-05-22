@@ -52,6 +52,7 @@ cloneVIVOTemplate(){
     git clone https://github.com/vivo-community/vivo-project-template.git ${TEMPLATEBASE}
  
     cd ${TEMPLATEBASE}
+    git checkout maint-rel-1.9.3
     git submodule init
     git submodule update
     ./setup.sh
