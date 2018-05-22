@@ -18,6 +18,8 @@ If you have questions or encounter problems, please email the VIVO technical lis
  * Git - if you are new to git, you might want to use the Github desktop client. [Windows](http://windows.github.com/) and [Mac](http://mac.github.com/) versions are available.
  * The virtual machine is configured to use 4GB of RAM, so please ensure your system has enough memory to accomodate this
  ( or shutdown most of your running applications prior to using this VM )
+ * Sometimes it's necessary to install the vagrant virtualbox guest additions plugin in order to get X11, shared drives, and the bi-directional clipboard to work. Do this in the shell that you will start vagrant. Use this command:
+   * $ vagrant plugin update vagrant-vbguest
 
 This Vagrant box is intended for development and experimentation only.  Change default user names and passwords.
 
