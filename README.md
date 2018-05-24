@@ -26,7 +26,7 @@ This Vagrant box is intended for development and experimentation only.  Change d
 ## Install the VIVO Vagrant box
 
 ~~~
-$ git clone https://github.com/lawlesst/vivo-vagrant.git vivo-vagrant   ( note -- this will be the name of your VM, feel free to change the target name as appropriate )
+$ git clone -b gui-developer-v1.9.3 https://github.com/vivo-community/vivo-vagrant vivo-vagrant   ( note -- this will be the name of your VM, feel free to change the target name as appropriate )
 $ cd vivo-vagrant
 $ vagrant up
 ~~~
