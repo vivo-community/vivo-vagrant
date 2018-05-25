@@ -26,6 +26,7 @@ This Vagrant box is intended for development and experimentation only.  Change d
 ## Install the VIVO Vagrant box
 
 ~~~
+$ vagrant plugin update vagrant-vbguest  ( not completly sure if this is required, but it might help X11 and shared file functions )
 $ git clone -b gui-developer-v1.9.3 https://github.com/vivo-community/vivo-vagrant vivo-vagrant   ( note -- this will be the name of your VM, feel free to change the target name as appropriate )
 $ cd vivo-vagrant
 $ vagrant up
@@ -47,14 +48,15 @@ $ vlog
 ~~~
 
 ## Starting the GUI and development environment
-Login to the system with vagrant ssh as mentioned above.
+Go to the VirtualBox console -- This is probably labeled as VirtualBoxVM -- it shoudl have a login prompt and perhaps console messages
+On the console - ogin to the system with the user/password = vagrant/vagrant
 Start the XFCE desktop with the command 
 $ startx
 
 ### Changing the display
- * set virtualbox to scaled mode
-   -- View -> Scaled Mode
- * In the XFCE desktop - right click -> Applications -> Settings -> Display 
+ * set virtualbox to scaled mode  ( this makes resizing much easier _
+   * <right ctrl  C> WINDOWS;   <Command C>  MAC
+   * In the XFCE desktop - right click -> Applications -> Settings -> Display 
     * Select a display that suites your display - eg 1400x1040 
     * Click Apply
     
