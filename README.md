@@ -27,8 +27,10 @@ This Vagrant box is intended for development and experimentation only.  Change d
 ## Install the VIVO Vagrant box
 
 ~~~
-$ vagrant plugin update vagrant-vbguest  ( not completly sure if this is required, but it might help X11 and shared file functions )
-$ git clone -b gui-developer-v1.9.3 https://github.com/vivo-community/vivo-vagrant vivo-vagrant   ( note -- this will be the name of your VM, feel free to change the target name as appropriate )
+# not completly sure if the following is required, but it might help X11 and shared file functions 
+$ vagrant plugin update vagrant-vbguest  
+# The following target will be the name of your VM, feel free to change the target name as appropriate 
+$ git clone -b gui-developer-v1.9.3 https://github.com/vivo-community/vivo-vagrant vivo-vagrant   
 $ cd vivo-vagrant
 $ vagrant up
 ~~~
