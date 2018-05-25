@@ -13,8 +13,9 @@ If you have questions or encounter problems, please email the VIVO technical lis
  * It installs the XFCE4 desktop gui environment
  
 ## Prerequisites
- * [VirtualBox](https://www.virtualbox.org/) or [VMWare Fusion](http://www.vmware.com/products/fusion).
- * [Vagrant](https://docs.vagrantup.com/v2/installation/index.html).
+ * recommend downloading latest versions of software below.
+ * [VirtualBox](https://www.virtualbox.org/) .   Works with Version 5.2.12
+ * [Vagrant](https://docs.vagrantup.com/v2/installation/index.html).   - Vagrant 2.0.4 or Greater
  * Git - if you are new to git, you might want to use the Github desktop client. [Windows](http://windows.github.com/) and [Mac](http://mac.github.com/) versions are available.
  * The virtual machine is configured to use 4GB of RAM, so please ensure your system has enough memory to accomodate this
  ( or shutdown most of your running applications prior to using this VM )
