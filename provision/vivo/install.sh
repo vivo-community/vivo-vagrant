@@ -95,6 +95,11 @@ installVIVO(){
 /etc/init.d/tomcat7 stop
 
 # add vagrant to tomcat7 group
+if ! id "vagrant" >/dev/null 2>&1; then
+  echo "Creating 'vagrant' user"
+  adduser --disabled-password --gecos "" vagrant
+fi
+
 usermod -a -G tomcat7 vagrant
 
 # install the app
