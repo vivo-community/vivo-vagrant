@@ -18,8 +18,9 @@ This Vagrant box is intended for development and experimentation only.  Change d
 ## Install the VIVO Vagrant box
 
 ~~~
-$ git clone https://github.com/lawlesst/vivo-vagrant.git vivo-vagrant
+$ git clone https://github.com/vivo-community/vivo-vagrant.git vivo-vagrant
 $ cd vivo-vagrant
+$ git checkout rel-1.10.0-RC-1
 $ vagrant up
 ~~~
 
