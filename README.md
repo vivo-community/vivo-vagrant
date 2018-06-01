@@ -38,7 +38,7 @@ Once you are logged in, you can view the default VIVO log output with this comma
 $ vlog
 ~~~
 
-### Commands / system layout
+## Commands / system layout
  * VIVO application: `/home/vagrant/vivo`.
  * VIVO data directory: `/usr/local/vdata`
  * VIVO TDB triple store: `/usr/local/vdata/tdbContentModels`
