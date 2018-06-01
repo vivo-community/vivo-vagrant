@@ -1,7 +1,6 @@
 
-# No source VIVO Vagrant for VIVO 1.9
-This branch is for VIVO v1.9 installed from the tar zipped release bundle. It does NOT include the full source code.
-For the most recent version that downloads the full source for Vivo 1.9.3 and is GUI enabled with eclipse please go to branch: https://github.com/vivo-community/vivo-vagrant/tree/gui-developer-v1.9.3
+# No source VIVO Vagrant for VIVO 1.10-RC-1
+This branch is for VIVO v1.10-RC-1 installed from the tar zipped release bundle. It does NOT include the full source code.
 
 [Vagrant](http://www.vagrantup.com/) configuration and install scripts for running [VIVO](http://vivoweb.org) on a virtual machine, aka [Vagrant box](http://docs.vagrantup.com/v2/boxes.html), running an Ubuntu 64 Server 16.04.3 image.
 
