@@ -55,7 +55,6 @@ cloneVIVOTemplate(){
     git checkout devworkshop-2018
     git submodule init
     git submodule update
-    ./setup.sh
 
     #Setup permissions and switch to TEMPLATEDIR dir.
     cd $APPDIR
