@@ -4,7 +4,7 @@ This branch is for VIVO v1.10-RC-1 installed from the tar zipped release bundle.
 
 [Vagrant](http://www.vagrantup.com/) configuration and install scripts for running [VIVO](http://vivoweb.org) on a virtual machine, aka [Vagrant box](http://docs.vagrantup.com/v2/boxes.html), running an Ubuntu 64 Server 16.04.3 image.
 
-The virtual machine will boot and install VIVO 1.9 and its dependencies.  This will take several minutes for the initial install.
+The virtual machine will boot and install VIVO and its dependencies.  This will take several minutes for the initial install.
 
 If you have questions or encounter problems, please email the VIVO technical list at [vivo-tech@googlegroups.com](https://groups.google.com/forum/#!forum/vivo-tech) or open issue here in the Github issue tracker.
 
@@ -56,16 +56,6 @@ You can, at anytime, re-provision your Vagrant box.  By running the following fr
  
 ## Reseting the VIVO database
 From time to time, you might also want to rollback to a clean VIVO database. This can be done by stopping tomcat and removing the file-based TDB triple store: `rm /usr/local/vdata/tdbContentModels`. Warning - this will delete all of the data you have loaded into VIVO and any ontology changes.
-
- 
-## Running previous releases of VIVO and Vitro
-If you are interested in running VIVO 1.5, 1.6, 1.7, 1.8 there are separate branches for each of those released version.
- ~~~
- $ git clone https://github.com/lawlesst/vivo-vagrant.git vivo-vagrant
- $ cd vivo-vagrant
- $ git checkout v1.x
- $ vagrant up
- ~~~
 
 ## Triplestores
 
