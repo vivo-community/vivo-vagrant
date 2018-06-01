@@ -24,7 +24,7 @@ PROVDIR=/home/vagrant/provision
 #Tomcat webapp dir
 WEBAPPDIR=/var/lib/tomcat7/webapps
 #Database
-VIVO_DATABASE=vivo17dev
+VIVO_DATABASE=vivo
 
 #Make app directory if it doesn't exist
 mkdir -p $APPDIR
@@ -52,7 +52,7 @@ cloneVIVOTemplate(){
     git clone https://github.com/vivo-community/vivo-project-template.git ${TEMPLATEBASE}
  
     cd ${TEMPLATEBASE}
-    git checkout maint-rel-1.9.3
+    git checkout devworkshop-2018
     git submodule init
     git submodule update
     ./setup.sh
@@ -126,6 +126,12 @@ installVIVO(){
 
 #Stop tomcat
 /etc/init.d/tomcat7 stop
+
+# add vagrant user to passwd file
+if ! id "vagrant" >/dev/null 2>&1; then
+  echo "Creating 'vagrant' user"
+  adduser --disabled-password --gecos "" vagrant
+fi
 
 # add vagrant to tomcat7 group
 usermod -a -G tomcat7 vagrant
