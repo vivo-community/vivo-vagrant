@@ -1,5 +1,5 @@
 
-# No source VIVO Vagrant for VIVO 1.10-RC-1
+# VIVO Vagrant for VIVO 1.10-RC-1 (No source)
 This branch is for VIVO v1.10-RC-1 installed from the tar zipped release bundle. It does NOT include the full source code.
 
 [Vagrant](http://www.vagrantup.com/) configuration and install scripts for running [VIVO](http://vivoweb.org) on a virtual machine, aka [Vagrant box](http://docs.vagrantup.com/v2/boxes.html), running an Ubuntu 64 Server 16.04.3 image.
