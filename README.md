@@ -1,11 +1,11 @@
 
-# VIVO Vagrant v1.9.3
+# VIVO Vagrant 1.9.3
 
-For the most recent version that downloads the full source for Vivo 1.9.3 and is GUI enabled with eclipse please go to branch: https://github.com/vivo-community/vivo-vagrant/tree/gui-developer-v1.9.3
+For the most recent version that downloads the full source for VIVO 1.9.3 and is GUI enabled with eclipse please go to branch: https://github.com/vivo-community/vivo-vagrant/tree/gui-developer-v1.9.3
 
 [Vagrant](http://www.vagrantup.com/) configuration and install scripts for running [VIVO](http://vivoweb.org) on a virtual machine, aka [Vagrant box](http://docs.vagrantup.com/v2/boxes.html), running an Ubuntu 64 Server 16.04.3 image.
 
-The virtual machine will boot and install VIVO 1.9 and its dependencies.  This will take several minutes for the initial install.
+The virtual machine will boot and install VIVO 1.9.3 and its dependencies.  This will take several minutes for the initial install.
 
 If you have questions or encounter problems, please email the VIVO technical list at [vivo-tech@googlegroups.com](https://groups.google.com/forum/#!forum/vivo-tech) or open issue here in the Github issue tracker.
 
