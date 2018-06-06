@@ -11,7 +11,7 @@ If you have questions or encounter problems, please email the VIVO technical lis
  * It downloads eclipse Oxygen for the IDE
  * It downloads the full github repo for VIVO, Vitro, and a third tier.
  * It installs the XFCE4 desktop gui environment
- 
+
 ## Prerequisites
  * recommend downloading latest versions of software below.
  * [VirtualBox](https://www.virtualbox.org/) .   Works with Version 5.2.12
@@ -27,9 +27,9 @@ This Vagrant box is intended for development and experimentation only.  Change d
 ## Install the VIVO Vagrant box
 
 ~~~
-# not completly sure if the following is required, but it might help X11 and shared file functions 
+# not completly sure if the following is required, but it might help X11 and shared file functions
 $ vagrant plugin update vagrant-vbguest  
-# The following target will be the name of your VM, feel free to change the target name as appropriate 
+# The following target will be the name of your VM, feel free to change the target name as appropriate
 $ git clone -b gui-developer-v1.9.3 https://github.com/vivo-community/vivo-vagrant vivo-vagrant   
 $ cd vivo-vagrant
 $ vagrant up
@@ -53,22 +53,32 @@ $ vlog
 ## Starting the GUI and development environment
 Go to the VirtualBox console -- This is probably labeled as VirtualBoxVM -- it shoudl have a login prompt and perhaps console messages
 On the console - ogin to the system with the user/password = vagrant/vagrant
-Start the XFCE desktop with the command 
+Start the XFCE desktop with the command
 $ startx
+
+If you get error ""(EE) No screens found" (or something similar) when running `startx` you might need to enable Remote Display in VirtualBox. To do so:
+
+* Go to the `vivo_vagrant_default` machine in the VirtualBox manager.
+* Click on `Settings`
+* Select `Display` + `Remote Display`
+* Check the "Enable Server" checkbox.
+* Restart the VM (e.g. via `vagrant halt` + `vagrant up`)
+
+When you log back to the VM `startx` should work.
 
 ### Changing the display
  * set virtualbox to scaled mode  ( this makes resizing much easier _
    * <right ctrl  C> WINDOWS;   <Command C>  MAC
-   * In the XFCE desktop - right click -> Applications -> Settings -> Display 
-    * Select a display that suites your display - eg 1400x1040 
+   * In the XFCE desktop - right click -> Applications -> Settings -> Display
+    * Select a display that suites your display - eg 1400x1040
     * Click Apply
-    
+
 ### Applications and issues in the desktop
  * eclipse is installed and can be started with the eclipse command in the terminal
  * firefox is installed and can be started with the firefox command in the terminal
  * There are bugs which prevent cutting and pasting between the guest and host -- please report back if this is resolved.
- 
- 
+
+
 
 ### Commands / system layout
  * VIVO application: `/usr/local/vivo`.  -- this is the https://github.com/vivo-community/vivo-project-template repo
@@ -78,7 +88,7 @@ $ startx
  * To start/stop Tomcat run `sudo /etc/init.d/tomcat start|stop|restart`.
  * A Vagrant [shared directory](http://docs.vagrantup.com/v2/synced-folders/) is available at `/work` from the box.
  * Use the `vagrant suspend` and `vagrant resume` commands to manage your Vagrant box when not in use or if you plan to restart or shutdown the host system, as opposed to using the VirtualBox or VMWare Fusion admin user interface.
- 
+
 ## Re-provisioning
 
 You can, at anytime, re-provision your Vagrant box.  By running the following from your host machine.  This will reinstall all components of the Vagrant box and reinstall VIVO.  This will destroy any changes you've made to your VIVO installation so be sure to backup any data or code changes you have made beforehand.
@@ -86,11 +96,11 @@ You can, at anytime, re-provision your Vagrant box.  By running the following fr
  ~~~
  $ vagrant up --provision
  ~~~
- 
+
 ## Reseting the VIVO database  -- !!!! Below is only for TDB --- need to identify the mysql command up update the DOC
 From time to time, you might also want to rollback to a clean VIVO database. This can be done by stopping tomcat and removing the file-based TDB triple store: `rm /usr/local/vdata/tdbContentModels`. Warning - this will delete all of the data you have loaded into VIVO and any ontology changes.
 
- 
+
 ## Running previous releases of VIVO and Vitro
 If you are interested in running VIVO 1.5, 1.6, 1.7, 1.8 there are separate branches for each of those released version.
  ~~~
