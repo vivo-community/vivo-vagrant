@@ -67,9 +67,7 @@ installVIVO() {
   echo 'tomcat           hard    nproc           1500' >> /etc/security/limits.conf
 
   # Vivo
-  cd /home/vagrant/
-  mkdir src
-  cd src
+  cd /home/vagrant/src
   git clone https://github.com/vivo-project/Vitro.git Vitro -b rel-1.10-maint
   git clone https://github.com/vivo-project/VIVO.git VIVO -b rel-1.10-maint
 
