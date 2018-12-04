@@ -82,8 +82,6 @@ installVIVO() {
 
   chgrp -R tomcat /opt/vivo
   chown -R tomcat /opt/vivo
-
-  systemctl restart tomcat
 }
 
 # Stop tomcat
