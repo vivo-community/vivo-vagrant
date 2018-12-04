@@ -5,7 +5,7 @@ For the most recent version that downloads the full source for VIVO 1.9.3 and is
 
 [Vagrant](http://www.vagrantup.com/) configuration and install scripts for running [VIVO](http://vivoweb.org) on a virtual machine, aka [Vagrant box](http://docs.vagrantup.com/v2/boxes.html), running an Ubuntu 64 Server 16.04.3 image.
 
-The virtual machine will boot and install VIVO 1.9.3 and its dependencies.  This will take several minutes for the initial install.
+The virtual machine will boot and install VIVO 1.10 and its dependencies.  This will take several minutes for the initial install.
 
 If you have questions or encounter problems, please email the VIVO technical list at [vivo-tech@googlegroups.com](https://groups.google.com/forum/#!forum/vivo-tech) or open issue here in the Github issue tracker.
 
@@ -45,7 +45,7 @@ $ vlog
  * Tomcat: `/opt/tomcat`
  * To start/stop Tomcat run `sudo systemctl start|stop|restart tomcat`.
  * A Vagrant [shared directory](http://docs.vagrantup.com/v2/synced-folders/) is available at `/work` from the box.
- * A Vagrant [shared directory](http://docs.vagrantup.com/v2/synced-folders/) is available at `/home/vagrant/src` from the box. *** This synced directory contains VIVO and Vitro source. Which can be developed from the host machine. ***
+ * A Vagrant [shared directory](http://docs.vagrantup.com/v2/synced-folders/) is available at `/home/vagrant/src` from the box. * This synced directory contains VIVO and Vitro source. Which can be developed from the host machine. *
  * Use the `vagrant suspend` and `vagrant resume` commands to manage your Vagrant box when not in use or if you plan to restart or shutdown the host system, as opposed to using the VirtualBox or VMWare Fusion admin user interface.
  
 ## Re-provisioning

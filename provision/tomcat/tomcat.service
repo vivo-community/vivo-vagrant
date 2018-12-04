@@ -9,7 +9,7 @@ Environment=JAVA_HOME=/usr/lib/jvm/java-1.8.0-openjdk-amd64/jre
 Environment=CATALINA_PID=/opt/tomcat/temp/tomcat.pid
 Environment=CATALINA_HOME=/opt/tomcat
 Environment=CATALINA_BASE=/opt/tomcat
-Environment='CATALINA_OPTS=-Xms512M -Xmx1024M -XX:MaxPermSize=128m'
+Environment='CATALINA_OPTS=-Xms1024M -Xmx2048M -XX:MaxPermSize=128m'
 Environment='JAVA_OPTS=-Djava.awt.headless=true -Djava.security.egd=file:/dev/./urandom'
 
 ExecStart=/opt/tomcat/bin/startup.sh

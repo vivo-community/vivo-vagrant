@@ -60,13 +60,13 @@ Vagrant.configure("2") do |config|
     # Customize number of CPUs on the VM:
     vb.cpus = 1
     # Customize the amount of memory on the VM:
-    vb.memory = "2048"
+    vb.memory = "4096"
   end
 
   config.vm.provider "vmware_fusion" do |v,override|
     v.gui = false
     v.vmx["numvcpus"] = "1"
-    v.vmx["memsize"] = "2048"
+    v.vmx["memsize"] = "4096"
   end
 
   # Setup box
