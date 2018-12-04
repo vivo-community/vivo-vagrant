@@ -68,6 +68,8 @@ installVIVO() {
 
   # Vivo
   cd /home/vagrant/
+  mkdir src
+  cd src
   git clone https://github.com/vivo-project/Vitro.git Vitro -b rel-1.10-maint
   git clone https://github.com/vivo-project/VIVO.git VIVO -b rel-1.10-maint
 

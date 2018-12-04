@@ -47,6 +47,7 @@ Vagrant.configure("2") do |config|
   # argument is a set of non-required options.
   config.vm.synced_folder "work", "/work"
   config.vm.synced_folder "provision", "/home/vagrant/provision"
+  config.vm.synced_folder "src", "/home/vagrant/src", create: true, mount_options: [ "dmode=755", "fmode=755" ]
 
   # Provider-specific configuration so you can fine-tune various
   # backing providers for Vagrant. These expose provider-specific options.
