@@ -17,6 +17,9 @@ mkdir -p /opt/vivo/config
 # Make log directory
 mkdir -p /opt/vivo/logs
 
+# Make src directory
+mkdir -p /home/vagrant/src
+
 removeRDFFiles(){
     # In development, you might want to remove these ontology and data files
     # since they slow down Tomcat restarts considerably.
@@ -75,7 +78,6 @@ installVIVO() {
   mvn install -DskipTests -s /home/vagrant/provision/vivo/settings.xml
 
   cp /home/vagrant/provision/vivo/runtime.properties /opt/vivo/config/runtime.properties
-  cp /home/vagrant/provision/vivo/deploy.properties /opt/vivo/config/deploy.properties
   cp /home/vagrant/provision/vivo/developer.properties /opt/vivo/config/developer.properties
   cp /home/vagrant/provision/vivo/build.properties /opt/vivo/config/build.properties
   cp /home/vagrant/provision/vivo/applicationSetup.n3 /opt/vivo/config/applicationSetup.n3

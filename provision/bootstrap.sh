@@ -16,11 +16,11 @@ apt-get update -y
 # Install Java and Maven
 apt-get install -y default-jdk maven
 
-# Set time zone
-timedatectl set-timezone America/New_York
-
 # Some utils
 apt-get install -y git vim screen wget curl raptor-utils unzip
+
+# Set time zone
+timedatectl set-timezone America/New_York
 
 # Install MySQL
 installMySQL () {

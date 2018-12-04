@@ -1,4 +1,4 @@
 .vagrant*
 *~
+src/*
 work/*
-src/
