@@ -1,5 +1,5 @@
 
-# VIVO Vagrant 1.9.3
+# VIVO Vagrant 1.10
 
 For the most recent version that downloads the full source for VIVO 1.9.3 and is GUI enabled with eclipse please go to branch: https://github.com/vivo-community/vivo-vagrant/tree/gui-developer-v1.9.3
 
@@ -24,9 +24,9 @@ $ cd vivo-vagrant
 $ vagrant up
 ~~~
 
-When the Vagrant provisioning script is complete, the VIVO web application will be available in a browser on the host machine at `http://localhost:8080/vivo`.  You can log into your new VIVO with the default admin user (`vivo_root@school.edu`) and password (`rootPassword`), which are specified in the `/provision/vivo/deploy.properties` source file in this repository.
+When the Vagrant provisioning script is complete, the VIVO web application will be available in a browser on the host machine at `http://localhost:8080/vivo`.  You can log into your new VIVO with the default admin user (`vivo_root@school.edu`) and password (`rootPassword`), which are specified in the `/provision/vivo/runtime.properties` source file in this repository.
 
-The vivo application will be at `/home/vagrant/vivo`. Mac users can log into your Vagrant box securely using this command from a Terminal session.  Windows users will want to use an SSH utility, e.g. [Putty](http://www.chiark.greenend.org.uk/~sgtatham/putty/download.html):
+The vivo application will be at `/home/vagrant/src/vivo`. Mac users can log into your Vagrant box securely using this command from a Terminal session.  Windows users will want to use an SSH utility, e.g. [Putty](http://www.chiark.greenend.org.uk/~sgtatham/putty/download.html):
 
 ~~~
 $ vagrant ssh
@@ -39,12 +39,13 @@ $ vlog
 ~~~
 
 ### Commands / system layout
- * VIVO application: `/home/vagrant/vivo`.
- * VIVO data directory: `/usr/local/vdata`
- * VIVO TDB triple store: `/usr/local/vdata/tdbContentModels`
- * Tomcat: `/var/lib/tomcat7/`
- * To start/stop Tomcat run `sudo /etc/init.d/tomcat start|stop|restart`.
+ * VIVO application: `/home/vagrant/src/vivo`.
+ * VIVO data directory: `/opt/vivo`
+ * VIVO TDB triple store: `/opt/vivo/tdbContentModels`
+ * Tomcat: `/opt/tomcat`
+ * To start/stop Tomcat run `sudo systemctl start|stop|restart tomcat`.
  * A Vagrant [shared directory](http://docs.vagrantup.com/v2/synced-folders/) is available at `/work` from the box.
+ * A Vagrant [shared directory](http://docs.vagrantup.com/v2/synced-folders/) is available at `/home/vagrant/src` from the box. *** This synced directory contains VIVO and Vitro source. Which can be developed from the host machine. ***
  * Use the `vagrant suspend` and `vagrant resume` commands to manage your Vagrant box when not in use or if you plan to restart or shutdown the host system, as opposed to using the VirtualBox or VMWare Fusion admin user interface.
  
 ## Re-provisioning
@@ -56,7 +57,7 @@ You can, at anytime, re-provision your Vagrant box.  By running the following fr
  ~~~
  
 ## Reseting the VIVO database
-From time to time, you might also want to rollback to a clean VIVO database. This can be done by stopping tomcat and removing the file-based TDB triple store: `rm /usr/local/vdata/tdbContentModels`. Warning - this will delete all of the data you have loaded into VIVO and any ontology changes.
+From time to time, you might also want to rollback to a clean VIVO database. This can be done by stopping tomcat and removing the file-based TDB triple store: `rm /opt/vivo/tdbContentModels`. Warning - this will delete all of the data you have loaded into VIVO and any ontology changes.
 
  
 ## Running previous releases of VIVO and Vitro

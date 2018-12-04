@@ -71,8 +71,8 @@ installVIVO() {
 
   # Vivo
   cd /home/vagrant/src
-  git clone https://github.com/vivo-project/Vitro.git Vitro -b rel-1.10-maint
-  git clone https://github.com/vivo-project/VIVO.git VIVO -b rel-1.10-maint
+  git clone https://github.com/vivo-project/Vitro.git Vitro -b rel-1.10-maint || true
+  git clone https://github.com/vivo-project/VIVO.git VIVO -b rel-1.10-maint || true
 
   cd VIVO
   mvn install -DskipTests -s /home/vagrant/provision/vivo/settings.xml
