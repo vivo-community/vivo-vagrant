@@ -72,6 +72,9 @@ installMySQL
 installTomcat
 setupFirewall
 
+# ca-certificates-java must be explicitly installed as it is needed for maven based installation
+/var/lib/dpkg/info/ca-certificates-java.postinst configure
+
 # Make Karma scripts executable
 chmod +x /home/vagrant/provision/karma.sh
 
