@@ -30,12 +30,12 @@ installMySQL () {
 
 # Install Tomcat 8
 installTomcat () {
-  groupadd tomcat
-  useradd -s /bin/false -g tomcat -d /opt/tomcat tomcat
+  groupadd tomcat || true
+  useradd -s /bin/false -g tomcat -d /opt/tomcat tomcat || true
 
   curl -O http://mirrors.sonic.net/apache/tomcat/tomcat-8/v8.5.35/bin/apache-tomcat-8.5.35.tar.gz
 
-  mkdir /opt/tomcat
+  mkdir /opt/tomcat || true
   tar xzvf apache-tomcat-8.5.35.tar.gz -C /opt/tomcat --strip-components=1
 
   chgrp -R tomcat /opt/tomcat

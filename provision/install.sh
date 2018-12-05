@@ -60,7 +60,7 @@ setupTomcat() {
 }
 
 setupMySQL() {
-  mysql --user=root --password=vivo -e "CREATE DATABASE vivo110dev CHARACTER SET utf8;"
+  mysql --user=root --password=vivo -e "CREATE DATABASE vivo110dev CHARACTER SET utf8;" || true
   mysql --user=root --password=vivo -e "GRANT ALL ON vivo110dev.* TO 'vivo'@'localhost' IDENTIFIED BY 'vivo';"
 }
 
@@ -92,9 +92,9 @@ systemctl stop tomcat
 # add vagrant to tomcat group
 if ! id "vagrant" >/dev/null 2>&1; then
   echo "Creating 'vagrant' user"
-  adduser --disabled-password --gecos "" vagrant
+  adduser --disabled-password --gecos "" vagrant || true
 fi
-usermod -a -G tomcat vagrant
+usermod -a -G tomcat vagrant || true
 
 # create VIVO database
 setupMySQL
