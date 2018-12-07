@@ -3,60 +3,76 @@
 #
 # Setup the base box
 #
-set -o verbose
-#Exit on first error
+
+# Exit on first error
 set -e
 
-#Update Ubuntu packages. Comment out during development
+# Print shell commands
+set -o verbose
+
+# Update Ubuntu packages. Comment out during development
 apt-get update -y
 
-#Set time zone
-area="America"
-zone="New_York"
-echo "$area/$zone" > /tmp/timezone
-cp -f /tmp/timezone /etc/timezone
-cp -f /usr/share/zoneinfo/$area/$zone /etc/localtime
+# Install Java and Maven
+apt-get install -y default-jdk maven
 
-# Basics.
+# Some utils
 apt-get install -y git vim screen wget curl raptor-utils unzip
 
-# Install open jdk 8
-installJava(){
-    add-apt-repository ppa:openjdk-r/ppa -y
-    apt-get update -y
-    apt-get install openjdk-8-jdk -y
+# Set time zone
+timedatectl set-timezone America/New_York
+
+# Install MySQL
+installMySQL () {
+  DEBIAN_FRONTEND=noninteractive apt-get -y install mysql-server
+  mysqladmin -u root password vivo
 }
 
-# Maven
-installMaven () {
-	cd /usr/local
-	rm -rf /usr/bin/mvn
-	rm -rf /usr/local/apache-maven-3.3.9
-	wget http://mirrors.sonic.net/apache/maven/maven-3/3.3.9/binaries/apache-maven-3.3.9-bin.tar.gz
-	tar -xvf apache-maven-3.3.9-bin.tar.gz
-	ln -s /usr/local/apache-maven-3.3.9/bin/mvn /usr/bin/mvn
-}
-
-# Install Tomcat 7 with JAVA_HOME export so Tomcat starts when install completes,
+# Install Tomcat 8
 installTomcat () {
-	export JAVA_HOME=/usr/lib/jvm/java-8-openjdk-amd64
-	apt-get install -y tomcat7
-	sed -i '/#JAVA_HOME.*$/a JAVA_HOME=/usr/lib/jvm/java-8-openjdk-amd64' /etc/default/tomcat7
+  groupadd tomcat || true
+  useradd -s /bin/false -g tomcat -d /opt/tomcat tomcat || true
+
+  curl -O http://mirrors.sonic.net/apache/tomcat/tomcat-8/v8.5.35/bin/apache-tomcat-8.5.35.tar.gz
+
+  mkdir /opt/tomcat || true
+  tar xzvf apache-tomcat-8.5.35.tar.gz -C /opt/tomcat --strip-components=1
+
+  chgrp -R tomcat /opt/tomcat
+  chmod -R g+r /opt/tomcat/conf
+  chmod g+x /opt/tomcat/conf
+  chown -R tomcat /opt/tomcat/webapps /opt/tomcat/work /opt/tomcat/temp /opt/tomcat/logs
+
+  cp /home/vagrant/provision/tomcat/tomcat.service /etc/systemd/system/tomcat.service
+
+  cp /home/vagrant/provision/tomcat/server.xml /opt/tomcat/conf/server.xml
+
+  cp /home/vagrant/provision/tomcat/context.xml /opt/tomcat/webapps/manager/META-INF/context.xml
+
+  cp /home/vagrant/provision/tomcat/context.xml /opt/tomcat/webapps/host-manager/META-INF/context.xml
+
+  cp /home/vagrant/provision/tomcat/tomcat-users.xml /opt/tomcat/conf/tomcat-users.xml
+
+  systemctl daemon-reload
+
+  systemctl start tomcat
+  systemctl enable tomcat
 }
 
-# MySQL
-# echo mysql-server mysql-server/root_password password vivo | debconf-set-selections
-# echo mysql-server mysql-server/root_password_again password vivo | debconf-set-selections
-# apt-get install -y mysql-server
-# apt-get install -y mysql-client
+# Setup Ubuntu Firewall
+setupFirewall () {
+  ufw allow 22
+  ufw allow 8080
+  ufw allow 8081
+  ufw allow 8000
+  ufw enable
+}
 
-
-
-installJava
-installMaven
+installMySQL
 installTomcat
+setupFirewall
 
-#ca-certificates-java must be explicitly installed as it is needed for maven based installation
+# ca-certificates-java must be explicitly installed as it is needed for maven based installation
 /var/lib/dpkg/info/ca-certificates-java.postinst configure
 
 # Make Karma scripts executable
