@@ -31,8 +31,8 @@ removeRDFFiles(){
 }
 
 setLogAlias() {
-    #Alias for viewing VIVO log
-    VLOG="alias vlog='less +F /opt/vivo/logs/vivo.all.log'"
+    # Alias for viewing VIVO log
+    VLOG="alias vlog='less +F /opt/tomcat/logs/vivo.all.log'"
     BASHRC=/home/vagrant/.bashrc
 
     if grep "$VLOG" $BASHRC > /dev/null
@@ -71,8 +71,8 @@ installVIVO() {
 
   # Vivo
   cd /home/vagrant/src
-  git clone https://github.com/vivo-project/Vitro.git Vitro -b rel-1.10-maint || true
-  git clone https://github.com/vivo-project/VIVO.git VIVO -b rel-1.10-maint || true
+  git clone https://github.com/vivo-project/Vitro.git Vitro -b vitro-1.10.0 || true
+  git clone https://github.com/vivo-project/VIVO.git VIVO -b vivo-1.10.0 || true
 
   cd VIVO
   mvn clean install -DskipTests -s /home/vagrant/provision/vivo/settings.xml
