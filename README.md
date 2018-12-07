@@ -61,7 +61,7 @@ From time to time, you might also want to rollback to a clean VIVO database. Thi
 
  
 ## Running previous releases of VIVO and Vitro
-If you are interested in running VIVO 1.5, 1.6, 1.7, 1.8 there are separate branches for each of those released version.
+If you are interested in running VIVO 1.5, 1.6, 1.7, 1.8, 1.9 there are separate branches for each of those released version.
  ~~~
  $ git clone https://github.com/lawlesst/vivo-vagrant.git vivo-vagrant
  $ cd vivo-vagrant
