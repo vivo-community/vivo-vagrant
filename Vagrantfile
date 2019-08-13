@@ -27,6 +27,7 @@ Vagrant.configure("2") do |config|
   config.vm.network "forwarded_port", guest: 80, host: 8081
   config.vm.network "forwarded_port", guest: 8080, host: 8080
   config.vm.network "forwarded_port", guest: 8000, host: 8000
+  config.vm.network "forwarded_port", guest: 8983, host: 8983
 
   # Create a forwarded port mapping which allows access to a specific port
   # within the machine from a port on the host machine and only allow access
@@ -71,6 +72,9 @@ Vagrant.configure("2") do |config|
 
   # Setup box
   config.vm.provision "bootstrap", type: "shell", path: "provision/bootstrap.sh", privileged: true
+
+  # Install Solr
+  config.vm.provision "solr", type: "shell", path: "provision/solr.sh", privileged: true
 
   # Install VIVO
   config.vm.provision "vivo", type: "shell", path: "provision/install.sh", privileged: true

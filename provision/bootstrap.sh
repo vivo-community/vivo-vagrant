@@ -33,10 +33,10 @@ installTomcat () {
   groupadd tomcat || true
   useradd -s /bin/false -g tomcat -d /opt/tomcat tomcat || true
 
-  curl -O http://mirrors.sonic.net/apache/tomcat/tomcat-8/v8.5.35/bin/apache-tomcat-8.5.35.tar.gz
+  curl -O http://mirrors.sonic.net/apache/tomcat/tomcat-8/v8.5.43/bin/apache-tomcat-8.5.43.tar.gz
 
   mkdir /opt/tomcat || true
-  tar xzvf apache-tomcat-8.5.35.tar.gz -C /opt/tomcat --strip-components=1
+  tar xzvf apache-tomcat-8.5.43.tar.gz -C /opt/tomcat --strip-components=1
 
   chgrp -R tomcat /opt/tomcat
   chmod -R g+r /opt/tomcat/conf
