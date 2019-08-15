@@ -10,16 +10,16 @@ set -e
 # Print shell commands
 set -o verbose
 
-# Install Solr 7.4.0
+# Install Solr 8.2.0
 installSolr () {
 
   echo '*           soft    nofile           65000' >> /etc/security/limits.conf
   echo '*           hard    nproc           65000' >> /etc/security/limits.conf
 
-  curl -O http://archive.apache.org/dist/lucene/solr/7.4.0/solr-7.4.0.tgz
+  curl -O http://archive.apache.org/dist/lucene/solr/8.2.0/solr-8.2.0.tgz
 
   mkdir /opt/solr || true
-  tar xzvf solr-7.4.0.tgz -C /opt/solr --strip-components=1
+  tar xzvf solr-8.2.0.tgz -C /opt/solr --strip-components=1
 
   mkdir -p /opt/solr/server/solr || true
   
