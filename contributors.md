@@ -8,3 +8,4 @@
 * Shawn Medero - [@soypunk](https://github.com/soypunk)
 * Peter Murray - [@dltj](https://github.com/dltj)
 * Ted Lawless - @lawlesst
+* Ralph OFlinn - [@roflinn](https://github.com/roflinn)

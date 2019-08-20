@@ -70,9 +70,10 @@ installVIVO() {
   echo 'tomcat           hard    nproc           1500' >> /etc/security/limits.conf
 
   # Vivo
+  BRANCH=rel-1.11.0-RC
   cd /home/vagrant/src
-  git clone https://github.com/vivo-project/Vitro.git Vitro -b vitro-1.10.0 || true
-  git clone https://github.com/vivo-project/VIVO.git VIVO -b vivo-1.10.0 || true
+  git clone https://github.com/vivo-project/Vitro.git Vitro --depth 1 -b ${BRANCH} || true
+  git clone https://github.com/vivo-project/VIVO.git VIVO --depth 1 -b ${BRANCH} || true
 
   cd VIVO
   mvn clean install -DskipTests -s /home/vagrant/provision/vivo/settings.xml

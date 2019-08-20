@@ -1,3 +1,7 @@
+#####8/14/19
+
+ * changed the default install to be VIVO 1.11.  Added external Solr, switched to MariaDB, switched to OpenJDK, latest versions as of this date.
+
 #####5/8/15
 
  * changed the default install to be VIVO 1.8.  VIVO 1.5 - 1.7 are available in separate branches.  
