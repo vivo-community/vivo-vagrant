@@ -10,6 +10,8 @@ set -e
 # Print shell commands
 set -o verbose
 
+source /home/vagrant/provision/.env
+
 # Update Ubuntu packages. Comment out during development
 apt-get update -y
 
@@ -26,16 +28,16 @@ apt-get install -y maven
 apt-get install -y git vim screen wget curl raptor-utils unzip
 
 # Set time zone
-timedatectl set-timezone America/New_York
+timedatectl set-timezone ${TIMEZONE}
 
 # Install MariaDB
 installMySQL () {
   export DEBIAN_FRONTEND=noninteractive
   apt-key adv --recv-keys --keyserver hkp://keyserver.ubuntu.com:80 0xF1656F24C74CD1D8
-  add-apt-repository 'deb [arch=amd64,i386,ppc64el] http://nyc2.mirrors.digitalocean.com/mariadb/repo/10.2/ubuntu xenial main'
+  add-apt-repository "deb [arch=amd64,i386,ppc64el] http://nyc2.mirrors.digitalocean.com/mariadb/repo/${MARIADB_VERSION}/ubuntu xenial main"
   apt-get update -y
   apt-get install -y mariadb-server mariadb-client
-  mysqladmin -u root password vivo
+  mysqladmin --user=root ping
 }
 
 # Install Tomcat 9
@@ -43,10 +45,10 @@ installTomcat () {
   groupadd tomcat || true
   useradd -s /bin/false -g tomcat -d /opt/tomcat tomcat || true
 
-  curl -O http://mirrors.sonic.net/apache/tomcat/tomcat-9/v9.0.22/bin/apache-tomcat-9.0.22.tar.gz
+  curl -o apache-tomcat.tar.gz http://mirrors.sonic.net/apache/tomcat/tomcat-9/v${TOMCAT_VERSION}/bin/apache-tomcat-${TOMCAT_VERSION}.tar.gz
 
   mkdir /opt/tomcat || true
-  tar xzvf apache-tomcat-9.0.22.tar.gz -C /opt/tomcat --strip-components=1
+  tar xzvf apache-tomcat.tar.gz -C /opt/tomcat --strip-components=1
 
   chgrp -R tomcat /opt/tomcat
   chmod -R g+r /opt/tomcat/conf

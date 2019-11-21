@@ -10,16 +10,18 @@ set -e
 # Print shell commands
 set -o verbose
 
-# Install Solr 8.2.0
+source /home/vagrant/provision/.env
+
+# Install Solr
 installSolr () {
 
   echo '*           soft    nofile           65000' >> /etc/security/limits.conf
   echo '*           hard    nproc           65000' >> /etc/security/limits.conf
 
-  curl -O http://archive.apache.org/dist/lucene/solr/8.2.0/solr-8.2.0.tgz
+  curl -o solr.tgz http://archive.apache.org/dist/lucene/solr/${SOLR_VERSION}/solr-${SOLR_VERSION}.tgz
 
   mkdir /opt/solr || true
-  tar xzvf solr-8.2.0.tgz -C /opt/solr --strip-components=1
+  tar xzvf solr.tgz -C /opt/solr --strip-components=1
 
   mkdir -p /opt/solr/server/solr || true
   
