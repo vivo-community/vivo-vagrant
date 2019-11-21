@@ -10,6 +10,8 @@ set -e
 # Print shell commands
 set -o verbose
 
+source /home/vagrant/provision/.env
+
 # Make data directory
 mkdir -p /opt/vivo
 # Make config directory
@@ -60,8 +62,8 @@ setupTomcat() {
 }
 
 setupMySQL() {
-  mysql --user=root --password=vivo -e "CREATE DATABASE vivo110dev CHARACTER SET utf8;" || true
-  mysql --user=root --password=vivo -e "GRANT ALL ON vivo110dev.* TO 'vivo'@'localhost' IDENTIFIED BY 'vivo';"
+  mysql --user=root -e "CREATE DATABASE ${VIVO_DATABASE} CHARACTER SET utf8;" || true
+  mysql --user=root -e "GRANT ALL ON ${VIVO_DATABASE}.* TO 'vivo'@'localhost' IDENTIFIED BY 'vivo';"
 }
 
 installVIVO() {
@@ -70,15 +72,15 @@ installVIVO() {
   echo 'tomcat           hard    nproc           1500' >> /etc/security/limits.conf
 
   # Vivo
-  BRANCH=rel-1.11.0-RC
   cd /home/vagrant/src
-  git clone https://github.com/vivo-project/Vitro.git Vitro --depth 1 -b ${BRANCH} || true
-  git clone https://github.com/vivo-project/VIVO.git VIVO --depth 1 -b ${BRANCH} || true
+  git clone https://github.com/vivo-project/Vitro.git Vitro --depth 1 -b ${VIVO_BRANCH} || true
+  git clone https://github.com/vivo-project/VIVO.git VIVO --depth 1 -b ${VIVO_BRANCH} || true
 
   cd VIVO
   mvn clean install -DskipTests -s /home/vagrant/provision/vivo/settings.xml
 
   cp /home/vagrant/provision/vivo/runtime.properties /opt/vivo/config/runtime.properties
+  sed -i "s/VIVO_DATABASE/${VIVO_DATABASE}/g" /opt/vivo/config/runtime.properties
   cp /home/vagrant/provision/vivo/developer.properties /opt/vivo/config/developer.properties
   cp /home/vagrant/provision/vivo/build.properties /opt/vivo/config/build.properties
   cp /home/vagrant/provision/vivo/applicationSetup.n3 /opt/vivo/config/applicationSetup.n3
