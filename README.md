@@ -56,6 +56,16 @@ On the console - ogin to the system with the user/password = vagrant/vagrant
 Start the XFCE desktop with the command 
 $ startx
 
+If you get error ""(EE) No screens found" (or something similar) when running `startx` you might need to enable Remote Display in VirtualBox. To do so:
+
+* Go to the `vivo_vagrant_default` machine in the VirtualBox manager.
+* Click on `Settings`
+* Select `Display` + `Remote Display`
+* Check the "Enable Server" checkbox.
+* Restart the VM (e.g. via `vagrant halt` + `vagrant up`)
+
+When you log back to the VM `startx` should work.
+
 ### Changing the display
  * set virtualbox to scaled mode  ( this makes resizing much easier _
    * <right ctrl  C> WINDOWS;   <Command C>  MAC
@@ -89,8 +99,8 @@ You can, at anytime, re-provision your Vagrant box.  By running the following fr
  
 ## Reseting the VIVO database  -- !!!! Below is only for TDB --- need to identify the mysql command up update the DOC
 From time to time, you might also want to rollback to a clean VIVO database. This can be done by stopping tomcat and removing the file-based TDB triple store: `rm /usr/local/vdata/tdbContentModels`. Warning - this will delete all of the data you have loaded into VIVO and any ontology changes.
-
  
+
 ## Running previous releases of VIVO and Vitro
 If you are interested in running VIVO 1.5, 1.6, 1.7, 1.8 there are separate branches for each of those released version.
  ~~~
